@@ -1,0 +1,40 @@
+/*
+ * Briefcase Media Style Settings
+ */
+/* --- Settings --- */
+
+// Z-indexes
+$zindex-dropdown:          1000 !default;
+$zindex-sticky:            1020 !default;
+$zindex-fixed:             1030 !default;
+$zindex-modal-backdrop:    1040 !default;
+$zindex-modal:             1050 !default;
+$zindex-popover:           1060 !default;
+$zindex-tooltip:           1070 !default;
+
+
+// Breakpoints
+$screen-xs-max: 360px;
+$screen-sm-max: 576px;
+$screen-md-max: 768px;
+$screen-lg-max: 980px;
+$screen-xl-max: 1200px;
+
+/* --- Color Palette --- */
+$white: #FFF;
+$primary: #CDBE77;
+$secondary: #F5E2C9;
+$accent: #D63D5B;
+$olive: #352F22;
+$olive-half: rgba(53, 47, 34, .5);
+$pink: #F878A0;
+
+
+/* --- Fonts --- */
+
+$cabin: "Cabin";
+$opensans: "Open Sans";
+$julius: "Julius Sans One";
+
+
+

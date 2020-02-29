@@ -1,0 +1,18 @@
+/*!
+Theme Name: Custom Theme
+Author: James Auble
+Author URI: https://www.jamesauble.com
+Description: Developed by James Auble
+Version: 0.0.2
+*/
+
+/*
+	Source scss styles are located in the resources directory.
+	The compiled bundle is in assets/sleepless.min.css; The README.md
+	file contains instructions how to get the compilation
+	process up & running.
+
+	If you need to make a quick fix, feel free to add CSS
+	below this comment. It will override sleepless.min.css styles.
+*/
+
