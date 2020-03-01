@@ -1,0 +1,10 @@
+//Wauble Wordpress Starter Theme
+//
+//This is the entry file for Sass compilation. Sass globbing is enabled.
+
+@import '_vars/**/**.{scss,css}';
+@import '_mixins/**/**.{scss,css}';
+@import 'globals/**/**.{scss,css}';
+@import 'parts/**/**.{scss,css}';
+@import 'templates/**/**.{scss,css}';
+@import 'overrides.scss';

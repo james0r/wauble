@@ -8,56 +8,46 @@ const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 const babel = require("gulp-babel");
-const argv = require("yargs").argv;
 const log = require("fancy-log");
 const clean = require("gulp-clean");
 const browserSync = require("browser-sync").create();
 var rewriteCSS = require("gulp-rewrite-css");
-var merge = require("merge-stream");
 var atImport = require("postcss-import");
 var notify = require("gulp-notify");
 const zip = require("gulp-zip");
-const deporder = require('gulp-deporder');
-const terser = require('gulp-terser');
 const plumber = require('gulp-plumber');
 
-var is_production = argv.production === undefined ? false : true;
-
-var project = {
+const project = {
   vendor: {
     files_to_watch: ["./vendor/**/*"],
     styles: ["./vendor/**/*.css", "./vendor/**/*.scss"],
-    scripts: [
-      "./vendor/jquery.js",
-      "./vendor/rivets.bundled.min.js",
-      "./vendor/slick/slick.js"
-    ]
+    scripts: ["./vendor/**/*.js"]
   },
   styles: {
-    files_to_watch: ["./sass/**/*.scss", "./js/components/**/*.scss"],
-    entry: ["./sass/*.scss", "./sass/**/*.scss"],
+    files_to_watch: ["./sass/**/*.{css,scss}"],
+    entry: ["./sass/main.scss"],
     dest: "./../assets/"
   },
   scripts: {
-    files_to_watch: "./js/**/*.js",
-    files: [
-      "./js/**/*.js"
-    ],
-    templates: "./../**/*.php",
+    files_to_watch: ["./js/**/*.js"],
+    files: ["./js/**/*.js"],
     dest: "./../assets/"
+  },
+  templates: {
+    files_to_watch: ["./../**/*.php"]
   }
 };
 
-const allStyles = project.vendor.styles.concat(project.styles.entry);
+let reloadMode = false;
 
-if (is_production) {
-  log.info("Running in Production Mode");
-} else {
-  log.info("Running in Development Mode");
+function concatVendorStyles() {
+  return src(project.vendor.styles, { base: ".", allowEmpty: true, sourcemaps: true})
+    .pipe(concat("_wauble.vendor.bundle.css"))
+    .pipe(dest(project.styles.dest, { sourcemaps: "." }))
 }
 
-function scssTask(cb) {
-  var prod = src(allStyles, { base: ".", allowEmpty: true, sourcemaps: true })
+function compileAuthoredStyles() {
+  return src(project.styles.entry, { base: ".", allowEmpty: true, sourcemaps: true })
     .pipe(sassGlob())
     .pipe(
       sass({
@@ -66,36 +56,22 @@ function scssTask(cb) {
     )
     .on("error", notify.onError())
     .pipe(rewriteCSS({ destination: project.styles.dest }))
-    .pipe(postcss([autoprefixer(), atImport(), cssnano()]))
-    .pipe(concat("_briefcase.min.scss.css"))
+    .pipe(postcss([autoprefixer(), atImport()])) // Add cssnano() to the series to minify CSS
+    .pipe(concat("_wauble.authored.bundle.css"))
     .pipe(dest(project.styles.dest, { sourcemaps: "." }))
     .pipe(browserSync.stream())
-
-  var dev = src(allStyles, { base: ".", allowEmpty: true })
-    .pipe(sassGlob())
-    .pipe(
-      sass({
-        errLogToConsole: true
-      })
-    )
-    .on("error", notify.onError())
-    .pipe(postcss([autoprefixer(), atImport()]))
-    .pipe(concat("_briefcase.expanded.scss.css"))
-    .pipe(dest(project.styles.dest))
-
-     merge(prod, dev);
-
-     cb();
 }
 
-function jsTask(cb) {
-
-  var vendor = src(project.vendor.scripts, { alleyEmpty: true })
-    .pipe(concat("_briefcase.vendor.min.js"))
+function concatVendorScripts() {
+  return src(project.vendor.scripts, { alleyEmpty: true })
+    .pipe(concat("_wauble.vendor.bundle.min.js"))
     .pipe(uglify())
     .pipe(dest(project.scripts.dest));
+}
 
-  var authored = src(project.scripts.files, { allowEmpty: true })
+function compileAuthoredScripts() {
+
+  return src(project.scripts.files, { allowEmpty: true })
     .pipe(plumber())
     .pipe(babel({
       presets: [
@@ -105,19 +81,15 @@ function jsTask(cb) {
       ]
     }))
     .on("error", notify.onError())
-    .pipe(concat("_briefcase.bundle.js"))
+    .pipe(concat("_wauble.authored.bundle.js"))
     .pipe(dest(project.scripts.dest));
-
-    merge(vendor, authored);
-
-    cb();
 }
 
 function zipDev(cb) {
+  //This task was created for a Shopify build system but can be enabled for Wordpress if desired.
   src(["**/*.*", "!node_modules/", "!node_modules/**"])
-    .pipe(zip("_briefcase.zip"))
+    .pipe(zip("_wauble.zip"))
     .pipe(dest(project.scripts.dest));
-
   cb();
 }
 
@@ -126,43 +98,24 @@ function refreshBrowser(cb) {
   cb();
 }
 
-function process(cb) {
-  parallel(scssTask, jsTask);
-  cb();
-}
-
 function initBrowserSync(cb) {
   browserSync.init({
     open: 'external',
-    host: 'meghanrob',
-    proxy: "meghanrob",
+    //If using virtual hosts enter them here. If not, use localhost or 127.0.0.1
+    host: 'hourofhistoryv2',
+    proxy: "hourofhistoryv2",
     port: 3000
   });
   cb();
 }
 
-function cleanupDev(cb) {
+function cleanup(cb) {
   return src(
     [
-      "./../assets/_briefcase.expanded.scss.css",
-      "./../assets/_briefcase.vendor.min.js",
-      "./../assets/_briefcase.bundle.js",
-      "./../assets/_briefcase.min.scss.css.map",
-      "./../assets/_briefcase.min.scss.css"
-    ],
-    { allowEmpty: true }
-  ).pipe(clean({ force: true }));
-  cb();
-}
-
-function cleanupProd(cb) {
-  return src(
-    [
-      "./../assets/_briefcase.expanded.scss.css",
-      "./../assets/_briefcase.vendor.min.js",
-      "./../assets/_briefcase.bundle.js",
-      "./../assets/_briefcase.min.scss.css.map",
-      "./../assets/_briefcase.min.scss.css"
+      "./../assets/_wauble.vendor.bundle.min.js",
+      "./../assets/_wauble.bundle.js",
+      "./../assets/_wauble.authored.bundle.css.map",
+      "./../assets/_wauble.authored.bundle.css"
     ],
     { allowEmpty: true }
   ).pipe(clean({ force: true }));
@@ -170,12 +123,25 @@ function cleanupProd(cb) {
 }
 
 function watchFiles(cb) {
-  watch(project.styles.files_to_watch, series(scssTask));
-  watch(project.scripts.files_to_watch, series(jsTask, refreshBrowser));
-  watch(project.scripts.templates, series(refreshBrowser));
+  if (reloadMode) {
+    watch(project.styles.files_to_watch, series(parallel(compileAuthoredStyles, concatVendorStyles). refreshBrowser));
+    watch(project.scripts.files_to_watch, series(compileAuthoredScripts, refreshBrowser));
+    watch(project.templates.files_to_watch, series(refreshBrowser));
+  } else {
+    watch(project.styles.files_to_watch, parallel(compileAuthoredStyles, concatVendorStyles));
+    watch(project.scripts.files_to_watch, parallel(compileAuthoredScripts, concatVendorScripts));
+  }
   cb(); 
 }
 
-exports.default = is_production
-  ? series(cleanupProd, parallel(scssTask, jsTask), zipDev)
-  : series(cleanupDev, parallel(scssTask, jsTask), initBrowserSync, watchFiles);
+const build = parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts);
+const dev = series(parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts), watchFiles);
+const reload = function() {
+  reloadMode = true;
+  series(parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts), initBrowserSync, watchFiles);
+}
+
+exports.default = build;
+exports.build = build;
+exports.reload = reload;
+exports.dev = dev;
