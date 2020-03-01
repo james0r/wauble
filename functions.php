@@ -7,51 +7,35 @@ add_action( 'wp_enqueue_scripts', 'crb_enqueue_assets' );
 function crb_enqueue_assets() {
 	$template_dir = get_template_directory_uri();
 
-	# Enqueue Custom JS files
+	# Enqueue Vendor JS files
 	wp_enqueue_script(
-		'vendor-bundle',
-		$template_dir . crb_assets_bundle( '_briefcase.vendor.min.js' ),
+		'vendor-scripts',
+		$template_dir . crb_assets_bundle( '_wauble.vendor.bundle.min.js' ),
 		array( 'jquery' ), // deps
 		null, // version -- this is handled by the bundle manifest
 		true // in footer
 	);
 
 	wp_enqueue_script(
-		'lightbox-js',
-		$template_dir . crb_assets_bundle( '/vendor/lightbox.min.js' ),
+		'authored-scripts',
+		$template_dir . crb_assets_bundle( '_wauble.authored.bundle.js' ),
 		array( 'jquery' ), // deps
 		null, // version -- this is handled by the bundle manifest
 		true // in footer
-	);
-
-	wp_enqueue_script(
-		'tweenmax-js',
-		$template_dir . crb_assets_bundle( '/vendor/tweenmax.js' ),
-		array( 'jquery' ), // deps
-		null, // version -- this is handled by the bundle manifest
-		true // in footer
-	);
-
-	wp_enqueue_script(
-		'authored-bundle',
-		$template_dir . crb_assets_bundle( '_briefcase.bundle.js' ),
-		array( 'jquery' ), // deps
-		null, // version -- this is handled by the bundle manifest
-		true // in footer
-	);
-
-	# Enqueue Custom CSS files
-	wp_enqueue_style(
-		'lightbox-css',
-		$template_dir . crb_assets_bundle( '/vendor/lightbox.min.css' )
 	);
 
 	wp_enqueue_style(
-		'theme-css-bundle',
-		$template_dir . crb_assets_bundle( '_briefcase.min.scss.css' )
+		'vendor-styles',
+		$template_dir . crb_assets_bundle( '_wauble.vendor.bundle.css' )
+	);
+
+	wp_enqueue_style(
+		'authored-styles',
+		$template_dir . crb_assets_bundle( '_wauble.authored.bundle.css' )
 	);
 
 	# The theme style.css file may contain overrides for the bundled styles
+	# Pre-compiled styles override file lives in /_dev/sass/overrides.scss
 	crb_enqueue_style( 'theme-styles', $template_dir . '/style.css' );
 
 	# Enqueue Comments JS file

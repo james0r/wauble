@@ -10,8 +10,9 @@
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
-    "dev": "yarn gulp --gulpfile resources/build/gulpfile.js",
-    "build": "yarn gulp --gulpfile resources/build/gulpfile.js --production"
+    "dev": "gulp dev",
+    "build": "gulp build",
+    "reload": "gulp reload"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
