@@ -35,9 +35,9 @@
     "yargs": "^13.3.0"
   },
   "scripts": {
-    "dev": "gulp",
-    "build": "gulp --production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp dev",
+    "build": "gulp build",
+    "reload": "gulp reload"
   },
   "author": "James Auble",
   "license": "none"

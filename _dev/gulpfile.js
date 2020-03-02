@@ -98,11 +98,12 @@ function refreshBrowser(cb) {
 
 function initBrowserSync(cb) {
   browserSync.init({
-    open: 'external',
+    open: 'internal',
     //If using virtual hosts enter them here. If not, use localhost or 127.0.0.1
-    host: 'hourofhistoryv2',
-    proxy: "hourofhistoryv2",
-    port: 3000
+    //Check the BrowserSync console output for ports and access to BrowserSync panel
+    host: 'wauble',
+    proxy: "wauble",
+    port: 80
   });
   cb();
 }
@@ -124,7 +125,7 @@ function watchFiles(cb) {
   log.info('Watching Files...')
 
   if (reloadMode) {
-    watch(project.styles.files_to_watch, series(parallel(compileAuthoredStyles, concatVendorStyles). refreshBrowser));
+    watch(project.styles.files_to_watch, series(parallel(compileAuthoredStyles, concatVendorStyles), refreshBrowser));
     watch(project.scripts.files_to_watch, series(compileAuthoredScripts, refreshBrowser));
     watch(project.templates.files_to_watch, series(refreshBrowser));
   } else {
@@ -138,10 +139,10 @@ const build = parallel(compileAuthoredStyles, concatVendorStyles, compileAuthore
 const dev = series(parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts), watchFiles);
 const reload = function() {
   reloadMode = true;
-  series(parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts), initBrowserSync, watchFiles);
+  return series(parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts), initBrowserSync, watchFiles);
 }
 
 exports.default = build;
 exports.build = build;
-exports.reload = reload;
+exports.reload = reload();
 exports.dev = dev;
