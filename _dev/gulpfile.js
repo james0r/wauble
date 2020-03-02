@@ -70,17 +70,15 @@ function concatVendorScripts() {
 }
 
 function compileAuthoredScripts() {
-
   return src(project.scripts.files, { allowEmpty: true })
-    .pipe(plumber())
-    .pipe(babel({
-      presets: [
-        ['@babel/env', {
-          modules: false
-        }]
-      ]
-    }))
-    .on("error", notify.onError())
+  .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+  .pipe(babel({
+    presets: [
+      ['@babel/env', {
+        modules: false
+      }]
+    ]
+  }))
     .pipe(concat("_wauble.authored.bundle.js"))
     .pipe(dest(project.scripts.dest));
 }
@@ -123,6 +121,8 @@ function cleanup(cb) {
 }
 
 function watchFiles(cb) {
+  log.info('Watching Files...')
+
   if (reloadMode) {
     watch(project.styles.files_to_watch, series(parallel(compileAuthoredStyles, concatVendorStyles). refreshBrowser));
     watch(project.scripts.files_to_watch, series(compileAuthoredScripts, refreshBrowser));
