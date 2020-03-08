@@ -3,6 +3,10 @@
   the_post();
 ?>
 
-Unused Homepage
+<div class="container">
+  <div class="inner-container">
+    <span>i'm in a span</span>
+  </div>
+</div>
 
 <?php get_footer(); ?>

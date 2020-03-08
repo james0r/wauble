@@ -1,5 +1,5 @@
 (function ($) {
   $(window).ready(function () {
-    console.log('Hello world, this is Wauble');
+    alert('something else');
   });
 })(jQuery);
