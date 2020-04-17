@@ -2,9 +2,37 @@
 //
 //This is the entry file for Sass compilation. Sass globbing is enabled.
 
-@import '_vars/**/**.{scss,css}';
-@import '_mixins/**/**.{scss,css}';
-@import 'globals/**/**.{scss,css}';
-@import 'parts/**/**.{scss,css}';
-@import 'templates/**/**.{scss,css}';
-@import 'overrides.scss';
+/*----------------------------------------------------
+Base
+-----------------------------------------------------*/
+
+@import 'base/variables';
+@import 'base//mixins';
+@import 'base/fonts';
+@import 'base/globals';
+@import 'base/reset';
+
+/*----------------------------------------------------
+Layout
+-----------------------------------------------------*/
+
+@import 'layout/footer';
+@import 'layout/header';
+
+/*----------------------------------------------------
+Parts
+-----------------------------------------------------*/
+
+@import 'parts/page-title';
+
+/*----------------------------------------------------
+Templates
+-----------------------------------------------------*/
+
+@import 'templates/home';
+
+/*----------------------------------------------------
+Override
+-----------------------------------------------------*/
+
+@import 'overrides';

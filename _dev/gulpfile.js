@@ -1,144 +1,311 @@
-const { src, dest, watch, series, parallel } = require("gulp");
-const sass = require("gulp-sass");
-var sassGlob = require("gulp-sass-glob");
-const concat = require("gulp-concat");
-const uglify = require("gulp-uglify");
-const postcss = require("gulp-postcss");
-const autoprefixer = require("autoprefixer");
-const babel = require("gulp-babel");
-const log = require("fancy-log");
-const clean = require("gulp-clean");
-const browserSync = require("browser-sync").create();
-var atImport = require("postcss-import");
-var notify = require("gulp-notify");
-const zip = require("gulp-zip");
+const { gulp, series, parallel, dest, src, watch } = require('gulp');
+const babel = require('gulp-babel');
+const beeper = require('beeper');
+const browserSync = require('browser-sync');
+const concat = require('gulp-concat');
+const connect = require('gulp-connect-php');
+const del = require('del');
+const log = require('fancy-log');
+const fs = require('fs');
+const imagemin = require('gulp-imagemin');
+const inject = require('gulp-inject-string');
+const partialimport = require('postcss-easy-import');
 const plumber = require('gulp-plumber');
+const postcss = require('gulp-postcss');
+const postCSSMixins = require('postcss-mixins');
+const postcssPresetEnv = require('postcss-preset-env');
+const remoteSrc = require('gulp-remote-src');
+const sourcemaps = require('gulp-sourcemaps');
+const uglify = require('gulp-uglify');
+const zip = require('gulp-vinyl-zip');
+const sass = require('gulp-sass');
 
-const project = {
-  vendor: {
-    files_to_watch: ["./vendor/**/*"],
-    styles: ["./vendor/**/*.css", "./vendor/**/*.scss"],
-    scripts: ["./vendor/**/*.js"]
-  },
-  styles: {
-    files_to_watch: ["./sass/**/*.{css,scss}"],
-    entry: ["./sass/main.scss"],
-    dest: "./../assets/"
-  },
-  scripts: {
-    files_to_watch: ["./js/**/*.js"],
-    files: ["./js/**/*.js"],
-    dest: "./../assets/"
-  },
-  templates: {
-    files_to_watch: ["./../**/*.php"]
-  }
+/* -------------------------------------------------------------------------------------------------
+Theme Name
+-------------------------------------------------------------------------------------------------- */
+
+const themeName = 'wauble';
+
+/* -------------------------------------------------------------------------------------------------
+Header & Footer JavaScript Boundles
+-------------------------------------------------------------------------------------------------- */
+const headerJS = ['./node_modules/jquery/dist/jquery.js'];
+
+const footerJS = ['./js/**'];
+
+/* -------------------------------------------------------------------------------------------------
+Development Tasks
+-------------------------------------------------------------------------------------------------- */
+
+function devServer() {
+	connect.server(
+		{
+			base: './build/wordpress',
+			port: '3020',
+		},
+		() => {
+			browserSync({
+				logPrefix: '🎈 WordPressify',
+				proxy: '127.0.0.1:3020',
+				host: '127.0.0.1',
+				port: '3010',
+				open: 'external',
+			});
+		},
+	);
+
+	watch('./src/assets/css/**/*.css', stylesDev);
+	watch('./src/assets/css/**/*.scss', stylesDev);
+	watch('./src/assets/js/**', series(footerScriptsDev, Reload));
+	watch('./build/wordpress/wp-config.php', { events: 'add' }, series(disableCron));
+}
+
+function Reload(done) {
+	browserSync.reload();
+	done();
+}
+
+function stylesDev() {
+  return src('./src/assets/css/style.scss')
+      .pipe(sourcemaps.init())
+      .pipe(sass({includePaths: 'node_modules'}).on("error", sass.logError))
+      .pipe(sourcemaps.write('.'))
+      .pipe(dest('./build/wordpress/wp-content/themes/' + themeName))
+      .pipe(browserSync.stream({ match: '**/*.css' }));
+}
+
+function headerScriptsDev() {
+	return src(headerJS)
+		.pipe(plumber({ errorHandler: onError }))
+		.pipe(sourcemaps.init())
+		.pipe(concat('header-bundle.js'))
+		.pipe(sourcemaps.write('.'))
+		.pipe(dest('./build/wordpress/wp-content/themes/' + themeName + '/js'));
+}
+
+function footerScriptsDev() {
+	return src(footerJS)
+		.pipe(plumber({ errorHandler: onError }))
+		.pipe(sourcemaps.init())
+		.pipe(
+			babel({
+				presets: ['@babel/preset-env'],
+			}),
+		)
+		.pipe(concat('footer-bundle.js'))
+		.pipe(sourcemaps.write('.'))
+		.pipe(dest('./build/wordpress/wp-content/themes/' + themeName + '/js'));
+}
+
+function devServer() {
+	connect.server(
+		{
+			base: './build/wordpress',
+			port: '3020',
+		},
+		() => {
+			browserSync({
+				logPrefix: 'Wauble Starter Theme',
+				proxy: '127.0.0.1:3020',
+				host: '127.0.0.1',
+				port: '3010',
+				open: 'external',
+			});
+		},
+	);
+
+	watch('./src/assets/css/**/*.css', stylesDev);
+	watch('./src/assets/js/**', series(footerScriptsDev, Reload));
+	watch('./src/assets/img/**', series(copyImagesDev, Reload));
+	watch('./src/assets/fonts/**', series(copyFontsDev, Reload));
+	watch('./src/theme/**', series(copyThemeDev, Reload));
+	watch('./src/assets/css/**/*.scss', stylesDev);
+	watch('./src/plugins/**', series(pluginsDev, Reload));
+	watch('./build/wordpress/wp-config.php', { events: 'add' }, series(disableCron));
+}
+
+function stylesProd() {
+  return src('./src/assets/css/style.scss')
+      .pipe(sass({includePaths: 'node_modules'}).on("error", sass.logError))
+      .pipe(dest('./dist/themes/' + themeName));
+}
+
+function headerScriptsProd() {
+return src(headerJS)
+  .pipe(plumber({ errorHandler: onError }))
+  .pipe(concat('header-bundle.js'))
+  .pipe(uglify())
+  .pipe(dest('./dist/themes/' + themeName + '/js'));
+}
+
+function footerScriptsProd() {
+return src(footerJS)
+  .pipe(plumber({ errorHandler: onError }))
+  .pipe(
+    babel({
+      presets: ['@babel/preset-env'],
+    }),
+  )
+  .pipe(concat('footer-bundle.js'))
+  .pipe(uglify())
+  .pipe(dest('./dist/themes/' + themeName + '/js'));
+}
+
+exports.dev = series(
+	stylesDev,
+	headerScriptsDev,
+	footerScriptsDev,
+	devServer,
+);
+
+/* -------------------------------------------------------------------------------------------------
+Production Tasks
+-------------------------------------------------------------------------------------------------- */
+async function cleanProd() {
+	await del(['./dist']);
+}
+
+function copyThemeProd() {
+	return src(['./src/theme/**', '!./src/theme/**/node_modules/**']).pipe(
+		dest('./dist/themes/' + themeName),
+	);
+}
+
+function copyFontsProd() {
+	return src('./src/assets/fonts/**').pipe(dest('./dist/themes/' + themeName + '/fonts'));
+}
+
+function stylesProd() {
+    return src('./src/assets/css/style.scss')
+        .pipe(sass({includePaths: 'node_modules'}).on("error", sass.logError))
+        .pipe(dest('./dist/themes/' + themeName));
+}
+
+function headerScriptsProd() {
+	return src(headerJS)
+		.pipe(plumber({ errorHandler: onError }))
+		.pipe(concat('header-bundle.js'))
+		.pipe(uglify())
+		.pipe(dest('./dist/themes/' + themeName + '/js'));
+}
+
+function footerScriptsProd() {
+	return src(footerJS)
+		.pipe(plumber({ errorHandler: onError }))
+		.pipe(
+			babel({
+				presets: ['@babel/preset-env'],
+			}),
+		)
+		.pipe(concat('footer-bundle.js'))
+		.pipe(uglify())
+		.pipe(dest('./dist/themes/' + themeName + '/js'));
+}
+
+function processImages() {
+	return src('./src/assets/img/**')
+		.pipe(plumber({ errorHandler: onError }))
+		.pipe(
+			imagemin([imagemin.svgo({ plugins: [{ removeViewBox: true }] })], {
+				verbose: true,
+			}),
+		)
+		.pipe(dest('./dist/themes/' + themeName + '/img'));
+}
+
+function zipProd() {
+	return src('./dist/themes/' + themeName + '/**/*')
+		.pipe(zip.dest('./dist/' + themeName + '.zip'))
+		.on('end', () => {
+			beeper();
+			log(pluginsGenerated);
+			log(filesGenerated);
+			log(thankYou);
+		});
+}
+
+exports.prod = series(
+	cleanProd,
+	copyThemeProd,
+	stylesProd,
+	headerScriptsProd,
+	footerScriptsProd,
+	processImages,
+	zipProd,
+);
+
+
+/* -------------------------------------------------------------------------------------------------
+Utility Tasks
+-------------------------------------------------------------------------------------------------- */
+
+const onError = err => {
+	beeper();
+	log(wpFy + ' - ' + errorMsg + ' ' + err.toString());
+	this.emit('end');
 };
 
-let reloadMode = false;
-
-function concatVendorStyles() {
-  return src(project.vendor.styles, { base: ".", allowEmpty: true, sourcemaps: true})
-    .pipe(concat("_wauble.vendor.bundle.css"))
-    .pipe(dest(project.styles.dest, { sourcemaps: "." }))
+async function disableCron() {
+	if (fs.existsSync('./build/wordpress/wp-config.php')) {
+		await fs.readFile('./build/wordpress/wp-config.php', (err, data) => {
+			if (err) {
+				log(wpFy + ' - ' + warning + ' WP_CRON was not disabled!');
+			}
+			if (data) {
+				if (data.indexOf('DISABLE_WP_CRON') >= 0) {
+					log('WP_CRON is already disabled!');
+				} else {
+					return src('./build/wordpress/wp-config.php')
+						.pipe(inject.after("define( 'DB_COLLATE', '' );", "\ndefine( 'DISABLE_WP_CRON', true );"))
+						.pipe(dest('./build/wordpress'));
+				}
+			}
+		});
+	}
 }
 
-function compileAuthoredStyles() {
-  return src(project.styles.entry, { base: ".", allowEmpty: true, sourcemaps: true })
-    .pipe(sassGlob())
-    .pipe(
-      sass({
-        errLogToConsole: true
-      })
-    )
-    .on("error", notify.onError())
-    .pipe(postcss([autoprefixer(), atImport()])) // Add cssnano() to the series to minify CSS
-    .pipe(concat("_wauble.authored.bundle.css"))
-    .pipe(dest(project.styles.dest, { sourcemaps: "." }))
-    .pipe(browserSync.stream())
+function Backup() {
+	if (!fs.existsSync('./build')) {
+		log(buildNotFound);
+		process.exit(1);
+	} else {
+		return src('./build/**/*')
+			.pipe(zip.dest('./backups/' + date + '.zip'))
+			.on('end', () => {
+				beeper();
+				log(backupsGenerated);
+				log(thankYou);
+			});
+	}
 }
 
-function concatVendorScripts() {
-  return src(project.vendor.scripts, { alleyEmpty: true })
-    .pipe(concat("_wauble.vendor.bundle.min.js"))
-    .pipe(uglify())
-    .pipe(dest(project.scripts.dest));
-}
+exports.backup = series(Backup);
 
-function compileAuthoredScripts() {
-  return src(project.scripts.files, { allowEmpty: true })
-  .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-  .pipe(babel({
-    presets: [
-      ['@babel/env', {
-        modules: false
-      }]
-    ]
-  }))
-    .pipe(concat("_wauble.authored.bundle.js"))
-    .pipe(dest(project.scripts.dest));
-}
+/* -------------------------------------------------------------------------------------------------
+Messages
+-------------------------------------------------------------------------------------------------- */
+const date = new Date().toLocaleDateString('en-GB').replace(/\//g, '.');
+const errorMsg = '\x1b[41mError\x1b[0m';
+const warning = '\x1b[43mWarning\x1b[0m';
+const devServerReady =
+	'Your development server is ready, start the workflow with the command: $ \x1b[1mnpm run dev\x1b[0m';
+const buildNotFound =
+	errorMsg +
+	' ⚠️　- You need to install WordPress first. Run the command: $ \x1b[1mnpm run install:wordpress\x1b[0m';
+const filesGenerated =
+	'Your ZIP template file was generated in: \x1b[1m' +
+	__dirname +
+	'/dist/' +
+	themeName +
+	'.zip\x1b[0m - ✅';
+const pluginsGenerated =
+	'Plugins are generated in: \x1b[1m' + __dirname + '/dist/plugins/\x1b[0m - ✅';
+const backupsGenerated =
+	'Your backup was generated in: \x1b[1m' + __dirname + '/backups/' + date + '.zip\x1b[0m - ✅';
+const wpFy = '\x1b[42m\x1b[1mWordPressify\x1b[0m';
+const wpFyUrl = '\x1b[2m - http://www.wordpressify.co/\x1b[0m';
+const thankYou = 'Thank you for using ' + wpFy + wpFyUrl;
 
-function zipDev(cb) {
-  //This task was created for a Shopify build system but can be enabled for Wordpress if desired.
-  src(["**/*.*", "!node_modules/", "!node_modules/**"])
-    .pipe(zip("_wauble.zip"))
-    .pipe(dest(project.scripts.dest));
-  cb();
-}
-
-function refreshBrowser(cb) {
-  browserSync.reload();
-  cb();
-}
-
-function initBrowserSync(cb) {
-  browserSync.init({
-    open: 'internal',
-    //If using virtual hosts enter them here. If not, use localhost or 127.0.0.1
-    //Check the BrowserSync console output for ports and access to BrowserSync panel
-    host: 'wauble',
-    proxy: "wauble",
-    port: 80
-  });
-  cb();
-}
-
-function cleanup(cb) {
-  return src(
-    [
-      "./../assets/_wauble.vendor.bundle.min.js",
-      "./../assets/_wauble.bundle.js",
-      "./../assets/_wauble.authored.bundle.css.map",
-      "./../assets/_wauble.authored.bundle.css"
-    ],
-    { allowEmpty: true }
-  ).pipe(clean({ force: true }));
-  cb();
-}
-
-function watchFiles(cb) {
-  log.info('Watching Files...')
-
-  if (reloadMode) {
-    watch(project.styles.files_to_watch, series(parallel(compileAuthoredStyles, concatVendorStyles), refreshBrowser));
-    watch(project.scripts.files_to_watch, series(compileAuthoredScripts, refreshBrowser));
-    watch(project.templates.files_to_watch, series(refreshBrowser));
-  } else {
-    watch(project.styles.files_to_watch, parallel(compileAuthoredStyles, concatVendorStyles));
-    watch(project.scripts.files_to_watch, parallel(compileAuthoredScripts, concatVendorScripts));
-  }
-  cb(); 
-}
-
-const build = parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts);
-const dev = series(parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts), watchFiles);
-const reload = function() {
-  reloadMode = true;
-  return series(parallel(compileAuthoredStyles, concatVendorStyles, compileAuthoredScripts, concatVendorScripts), initBrowserSync, watchFiles);
-}
-
-exports.default = build;
-exports.build = build;
-exports.reload = reload();
-exports.dev = dev;
+/* -------------------------------------------------------------------------------------------------
+End of all Tasks
+-------------------------------------------------------------------------------------------------- */
