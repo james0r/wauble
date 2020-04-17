@@ -1,0 +1,6 @@
+{
+  "path-autocomplete.pathMappings": {
+    "/test": "${folder}/src/Actions/test",
+    "./": "${folder}/assets"
+}
+}

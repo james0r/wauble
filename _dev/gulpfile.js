@@ -1,17 +1,14 @@
 const { src, dest, watch, series, parallel } = require("gulp");
-const sourcemaps = require("gulp-sourcemaps");
 const sass = require("gulp-sass");
 var sassGlob = require("gulp-sass-glob");
 const concat = require("gulp-concat");
 const uglify = require("gulp-uglify");
 const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
-const cssnano = require("cssnano");
 const babel = require("gulp-babel");
 const log = require("fancy-log");
 const clean = require("gulp-clean");
 const browserSync = require("browser-sync").create();
-var rewriteCSS = require("gulp-rewrite-css");
 var atImport = require("postcss-import");
 var notify = require("gulp-notify");
 const zip = require("gulp-zip");
@@ -55,7 +52,6 @@ function compileAuthoredStyles() {
       })
     )
     .on("error", notify.onError())
-    .pipe(rewriteCSS({ destination: project.styles.dest }))
     .pipe(postcss([autoprefixer(), atImport()])) // Add cssnano() to the series to minify CSS
     .pipe(concat("_wauble.authored.bundle.css"))
     .pipe(dest(project.styles.dest, { sourcemaps: "." }))

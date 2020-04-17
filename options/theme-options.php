@@ -20,7 +20,8 @@ Container::make( 'theme_options', __( 'Theme Options', 'crb' ) )
     // Field::make( 'rich_text', 'crb_cookie_banner_text', __( 'Cookie Banner Text' ) ),
     ) )
     ->add_tab( __( 'Header', 'crb' ), array(
-    Field::make( 'image', 'crb_header_logo', __( 'Header Logo Image' ) )
+    Field::make( 'image', 'crb_header_logo', __( 'Header Logo Image' ) ),
+    Field::make( 'image', 'crb_header_logo_mobile', __( 'Header Logo Image' ) )
     ) )
     ->add_tab( __( 'Page Header Background', 'crb' ), array(
     Field::make( 'image', 'crb_page_header', __( 'Page Header Image' ) )

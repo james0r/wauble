@@ -65,6 +65,7 @@ function load_dashicons_front_end() {
 
 # Attach Custom Post Types and Custom Taxonomies
 add_action( 'init', 'crb_attach_post_types_and_taxonomies', 0 );
+
 function crb_attach_post_types_and_taxonomies() {
 	# Attach Custom Post Types
 	include_once( CRB_THEME_DIR . 'options/post-types.php' );
@@ -153,6 +154,7 @@ function crb_excerpt_length() {
 }
 
 add_filter( 'mce_buttons', 'add_page_break', 1, 2 );
+
 function add_page_break( $buttons, $id ){
    /* only add this for content editor */
    if ( 'content' == $id ) {
@@ -325,4 +327,76 @@ function shapeSpace_enable_gutenberg_post_type($can_edit, $post) {
 add_filter('use_block_editor_for_post_type', 'shapeSpace_enable_gutenberg_post_type', 10, 2);
 
 // WP >= 5.0
-add_filter('use_block_editor_for_post', '__return_true', 5);
+add_filter('use_block_editor_for_post', '__return_false', 5);
+
+// Remove comments page in menu
+add_action('admin_menu', function () {
+  remove_menu_page('edit-comments.php');
+});
+
+// Remove comments links from admin bar
+add_action('init', function () {
+  if (is_admin_bar_showing()) {
+      remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
+  }
+});
+
+add_action( 'init', 'cp_change_post_object' );
+// Change dashboard Posts to News
+function cp_change_post_object() {
+    $get_post_type = get_post_type_object('post');
+    $labels = $get_post_type->labels;
+        $labels->name = 'Blog';
+        $labels->singular_name = 'Blog';
+        $labels->add_new = 'Add Article';
+        $labels->add_new_item = 'Add Article';
+        $labels->edit_item = 'Edit Article';
+        $labels->new_item = 'News';
+        $labels->view_item = 'View Article';
+        $labels->search_items = 'Search Blog';
+        $labels->not_found = 'No Articles found';
+        $labels->not_found_in_trash = 'No Articles found in Trash';
+        $labels->all_items = 'All Articles';
+        $labels->menu_name = 'Blog';
+        $labels->name_admin_bar = 'Blog';
+        $get_post_type->menu_icon = 'dashicons-welcome-write-blog';
+}
+
+function remove_menu_items(){
+  remove_menu_page('readme.php' );
+}
+
+add_action( 'admin_menu', 'remove_menu_items', 999 );
+
+
+// function wpse121723_register_sidebars() {
+//   register_sidebar( array(
+//       'name' => 'Home right sidebar',
+//       'id' => 'home_right_1',
+//       'before_widget' => '<div>',
+//       'after_widget' => '</div>',
+//       'before_title' => '<h2 class="rounded">',
+//       'after_title' => '</h2>',
+//   ) );
+// }
+// add_action( 'widgets_init', 'wpse121723_register_sidebars' );
+
+// function unregister_default_widgets() {
+//   unregister_widget('WP_Widget_Pages');
+//   unregister_widget('WP_Widget_Calendar');
+//   unregister_widget('WP_Widget_Archives');
+//   unregister_widget('WP_Widget_Links');
+//   unregister_widget('WP_Widget_Meta');
+//   unregister_widget('WP_Widget_Search');
+//   unregister_widget('WP_Widget_Text');
+//   unregister_widget('WP_Widget_Categories');
+//   unregister_widget('WP_Widget_Recent_Posts');
+//   unregister_widget('WP_Widget_Recent_Comments');
+//   unregister_widget('WP_Widget_RSS');
+//   unregister_widget('WP_Widget_Media');
+//   unregister_widget('WP_Widget_Tag_Cloud');
+//   unregister_widget('WP_Nav_Menu_Widget');
+//   unregister_widget('Twenty_Eleven_Ephemera_Widget');
+//   wp_unregister_sidebar_widget('wpe_widget_powered_by');
+// }
+// add_action('widgets_init', 'unregister_default_widgets', 18);
