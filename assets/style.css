@@ -1,4 +1,7 @@
 /*----------------------------------------------------
+Base
+-----------------------------------------------------*/
+/*----------------------------------------------------
 Z-indexes
 -----------------------------------------------------*/
 /*----------------------------------------------------
@@ -18,25 +21,26 @@ Breakpoints
  -----------------------------------------------------*/
 @font-face {
   font-family: 'Open Sans';
-  src: url("../../assets/fonts/OpenSans-Regular.woff2") format("woff2"), url("../../assets/fonts/OpenSans-Regular.woff") format("woff");
+  src: url("../../../assets/fonts/OpenSans-Regular.woff2") format("woff2"), url("../../../assets/fonts/OpenSans-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
-/* ------------------------------------------------------------ *\
-	Layout
-\* ------------------------------------------------------------ */
-.full-width {
-  width: 100vw;
-  margin-left: calc((100vw - 100%) * (1/2)); }
+
+body span {
+  color: purple; }
+
 html {
   box-sizing: border-box;
   font-size: 16px; }
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+
 *,
 *:before,
 *:after {
   box-sizing: inherit; }
+
 body,
 h1,
 h2,
@@ -50,13 +54,26 @@ ul {
   margin: 0;
   padding: 0;
   font-weight: normal; }
+
 ol,
 ul {
   list-style: none; }
+
 a:visited,
 a {
   color: black; }
-.container span {
-  color: #D63D5B;
-  text-align: center; }
-/*# sourceMappingURL=_wauble.authored.bundle.css.map */
+
+/*----------------------------------------------------
+Layout
+-----------------------------------------------------*/
+/*----------------------------------------------------
+Parts
+-----------------------------------------------------*/
+/*----------------------------------------------------
+Templates
+-----------------------------------------------------*/
+/*----------------------------------------------------
+Override
+-----------------------------------------------------*/
+
+/*# sourceMappingURL=style.css.map */

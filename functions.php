@@ -4,45 +4,42 @@ define( 'THEME_ASSETS', get_stylesheet_directory_uri() . '/assets' );
 
 # Enqueue JS and CSS assets on the front-end
 add_action( 'wp_enqueue_scripts', 'crb_enqueue_assets' );
+
+function wauble_resources() {
+  wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/style.css' );
+  wp_enqueue_script( 'header_js', get_template_directory_uri() . '/assets/header-bundle.js', null, 1.0, false );
+  wp_enqueue_script( 'footer_js', get_template_directory_uri() . '/assets/footer-bundle.js', null, 1.0, true );
+}
+
+add_action( 'wp_enqueue_scripts', 'wauble_resources' );
+
 function crb_enqueue_assets() {
 	$template_dir = get_template_directory_uri();
 
-	# Enqueue Vendor JS files
-	wp_enqueue_script(
-		'vendor-scripts',
-		$template_dir . crb_assets_bundle( '_wauble.vendor.bundle.min.js' ),
-		array( 'jquery' ), // deps
-		null, // version -- this is handled by the bundle manifest
-		true // in footer
-	);
-
-	wp_enqueue_script(
-		'authored-scripts',
-		$template_dir . crb_assets_bundle( '_wauble.authored.bundle.js' ),
-		array( 'jquery' ), // deps
-		null, // version -- this is handled by the bundle manifest
-		true // in footer
-	);
-
-	wp_enqueue_style(
-		'vendor-styles',
-		$template_dir . crb_assets_bundle( '_wauble.vendor.bundle.css' )
-	);
-
-	wp_enqueue_style(
-		'authored-styles',
-		$template_dir . crb_assets_bundle( '_wauble.authored.bundle.css' )
-	);
-
 	# The theme style.css file may contain overrides for the bundled styles
 	# Pre-compiled styles override file lives in /_dev/sass/overrides.scss
-	crb_enqueue_style( 'theme-styles', $template_dir . '/style.css' );
-
-	# Enqueue Comments JS file
-	if ( is_singular() ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+  crb_enqueue_style( 'theme-styles', $template_dir . '/style.css' );
 }
+
+// Customize excerpt word count length
+function custom_excerpt_length() {
+return 22;
+}
+
+add_filter( 'excerpt_length', 'custom_excerpt_length' );
+
+function wauble_setup() {
+  // Handle Titles
+  add_theme_support( 'title-tag' );
+
+  // Add featured image support
+  add_theme_support( 'post-thumbnails' );
+  add_image_size( 'small-thumbnail', 720, 720, true );
+  add_image_size( 'square-thumbnail', 80, 80, true );
+  add_image_size( 'banner-image', 1024, 1024, true );
+}
+
+add_action( 'after_setup_theme', 'wauble_setup' );
 
 // # Enqueue JS and CSS assets on admin pages
 add_action( 'admin_enqueue_scripts', 'crb_admin_enqueue_scripts' );
@@ -115,6 +112,7 @@ if ( ! function_exists( 'crb_setup_theme' ) ) {
 		register_nav_menus( array(
 			'header-menu'         => __( 'Header Menu', 'crb' ),
 			'footer-menu'         => __( 'Footer Menu', 'crb' ),
+			'mobile-menu'         => __( 'Mobile Menu', 'crb' ),
 		) );
 
 		# Attach custom shortcodes
@@ -130,10 +128,6 @@ if ( ! function_exists( 'crb_setup_theme' ) ) {
 			return get_template_directory_uri() . '/assets/images/favicon.png';
 		} );
 		add_filter( 'carbon_fields_map_field_api_key', 'crb_get_google_maps_api_key' );
-
-		# Add Image Sizes
-		add_image_size( 'home-slider', 1440, 0 );
-		add_image_size( 'intro', 1440, 0 );
 	}
 }
 
@@ -150,7 +144,7 @@ function crb_excerpt_more() {
 }
 
 function crb_excerpt_length() {
-	return 55;
+	return 22;
 }
 
 add_filter( 'mce_buttons', 'add_page_break', 1, 2 );
@@ -164,29 +158,6 @@ function add_page_break( $buttons, $id ){
    return $buttons;
 }
 
-/**
- * Get the path to a versioned bundle relative to the theme directory.
- *
- * @param  string $path
- * @return string
- */
-function crb_assets_bundle( $path ) {
-	static $manifest = null;
-
-	if ( is_null( $manifest ) ) {
-		$manifest_path = CRB_THEME_DIR . 'assets/manifest.json';
-
-		if ( file_exists( $manifest_path ) ) {
-			$manifest = json_decode( file_get_contents( $manifest_path ), true );
-		} else {
-			$manifest = array();
-		}
-	}
-
-	$path = isset( $manifest[ $path ] ) ? $manifest[ $path ] : $path;
-
-	return '/assets/' . $path;
-}
 
 function get_part($part_slug = 'none', $arr = Array()) {
 	return crb_render_fragment($part_slug, $arr);
@@ -262,6 +233,8 @@ function condensed_body_class($classes) {
 
 add_filter( 'body_class', 'condensed_body_class');
 
+// Set classes for pagination links
+
 function next_posts_link_attributes() {
 	return 'class="next-button"';
 }
@@ -301,32 +274,7 @@ add_theme_support( 'editor-styles' );
 // Enqueue editor styles.
 add_editor_style( 'style-editor.css' );
 
-function twentynineteen_editor_customizer_styles() {
-
-	wp_enqueue_style( 'twentynineteen-editor-customizer-styles', get_theme_file_uri( '/style-editor-customizer.css' ), false, '1.1', 'all' );
-
-	if ( 'custom' === get_theme_mod( 'primary_color' ) ) {
-		// Include color patterns.
-		require_once get_parent_theme_file_path( '/inc/color-patterns.php' );
-		wp_add_inline_style( 'twentynineteen-editor-customizer-styles', twentynineteen_custom_colors_css() );
-	}
-}
-add_action( 'enqueue_block_editor_assets', 'twentynineteen_editor_customizer_styles' );
-
-function shapeSpace_enable_gutenberg_post_type($can_edit, $post) {
-	
-	if (empty($post->ID)) return $can_edit;
-	
-	if ('books' === $post_type) return true;
-	
-	return $can_edit;
-	
-}
-
-// Enable Gutenberg for WordPress >= 5.0
-add_filter('use_block_editor_for_post_type', 'shapeSpace_enable_gutenberg_post_type', 10, 2);
-
-// WP >= 5.0
+// DISABLES GUTENBERG
 add_filter('use_block_editor_for_post', '__return_false', 5);
 
 // Remove comments page in menu
@@ -349,7 +297,7 @@ function cp_change_post_object() {
         $labels->name = 'Blog';
         $labels->singular_name = 'Blog';
         $labels->add_new = 'Add Article';
-        $labels->add_new_item = 'Add Article';
+        $labels->add_new_item = 'Add New Article';
         $labels->edit_item = 'Edit Article';
         $labels->new_item = 'News';
         $labels->view_item = 'View Article';
@@ -361,42 +309,3 @@ function cp_change_post_object() {
         $labels->name_admin_bar = 'Blog';
         $get_post_type->menu_icon = 'dashicons-welcome-write-blog';
 }
-
-function remove_menu_items(){
-  remove_menu_page('readme.php' );
-}
-
-add_action( 'admin_menu', 'remove_menu_items', 999 );
-
-
-// function wpse121723_register_sidebars() {
-//   register_sidebar( array(
-//       'name' => 'Home right sidebar',
-//       'id' => 'home_right_1',
-//       'before_widget' => '<div>',
-//       'after_widget' => '</div>',
-//       'before_title' => '<h2 class="rounded">',
-//       'after_title' => '</h2>',
-//   ) );
-// }
-// add_action( 'widgets_init', 'wpse121723_register_sidebars' );
-
-// function unregister_default_widgets() {
-//   unregister_widget('WP_Widget_Pages');
-//   unregister_widget('WP_Widget_Calendar');
-//   unregister_widget('WP_Widget_Archives');
-//   unregister_widget('WP_Widget_Links');
-//   unregister_widget('WP_Widget_Meta');
-//   unregister_widget('WP_Widget_Search');
-//   unregister_widget('WP_Widget_Text');
-//   unregister_widget('WP_Widget_Categories');
-//   unregister_widget('WP_Widget_Recent_Posts');
-//   unregister_widget('WP_Widget_Recent_Comments');
-//   unregister_widget('WP_Widget_RSS');
-//   unregister_widget('WP_Widget_Media');
-//   unregister_widget('WP_Widget_Tag_Cloud');
-//   unregister_widget('WP_Nav_Menu_Widget');
-//   unregister_widget('Twenty_Eleven_Ephemera_Widget');
-//   wp_unregister_sidebar_widget('wpe_widget_powered_by');
-// }
-// add_action('widgets_init', 'unregister_default_widgets', 18);
