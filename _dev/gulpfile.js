@@ -3,18 +3,12 @@ const babel = require('gulp-babel');
 const beeper = require('beeper');
 const browserSync = require('browser-sync');
 const concat = require('gulp-concat');
-const connect = require('gulp-connect-php');
 const del = require('del');
 const log = require('fancy-log');
 const fs = require('fs');
 const imagemin = require('gulp-imagemin');
 const inject = require('gulp-inject-string');
-const partialimport = require('postcss-easy-import');
 const plumber = require('gulp-plumber');
-const postcss = require('gulp-postcss');
-const postCSSMixins = require('postcss-mixins');
-const postcssPresetEnv = require('postcss-preset-env');
-const remoteSrc = require('gulp-remote-src');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 const zip = require('gulp-vinyl-zip');
@@ -38,25 +32,19 @@ Development Tasks
 -------------------------------------------------------------------------------------------------- */
 
 function devServer() {
-	connect.server(
-		{
-			base: './build/wordpress',
-			port: '3020',
-		},
-		() => {
-			browserSync({
-				logPrefix: '🎈 WordPressify',
-				proxy: '127.0.0.1:3020',
-				host: '127.0.0.1',
-				port: '3010',
-				open: 'external',
-			});
-		},
-	);
 
-	watch('./src/assets/css/**/*.css', stylesDev);
-	watch('./src/assets/css/**/*.scss', stylesDev);
-	watch('./src/assets/js/**', series(footerScriptsDev, Reload));
+  browserSync({
+    logPrefix: '🎈 Wauble',
+    proxy: 'wauble/',
+    host: '127.0.0.1',
+    port: '3010',
+    open: 'external',
+  });
+
+
+	watch('./sass/**/*.css', stylesDev);
+	watch('./sass/**/*.scss', stylesDev);
+	watch('./js/**', series(footerScriptsDev, Reload));
 	watch('./build/wordpress/wp-config.php', { events: 'add' }, series(disableCron));
 }
 
@@ -66,11 +54,11 @@ function Reload(done) {
 }
 
 function stylesDev() {
-  return src('./src/assets/css/style.scss')
+  return src('./sass/style.scss')
       .pipe(sourcemaps.init())
       .pipe(sass({includePaths: 'node_modules'}).on("error", sass.logError))
       .pipe(sourcemaps.write('.'))
-      .pipe(dest('./build/wordpress/wp-content/themes/' + themeName))
+      .pipe(dest('../assets/'))
       .pipe(browserSync.stream({ match: '**/*.css' }));
 }
 
@@ -80,7 +68,7 @@ function headerScriptsDev() {
 		.pipe(sourcemaps.init())
 		.pipe(concat('header-bundle.js'))
 		.pipe(sourcemaps.write('.'))
-		.pipe(dest('./build/wordpress/wp-content/themes/' + themeName + '/js'));
+		.pipe(dest('../assets/'));
 }
 
 function footerScriptsDev() {
@@ -94,61 +82,7 @@ function footerScriptsDev() {
 		)
 		.pipe(concat('footer-bundle.js'))
 		.pipe(sourcemaps.write('.'))
-		.pipe(dest('./build/wordpress/wp-content/themes/' + themeName + '/js'));
-}
-
-function devServer() {
-	connect.server(
-		{
-			base: './build/wordpress',
-			port: '3020',
-		},
-		() => {
-			browserSync({
-				logPrefix: 'Wauble Starter Theme',
-				proxy: '127.0.0.1:3020',
-				host: '127.0.0.1',
-				port: '3010',
-				open: 'external',
-			});
-		},
-	);
-
-	watch('./src/assets/css/**/*.css', stylesDev);
-	watch('./src/assets/js/**', series(footerScriptsDev, Reload));
-	watch('./src/assets/img/**', series(copyImagesDev, Reload));
-	watch('./src/assets/fonts/**', series(copyFontsDev, Reload));
-	watch('./src/theme/**', series(copyThemeDev, Reload));
-	watch('./src/assets/css/**/*.scss', stylesDev);
-	watch('./src/plugins/**', series(pluginsDev, Reload));
-	watch('./build/wordpress/wp-config.php', { events: 'add' }, series(disableCron));
-}
-
-function stylesProd() {
-  return src('./src/assets/css/style.scss')
-      .pipe(sass({includePaths: 'node_modules'}).on("error", sass.logError))
-      .pipe(dest('./dist/themes/' + themeName));
-}
-
-function headerScriptsProd() {
-return src(headerJS)
-  .pipe(plumber({ errorHandler: onError }))
-  .pipe(concat('header-bundle.js'))
-  .pipe(uglify())
-  .pipe(dest('./dist/themes/' + themeName + '/js'));
-}
-
-function footerScriptsProd() {
-return src(footerJS)
-  .pipe(plumber({ errorHandler: onError }))
-  .pipe(
-    babel({
-      presets: ['@babel/preset-env'],
-    }),
-  )
-  .pipe(concat('footer-bundle.js'))
-  .pipe(uglify())
-  .pipe(dest('./dist/themes/' + themeName + '/js'));
+		.pipe(dest('../assets/'));
 }
 
 exports.dev = series(
@@ -161,6 +95,34 @@ exports.dev = series(
 /* -------------------------------------------------------------------------------------------------
 Production Tasks
 -------------------------------------------------------------------------------------------------- */
+
+function stylesProd() {
+  return src('./src/assets/css/style.scss')
+      .pipe(sass({includePaths: 'node_modules'}).on("error", sass.logError))
+      .pipe(dest('./dist/themes/' + themeName));
+}
+
+function headerScriptsProd() {
+return src(headerJS)
+  .pipe(plumber({ errorHandler: onError }))
+  .pipe(concat('header-bundle.js'))
+  .pipe(uglify())
+  .pipe(dest('../assets/'));
+}
+
+function footerScriptsProd() {
+return src(footerJS)
+  .pipe(plumber({ errorHandler: onError }))
+  .pipe(
+    babel({
+      presets: ['@babel/preset-env'],
+    }),
+  )
+  .pipe(concat('footer-bundle.js'))
+  .pipe(uglify())
+  .pipe(dest('../assets/'));
+}
+
 async function cleanProd() {
 	await del(['./dist']);
 }
@@ -169,10 +131,6 @@ function copyThemeProd() {
 	return src(['./src/theme/**', '!./src/theme/**/node_modules/**']).pipe(
 		dest('./dist/themes/' + themeName),
 	);
-}
-
-function copyFontsProd() {
-	return src('./src/assets/fonts/**').pipe(dest('./dist/themes/' + themeName + '/fonts'));
 }
 
 function stylesProd() {
