@@ -1,5 +1,5 @@
 (function($) {
   $(window).ready(function() {
-    console.log('test');
+    console.log('Wauble Wordpress Starter Theme');
   })
 })(jQuery);

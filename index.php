@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file
  *
@@ -17,27 +18,30 @@
 get_header();
 ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
 
-		<?php
-		if ( have_posts() ) {
 
-			// Load posts loop.
-			while ( have_posts() ) {
-				the_post();
-			}
+<section id="primary" class="content-area">
+  <main id="main" class="site-main">
 
-		} else {
+    <?php
+if ( have_posts() ) {
 
-			// If no content, include the "No posts found" template.
-			get_part('none');
+  // Load posts loop.
+  while ( have_posts() ) {
+    the_post();
+  }
 
-		}
-		?>
-		
-		</main><!-- .site-main -->
-	</section><!-- .content-area -->
+} else {
+
+  // If no content, include the "No posts found" template.
+  get_part('none');
+
+}
+?>
+
+  </main><!-- .site-main -->
+</section><!-- .content-area -->
 
 <?php
 get_footer();
+

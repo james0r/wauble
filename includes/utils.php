@@ -1,30 +1,13 @@
 <?php
 
-function crb_image_asset( $asset_name, $alt_tag, $classname = null) {
-  $tpl = '<img %s src="%s/%s" alt="%s">';
-  $class = '';
-  if(empty($classname) === false) {
-    $class = sprintf('class="%s"', $classname);
-  }
-	return sprintf($tpl, $class, get_bloginfo('stylesheet_directory'), ltrim($asset_name, '/'), $alt_tag);
+function console_log( $data ){
+  echo '<script>';
+  echo 'console.log('. json_encode( $data ) .')';
+  echo '</script>';
 }
 
-function crb_meta_data( $meta_key, $id = null ) {
-  if (empty($id) === true) {
-    $id = get_the_id();
-  }
 
-  $return = null;
-  if ( empty($return) === true ) {
-    $return = carbon_get_post_meta( $id, $meta_key );
-  }
-  if ( empty($return) === true ) {
-    $return = carbon_get_theme_option($meta_key);
-  }
-	return $return;
-}
-
-function crb_meta_image( $meta_key, $id = null  ) {
+function cfimageurl( $meta_key, $id = null  ) {
   $image_id = crb_meta_data($meta_key, $id);
   if($image_id === null) {
     $image_id = $meta_key;
@@ -38,79 +21,24 @@ function crb_meta_image( $meta_key, $id = null  ) {
   );
 }
 
-function crb_get_fragment_name( $section ) {
-	return str_replace( '_', '-', $section['_type'] );
+function cfthemeta($field) {
+  return carbon_get_the_post_meta($field);
 }
 
-function crb_page_builder_alg() {
-  if ( $list_section = carbon_get_the_post_meta( 'crb_block_sections' ) ) {
-  	foreach ( $list_section as $idx => $section ) {
-      $section['index'] = $idx;
-  		$fragment_name = crb_get_fragment_name( $section );
-
-  		crb_render_fragment( 'page-builder/' . $fragment_name, $section );
-  	}
-  }
+function cfthemeoption($field) {
+  return carbon_get_theme_option($field);
 }
 
-// app specific
-
-function expand_alg( $url ) {
-  $query = str_replace('#expand?', '', $url);
-  parse_str($query, $param);
-
-  $return = array();
-  if(isset($param['taxonomy']) === true) {
-    $terms = get_terms($param['taxonomy'], array('hide_empty' => false));
-    foreach($terms as $term_obj) {
-      $return[] = array(
-        'title' => $term_obj->name,
-        'url' => get_term_link($term_obj),
-      );
-    }
-  } else {
-    // The Query
-    $args = array(
-      'post_type' => $param['post_type'],
-      // oldest posts first
-      'order' => 'ASC',
-      'orderby' => 'date',
-      'posts_per_page' => '-1',
-    );
-
-    if (empty($param['limit']) === false) {
-      $args['posts_per_page'] = $param['limit'];
-    }
-
-    $the_query = new WP_Query( $args );
-
-    // The Loop
-    if ( $the_query->have_posts() ) {
-      while ( $the_query->have_posts() ) {
-        $the_query->the_post();
-        $return[] = array(
-          'title' => get_the_title(),
-          'url'   => get_permalink(),
-        );
-      }
-    }
-  }
-  return $return;
+function cfmeta($id, $field, $complex = false) {
+  return carbon_get_post_meta($id, $field, $complex);
 }
 
-// shopify inspired polyfills
-
-function asset_img_url( $filename ) {
-  return sprintf('%s/assets/images/%s', get_bloginfo('stylesheet_directory'), ltrim($filename, '/'));
+function cfattachmentimage ($field, $size = 'master', $icon = false, $attr = '') {
+  return wp_get_attachment_image(cfthemeta($field), $size, $icon, $attr);
 }
 
-function img_tag( $filename, $alt_tag, $classname = null) {
-  $tpl = '<img %s src="%s/assets/images/%s" alt="%s">';
-  $class = '';
-  if(empty($classname) === false) {
-    $class = sprintf('class="%s"', $classname);
-  }
-	return sprintf($tpl, $class, get_bloginfo('stylesheet_directory'), ltrim($filename, '/'), $alt_tag);
+function get_part($part_slug = 'none', $arr = Array()) {
+	return crb_render_fragment($part_slug, $arr);
 }
 
 // --- helpers ---
@@ -124,25 +52,8 @@ function do_truncate( $text, $limit ) {
   return $return;
 }
 
-function default_url( $url ) {
-  $return = '';
-  if ($url !== '#') {
-    $return = sprintf('href="%s"', $url);
-  }
-  return $return;
-}
-
 function get_directions( $address ) {
   return sprintf('https://www.google.com/maps/dir/?api=1&destination=%s', $address);
-}
-
-function get_the_default_image() {
-  return crb_image_asset('assets/images/no-image.svg', 'no image uploaded yet');
-}
-
-function get_cat_slug( $id ) {
-  $cat = get_category( $id );
-  return $cat->slug;
 }
 
 function slugify( $text ) {
@@ -159,46 +70,43 @@ function get_nav( $menu_name, $args = array() ) {
   return $return;
 }
 
-function parse_nav( $linklist ) {
-  $return = array();
-  foreach ($linklist as $id => $obj) {
-    $info = array(
-      'title' => $obj->title,
-      'url'   => $obj->url,
-    );
-    if(isset($obj->wpse_children) === true) {
-      $info['links'] = parse_nav($obj->wpse_children);
-    } else if (strpos($obj->url, '#expand') !== false) {
-      parse_str($obj->url, $param);
-      $info['url'] = $param['actual'];
-      $info['links'] = expand_alg($obj->url);
-    }
-    $return[] = $info;
-  }
-  return $return;
-}
+// Adds a toast in the bottom right corner displaying current template while logged into admin
 
-/**
- * Modification of "Build a tree from a flat array in PHP"
- *
- * Authors: @DSkinner, @ImmortalFirefly and @SteveEdson
- *
- * @link https://stackoverflow.com/a/28429487/2078474
- */
-function buildTree( array &$elements, $parentId = 0 )
-{
-    $branch = array();
-    foreach ( $elements as &$element )
-    {
-        if ( $element->menu_item_parent == $parentId )
-        {
-            $children = buildTree( $elements, $element->ID );
-            if ( $children )
-                $element->wpse_children = $children;
+function display_template_toast() {
+	if ( is_super_admin() ) {
+		global $template;
 
-            $branch[$element->ID] = $element;
-            unset( $element );
-        }
-    }
-    return $branch;
+		$markup = '<div class="wp-template-toast">
+						%s
+						</div>
+						<style>
+							.wp-template-toast {
+								position: fixed;
+								height: 20px;
+								width: 150px;
+								background: rgba(255,0,0,.5);
+								color: white;
+								bottom: 0px;
+								display: flex;
+								justify-content: center;
+								font-size: 12px;
+								right: 0px;
+								border-radius: 5px;
+								animation: fadeout 1s 2s forwards;
+							}
+							@keyframes fadeout {
+								from {
+									opacity: 1;
+								}
+
+								to {
+									opacity: 0;
+								}
+							}
+						</style>';
+
+			echo sprintf($markup, basename($template));
+	}
 }
+ 
+add_action( 'wp_footer', 'display_template_toast' );

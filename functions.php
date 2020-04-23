@@ -92,6 +92,7 @@ if ( ! function_exists( 'crb_setup_theme' ) ) {
 		include_once( CRB_THEME_DIR . 'includes/admin-hooks.php' );
 		include_once( CRB_THEME_DIR . 'includes/utils.php' );
 		include_once( CRB_THEME_DIR . 'includes/query-args.php' );
+		include_once( CRB_THEME_DIR . 'includes/custom-modules.php' );
 		
 		# Theme supports
 		add_theme_support( 'automatic-feed-links' );
@@ -127,7 +128,8 @@ if ( ! function_exists( 'crb_setup_theme' ) ) {
 		add_filter( 'crb_theme_favicon_uri', function() {
 			return get_template_directory_uri() . '/assets/images/favicon.png';
 		} );
-		add_filter( 'carbon_fields_map_field_api_key', 'crb_get_google_maps_api_key' );
+    add_filter( 'carbon_fields_map_field_api_key', 'crb_get_google_maps_api_key' );
+    
 	}
 }
 
@@ -309,3 +311,4 @@ function cp_change_post_object() {
         $labels->name_admin_bar = 'Blog';
         $get_post_type->menu_icon = 'dashicons-welcome-write-blog';
 }
+
