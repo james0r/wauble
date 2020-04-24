@@ -6,7 +6,6 @@ function console_log( $data ){
   echo '</script>';
 }
 
-
 function cfimageurl( $meta_key, $id = null  ) {
   $image_id = crb_meta_data($meta_key, $id);
   if($image_id === null) {

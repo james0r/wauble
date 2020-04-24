@@ -5,7 +5,6 @@
   get_header();
   the_post();
 ?>
-<?php get_part('pagetitle'); ?>
 
 <article class="generic">
     <div class="major-container">

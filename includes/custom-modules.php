@@ -4,26 +4,19 @@ add_action( 'edit_form_after_editor', 'generate_block_cta' );
 function generate_block_cta( $post ) {
 ?>
   <div class="block-cta postbox">
-	  <h2>DR Module Manager</h2>
+	  <h2>Wauble Dynamic Sections</h2>
 	  <div class="inside clearfix">
 		  <?php if(!empty($_GET['post'])){ ?>
-	  		<p>Add and order any modules from the DR module library.</p>
-				<a href="/wp-admin/admin.php?page=manage-modules&editing=<?php echo $_GET['post']; ?>" class="button button-primary button-large">Manage Modules</a>
+	  		<p>Add and order any sections from the Wauble dynamic sections library.</p>
+				<a href="/wp-admin/admin.php?page=manage-modules&editing=<?php echo $_GET['post']; ?>" class="button button-primary button-large">Manage Dynamic Sections</a>
 			<?php } else { ?>
-				<p>Please publish this post or save to a draft before adding modules.</p>
+				<p>Please publish this post or save to a draft before adding sections.</p>
 			<?php } ?>
 	  </div>
   </div>
 <?php }
-	
-
-
-
 
 add_filter( 'wpseo_metabox_prio', function() { return 'low'; } );
-
-
-
 
 add_action( 'admin_menu', 'homepage_menu' );
 
@@ -47,31 +40,29 @@ function render_modules(){ ?>
 	
 	<div class="wrap module-manager">
 		
-		
 		<div class="mm-header clearfix">
-    	<h1>Manage Modules: <span><?php echo get_the_title($editing); ?></span></h1>
+    	<h1>Manage Dynamic Sections: <span><?php echo get_the_title($editing); ?></span></h1>
     	<a href="/wp-admin/post.php?post=<?php echo $editing; ?>&action=edit" class="page-title-action">Page Editor</a>
 		</div>
 		
-		
 		<div class="row">
-			
 			
 			<div class="columns four">
 				<div class="mm-form">
 					<form method="post" action="<?php echo esc_html( admin_url( 'admin-post.php' ) ); ?>">
-						<h2>Add Module</h2>
-						<label>Module #</label>
+						<h2>Add Dynamic Section</h2>
+						<label>Section Template</label>
 						<select name="module_name">
+							<option value="" disabled selected>-- Choose a Template --</option>
 							<option value="name">Name</option>
 							<option value="date">Date</option>
 						</select>
-						<label>Module Name</label>
+						<label>Section Name</label>
 						<input type="text" name="module_display_name" />
-						<p>Both Fields are required. The module name is for admin organization only</p>
+						<p>Both Fields are required. The section name is for your own reference.</p>
 						<input type="hidden" name="editing" value="<?php echo $editing; ?>" />
 						<input type="hidden" name="action" value="add_module">
-						<button type="submit" class="button button-primary button-large">Add Module</button>
+						<button type="submit" class="button button-primary button-large">Add Section</button>
     			</form>
 				</div>
 			</div>
@@ -89,7 +80,7 @@ function render_modules(){ ?>
 							$str = str_replace("_"," ",$str);
 							$str = ucwords(strtolower($str));
 						?>
-						<p>Module: <?php echo $str; ?></p>
+						<p>Template: <?php echo $str; ?></p>
 						<form method="post" action="<?php echo esc_html( admin_url( 'admin-post.php' ) ); ?>">
 							<input type="hidden" name="instance" value="<?php echo $m->id; ?>" />
 							<input type="hidden" name="editing" value="<?php echo $editing; ?>" />
@@ -172,8 +163,5 @@ function update_module_order() {
 	}
 
 }
-
-
-
 
 ?>

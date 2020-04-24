@@ -1,21 +1,11 @@
 <?php
-  /*
-  Template Name: Page Template
-  */
   get_header();
-  the_post();
 ?>
-<?php get_part('pagetitle'); ?>
 
-<article class="generic">
-    <div class="major-container">
-      <div class="minor-container">
-        <div class="generic-inner">
-          <?php the_content(); ?>
-        </div>
-      </div>
-    </div>
-
-</article>
+<div class="default-page">
+  <div class="default-page-inner">
+    <?php get_part('module-loop'); ?>
+  </div>
+</div>
 
 <?php get_footer(); ?>

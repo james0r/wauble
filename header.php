@@ -8,8 +8,8 @@
   <meta property="og:url" content="<?php global $wp;
                                     echo home_url($wp->request) ?>">
   <meta property="og:title" content="">
+  
   <?php wp_head(); ?>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
 </head>
 
 <body <?php body_class('') ?>>
