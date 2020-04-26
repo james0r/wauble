@@ -1,4 +1,4 @@
-	<?php get_part('footer'); ?>
+	<?php get_fragment('footer'); ?>
 	<?php wp_footer(); ?>
 </div><!-- .prevent-overflow --> 
 	

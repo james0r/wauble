@@ -1,8 +1,10 @@
 <?php
-	
+
 add_action( 'edit_form_after_editor', 'generate_block_cta' );
+	
 function generate_block_cta( $post ) {
 ?>
+  <?php if (basename(get_page_template()) == 'dynamic-sections.php'): ?>
   <div class="block-cta postbox">
 	  <h2>Wauble Dynamic Sections</h2>
 	  <div class="inside clearfix">
@@ -14,9 +16,8 @@ function generate_block_cta( $post ) {
 			<?php } ?>
 	  </div>
   </div>
+  <?php endif; ?>
 <?php }
-
-add_filter( 'wpseo_metabox_prio', function() { return 'low'; } );
 
 add_action( 'admin_menu', 'homepage_menu' );
 

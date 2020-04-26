@@ -15,6 +15,17 @@ jQuery(document).ready(function($){
 	});
 */
 
+$(document).on('carbonFields.apiLoaded', function(e, api) {
+  // Hook to all field changes and log the changed field's name and new value
+  $(document).on('carbonFields.fieldUpdated', function(e, fieldName) {
+      console.log('---');
+      console.log('Field updated: ' + fieldName);
+      console.log('New value:');
+      console.log(api.getFieldValue(fieldName))
+      console.log('---');
+  });
+});
+
 	$( "#sortable" ).sortable({
 		update: function( event, ui ) {
 			//console.log(event);
@@ -167,4 +178,16 @@ jQuery(document).ready(function($){
 	 }); 
 
 	
+});
+
+
+jQuery(document).on('carbonFields.apiLoaded', function(e, api) {
+  // Hook to all field changes and log the changed field's name and new value
+  $(document).on('carbonFields.fieldUpdated', function(e, fieldName) {
+      console.log('---');
+      console.log('Field updated: ' + fieldName);
+      console.log('New value:');
+      console.log(api.getFieldValue(fieldName))
+      console.log('---');
+  });
 });

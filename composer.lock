@@ -88,16 +88,16 @@
         },
         {
             "name": "htmlburger/carbon-fields",
-            "version": "v3.1.7",
+            "version": "v3.1.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/htmlburger/carbon-fields.git",
-                "reference": "2e66fa0d03a845ce6516bd8bd15cfa8b8096c1e7"
+                "reference": "016e6bac1d9bd23de04026c2efb859e42dc1043a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/htmlburger/carbon-fields/zipball/2e66fa0d03a845ce6516bd8bd15cfa8b8096c1e7",
-                "reference": "2e66fa0d03a845ce6516bd8bd15cfa8b8096c1e7",
+                "url": "https://api.github.com/repos/htmlburger/carbon-fields/zipball/016e6bac1d9bd23de04026c2efb859e42dc1043a",
+                "reference": "016e6bac1d9bd23de04026c2efb859e42dc1043a",
                 "shasum": ""
             },
             "require": {
@@ -217,7 +217,7 @@
             ],
             "description": "WordPress developer-friendly custom fields for post types, taxonomy terms, users, comments, widgets, options and more.",
             "homepage": "http://carbonfields.net/",
-            "time": "2019-11-14T09:02:25+00:00"
+            "time": "2020-04-22T07:57:11+00:00"
         },
         {
             "name": "htmlburger/carbon-fragment",

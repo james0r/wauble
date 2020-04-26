@@ -46,7 +46,7 @@ class Carbon_Fragment {
 			$fragments = array($fragments);
 		}
 
-		$fragments = preg_replace('/^\/?(parts\/)?(.*?)(\.php)?$/i', 'parts/part-$2.php', $fragments);
+		$fragments = preg_replace('/^\/?(fragments\/)?(.*?)(\.php)?$/i', 'fragments/$2.php', $fragments);
 		$this->template_file = locate_template($fragments, false, false);
 		
 		if (!$this->template_file) {

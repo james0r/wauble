@@ -6,6 +6,11 @@ function console_log( $data ){
   echo '</script>';
 }
 
+function get_meta($id, $key) {
+  $value = get_post_meta($id);
+  return $value[$key][0];
+}
+
 function cfimageurl( $meta_key, $id = null  ) {
   $image_id = crb_meta_data($meta_key, $id);
   if($image_id === null) {
@@ -36,7 +41,7 @@ function cfattachmentimage ($field, $size = 'master', $icon = false, $attr = '')
   return wp_get_attachment_image(cfthemeta($field), $size, $icon, $attr);
 }
 
-function get_part($part_slug = 'none', $arr = Array()) {
+function get_fragment($part_slug = 'none', $arr = Array()) {
 	return crb_render_fragment($part_slug, $arr);
 }
 

@@ -4,7 +4,7 @@
 
 <div class="default-page">
   <div class="default-page-inner">
-    <?php get_part('module-loop'); ?>
+    <?php get_fragment('module-loop'); ?>
   </div>
 </div>
 

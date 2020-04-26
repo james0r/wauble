@@ -2,16 +2,11 @@
 define( 'CRB_THEME_DIR', dirname( __FILE__ ) . DIRECTORY_SEPARATOR );
 define( 'THEME_ASSETS', get_stylesheet_directory_uri() . '/assets' );
 
-// ================================================ INIT CARBON FIELDS
-
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
-add_action( 'after_setup_theme', 'crb_load' );
-function crb_load() {
-    require_once( 'vendor/autoload.php' );
-    \Carbon_Fields\Carbon_Fields::boot();
-}
+// ================================================ CARBON FIELDS
+
 
 // ================================================ SCRIPTS	AND STYLESHEETS
 
@@ -53,36 +48,32 @@ add_image_size( 'banner-image', 1024, 1024, true );
 
 // ================================================ WAUBLE THEME DEFAULTS
 
+
+
 function wauble_theme_setup() {
 
+  include_once( 'vendor/autoload.php' );
+  \Carbon_Fields\Carbon_Fields::boot();
+
+  include_once  CRB_THEME_DIR . 'includes/custom-modules.php';
+  include_once  CRB_THEME_DIR . 'includes/meta/user-meta.php';
+  include_once  CRB_THEME_DIR . 'includes/theme-options.php';
+  include_once  CRB_THEME_DIR . 'includes/meta/meta-standard.php';
+  include_once  CRB_THEME_DIR . 'includes/meta/meta-modules.php';
+  
   // ================================================ LIBRARIES & INCLUDES
 
-  if ( file_exists(  CRB_THEME_DIR . '/includes/meta/meta-modules.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/meta/meta-modules.php';
+  if ( file_exists(  CRB_THEME_DIR . 'includes/post-types.php' ) ) {
+    require_once  CRB_THEME_DIR . 'includes/post-types.php';
   }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/custom-modules.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/custom-modules.php';
+  if ( file_exists(  CRB_THEME_DIR . 'includes/shortcodes.php' ) ) {
+    require_once  CRB_THEME_DIR . 'includes/shortcodes.php';
   }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/meta/meta-standard.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/meta/meta-standard.php';
-  }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/post-types.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/post-types.php';
-  }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/shortcodes.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/shortcodes.php';
-  }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/taxonomies.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/taxonomies.php';
-  }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/theme-options.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/theme-options.php';
-  }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/user-meta.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/user-meta.php';
+  if ( file_exists(  CRB_THEME_DIR . 'includes/taxonomies.php' ) ) {
+    require_once  CRB_THEME_DIR . 'includes/taxonomies.php';
   }
   if ( file_exists(  CRB_THEME_DIR . '/includes/utils.php' ) ) {
-    require_once  CRB_THEME_DIR . '/includes/utils.php';
+    require_once  CRB_THEME_DIR . 'includes/utils.php';
   }
   
   function condensed_body_class($classes) {
@@ -128,12 +119,30 @@ function wauble_theme_setup() {
   add_filter('next_posts_link_attributes', 'next_posts_link_attributes');
   add_filter('previous_posts_link_attributes', 'prev_posts_link_attributes');
 
-  // Remove content editor from ALL pages
+  /**
+ * Hide editor on specific pages.
+ *
+ */
+  add_action( 'admin_init', 'hide_editor' );
 
-  add_action('admin_head', 'remove_content_editor');
-  function remove_content_editor()
-  { 
-      remove_post_type_support('page', 'editor');        
+  function hide_editor() {
+    // Get the Post ID.
+    $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
+    if( !isset( $post_id ) ) return;
+
+    // Hide the editor on the page titled 'Homepage'
+    $homepgname = get_the_title($post_id);
+    if($homepgname == 'Homepage'){ 
+      remove_post_type_support('page', 'editor');
+    }
+
+    // Hide the editor on a page with a specific page template
+    // Get the name of the Page Template file.
+    $template_file = get_post_meta($post_id, '_wp_page_template', true);
+
+    if($template_file == 'templates/dynamic-sections.php'){ // the filename of the page template
+      remove_post_type_support('page', 'editor');
+    }
   }
 
   // Disables Gutenburg
@@ -239,3 +248,16 @@ add_action( 'after_setup_theme', 'wauble_theme_setup' );
 }
 
 add_action("after_switch_theme", "createModulesTable");
+
+function rename_theme_options() {
+    
+  global $menu;
+  
+  foreach($menu as $key => $item) {
+    if ( $item[0] === 'Theme Options' ) {
+        $menu[$key][0] = __('Wauble Options','wauble');
+    }
+  }
+ return false;
+}
+add_action( 'admin_menu', 'rename_theme_options', 999 );
