@@ -1,11 +1,6 @@
 <?php
-define( 'CRB_THEME_DIR', dirname( __FILE__ ) . DIRECTORY_SEPARATOR );
+define( 'WAUBLE_THEME_DIR', dirname( __FILE__ ) . DIRECTORY_SEPARATOR );
 define( 'THEME_ASSETS', get_stylesheet_directory_uri() . '/assets' );
-
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
-
-// ================================================ CARBON FIELDS
 
 
 // ================================================ SCRIPTS	AND STYLESHEETS
@@ -51,29 +46,20 @@ add_image_size( 'banner-image', 1024, 1024, true );
 
 
 function wauble_theme_setup() {
-
-  include_once( 'vendor/autoload.php' );
-  \Carbon_Fields\Carbon_Fields::boot();
-
-  include_once  CRB_THEME_DIR . 'includes/custom-modules.php';
-  include_once  CRB_THEME_DIR . 'includes/meta/user-meta.php';
-  include_once  CRB_THEME_DIR . 'includes/theme-options.php';
-  include_once  CRB_THEME_DIR . 'includes/meta/meta-standard.php';
-  include_once  CRB_THEME_DIR . 'includes/meta/meta-modules.php';
   
   // ================================================ LIBRARIES & INCLUDES
 
-  if ( file_exists(  CRB_THEME_DIR . 'includes/post-types.php' ) ) {
-    require_once  CRB_THEME_DIR . 'includes/post-types.php';
+  if ( file_exists(  WAUBLE_THEME_DIR . 'includes/post-types.php' ) ) {
+    require_once  WAUBLE_THEME_DIR . 'includes/post-types.php';
   }
-  if ( file_exists(  CRB_THEME_DIR . 'includes/shortcodes.php' ) ) {
-    require_once  CRB_THEME_DIR . 'includes/shortcodes.php';
+  if ( file_exists(  WAUBLE_THEME_DIR . 'includes/shortcodes.php' ) ) {
+    require_once  WAUBLE_THEME_DIR . 'includes/shortcodes.php';
   }
-  if ( file_exists(  CRB_THEME_DIR . 'includes/taxonomies.php' ) ) {
-    require_once  CRB_THEME_DIR . 'includes/taxonomies.php';
+  if ( file_exists(  WAUBLE_THEME_DIR . 'includes/taxonomies.php' ) ) {
+    require_once  WAUBLE_THEME_DIR . 'includes/taxonomies.php';
   }
-  if ( file_exists(  CRB_THEME_DIR . '/includes/utils.php' ) ) {
-    require_once  CRB_THEME_DIR . 'includes/utils.php';
+  if ( file_exists(  WAUBLE_THEME_DIR . '/includes/utils.php' ) ) {
+    require_once  WAUBLE_THEME_DIR . 'includes/utils.php';
   }
   
   function condensed_body_class($classes) {
@@ -100,6 +86,8 @@ function wauble_theme_setup() {
           $tn= str_replace(".php", "", $tmp);
           $classes[] = "template_".$tn;
       }
+
+      wp_reset_postdata();
    
       return $classes;
    

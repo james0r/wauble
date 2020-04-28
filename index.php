@@ -34,7 +34,7 @@ if ( have_posts() ) {
 } else {
 
   // If no content, include the "No posts found" template.
-  get_fragment('none');
+  get_fragment('module-loop');
 
 }
 ?>

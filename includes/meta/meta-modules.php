@@ -14,25 +14,10 @@ if (isset($_REQUEST['post'])) {
 }
 $modules = $wpdb->get_results("SELECT * FROM modules WHERE page = " . $current_page . " ORDER BY display_order ASC");
 
-Container::make('post_meta', __('Advanced Settings', 'crb'))
-  ->where('post_template', '=', 'templates/dynamic-sections.php')
-  ->set_context( 'advanced' )
-  ->add_fields(array(
-      Field::make('textarea', 'crb_custom_css', __('Custom CSS', 'crb'))
-        ->set_width( 50 ),
-      Field::make('text', 'crb_custom_classes', __('Custom Classes', 'crb'))
-        ->set_width( 50 )
-        ->set_help_text('Separate with spaces.'),
-));
-
 foreach ($modules as $m) {
     
   
       $suffix = '_' . $m->id;
-      
-      $container = Container::make( 'post_meta', __( $m->name . ' Settings', 'crb' ) );
-      $container->where( 'post_id', '=', $m->page );
-      $container->where('post_template', '=', 'templates/dynamic-sections.php');
       
       //for all blocks
       
@@ -43,7 +28,12 @@ foreach ($modules as $m) {
           
           case "name":
               
-              require __DIR__ . '/modules/name.php';
+            Container::make( 'post_meta', __( $m->name . ' Settings', 'crb' ) )
+              ->where( 'post_id', '=', $m->page )
+              ->where('post_template', '=', 'templates/dynamic-sections.php')
+              ->add_fields( array(
+                Field::make( 'text', 'crb_full_name'.$suffix, __('Full Name', 'crb') ),
+              ));
               
               break;
           
