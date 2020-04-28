@@ -11,34 +11,9 @@ function get_meta($id, $key) {
   return $value[$key][0];
 }
 
-function cfimageurl( $meta_key, $id = null  ) {
-  $image_id = crb_meta_data($meta_key, $id);
-  if($image_id === null) {
-    $image_id = $meta_key;
-  }
-  $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-  $image_url = wp_get_attachment_url($image_id);
-
-	return (object) array(
-    'url' => $image_url,
-    'alt' => $image_alt,
-  );
-}
-
-function cfthemeta($field) {
-  return carbon_get_the_post_meta($field);
-}
-
-function cfthemeoption($field) {
-  return carbon_get_theme_option($field);
-}
-
-function cfmeta($id, $field, $complex = false) {
-  return carbon_get_post_meta($id, $field, $complex);
-}
-
-function cfattachmentimage ($field, $size = 'master', $icon = false, $attr = '') {
-  return wp_get_attachment_image(cfthemeta($field), $size, $icon, $attr);
+function get_the_meta($key, $single = true) {
+  $value = get_post_meta(get_the_ID(), $key, $single);
+  return $value;
 }
 
 // MODIFIED GET TEMPLATE PART TO ACCEPT ARGUMENTS

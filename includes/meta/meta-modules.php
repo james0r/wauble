@@ -16,11 +16,11 @@ foreach ($modules as $m) {
   
       $suffix = '_' . $m->id;
       
-      $cmb = new_cmb2_box( array(
-        'id'           => 'dynamic-sections',
-        'title'        => 'Dynamic Sections',
+      $box = new_cmb2_box( array(
+        'id'           => $m->id,
+        'title'        => $m->name,
         'object_types' => array( 'page' ), // post type
-        'show_on'      => array( 'key' => 'page-template', 'value' => 'dynamic-sections.php' ),
+        'show_on'	  => array( 'id' => array( $m->page, ) ),
         'context'      => 'normal', //  'normal', 'advanced', or 'side'
         'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
         'show_names'   => true, // Show field names on the left

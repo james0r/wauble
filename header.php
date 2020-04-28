@@ -14,4 +14,4 @@
 
 <body <?php body_class('') ?>>
 
-<?php get_fragment('header'); ?>
+<?php get_partial('partials/header'); ?>

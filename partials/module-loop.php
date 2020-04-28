@@ -11,7 +11,7 @@
 				
 			//get the guts of the module
 			echo "<div class='module-content'>";
-        get_fragment('modules/'.$m->module, [ 'instance' => $m->id ]);
+        get_partial('partials/modules/'.$m->module, array('instance' => $m->id));
 			echo "</div>";
 			
 		//close the module container

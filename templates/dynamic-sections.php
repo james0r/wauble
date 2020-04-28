@@ -7,7 +7,7 @@
 
 <div class="<?php echo slugify($pagename); ?>">
   <div class="<?php echo slugify($pagename); ?>-inner">
-    <?php get_fragment('module-loop'); ?>
+    <?php get_partial('partials/module-loop'); ?>
   </div>
 </div>
 

@@ -2,10 +2,10 @@
 define( 'WAUBLE_THEME_DIR', dirname( __FILE__ ) . DIRECTORY_SEPARATOR );
 define( 'THEME_ASSETS', get_stylesheet_directory_uri() . '/assets' );
 
-if ( file_exists( dirname( __FILE__ ) . '/includes/cmb2/init.php' ) ) {
-	require_once dirname( __FILE__ ) . '/includes/cmb2/init.php';
-} elseif ( file_exists( dirname( __FILE__ ) . '/includes/CMB2/init.php' ) ) {
-	require_once dirname( __FILE__ ) . '/includes/CMB2/init.php';
+if ( file_exists( dirname( __FILE__ ) . '/includes/libs/cmb2/init.php' ) ) {
+	require_once dirname( __FILE__ ) . '/includes/libs/cmb2/init.php';
+} elseif ( file_exists( dirname( __FILE__ ) . '/includes/libs/CMB2/init.php' ) ) {
+	require_once dirname( __FILE__ ) . '/includes/libs/CMB2/init.php';
 }
 
 if ( file_exists( WAUBLE_THEME_DIR . '/includes/custom-modules.php' ) ) {
@@ -16,6 +16,8 @@ add_action( 'cmb2_admin_init', 'cmb2_sample_metaboxes' );
 
 function cmb2_sample_metaboxes() {
   require_once WAUBLE_THEME_DIR . '/includes/meta/meta-standard.php';
+  require_once WAUBLE_THEME_DIR . '/includes/meta/meta-modules.php';
+  require_once WAUBLE_THEME_DIR . '/includes/theme-options.php';
 }
 
 // ================================================ SCRIPTS	AND STYLESHEETS
