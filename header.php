@@ -14,20 +14,4 @@
 
 <body <?php body_class('') ?>>
 
-<?php 
-  if (carbon_get_theme_option('crb_show_promo_options')) : ?>
-
-  <div class="promo-banner-major">
-    <div class="minor-container">
-      <div class="promo-banner">
-        <div class="promo-banner-inner">
-          <?php echo carbon_get_theme_option('crb_promo_banner'); ?>
-          <i class="fa fa-times promo-close" aria-hidden="true"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <?php endif; ?>
-
-  <?php get_fragment('header'); ?>
+<?php get_fragment('header'); ?>

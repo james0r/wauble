@@ -1,7 +1,4 @@
 <?php
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
-
 // =============================================================== SERVICE TEMPLATE META
 
 global $wpdb;
@@ -19,6 +16,16 @@ foreach ($modules as $m) {
   
       $suffix = '_' . $m->id;
       
+      $cmb = new_cmb2_box( array(
+        'id'           => 'dynamic-sections',
+        'title'        => 'Dynamic Sections',
+        'object_types' => array( 'page' ), // post type
+        'show_on'      => array( 'key' => 'page-template', 'value' => 'dynamic-sections.php' ),
+        'context'      => 'normal', //  'normal', 'advanced', or 'side'
+        'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
+        'show_names'   => true, // Show field names on the left
+      ) );
+      
       //for all blocks
       
       
@@ -28,12 +35,7 @@ foreach ($modules as $m) {
           
           case "name":
               
-            Container::make( 'post_meta', __( $m->name . ' Settings', 'crb' ) )
-              ->where( 'post_id', '=', $m->page )
-              ->where('post_template', '=', 'templates/dynamic-sections.php')
-              ->add_fields( array(
-                Field::make( 'text', 'crb_full_name'.$suffix, __('Full Name', 'crb') ),
-              ));
+              require __DIR__ . '/modules/name.php';
               
               break;
           

@@ -1,8 +1,9 @@
 <?php
 
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
-
-$container->add_fields( array(
-  Field::make( 'date', 'crb_event_date', __('Event Date', 'crb') )->set_width( 50 )
-));
+$box->add_field( array(
+	'name' => 'Event Date',
+	'id'   => 'cmb_event_date_'.$suffix,
+	'type' => 'text_date',
+	// 'timezone_meta_key' => 'wiki_test_timezone',
+	// 'date_format' => 'l jS \of F Y',
+) );

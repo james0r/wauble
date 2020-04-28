@@ -1,8 +1,7 @@
 <?php
 
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
-
-$container->add_fields( array(
-  Field::make( 'text', 'crb_full_name', __('Full Name', 'crb') )->set_width( 50 )
-));
+$box->add_field( array(
+	'name'    => 'Full Name',
+	'id'      => 'cmb_full_name_'.$suffix,
+	'type'    => 'text',
+) );
