@@ -20,6 +20,21 @@ function cmb2_sample_metaboxes() {
   require_once WAUBLE_THEME_DIR . '/includes/theme-options.php';
 }
 
+// ================================================ DASHBOARD WIDGET
+
+
+add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
+  
+function my_custom_dashboard_widgets() {
+global $wp_meta_boxes;
+ 
+wp_add_dashboard_widget('custom_help_widget', 'Wauble Theme Support', 'custom_dashboard_help');
+}
+ 
+function custom_dashboard_help() {
+echo '<p>Welcome to your new site! Need help? Contact a developer <a href="mailto:support@jamesauble.com">here</a>. For WordPress Tutorials visit: <a href="https://www.wpbeginner.com" target="_blank">WPBeginner</a></p>';
+}
+
 // ================================================ SCRIPTS	AND STYLESHEETS
 
 function wauble_resources() {
@@ -266,3 +281,34 @@ function rename_theme_options() {
  return false;
 }
 add_action( 'admin_menu', 'rename_theme_options', 999 );
+
+add_action( 'after_switch_theme', 'create_page_on_theme_activation' );
+
+function create_page_on_theme_activation(){
+
+    // Set the title, template, etc
+    $new_page_title     = __('Front Page','text-domain'); // Page's title
+    $new_page_content   = '';                           // Content goes here
+    $new_page_template  = 'templates/dynamic-sections.php';       // The template to use for the page
+    $page_check = get_page_by_title($new_page_title);   // Check if the page already exists
+    // Store the above data in an array
+    $new_page = array(
+            'post_type'     => 'page', 
+            'post_title'    => $new_page_title,
+            'post_content'  => $new_page_content,
+            'post_status'   => 'publish',
+            'post_author'   => 1,
+            'post_name'     => 'front-page'
+    );
+    // If the page doesn't already exist, create it
+    if(!isset($page_check->ID)){
+        $new_page_id = wp_insert_post($new_page);
+        if(!empty($new_page_template)){
+            update_post_meta($new_page_id, '_wp_page_template', $new_page_template);
+        }
+    }
+    // Use a static front page
+    $front_page = get_page_by_title( 'Front Page' );
+    update_option( 'page_on_front', $front_page->ID );
+    update_option( 'show_on_front', 'page' );
+}
