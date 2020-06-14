@@ -24,7 +24,8 @@
 	"repository": "https://www.github.com/james0r",
 	"scripts": {
 		"dev": "gulp dev",
-		"prod": "gulp prod",
+    "prod": "gulp prod",
+    "build": "gulp prod",
 		"backup": "gulp backup",
 		"lint:css": "stylelint src/**/*.css"
 	},

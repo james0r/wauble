@@ -41,9 +41,9 @@ function devServer() {
     open: 'external',
   });
 
-
-  watch('./sass/**/*.css', stylesDev);
-  watch('./sass/**/*.scss', stylesDev);
+  watch('../**/**.php', Reload);
+  watch('./scss/**/*.css', stylesDev);
+  watch('./scss/**/*.scss', stylesDev);
   watch('./js/**', series(footerScriptsDev, Reload));
   watch('./build/wordpress/wp-config.php', { events: 'add' }, series(disableCron));
 }
@@ -54,7 +54,7 @@ function Reload(done) {
 }
 
 function stylesDev() {
-  return src('./sass/style.scss')
+  return src('./scss/main.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({ includePaths: 'node_modules' }).on("error", sass.logError))
     .pipe(sourcemaps.write('.'))
@@ -97,9 +97,9 @@ Production Tasks
 -------------------------------------------------------------------------------------------------- */
 
 function stylesProd() {
-  return src('./src/assets/css/style.scss')
+  return src('./scss/main.scss')
     .pipe(sass({ includePaths: 'node_modules' }).on("error", sass.logError))
-    .pipe(dest('./dist/themes/' + themeName));
+    .pipe(dest('../assets/'));
 }
 
 function headerScriptsProd() {
@@ -123,68 +123,46 @@ function footerScriptsProd() {
     .pipe(dest('../assets/'));
 }
 
-async function cleanProd() {
-  await del(['./dist']);
-}
+// async function cleanProd() {
+//   await del(['../assets/images/']);
+// }
 
-function copyThemeProd() {
-  return src(['./src/theme/**', '!./src/theme/**/node_modules/**']).pipe(
-    dest('./dist/themes/' + themeName),
-  );
-}
-
-function stylesProd() {
-  return src('./src/assets/css/style.scss')
-    .pipe(sass({ includePaths: 'node_modules' }).on("error", sass.logError))
-    .pipe(dest('./dist/themes/' + themeName));
-}
-
-function headerScriptsProd() {
-  return src(headerJS)
-    .pipe(plumber({ errorHandler: onError }))
-    .pipe(concat('header-bundle.js'))
-    .pipe(uglify())
-    .pipe(dest('./dist/themes/' + themeName + '/js'));
-}
-
-function footerScriptsProd() {
-  return src(footerJS)
-    .pipe(plumber({ errorHandler: onError }))
-    .pipe(
-      babel({
-        presets: ['@babel/preset-env'],
-      }),
-    )
-    .pipe(concat('footer-bundle.js'))
-    .pipe(uglify())
-    .pipe(dest('./dist/themes/' + themeName + '/js'));
-}
+// function copyThemeProd() {
+//   return src(['./src/theme/**', '!./src/theme/**/node_modules/**']).pipe(
+//     dest('./dist/themes/' + themeName),
+//   );
+// }
 
 function processImages() {
-  return src('./src/assets/img/**')
+  return src(['../assets/images/**.jpg', '../assets/images/**.jpeg', '../assets/images/**.png'])
     .pipe(plumber({ errorHandler: onError }))
-    .pipe(
-      imagemin([imagemin.svgo({ plugins: [{ removeViewBox: true }] })], {
-        verbose: true,
-      }),
-    )
-    .pipe(dest('./dist/themes/' + themeName + '/img'));
+    .pipe(imagemin([
+      imagemin.gifsicle({interlaced: true}),
+      imagemin.mozjpeg({quality: 75, progressive: true}),
+      imagemin.optipng({optimizationLevel: 5}),
+      imagemin.svgo({
+          plugins: [
+              {removeViewBox: true},
+              {cleanupIDs: false}
+          ]
+      })
+  ], {
+    verbose: true
+  }))
+    .pipe(dest('../assets/images'));
 }
 
 function zipProd() {
-  return src('./dist/themes/' + themeName + '/**/*')
-    .pipe(zip.dest('./dist/' + themeName + '.zip'))
+  return src(['**/**.*', '!node_modules/**/**.*'])
+    .pipe(zip.dest('../assets/' + themeName + '.zip'))
     .on('end', () => {
       beeper();
-      log(pluginsGenerated);
       log(filesGenerated);
       log(thankYou);
     });
 }
 
 exports.prod = series(
-  cleanProd,
-  copyThemeProd,
   stylesProd,
   headerScriptsProd,
   footerScriptsProd,
@@ -251,18 +229,12 @@ const buildNotFound =
   errorMsg +
   ' ⚠️　- You need to install WordPress first. Run the command: $ \x1b[1mnpm run install:wordpress\x1b[0m';
 const filesGenerated =
-  'Your ZIP template file was generated in: \x1b[1m' +
-  __dirname +
-  '/dist/' +
+  'Your ZIP template file was generated in: \x1b[1m' + '/assets/' +
   themeName +
   '.zip\x1b[0m - ✅';
-const pluginsGenerated =
-  'Plugins are generated in: \x1b[1m' + __dirname + '/dist/plugins/\x1b[0m - ✅';
 const backupsGenerated =
   'Your backup was generated in: \x1b[1m' + __dirname + '/backups/' + date + '.zip\x1b[0m - ✅';
-const wpFy = '\x1b[42m\x1b[1mWordPressify\x1b[0m';
-const wpFyUrl = '\x1b[2m - http://www.wordpressify.co/\x1b[0m';
-const thankYou = 'Thank you for using ' + wpFy + wpFyUrl;
+const thankYou = 'Production build has completed. ✅';
 
 /* -------------------------------------------------------------------------------------------------
 End of all Tasks
