@@ -38,7 +38,8 @@ echo '<p>Welcome to your new site! Need help? Contact a developer <a href="mailt
 // ================================================ SCRIPTS	AND STYLESHEETS
 
 function wauble_resources() {
-  wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/style.css' );
+  wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/main.css' );
+  wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/assets/all.min.css' );
   wp_enqueue_style( 'theme-styles', get_template_directory_uri() . '/style.css' );
   wp_enqueue_script( 'header_js', get_template_directory_uri() . '/assets/header-bundle.js', null, 1.0, false );
   wp_enqueue_script( 'footer_js', get_template_directory_uri() . '/assets/footer-bundle.js', null, 1.0, true );
@@ -247,6 +248,62 @@ function wauble_theme_setup() {
     remove_meta_box('dashboard_secondary', 'dashboard', 'core');
   }
   add_action('admin_menu', 'disable_default_dashboard_widgets');
+
+  add_action('wp_head', 'head_meta_additions');
+function head_meta_additions() {
+
+  if( is_single() || is_page() ) {
+
+    $post_id = get_queried_object_id();
+
+    $url = get_permalink($post_id);
+
+    if (!empty(get_the_meta('cmb_seo_title_override'))) {
+      $title = get_the_meta('cmb_seo_title_override');
+    } else {
+      $title = get_the_title($post_id);
+    }
+
+    $site_name = get_bloginfo('name');
+
+    if (!empty(get_the_meta('cmb_seo_description_override'))) {
+      $description = get_the_meta('cmb_seo_description_override');
+    } else {
+      $description = wp_trim_words( get_post_field('post_content', $post_id), 25 );
+    }
+
+    if (!empty(get_the_meta('cmb_seo_image_override'))) {
+      $image = get_the_meta('cmb_seo_image_override');
+    } else {
+      $image = get_the_post_thumbnail_url($post_id);
+      if (!empty($image) || $image == '' || $image == null) {
+        $image = cmb_get_option('cmb_desktop_logo');
+      }
+    }
+
+
+    $locale = get_locale();
+
+    echo '<meta property="og:locale" content="' . esc_attr($locale) . '" />';
+    echo '<meta property="og:type" content="article" />';
+    echo '<meta property="og:title" content="' . esc_attr($title) . ' | ' . esc_attr($site_name) . '" />';
+    echo '<meta property="og:description" content="' . esc_attr($description) . '" />';
+    echo '<meta property="og:url" content="' . esc_url($url) . '" />';
+    echo '<meta property="og:site_name" content="' . esc_attr($site_name) . '" />';
+
+    if($image) echo '<meta property="og:image" content="' . esc_url($image) . '" />';
+
+    // Twitter Card
+    echo '<meta name="twitter:card" content="summary_large_image" />';
+    echo '<meta name="twitter:site" content="@francecarlucci" />';
+    echo '<meta name="twitter:creator" content="@francecarlucci" />';
+
+    // Page Meta 
+
+    echo '<meta name="description" content="' . esc_attr($description) . '" />';
+  }
+
+}
   
 }
 
@@ -268,19 +325,6 @@ add_action( 'after_setup_theme', 'wauble_theme_setup' );
 }
 
 add_action("after_switch_theme", "createModulesTable");
-
-function rename_theme_options() {
-    
-  global $menu;
-  
-  foreach($menu as $key => $item) {
-    if ( $item[0] === 'Theme Options' ) {
-        $menu[$key][0] = __('Wauble Options','wauble');
-    }
-  }
- return false;
-}
-add_action( 'admin_menu', 'rename_theme_options', 999 );
 
 add_action( 'after_switch_theme', 'create_page_on_theme_activation' );
 

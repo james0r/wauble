@@ -4,14 +4,10 @@
 <head>
   <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta property="og:image" content="<?php echo $share_image; ?>">
-  <meta property="og:url" content="<?php global $wp;
-                                    echo home_url($wp->request) ?>">
-  <meta property="og:title" content="">
-  
+  <?php echo get_partial('partials/theme-colors'); ?>
   <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('') ?>>
+<body <?php body_class(''); ?>>
 
-<?php get_partial('partials/header'); ?>
+<?php echo cmb2_get_option('cmb_secondary_options', 'cmb_footer_copyright') ?>
