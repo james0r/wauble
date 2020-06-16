@@ -22,5 +22,6 @@ node_modules/
 *.sql
 *.sqlite
 package-lock.json
+composer.lock
 
 .vscode/*
