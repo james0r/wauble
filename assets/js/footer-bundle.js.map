@@ -1,0 +1,1 @@
+{"version":3,"sources":["_footer.js"],"names":["$","console","log","jQuery"],"mappings":";;AAAA,CAAC,UAASA,CAAT,EAAY;AACXA,EAAAA,CAAC,CAAC,YAAW;AACXC,IAAAA,OAAO,CAACC,GAAR,CAAY,gCAAZ;AACD,GAFA,CAAD;AAGD,CAJD,EAIGC,MAJH","file":"footer-bundle.js","sourcesContent":["(function($) {\n  $(function() {\n    console.log('Wauble Wordpress Starter Theme');\n  })\n})(jQuery);"]}
