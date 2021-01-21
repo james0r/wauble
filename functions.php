@@ -292,14 +292,16 @@ function wauble_admin_scripts() {
 }
 add_action('admin_enqueue_scripts', 'wauble_admin_scripts');
 
-require_once WAUBLE_THEME_DIR . '/includes/libs/CMB2/init.php';
+require_once WAUBLE_THEME_DIR . '/inc/helpers.php';
 
-require_once WAUBLE_THEME_DIR . '/includes/dynamic-modules-admin.php';
+require_once WAUBLE_THEME_DIR . '/inc/libs/CMB2/init.php';
+
+require_once WAUBLE_THEME_DIR . '/inc/dynamic-modules-admin.php';
 
 function cmb2_metaboxes() {
-  require_once WAUBLE_THEME_DIR . '/includes/meta/meta-standard.php';
-  require_once WAUBLE_THEME_DIR . '/includes/meta/meta-modules.php';
-  require_once WAUBLE_THEME_DIR . '/includes/theme-options.php';
+  require_once WAUBLE_THEME_DIR . '/inc/meta/meta-standard.php';
+  require_once WAUBLE_THEME_DIR . '/inc/meta/meta-modules.php';
+  require_once WAUBLE_THEME_DIR . '/inc/theme-options.php';
 }
 add_action('cmb2_admin_init', 'cmb2_metaboxes');
 
@@ -314,7 +316,7 @@ add_action('cmb2_admin_init', 'cmb2_metaboxes');
         display_order int(32) NOT NULL,
         PRIMARY KEY  (id)
       )';
-   require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+   require_once ABSPATH . 'wp-admin/inc/upgrade.php';
    dbDelta($sql);
  }
 add_action('after_switch_theme', 'wauble_dynamic_modules_db_table');
