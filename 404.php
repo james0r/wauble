@@ -4,7 +4,7 @@
 
 <div class="no-page-found-template">
   <div class="no-page-found-template-inner">
-    <?php get_partial('template-parts/module-loop'); ?>
+    <?php wauble_get_template_part('template-parts/module-loop'); ?>
   </div>
 </div>
 

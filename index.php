@@ -9,7 +9,7 @@ $q = new WP_Query;
     endwhile;
     
     else:
-      get_partial('template-parts/module-loop');
+      wauble_get_template_part('template-parts/module-loop');
     endif;
 
 wp_reset_postdata();

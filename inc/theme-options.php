@@ -2,7 +2,7 @@
 
 	/**
 	 * Registering meta fields for Theme Options
-   *  IMPORTANT: Don't change option_key from cmb_main_options or it will break helper function
+   * IMPORTANT: Don't change option_key from cmb_main_options or it will break helper function
 	 */
 	$args = array(
 		'id'           => 'cmb_main_options_page',

@@ -11,7 +11,7 @@
 				
 			//get the guts of the module
 			echo "<div class='module-content'>";
-        get_partial('template-parts/modules/'.$m->module, array('instance' => $m->id));
+        wauble_get_template_part('template-parts/modules/'.$m->module, array('instance' => $m->id));
 			echo "</div>";
 			
 		//close the module container
