@@ -2,8 +2,8 @@
 <style>
 :root {
 <?php 
-  if (!empty(cmb2_get_option('cmb_theme_colors', 'cmb_primary_color'))) {
-    echo '--wauble-primary-color: ' . cmb2_get_option('cmb_theme_colors', 'cmb_primary_color') . ';';
+  if (!empty(cmb2_get_option('cmb2_box_key_theme_colors', 'primary_color'))) {
+    echo '--wauble-primary-color: ' . cmb2_get_option('cmb2_box_key_theme_colors', 'primary_color') . ';';
   }
 ?>
 }

@@ -4,8 +4,8 @@ $args = [
   'id'              => 'cmb2_id_box_theme_options',
   'object_types'    => ['options-page'],
   'title'           => __('Wauble Options', 'wauble'),
-  'option_key'      => 'cmb2_theme_options_box',
   'menu_title'      => __('Wauble Options', 'wauble'),
+  'option_key'      => 'cmb2_theme_options_box',
   'capability'      => 'unknown', // Cap required to view options-page.
 ];
 
@@ -125,8 +125,8 @@ $args = array(
   'id'           => 'cmb_social_links',
   'object_types' => array('options-page'),
   'option_key'   => 'cmb_social_links',
-  'parent_slug'  => 'cmb_main_options',
-  'tab_group'    => 'cmb_main_options',
+  'parent_slug'  => 'cmb2_theme_options_box',
+  'tab_group'    => 'cmb2_theme_options_box',
   'tab_title'    => __('Social Links', 'wauble'),
   'title'        => __('Social Links', 'wauble')
 );
@@ -170,11 +170,11 @@ $social_options->add_field(array(
 ));
 
 $args = array(
-  'id'           => 'cmb_theme_colors',
+  'id'           => 'cmb2_box_id_theme_colors',
   'object_types' => array('options-page'),
-  'option_key'   => 'cmb_theme_colors',
-  'parent_slug'  => 'cmb_main_options',
-  'tab_group'    => 'cmb_main_options',
+  'option_key'   => 'cmb2_box_key_theme_colors',
+  'parent_slug'  => 'cmb2_theme_options_box',
+  'tab_group'    => 'cmb2_theme_options_box',
   'tab_title'    => __('Theme Colors', 'wauble'),
   'title'        => __('Theme Colors', 'wauble')
 );
@@ -183,7 +183,7 @@ $color_options = new_cmb2_box($args);
 
 $color_options->add_field(array(
   'name'    => __('Theme Primary Color', 'wauble'),
-  'id'      => 'cmb_primary_color',
+  'id'      => 'primary_color',
   'type'    => 'colorpicker',
   'default' => '#0000ff',
   'options' => array(
