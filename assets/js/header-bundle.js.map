@@ -1,1 +1,1 @@
-{"version":3,"sources":["_header.js"],"names":[],"mappings":"AAAA","file":"header-bundle.js","sourcesContent":[""]}
+{"version":3,"sources":["_header.js"],"names":["someFunc","name","console","log"],"mappings":";;AAAA,IAAIA,QAAQ,GAAG,SAAXA,QAAW,CAAAC,IAAI;AAAA,SAAIA,IAAJ;AAAA,CAAnB;;AAEAC,OAAO,CAACC,GAAR,CAAaH,QAAQ,CAAC,KAAD,CAArB","file":"header-bundle.js","sourcesContent":["let someFunc = name => name;\n\nconsole.log( someFunc('bob') );"]}

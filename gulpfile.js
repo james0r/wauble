@@ -1,4 +1,4 @@
-const { gulp, series, parallel, dest, src, watch } = require("gulp");
+const { series, dest, src, watch } = require("gulp");
 const babel = require("gulp-babel");
 const beeper = require("beeper");
 const browserSync = require("browser-sync");
@@ -7,7 +7,6 @@ const del = require("del");
 const log = require("fancy-log");
 const fs = require("fs");
 const imagemin = require("gulp-imagemin");
-const inject = require("gulp-inject-string");
 const plumber = require("gulp-plumber");
 const sourcemaps = require("gulp-sourcemaps");
 const uglify = require("gulp-uglify");
@@ -26,9 +25,9 @@ const themeName = "wauble";
 /* -------------------------------------------------------------------------------------------------
 Header & Footer JavaScript Boundles
 -------------------------------------------------------------------------------------------------- */
-const headerJS = ["./js/_header.js"];
+const headerJS = ["src/js/_header.js"];
 
-const footerJS = ["./js/**", "!./js/_header.js"];
+const footerJS = ["src/js/**", "!src/js/_header.js"];
 
 /* -------------------------------------------------------------------------------------------------
 Development Tasks
@@ -43,16 +42,11 @@ function devServer() {
     open: "external",
   });
 
-  watch("../**/**.php", Reload);
-  watch("./scss/**/*.css", stylesMainDev);
-  watch("./scss/**/*.scss", stylesMainDev);
-  watch("./scss/modules/*.scss", stylesModulesDev);
-  watch("./js/**", series(footerScriptsDev, Reload));
-  watch(
-    "./build/wordpress/wp-config.php",
-    { events: "add" },
-    series(disableCron)
-  );
+  watch("**/**.php", Reload);
+  watch("src/scss/**/*.css", stylesMainDev);
+  watch("src/scss/**/*.scss", stylesMainDev);
+  watch("src/scss/modules/*.scss", stylesModulesDev);
+  watch("src/js/**", series(footerScriptsDev, headerScriptsDev, Reload));
 }
 
 function Reload(done) {
@@ -61,7 +55,7 @@ function Reload(done) {
 }
 
 function stylesMainDev() {
-  return src("./scss/main.scss")
+  return src("src/scss/main.scss")
     .pipe(sourcemaps.init())
     .pipe(
       sass({ includePaths: "node_modules", outputStyle: "expanded" }).on(
@@ -70,13 +64,13 @@ function stylesMainDev() {
       )
     )
     .pipe(sourcemaps.write("."))
-    .pipe(dest("../assets/css/"))
-    .pipe(browserSync.stream({ match: "**/css/*.css" }));
+    .pipe(dest("assets/css/"))
+    .pipe(browserSync.stream());
 }
 
 function stylesModulesDev() {
-  return src(["./scss/modules/*.scss"])
-    .pipe(gulpHeader("@import '../abstracts';\n"))
+  return src(["src/scss/modules/*.scss"])
+    .pipe(gulpHeader("@import '.src/abstracts';\n"))
     .pipe(sourcemaps.init())
     .pipe(
       sass({ includePaths: "node_modules", outputStyle: "expanded" }).on(
@@ -90,8 +84,8 @@ function stylesModulesDev() {
         prefix: "module-",
       })
     )
-    .pipe(dest("../assets/css/"))
-    .pipe(browserSync.stream({ match: "**/css/*.css" }));
+    .pipe(dest("assets/css/"))
+    .pipe(browserSync.stream());
 }
 
 function headerScriptsDev() {
@@ -99,12 +93,17 @@ function headerScriptsDev() {
     return src(headerJS)
       .pipe(plumber({ errorHandler: onError }))
       .pipe(sourcemaps.init())
+      .pipe(
+        babel({
+          presets: ["@babel/preset-env"],
+        })
+      )
       .pipe(concat("header-bundle.js"))
       .pipe(sourcemaps.write("."))
-      .pipe(dest("../assets/js/"));
+      .pipe(dest("assets/js/"));
   } else {
     return del(
-      ["../assets/js/header-bundle.js", "../assets/js/header-bundle.js.map"],
+      ["assets/js/header-bundle.js", "assets/js/header-bundle.js.map"],
       { force: true }
     );
   }
@@ -121,7 +120,7 @@ function footerScriptsDev() {
     )
     .pipe(concat("footer-bundle.js"))
     .pipe(sourcemaps.write("."))
-    .pipe(dest("../assets/js/"));
+    .pipe(dest("assets/js/"));
 }
 
 exports.dev = series(
@@ -137,17 +136,17 @@ Production Tasks
 -------------------------------------------------------------------------------------------------- */
 
 function stylesMainProd() {
-  return src("./scss/main.scss")
+  return src("src/scss/main.scss")
     .pipe(sourcemaps.init())
     .pipe(sass({ includePaths: "node_modules" }).on("error", sass.logError))
     .pipe(cleanCSS())
-    .pipe(sourcemaps.write(".", { sourceRoot: "./scss/" }))
-    .pipe(dest("../assets/css/"));
+    .pipe(sourcemaps.write(".", { sourceRoot: "src/scss/" }))
+    .pipe(dest("assets/css/"));
 }
 
 function stylesModulesProd() {
-  return src("./scss/modules/*.scss")
-  .pipe(gulpHeader("@import '../abstracts';\n"))
+  return src("src/scss/modules/*.scss")
+    .pipe(gulpHeader("@import '../abstracts';\n"))
     .pipe(sourcemaps.init())
     .pipe(sass({ includePaths: "node_modules" }).on("error", sass.logError))
     .pipe(cleanCSS())
@@ -156,8 +155,8 @@ function stylesModulesProd() {
         prefix: "module-",
       })
     )
-    .pipe(sourcemaps.write(".", { sourceRoot: "./scss/" }))
-    .pipe(dest("../assets/css/"));
+    .pipe(sourcemaps.write(".", { sourceRoot: "src/scss/" }))
+    .pipe(dest("assets/css/"));
 }
 
 function headerScriptsProd(cb) {
@@ -166,10 +165,10 @@ function headerScriptsProd(cb) {
       .pipe(plumber({ errorHandler: onError }))
       .pipe(concat("header-bundle.js"))
       .pipe(uglify())
-      .pipe(dest("../assets/js/"));
+      .pipe(dest("assets/js/"));
   } else {
     return del(
-      ["../assets/js/header-bundle.js", "../assets/js/header-bundle.js.map"],
+      ["assets/js/header-bundle.js", "assets/js/header-bundle.js.map"],
       { force: true }
     );
   }
@@ -185,24 +184,24 @@ function footerScriptsProd() {
     )
     .pipe(concat("footer-bundle.js"))
     .pipe(uglify())
-    .pipe(dest("../assets/js/"));
+    .pipe(dest("assets/js/"));
 }
 
 // async function cleanProd() {
-//   await del(['../assets/images/']);
+//   await del(['.src/assets/images/']);
 // }
 
 // function copyThemeProd() {
-//   return src(['./src/theme/**', '!./src/theme/**/node_modules/**']).pipe(
-//     dest('./dist/themes/' + themeName),
+//   return src(['src/src/theme/**', '!src/src/theme/**/node_modules/**']).pipe(
+//     dest('src/dist/themes/' + themeName),
 //   );
 // }
 
 function processImages() {
   return src([
-    "../assets/images/**.jpg",
-    "../assets/images/**.jpeg",
-    "../assets/images/**.png",
+    "assets/images/**.jpg",
+    "assets/images/**.jpeg",
+    "assets/images/**.png",
   ])
     .pipe(plumber({ errorHandler: onError }))
     .pipe(
@@ -220,12 +219,12 @@ function processImages() {
         }
       )
     )
-    .pipe(dest("../assets/images"));
+    .pipe(dest("assets/images"));
 }
 
 function zipProd() {
   return src(["**/**.*", "!node_modules/**/**.*"])
-    .pipe(zip.dest("../assets/" + themeName + ".zip"))
+    .pipe(zip.dest("assets/" + themeName + ".zip"))
     .on("end", () => {
       beeper();
       log(filesGenerated);
@@ -252,37 +251,13 @@ const onError = (err) => {
   this.emit("end");
 };
 
-async function disableCron() {
-  if (fs.existsSync("./build/wordpress/wp-config.php")) {
-    await fs.readFile("./build/wordpress/wp-config.php", (err, data) => {
-      if (err) {
-        log(wpFy + " - " + warning + " WP_CRON was not disabled!");
-      }
-      if (data) {
-        if (data.indexOf("DISABLE_WP_CRON") >= 0) {
-          log("WP_CRON is already disabled!");
-        } else {
-          return src("./build/wordpress/wp-config.php")
-            .pipe(
-              inject.after(
-                "define( 'DB_COLLATE', '' );",
-                "\ndefine( 'DISABLE_WP_CRON', true );"
-              )
-            )
-            .pipe(dest("./build/wordpress"));
-        }
-      }
-    });
-  }
-}
-
 function Backup() {
-  if (!fs.existsSync("./build")) {
+  if (!fs.existsSync("build")) {
     log(buildNotFound);
     process.exit(1);
   } else {
-    return src("./build/**/*")
-      .pipe(zip.dest("./backups/" + date + ".zip"))
+    return src("build/**/*")
+      .pipe(zip.dest("backups/" + date + ".zip"))
       .on("end", () => {
         beeper();
         log(backupsGenerated);

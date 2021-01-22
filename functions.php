@@ -265,13 +265,14 @@ add_action('widgets_init', 'wauble_widgets_init');
  */
 function wauble_scripts() {
   // Enqueue Wauble styles
-  wp_enqueue_style('style', get_template_directory_uri() . '/assets/main.css');
-  wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/all.min.css');
+  wp_enqueue_style('style', get_template_directory_uri() . '/assets/css/main.css');
+  wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/css/all.min.css');
   wp_enqueue_style('theme-styles', get_template_directory_uri() . '/style.css');
 
   // Enqueue Wauble scripts
-  wp_enqueue_script('header_js', get_template_directory_uri() . '/assets/header-bundle.js', null, 1.0, false);
-  wp_enqueue_script('footer_js', get_template_directory_uri() . '/assets/footer-bundle.js', null, 1.0, true);
+  wp_enqueue_script('jquery');
+  wp_enqueue_script('header_js', get_template_directory_uri() . '/assets/js/header-bundle.js', null, 1.0, false);
+  wp_enqueue_script('footer_js', get_template_directory_uri() . '/assets/js/footer-bundle.js', null, 1.0, true);
 
   // Threaded comment reply styles.
   if (is_singular() && comments_open() && get_option('thread_comments')) {
@@ -286,9 +287,9 @@ add_action('wp_enqueue_scripts', 'wauble_scripts');
  * @return void
  */
 function wauble_admin_scripts() {
-  wp_enqueue_style('admin-styles', get_template_directory_uri() . '/_dev/admin/admin.css');
-  wp_enqueue_script('jquery-ui', get_template_directory_uri() . '/_dev/admin/jquery-ui.min.js');
-  wp_enqueue_script('admin-scripts', get_template_directory_uri() . '/_dev/admin/admin.js');
+  wp_enqueue_style('admin-styles', get_template_directory_uri() . '/assets/admin/admin.css');
+  wp_enqueue_script('jquery-ui', get_template_directory_uri() . '/assets/admin/jquery-ui.min.js');
+  wp_enqueue_script('admin-scripts', get_template_directory_uri() . '/assets/admin/admin.js');
 }
 add_action('admin_enqueue_scripts', 'wauble_admin_scripts');
 
