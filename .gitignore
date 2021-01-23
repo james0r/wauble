@@ -7,5 +7,10 @@ node_modules/
 *.sqlite
 package-lock.json
 composer.lock
+wauble.zip
+assets/js/footer-bundle.js
+assets/js/header-bundle.js
+assets/css/main.css.map
+assets/css/main.css
 
 .vscode/

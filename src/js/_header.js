@@ -1,3 +1,5 @@
-let someFunc = name => name;
-
-console.log( someFunc('bob') );
+(function($) {
+  $(function() {
+    console.log('Wauble Wordpress Starter Theme');
+  })
+})(jQuery);

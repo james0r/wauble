@@ -27,6 +27,7 @@ yarn dev
 - Dynamic sections functionality with a modules manager for admin posts/pages
 - Sass 7-1 (ish) file structure.
 - A functions.php inspired by Wordpress' TwentyTwentyOne theme.
+- Image minification / optimization
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

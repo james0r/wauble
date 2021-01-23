@@ -1,5 +1,5 @@
 (function($) {
   $(function() {
-    console.log('Wauble Wordpress Starter Theme');
+    console.log('Created by JamesAuble.com');
   })
 })(jQuery);

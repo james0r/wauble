@@ -317,7 +317,7 @@ add_action('cmb2_admin_init', 'cmb2_metaboxes');
         display_order int(32) NOT NULL,
         PRIMARY KEY  (id)
       )';
-   require_once ABSPATH . 'wp-admin/inc/upgrade.php';
+   require_once ABSPATH . 'wp-admin/includes/upgrade.php';
    dbDelta($sql);
  }
 add_action('after_switch_theme', 'wauble_dynamic_modules_db_table');
