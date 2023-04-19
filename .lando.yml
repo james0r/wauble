@@ -1,0 +1,59 @@
+name: wauble-lando
+recipe: wordpress
+config:
+  php: '8.2'
+  webroot: wordpress
+  via: nginx
+  database: mysql
+env_file:
+  - .env
+services:
+  theme:
+    type: node:16
+    services:
+      ports:
+        - 3000:3000
+  pma:
+    type: phpmyadmin
+    hosts:
+      - database
+proxy:
+  # Appserver_nginx or appserver for apache
+  appserver_nginx:
+    - wauble-lando.lndo.site
+  pma:
+    - pma.wauble-lando.lndo.site
+tooling:
+  yarn:
+    service: theme
+  envoy:
+    service: appserver
+  composer:
+    service: appserver
+  setup:wordpress:
+    service: appserver
+    description: Download latest Wordpress release
+    cmd:
+      - wp core download && wp config create
+      - wp core install --url=https://wauble-lando.lndo.site/ --title="Wauble Lando" --admin_user=admin --admin_password=password --admin_email=james.auble@gmail.com --path=wordpress
+      - composer install
+      - wp plugin uninstall hello --path=wordpress
+      - wp plugin activate --all --path=wordpress
+      - wp plugin deactivate akismet --path=wordpress
+  setup:theme:
+    service: appserver
+    description: Clone and build Wauble theme
+    cmd:
+      - appserver: rm -rf wordpress/wp-content/themes/twentytwentyone
+      - appserver: rm -rf wordpress/wp-content/themes/twentytwentytwo
+      - appserver: rm -rf wordpress/wp-content/themes/twentytwentythree
+      - appserver: git clone git@github.com:james0r/wauble.git wordpress/wp-content/themes/wauble
+      - appserver: rm -rf wordpress/wp-content/themes/wauble/.git
+      - appserver: cd wordpress/wp-content/themes/wauble && composer install
+      - appserver: wp theme activate wauble --path=wordpress
+      - theme: cd wordpress/wp-content/themes/wauble && npm i && npm run build
+events:
+  post-rebuild:
+    - echo 'Post Rebuilt Triggered'
+excludes:
+  - vendor

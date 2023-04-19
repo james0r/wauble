@@ -1,6 +1,7 @@
 *
 !*/
 !/.gitignore
+!/.lando.yml
 !/composer.json
 !/auth.json
 !/Envoy.blade.php
