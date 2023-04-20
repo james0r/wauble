@@ -4,7 +4,7 @@
   "repositories": {
       "satispress": {
           "type": "composer",
-          "url": "https://wauble.jamesauble.com/satispress/"
+          "url": "https://packages.jamesauble.com/satispress/"
       },
       "0": {
           "type": "composer",
