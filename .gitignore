@@ -1,3 +1,4 @@
+# Project Root
 *
 !*/
 !/.gitignore
@@ -5,4 +6,4 @@
 !/composer.json
 !/auth.json
 !/Envoy.blade.php
-!/wp-cli.yml
+!/.gitignore.example
