@@ -1,9 +1,0 @@
-path: wordpress
-
-config create:
-    dbname: wordpress
-    dbuser: wordpress
-    dbpass: wordpress
-    dbhost: database
-    extra-php: |
-        define( 'WP_ENVIRONMENT_TYPE', 'development' );
