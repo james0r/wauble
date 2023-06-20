@@ -34,14 +34,18 @@ tooling:
     service: appserver
   setup:wordpress:
     service: appserver
-    description: Download latest Wordpress release
-    cmd:
-      - wp core download --path=wordpress && wp config create --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=database --path=wordpress
-  install:wordpress:
-    service: appserver
     description: Install Wordpress noninteractively
     cmd:
+      - wp core download --path=wordpress && wp config create --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=database --path=wordpress
       - wp core install --url=https://wauble-lando.lndo.site/ --title="Wauble Lando" --admin_user=admin --admin_password=password --admin_email=james.auble@gmail.com --path=wordpress
+      - wp option update page_on_front 2 --path=wordpress
+      - wp option update show_on_front page --path=wordpress
+      - wp menu create "Header Menu" --path=wordpress
+      - wp menu location assign header-menu header_menu --path=wordpress
+      - wp menu item add-post header-menu 2 --path=wordpress
+      - wp menu create "Footer Menu" --path=wordpress
+      - wp menu location assign footer-menu footer_menu --path=wordpress
+      - wp menu item add-post footer-menu 2 --path=wordpress
   setup:environment:
     service: appserver
     description: Download starter theme and install dependencies
@@ -53,6 +57,7 @@ tooling:
       - appserver: cd wordpress/wp-content/themes && git clone https://github.com/james0r/wauble.git temp && mv temp/* wauble/ && rm -rf temp
       - appserver: cd wordpress/wp-content/themes/wauble && composer install
       - node: cd wordpress/wp-content/themes/wauble && npm install
+      - node: cd wordpress/wp-content/themes/wauble && npm run build
       - appserver: wp theme activate wauble --path=wordpress
       - appserver: wp plugin activate --all --path=wordpress
 events:
