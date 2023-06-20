@@ -3,13 +3,16 @@
 
 # Root Configs
 !.gitignore
+!.gitignore.example
 !.lando.yml
 !composer.json
 !Envoy.blade.php
+!Envoy.blade.php.wpengine.example
 !README.md
 !auth.json
 !/.rsync/
 !/.rsync/exclude
+!.env.example
 
 # WordPress
 
