@@ -25,8 +25,8 @@ lando setup:environment
 ### Install Local Theme Deps
 
 ```bash
-composer install
 cd wordpress/wp-content/themes/wauble
+composer install
 npm install
 npm run build
 ```
