@@ -14,7 +14,6 @@ In root directory run
 ```bash
 lando start
 lando setup:wordpress
-lando install:wordpress
 ```
 
 ### Install Wauble Starter Theme & Composer Managed Plugins
