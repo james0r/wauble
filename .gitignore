@@ -1,10 +1,35 @@
-# Project Root
-*
-!*/
-!/.gitignore
-!/.lando.yml
-!/composer.json
-!/auth.json
-!/Envoy.blade.php
-!/.gitignore.example
-!/README.md
+# Ignore Everything
+/**
+
+# Root Configs
+!.gitignore
+!.lando.yml
+!composer.json
+!Envoy.blade.php
+!README.md
+!auth.json
+!/.rsync/
+!/.rsync/exclude
+
+# WordPress
+
+# !/wordpress/
+# /wordpress/**
+
+# !/wordpress/wp-content/
+# /wordpress/wp-content/**
+
+# Themes
+
+# !/wordpress/wp-content/themes/
+# /wordpress/wp-content/themes/**
+
+# !/wordpress/wp-content/themes/lark/
+# !/wordpress/wp-content/themes/lark/**
+# /wordpress/wp-content/themes/lark/dist
+# /wordpress/wp-content/themes/lark/dist/**
+# /wordpress/wp-content/themes/lark/.env
+
+# Depenedencies
+vendor
+node_modules

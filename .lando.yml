@@ -60,6 +60,6 @@ events:
     - echo 'Post Rebuilt Triggered'
 excludes:
   - vendor
-  - wordpress/wp-content/uploads
   - wordpress/wp-content/themes/wauble/node_modules
   - wordpress/wp-content/themes/wauble/vendor
+  # - wordpress/wp-content/uploads

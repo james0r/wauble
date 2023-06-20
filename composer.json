@@ -1,45 +1,47 @@
 {
-  "name": "jamesauble/wauble",
+  "name": "jamesauble/lando-wordpress",
   "type": "project",
   "repositories": {
-      "satispress": {
-          "type": "composer",
-          "url": "https://packages.jamesauble.com/satispress/"
-      },
-      "0": {
-          "type": "composer",
-          "url": "https://wpackagist.org",
-          "only": [
-              "wpackagist-plugin/*",
-              "wpackagist-theme/*"
-          ]
-      }
+    "satispress": {
+      "type": "composer",
+      "url": "https://packages.jamesauble.com/satispress/"
+    },
+    "0": {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    }
   },
   "config": {
-      "allow-plugins": {
-          "composer/installers": true
-      }
+    "allow-plugins": {
+      "composer/installers": true
+    }
   },
   "extra": {
     "installer-paths": {
-        "wordpress/wp-content/mu-plugins/{$name}/": [
-            "type:wordpress-muplugin"
-        ],
-        "wordpress/wp-content/plugins/{$name}/": [
-            "type:wordpress-plugin"
-        ],
-        "wordpress/wp-content/themes/{$name}/": [
-            "type:wordpress-theme"
-        ]
+      "wordpress/wp-content/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "wordpress/wp-content/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "wordpress/wp-content/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
     },
     "wordpress-install-dir": "wordpress"
   },
   "require": {
-      "wpackagist-plugin/acf-extended": "0.8.9.3",
-      "wpackagist-plugin/regenerate-thumbnails": "^3.1",
-      "wpackagist-plugin/wordpress-seo": "^20.5",
-      "wpackagist-plugin/classic-editor": "^1.6",
-      "wpackagist-plugin/wp-graphql": "^1.14",
-      "satispress/advanced-custom-fields-pro": "^6.0"
+    "wpackagist-plugin/regenerate-thumbnails": "^3.1",
+    "wpackagist-plugin/wordpress-seo": "^20.5",
+    "wpackagist-plugin/classic-editor": "^1.6",
+    "satispress/advanced-custom-fields-pro": "^6.0",
+    "vlucas/phpdotenv": "^5.5"
+  },
+  "require-dev": {
+    "laravel/envoy": "^2.8"
   }
 }
