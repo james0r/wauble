@@ -5,6 +5,8 @@ config:
   webroot: wordpress
   via: nginx
   database: mysql
+  config:
+    server: config/nginx.conf
 env_file:
   - .env
 services:
@@ -37,7 +39,7 @@ tooling:
     description: Install Wordpress noninteractively
     cmd:
       - wp core download --path=wordpress && wp config create --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=database --path=wordpress
-      - wp core install --url=https://wauble-lando.lndo.site/ --title="Wauble Lando" --admin_user=admin --admin_password=password --admin_email=james.auble@gmail.com --path=wordpress
+      - wp core install --url=http://wauble-lando.lndo.site/ --title="Wauble Lando" --admin_user=admin --admin_password=password --admin_email=james.auble@gmail.com --path=wordpress
   setup:theme:
     service: appserver
     description: Download starter theme and install dependencies

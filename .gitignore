@@ -13,6 +13,8 @@
 !/.rsync/
 !/.rsync/exclude
 !.env.example
+!/config/
+!/config/nginx.conf
 
 # WordPress
 
