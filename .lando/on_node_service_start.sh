@@ -14,7 +14,6 @@ until (ps -p $(cat /tmp/npm.pid)); do
   pkill -15 "npm run watch"
   pkill -15 "mix watch"  
   pkill -15 "watch"
-  pkill -15 "npm"
   pkill -15 "webpack"
   run_theme_watch
 done
