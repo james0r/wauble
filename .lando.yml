@@ -42,8 +42,11 @@ tooling:
     service: appserver
     description: Install Wordpress noninteractively
     cmd:
+      - mkdir -p temp/wauble && cp -r temp/wauble. wordpress/wp-content/themes/wauble/
       - wp core download --path=wordpress && wp config create --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=database --path=wordpress
       - wp core install --url=http://wauble.lndo.site/ --title="Wauble Lando" --admin_user=admin --admin_password=password --admin_email=james.auble@gmail.com --path=wordpress
+      - mkdir -p wordpress/wp-content/themes/wauble && cp -r temp/wauble/. wordpress/wp-content/themes/wauble/
+      - rm -rf temp
   setup:theme:
     service: appserver
     description: Download starter theme and install dependencies
@@ -52,7 +55,6 @@ tooling:
       - appserver: rm -rf wordpress/wp-content/themes/twentytwentyone
       - appserver: rm -rf wordpress/wp-content/themes/twentytwentytwo
       - appserver: mkdir -p wordpress/wp-content/themes/wauble
-      - appserver: cd wordpress/wp-content/themes && git clone git@github.com:james0r/wauble.git temp && cp -r temp/. wauble/ && rm -rf temp
       - appserver: cd wordpress/wp-content/themes/wauble && composer install
       - node: cd wordpress/wp-content/themes/wauble && npm install
       - node: cd wordpress/wp-content/themes/wauble && npm run build
