@@ -29,11 +29,11 @@
 # !/wordpress/wp-content/themes/
 # /wordpress/wp-content/themes/**
 
-# !/wordpress/wp-content/themes/lark/
-# !/wordpress/wp-content/themes/lark/**
-# /wordpress/wp-content/themes/lark/dist
-# /wordpress/wp-content/themes/lark/dist/**
-# /wordpress/wp-content/themes/lark/.env
+# !/wordpress/wp-content/themes/wauble/
+# !/wordpress/wp-content/themes/wauble/**
+# /wordpress/wp-content/themes/wauble/dist
+# /wordpress/wp-content/themes/wauble/dist/**
+# /wordpress/wp-content/themes/wauble/.env
 
 # Depenedencies
 vendor

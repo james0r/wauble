@@ -1,4 +1,4 @@
-name: wauble-lando
+name: wauble
 recipe: wordpress
 config:
   php: '8.2'
@@ -10,21 +10,25 @@ config:
 env_file:
   - .env
 services:
-  # node:
-  #   type: node:16
-  #   services:
-  #     ports:
-  #       - 3000:3000
+  node:
+    type: node:18
+    build:
+      - "cd /app/wordpress/wp-content/themes/wauble && npm install"
+      - "cd /app/wordpress/wp-content/themes/wauble && npm run dev"
+    overrides:
+      command: 
+        - /app/.lando/on_node_service_start.sh
   pma:
     type: phpmyadmin
     hosts:
       - database
 proxy:
-  # Appserver_nginx or appserver for apache
   appserver_nginx:
-    - wauble-lando.lndo.site
+    - wauble.lndo.site
+  node:
+    - bs.wauble.lndo.site:3000
   pma:
-    - pma.wauble-lando.lndo.site
+    - pma.wauble.lndo.site
 tooling:
   npm:
     service: node
@@ -39,7 +43,7 @@ tooling:
     description: Install Wordpress noninteractively
     cmd:
       - wp core download --path=wordpress && wp config create --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=database --path=wordpress
-      - wp core install --url=http://wauble-lando.lndo.site/ --title="Wauble Lando" --admin_user=admin --admin_password=password --admin_email=james.auble@gmail.com --path=wordpress
+      - wp core install --url=http://wauble.lndo.site/ --title="Wauble Lando" --admin_user=admin --admin_password=password --admin_email=james.auble@gmail.com --path=wordpress
   setup:theme:
     service: appserver
     description: Download starter theme and install dependencies
@@ -49,10 +53,11 @@ tooling:
       - appserver: rm -rf wordpress/wp-content/themes/twentytwentytwo
       - appserver: mkdir -p wordpress/wp-content/themes/wauble
       - appserver: cd wordpress/wp-content/themes && git clone git@github.com:james0r/wauble.git temp && cp -r temp/. wauble/ && rm -rf temp
-      # - appserver: cd wordpress/wp-content/themes/wauble && composer install
-      # - node: cd wordpress/wp-content/themes/wauble && npm install
-      # - node: cd wordpress/wp-content/themes/wauble && npm run build
+      - appserver: cd wordpress/wp-content/themes/wauble && composer install
+      - node: cd wordpress/wp-content/themes/wauble && npm install
+      - node: cd wordpress/wp-content/themes/wauble && npm run build
       - appserver: wp theme activate wauble --path=wordpress
+      - appserver: wp plugin delete hello --path=wordpress
       - appserver: wp plugin activate --all --path=wordpress
       - appserver: wp option update page_on_front 2 --path=wordpress
       - appserver: wp option update show_on_front page --path=wordpress
@@ -62,9 +67,25 @@ tooling:
       - appserver: wp menu create "Footer Menu" --path=wordpress
       - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
-events:
-  post-rebuild:
-    - echo 'Post Rebuilt Triggered'
+  restart:theme-watch:
+    description: Restart the watch command
+    service: node
+    user: root
+    cmd:
+      - echo -n "Killing theme watcher..."
+      - kill -9 $(cat /tmp/npm.pid) && echo " ✅"
+  build:theme:
+    description: Build the theme
+    service: node
+    user: root
+    cmd:
+      - echo -n "Building theme..."
+      - cd wordpress/wp-content/themes/wauble && npm run build
+      - echo "Theme build successfully ✅"
+  install:theme-dependencies:
+    - echo -n "Installing theme dependencies..."
+    - cd wordpress/wp-content/themes/wauble && npm install
+    - echo "Theme dependencies installed successfully ✅"
 excludes:
   - wordpress/wp-content/themes/wauble/node_modules
   # - vendor
