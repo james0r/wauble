@@ -20,16 +20,16 @@
 
 # WordPress
 
-# !/wordpress/
-# /wordpress/**
+!/wordpress/
+/wordpress/**
 
-# !/wordpress/wp-content/
-# /wordpress/wp-content/**
+!/wordpress/wp-content/
+/wordpress/wp-content/**
 
 # Themes
 
-# !/wordpress/wp-content/themes/
-# /wordpress/wp-content/themes/**
+!/wordpress/wp-content/themes/
+/wordpress/wp-content/themes/**
 
 !/wordpress/wp-content/themes/wauble/
 !/wordpress/wp-content/themes/wauble/**

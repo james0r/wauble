@@ -1,0 +1,9 @@
+{
+    "require": {
+        "lukapeharda/tailwindcss-color-palette-generator": "^0.3.0",
+        "log1x/navi": "^2.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.0"
+    }
+}

@@ -1,0 +1,32 @@
+
+// import 'base' styles
+@use 'base/reset';
+@use 'base/typography';
+
+// import 'components' styles
+@use 'components/buttons';
+@use 'components/carousel';
+@use 'components/cover';
+@use 'components/dropdown';
+
+// import 'layout' styles
+@use 'layout/navigation';
+@use 'layout/grid';
+@use 'layout/header';
+@use 'layout/footer';
+@use 'layout/sidebar';
+@use 'layout/forms';
+
+// import 'pages' styles
+@use 'pages/home';
+@use 'pages/contact';
+
+// import 'sassutils' styles
+@use 'sassutils/variables';
+@use 'sassutils/functions';
+@use 'sassutils/mixins';
+@use 'sassutils/helpers';
+
+// import 'vendors' styles
+@use 'vendors/bootstrap';
+@use 'vendors/embla';

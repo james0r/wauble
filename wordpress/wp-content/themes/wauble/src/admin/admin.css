@@ -1,0 +1,24 @@
+/* CLEARFIX */
+
+/* GRID */
+/* .row { position: relative;  padding: 0; height: auto; margin: 0 auto; width: 100%; }
+.row .columns { margin-left: 4.4%; float: left; height: auto; min-height: 1px;}
+.row .columns:first-child{margin-left: 0px;}
+.row .columns .row{width: 100%;}
+.row .columns.one{ width: 4.3%; }.row .columns.two{ width: 13%; }.row .columns.three{ width: 21.68%; }.row .columns.four{ width: 30.4%; }.row .columns.five{ width: 39.1%; }.row .columns.six{ width: 47.8%; }.row .columns.seven{ width: 56.5%; }.row .columns.eight{ width: 65.2%; }.row .columns.nine{ width: 73.9%; }.row .columns.ten{ width: 82.6%; }.row .columns.eleven{ width: 91.3%; }.row .columns.twelve{ width: 100%; margin-left:0px; }
+@media all and (max-width: 768px) {
+  .row .columns{width: 100% !important;margin-left: 0;}
+} */
+
+/* Custom Post Type ACF Field Tweak */
+.select2-container .select2-selection--single {
+  height: 30px !important;
+}
+
+.select2-selection__arrow {
+  height: 28px !important;
+}
+
+.acf-range-wrap input[type=number] {
+  min-width: 4rem !important;
+}
