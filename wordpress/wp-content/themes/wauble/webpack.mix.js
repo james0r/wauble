@@ -25,7 +25,7 @@ mix.postCss("src/css/site.css", "dist/css/tailwind.css")
 
 // Sync Directories
 mix
-  .copyDirectory("src/vendor", "dist/vendor")
+  .copyDirectory("src/static", "dist/static")
   .copyDirectory("src/images", "dist/images")
   .copyDirectory("src/admin", "dist/admin")
   .copyDirectory("src/fonts", "dist/fonts")
