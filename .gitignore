@@ -31,12 +31,15 @@
 # !/wordpress/wp-content/themes/
 # /wordpress/wp-content/themes/**
 
-# !/wordpress/wp-content/themes/wauble/
-# !/wordpress/wp-content/themes/wauble/**
-# /wordpress/wp-content/themes/wauble/dist
-# /wordpress/wp-content/themes/wauble/dist/**
-# /wordpress/wp-content/themes/wauble/.env
+!/wordpress/wp-content/themes/wauble/
+!/wordpress/wp-content/themes/wauble/**
+/wordpress/wp-content/themes/wauble/dist
+/wordpress/wp-content/themes/wauble/dist/**
+/wordpress/wp-content/themes/wauble/.env
 
 # Depenedencies
 vendor
 node_modules
+
+# Lock files
+package-lock.json
