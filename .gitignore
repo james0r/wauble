@@ -18,6 +18,10 @@
 !/.lando/
 !/.lando/on_node_service_start.sh
 
+# Depenedencies
+vendor
+node_modules
+
 # WordPress
 
 !/wordpress/
@@ -37,9 +41,6 @@
 /wordpress/wp-content/themes/wauble/dist/**
 /wordpress/wp-content/themes/wauble/.env
 
-# Depenedencies
-vendor
-node_modules
 
 # Lock files
 package-lock.json
