@@ -9,12 +9,13 @@ config:
     server: config/nginx.conf
 env_file:
   - .env
+events:
+  pre-start:
+    - node: "cd /app/wordpress/wp-content/themes/wauble && npm install"
+    - node: "cd /app/wordpress/wp-content/themes/wauble && npm run dev"
 services:
   node:
     type: node:18
-    build:
-      - "cd /app/wordpress/wp-content/themes/wauble && npm install"
-      - "cd /app/wordpress/wp-content/themes/wauble && npm run dev"
     overrides:
       command: 
         - /app/.lando/on_node_service_start.sh
