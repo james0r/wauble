@@ -5,7 +5,7 @@ if (!defined('WAUBLE_VERSION')) {
 }
 
 if (!defined('WAUBLE_MIN_PHP_VER_REQUIRED')) {
-  define('WAUBLE_MIN_PHP_VER_REQUIRED', '7.4');
+  define('WAUBLE_MIN_PHP_VER_REQUIRED', '8.0');
 }
 
 if (!defined('WAUBLE_MIN_WP_VER_REQUIRED')) {
