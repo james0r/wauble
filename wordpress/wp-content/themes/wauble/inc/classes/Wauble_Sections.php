@@ -11,7 +11,7 @@ class Wauble_Sections {
   public function __construct() {
     add_action('wp', [$this, 'init_sections']);
     add_action('init', [$this, 'register_shortcode']);
-    add_filter('acf/load_value/name=sections', [$this, 'add_classic_editor_default_section'], 10, 3);
+    add_filter('acf/load_value/name=sections', [$this, 'add_content_area_default_section'], 10, 3);
   }
   
   public function init_sections() {
@@ -29,7 +29,7 @@ class Wauble_Sections {
     add_shortcode( 'sections', [$this, 'render'] );
   }
 
-  public function add_classic_editor_default_section($value, $post_id, $field) {
+  public function add_content_area_default_section($value, $post_id, $field) {
     if ($value !== NULL) {
       // $value will only be NULL on a new post
       return $value;
@@ -37,7 +37,7 @@ class Wauble_Sections {
     // add default layouts
     $value = array(
       array(
-        'acf_fc_layout' => 'classic_editor' // layout_1 is the name of the layout
+        'acf_fc_layout' => 'content_area' 
       )
     );
     return $value;

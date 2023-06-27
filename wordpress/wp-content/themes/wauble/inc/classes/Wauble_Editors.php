@@ -8,7 +8,7 @@ class Wauble_Editors {
   public function __construct() {
     
     if (WAUBLE_DISABLE_BLOCK_EDITOR) {
-      // add_action('admin_init', [$this, 'hide_classic_editor_on_pages']);
+      add_action('admin_init', [$this, 'hide_classic_editor_on_pages']);
       add_filter('use_block_editor_for_post', '__return_false');
     } else {
       add_filter('allowed_block_types_all', [$this, 'get_allowed_block_types']);
@@ -21,9 +21,7 @@ class Wauble_Editors {
     }
     if (!isset($post_id)) return;
 
-    $post_template = get_post_meta($post_id, '_wp_page_template');
-
-    if (($post_template[0] ?? null) !== 'default' || $post_id === get_option('page_on_front') || $post_id === get_option('page_for_posts')) {
+    if (get_post_type($post_id) == 'page') {
       remove_post_type_support('page', 'editor');
     }
   }

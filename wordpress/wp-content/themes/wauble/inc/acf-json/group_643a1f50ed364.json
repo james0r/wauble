@@ -301,15 +301,6 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_647fe02a4ee59": {
-                    "key": "layout_647fe02a4ee59",
-                    "name": "classic_editor",
-                    "label": "Classic Editor",
-                    "display": "block",
-                    "sub_fields": [],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_6481a85ab42f1": {
                     "key": "layout_6481a85ab42f1",
                     "name": "faq",
@@ -1188,5 +1179,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1687320879
+    "modified": 1687864571
 }
