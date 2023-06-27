@@ -687,6 +687,62 @@
                             "ui_on_text": "",
                             "ui_off_text": "",
                             "ui": 1
+                        },
+                        {
+                            "key": "field_649acbdfa1a57",
+                            "label": "Show Categories on Posts",
+                            "name": "show_categories_on_posts",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_649164428bd7d",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_649acdc99d204",
+                            "label": "Show Date on Posts",
+                            "name": "show_date_on_posts",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_649164428bd7d",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
                         }
                     ],
                     "min": "",
@@ -1179,5 +1235,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1687864571
+    "modified": 1687866853
 }

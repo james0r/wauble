@@ -5,6 +5,8 @@ $post_types = $section['post_type'];
 $categories = $section['categories'];
 $tags = $section['tags'];
 $ajax = $section['use_ajax_pagination'] ? true : false;
+$show_categories_on_posts = $section['show_categories_on_posts'] ? true : false;
+$show_date_on_posts = $section['show_date_on_posts'] ? true : false;
 
 if (get_query_var('paged')) {
   $paged = get_query_var('paged');
@@ -62,7 +64,10 @@ document.body.addEventListener('htmx:afterSwap', function(evt) {
     >
       <?php while ($query->have_posts()) : $query->the_post(); ?>
 
-      <?php echo get_template_part('template-parts/blog-card'); ?>
+      <?php echo get_template_part('template-parts/blog-card', null, [
+        'show_categories_on_posts' => $show_categories_on_posts,
+        'show_date_on_posts' => $show_date_on_posts
+      ]); ?>
 
       <?php endwhile; ?>
     </ul>
