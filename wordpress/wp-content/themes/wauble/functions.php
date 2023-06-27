@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('WAUBLE_VERSION')) {
-  define('WAUBLE_VERSION', '0.0.5');
+  define('WAUBLE_VERSION', '1.0.0');
 }
 
 if (!defined('WAUBLE_MIN_PHP_VER_REQUIRED')) {
