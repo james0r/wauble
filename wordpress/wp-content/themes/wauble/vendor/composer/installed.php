@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0ead5db86e237f0437a29b3194ce1e724fc230eb',
+        'reference' => 'bc4ee284cb88c12611b7c8b79b03f6b097c34683',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0ead5db86e237f0437a29b3194ce1e724fc230eb',
+            'reference' => 'bc4ee284cb88c12611b7c8b79b03f6b097c34683',
             'dev_requirement' => false,
         ),
         'log1x/navi' => array(
