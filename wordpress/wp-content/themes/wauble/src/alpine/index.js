@@ -12,16 +12,16 @@ export default {
     })
 
     // Register Alpine components
-    // const alpineComponents = require.context('./components/', true, /\.js$/)
+    const alpineComponents = require.context('./components/', true, /\.js$/)
 
-    // alpineComponents.keys().forEach((key) => {
-    //   const component = alpineComponents(key).default
+    alpineComponents.keys().forEach((key) => {
+      const component = alpineComponents(key).default
 
-    //   // Component name will be named exactly as defined in the module
-    //   const name = component.name
+      // Component name will be named exactly as defined in the module
+      const name = component.name
 
-    //   Alpine.data(name, component.component)
-    // })
+      Alpine.data(name, component.component)
+    })
 
     // Register Alpine Magic Properties
     // const alpineMagic = require.context('./magic/', true, /\.js$/)
