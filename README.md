@@ -2,9 +2,13 @@
 
 ## Getting Started
 
-### Clone repo
+### Download
 ```bash
-git clone https://github.com/james0r/lando-wordpress.git
+git clone git@github.com:james0r/wauble.git
+```
+or
+```bash
+create_wauble_app.sh
 ```
 
 ### Set up WordPress
@@ -22,11 +26,8 @@ lando setup:wordpress
 lando setup:environment
 ```
 
-### Install Local Theme Deps
+### Rebuild Local Environment
 
 ```bash
-cd wordpress/wp-content/themes/wauble
-composer install
-npm install
-npm run build
+lando rebuild -y
 ```
