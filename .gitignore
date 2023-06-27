@@ -41,6 +41,8 @@ node_modules
 /wordpress/wp-content/themes/wauble/dist/**
 /wordpress/wp-content/themes/wauble/.env
 
-
-# Lock files
+# Lock Files
 package-lock.json
+
+# System Files
+.DS_Store
