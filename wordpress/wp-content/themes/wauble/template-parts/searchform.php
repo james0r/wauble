@@ -12,7 +12,7 @@
     >Search for:</label>
     <input
       type="text"
-      value="et"
+      value="<?php echo get_search_query(); ?>"
       name="s"
       id="s"
       class="border border-gray-300 rounded-md px-4 py-2 w-full"
