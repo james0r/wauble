@@ -1,8 +1,10 @@
 <?php get_template_part('template-parts/header'); ?>
 
-<div class="no-page-found-template container">
-  <div class="no-page-found-template-inner">
-    I'm the 404 page
+<div class="px-6 md:px-8 py-8">
+  <div class="container">
+    <h1>
+      <?php _e('404: Page Not Found', 'wauble'); ?>
+    </h1>
   </div>
 </div>
 
