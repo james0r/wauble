@@ -32,10 +32,6 @@ class Wauble_Static_Templates {
       return get_stylesheet_directory() . "/static-templates/{$staticQueryVarValue}.php";
     }
 
-    if (is_home()) {
-      return get_stylesheet_directory() . '/static-templates/page-blog.php';
-    }
-
     return $template;
   }
 }

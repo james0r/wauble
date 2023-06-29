@@ -1,6 +1,7 @@
 <?php
 $show_categories_on_posts = $args['show_categories_on_posts'] ? true : false;
 $show_date_on_posts = $args['show_date_on_posts'] ? true : false;
+$show_tags_on_posts = true;
 ?>
 
 <li>
@@ -36,9 +37,24 @@ $show_date_on_posts = $args['show_date_on_posts'] ? true : false;
       </time>
       <?php endif; ?>
     </div>
+    <?php if ($show_tags_on_posts && !empty(get_the_tags())) : ?>
+      <div class="text-sm my-1">
+        Tags: <?php
+                $posttags = get_the_tags();
+                if ($posttags) {
+                  foreach ($posttags as $index=>$tag) {
+                    echo '<a href="/tag/' . $tag->slug . '" class="hover:text-primary-500">' . $tag->name . '</a>';
+                    if ($index < count($posttags) - 1) {
+                      echo ', ';
+                    }
+                  }
+                }
+                ?>
+      </div>
+    <?php endif; ?>
     <a
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
-      class="after:content-[' '] after:inset-0 after:absolute after:h-full after:z-[1]"
+      class=""
     >
       <h3 class="mt-0">
         <?php echo get_the_title(get_the_ID()); ?>

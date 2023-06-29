@@ -24,6 +24,23 @@
     <ul>
       <?php wp_list_categories(); ?>
     </ul>
+
+    <h2>Archives by Tags (Cloud):</h2>
+    <ul>
+      <?php wp_tag_cloud(); ?>
+    </ul>
+
+    <h2>
+      Archives by Tags (List):
+    </h2>
+      <ul>
+        <?php
+          $tags = get_tags();
+          foreach ($tags as $tag) {
+            echo '<li><a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a></li>';
+          }
+        ?>
+      </ul>
   </div>
 </div>
 
