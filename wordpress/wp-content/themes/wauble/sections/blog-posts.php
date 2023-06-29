@@ -65,9 +65,9 @@ document.body.addEventListener('htmx:afterSwap', function(evt) {
       <?php while ($query->have_posts()) : $query->the_post(); ?>
 
       <?php echo get_template_part('template-parts/blog-card', null, [
-        'show_categories_on_posts' => $show_categories_on_posts,
-        'show_date_on_posts' => $show_date_on_posts
-      ]); ?>
+            'show_categories_on_posts' => $show_categories_on_posts,
+            'show_date_on_posts' => $show_date_on_posts
+          ]); ?>
 
       <?php endwhile; ?>
     </ul>
@@ -78,8 +78,8 @@ document.body.addEventListener('htmx:afterSwap', function(evt) {
       <?php if ($ajax) : ?>
       <button
         hx-get="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>"
-        hx-target="#section-<?php echo $section_count; ?>"
-        hx-select="#section-<?php echo $section_count; ?>"
+        hx-target="#section-<?php echo $section_count; ?> .container"
+        hx-select="#section-<?php echo $section_count; ?> .container"
         hx-swap="outerHTML"
         type="button"
         hx-trigger="click"
@@ -97,8 +97,8 @@ document.body.addEventListener('htmx:afterSwap', function(evt) {
       <?php if ($ajax) : ?>
       <button
         hx-get="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>"
-        hx-target="#section-<?php echo $section_count; ?>"
-        hx-select="#section-<?php echo $section_count; ?>"
+        hx-target="#section-<?php echo $section_count; ?> .container"
+        hx-select="#section-<?php echo $section_count; ?> .container"
         hx-swap="outerHTML"
         type="button"
         hx-trigger="click"
