@@ -25,10 +25,15 @@ class Wauble_Static_Templates {
   }
 
   public function include_static_template($template) {
+
     $staticQueryVarValue = get_query_var('static_template');
 
     if (!empty($staticQueryVarValue)) {
       return get_stylesheet_directory() . "/static-templates/{$staticQueryVarValue}.php";
+    }
+
+    if (is_home()) {
+      return get_stylesheet_directory() . '/static-templates/page-blog.php';
     }
 
     return $template;

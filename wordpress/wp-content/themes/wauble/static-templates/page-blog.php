@@ -1,13 +1,6 @@
-<?php
-
-/**
- * Template Name: Search template
- */
-?>
-
 <?php get_template_part('template-parts/header'); ?>
 
-<div class="px-6 md:px-8">
+<div id="blog-posts" class="px-6 md:px-8">
   <div class="container my-8">
     <div class="max-w-max mx-auto my-4">
       <?php get_template_part('template-parts/searchform'); ?>
@@ -39,8 +32,7 @@
         'paged' => $paged,
         'post_status' => 'publish',
         'order' => 'DESC',
-        'orderby' => 'date',
-        's' => get_search_query()
+        'orderby' => 'date'
       );
 
       if ($paginate && $posts_per_page === -1) {
@@ -75,7 +67,6 @@
 
     <?php if ($query->have_posts()) : ?>
     <ul
-      id="blog-posts-<?php echo $section_count; ?>"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
     >
       <?php while ($query->have_posts()) : $query->the_post(); ?>
@@ -89,24 +80,58 @@
     </ul>
     <?php if ($paginate) : ?>
     <nav class="flex space-x-4 mx-auto max-w-max my-8">
+      <?php 
+        $big = 999999999;
+      ?>
       <?php if ($paged > 1) : ?>
-      <?php $previous_query_params = array(
-              's' => get_search_query(),
-              'page' => $paged - 1
-            ); ?>
-      <a href="?<?php echo http_build_query($previous_query_params); ?>">
+      <?php if ($ajax) : ?>
+      <button
+        hx-get="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>"
+        hx-target="#blog-posts"
+        hx-select="#blog-posts"
+        hx-swap="outerHTML"
+        type="button"
+        hx-trigger="click"
+        class="font-bold"
+      >
+        &laquo; Previous
+      </button>
+      <?php else : ?>
+      <a href="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>">
         &laquo; Previous
       </a>
       <?php endif; ?>
+      <?php endif; ?>
       <?php if ($paged < $query->max_num_pages) : ?>
-      <?php $next_query_params = array(
-                's' => get_search_query(),
-                'page' => $paged + 1
-              ); ?>
-      <a href="?<?php echo http_build_query($next_query_params); ?>">
+      <?php if ($ajax) : ?>
+      <button
+        hx-get="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>"
+        hx-target="#blog-posts"
+        hx-select="#blog-posts"
+        hx-swap="outerHTML"
+        type="button"
+        hx-trigger="click"
+        class="font-bold"
+      >
+        Next &raquo;
+      </button>
+      <?php else : ?>
+      <a href="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>">
         Next &raquo;
       </a>
       <?php endif; ?>
+      <?php endif; ?>
+      <?php
+            // Full pagination
+            // echo paginate_links(array(
+            //   'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+            //   'format' => '?paged=%#%',
+            //   'current' => max(1, $paged),
+            //   'total' => $query->max_num_pages,
+            //   'prev_text' => __('« Previous', 'wauble'),
+            //   'next_text' => __('Next »', 'wauble'),
+            // ));
+            ?>
     </nav>
     <?php endif; ?>
     <?php else : ?>
@@ -115,7 +140,11 @@
     </h3>
     <?php endif; ?>
 
-    <?php wp_reset_postdata(); ?>
+    <?php 
+    
+    wp_reset_postdata(); 
+    
+    ?>
     <?php else : ?>
     <p><?php esc_html_e('Sorry, no posts matched your criteria.', 'wauble'); ?></p>
     <?php endif; ?>
