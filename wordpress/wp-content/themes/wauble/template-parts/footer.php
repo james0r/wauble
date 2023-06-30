@@ -1,5 +1,5 @@
 </main>
-<footer id="site-footer">
+<footer id="site-footer" class="clear-both">
   <div class="px-6 md:px-8 my-8">
     <div class="container">
       <hr>
