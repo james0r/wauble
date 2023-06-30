@@ -57,8 +57,10 @@
                 <span class="accordion-icon"></span>
               </button>
             </h3>
-            <div role="region" :aria-labelledby="$id('faq-question')" class="rte rte-lg rte-a:text-primary-500 rte-p:mb-0 text-[#727272]" :id="$id('faq-answer')" x-show="<?php echo $active_expression; ?>" x-collapse>
-              <?php echo $item['answer']; ?>
+            <div role="region" :aria-labelledby="$id('faq-question')" class="" :id="$id('faq-answer')" x-show="<?php echo $active_expression; ?>" x-collapse>
+              <div class="rte py-4">
+                <?php echo $item['answer']; ?>
+              </div>
             </div>
           </li>
         <?php endforeach; ?>

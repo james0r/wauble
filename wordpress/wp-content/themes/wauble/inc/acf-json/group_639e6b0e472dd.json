@@ -91,7 +91,7 @@
                     "label": "Answer",
                     "name": "answer",
                     "aria-label": "",
-                    "type": "textarea",
+                    "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -101,10 +101,10 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "placeholder": "",
-                    "new_lines": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 1,
+                    "delay": 0,
                     "parent_repeater": "field_639e6b1ac7e5c"
                 }
             ]
@@ -128,5 +128,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1688121670
+    "modified": 1688122112
 }
