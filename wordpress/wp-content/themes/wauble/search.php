@@ -1,15 +1,8 @@
-<?php
-
-/**
- * Template Name: Search template
- */
-?>
-
 <?php get_template_part('template-parts/header'); ?>
 
 <div class="px-6 md:px-8">
-  <div class="container my-8">
-    <div class="max-w-max mx-auto my-4">
+  <div class="container py-8">
+    <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">
       <?php get_template_part('template-parts/searchform'); ?>
     </div>
 

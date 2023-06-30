@@ -1,10 +1,24 @@
-<?php if ($section['faq_items'] || $section['use_global_faq_items']) : ?>
+<?php 
+  $use_global_faq_items = $section['use_global_faq_items'] ?? null;
+  $faq_items = $section['faq_items'] ?? null;
+  $section_heading = $section['heading'] ?? null;
+
+  if ($use_global_faq_items && !empty(get_field('faq_items', 'option'))) {
+    $items = get_field('faq_items', 'option');
+  } elseif ($faq_items) {
+    $items = $faq_items;
+  } else {
+    $items = null;
+  }
+?>
+
+<?php if ($items) : ?>
 
   <div class="px-6 py-12">
     <div class="container">
 
       <?php
-      if ($section['use_global_faq_items'] ?? null) {
+      if ($use_global_faq_items) {
         $single_mode = get_field('faq_only_allow_1_item_expanded', 'option') ?? null;
       } else {
         $single_mode = $section['only_allow_1_item_expanded'] ?? null;
@@ -12,16 +26,16 @@
       ?>
 
       <?php
-      if ($section['use_global_faq_items'] ?? null) {
+      if ($use_global_faq_items) {
         $heading = get_field('faq_heading', 'option');
       } else {
-        $heading = ($section['heading'] ?? null);
+        $heading = $section_heading;;
       }
       ?>
 
       <?php if ($heading ?? null) : ?>
         <h2 class="text-center mb-8">
-          <?php echo $heading; ?>
+          <?php _e($heading, 'wauble'); ?>
         </h2>
       <?php endif ?>
 
@@ -29,13 +43,7 @@
         $component_expression = $single_mode ? '{ active: null }' : '';
       ?>
       <ul x-data="<?php echo $component_expression; ?>" x-cloak>
-        <?php
-        if ($section['use_global_faq_items']) {
-          $items = get_field('faq_items', 'option');
-        } elseif ($section['faq_items']) {
-          $items = $section['faq_items'];
-        }
-        ?>
+
 
         <?php foreach ($items as $index => $item) : ?>
           <li class="list-none mt-6 first:mt-0" x-data="{ expanded: false }" x-id="['faq-answer', 'faq-question']" role="region">

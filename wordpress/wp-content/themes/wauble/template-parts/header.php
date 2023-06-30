@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   <?php language_attributes(); ?>
-  class="bg-base-100 antialiased font-open-sans"
+  class="antialiased font-open-sans bg-gray-100"
 >
 
 <?php get_template_part('template-parts/head'); ?>
