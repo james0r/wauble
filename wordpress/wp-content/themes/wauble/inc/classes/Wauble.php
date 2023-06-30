@@ -86,15 +86,15 @@ class Wauble {
     return self::$theme_prefix;
   }
 
-  public function getImageAsset($filename) {
+  public function getImageAssetUrl($filename) {
     return sprintf('%s/dist/images/%s', self::$stylesheet_dir_url, ltrim($filename, '/'));
   }
   
-  public function getStaticAsset($filename) {
+  public function getStaticAssetUrl($filename) {
     return sprintf('%s/dist/static/%s', self::$stylesheet_dir_url, ltrim($filename, '/'));
   }
 
-  public function getAsset($filename) {
+  public function getAssetUrl($filename) {
     return sprintf('%s/dist/%s', self::$stylesheet_dir_url, ltrim($filename, '/'));
   }
 

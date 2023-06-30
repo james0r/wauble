@@ -4,6 +4,8 @@
 
 <?php if (!empty($images)) : ?>
 
+  <link rel="stylesheet" href="<?php echo Wauble()->getStaticAssetUrl('photoswipe.css'); ?>">
+
 <div class="px-6 md:px-8 py-8">
   <div class="container">
     <?php if ($heading) : ?>
@@ -33,13 +35,13 @@
 <?php endif; ?>
 
 <script type="module">
-  	import PhotoSwipeLightbox from '<?php echo Wauble()->getStaticAsset('vendor/photoswipe-lightbox.esm.min.js'); ?>';
+  	import PhotoSwipeLightbox from '<?php echo Wauble()->getStaticAssetUrl('photoswipe-lightbox.esm.min.js'); ?>';
 	          	
     const lightbox = new PhotoSwipeLightbox({
-      gallery: '#<?php echo esc_attr($id); ?>',
+      gallery: '#section-<?php echo esc_attr($section_count); ?>',
       children: 'a',
       doubleTapAction: false,
-      pswpModule: () => import('<?php echo Wauble()->getStaticAsset('vendor/photoswipe.esm.min.js'); ?>'),
+      pswpModule: () => import('<?php echo Wauble()->getStaticAssetUrl('photoswipe.esm.min.js'); ?>'),
     });
   
     lightbox.init();
