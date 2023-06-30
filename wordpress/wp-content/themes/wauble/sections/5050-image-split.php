@@ -1,5 +1,5 @@
 <div
-  class="px-6 md:px-8 overflow-hidden"
+  class="px-6 md:px-8 py-8 overflow-hidden"
   x-data="{ intersected: false }"
   x-intersect:enter.full="intersected = true"
   x-intersect:leave.full="intersected = false"
