@@ -11,8 +11,8 @@ $content = $section['content'] ?? null;
 </div>
 <?php else : ?>
 <div class="px-6 md:px-8 my-8 md:my-12">
-  <div class="container">
-    <div class="prose max-w-none">
+  <div class="container"> 
+    <div class="rte">
       <?php if ($title) : ?>
       <h2>
         <?php

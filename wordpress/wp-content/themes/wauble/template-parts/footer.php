@@ -1,10 +1,8 @@
 </main>
 <footer id="site-footer" class="clear-both">
-  <div class="px-6 md:px-8 my-8">
+  <div class="px-6 md:px-8 py-8 border-t border-black-500">
     <div class="container">
-      <hr>
-      I'm the footer
-      <?php if (get_field('copyright_line', 'option')) : ?>
+      <?php if (!empty(get_field('copyright_line', 'option'))) : ?>
       <div>
         <?php _e(get_field('copyright_line', 'option'), 'wauble'); ?>
       </div>

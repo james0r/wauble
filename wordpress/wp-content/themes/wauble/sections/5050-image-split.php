@@ -84,7 +84,7 @@
           <?php echo $section['heading'] ?>
         </h2>
         <?php if ($section['body_text']) : ?>
-        <div class="prose">
+        <div class="rte">
           <?php echo $section['body_text']; ?>
         </div>
         <?php endif; ?>

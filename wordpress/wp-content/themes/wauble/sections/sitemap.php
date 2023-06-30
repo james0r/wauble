@@ -2,7 +2,7 @@
   <article class="bg-white px-6 pt-8 pb-12 lg:pb-24 md:pt-16 sm:px-8 xl:px-12">
     <div class="max-w-screen-md mx-auto">
 
-      <div class="max-w-screen-md mx-auto prose lg:prose-lg">
+      <div class="max-w-screen-md mx-auto rte lg:rte-lg">
         <h2 class="mb-2 text-2xl font-semibold text-neutral-500 lg:text-3xl">Pages</h2>
         <?php
         wp_nav_menu([

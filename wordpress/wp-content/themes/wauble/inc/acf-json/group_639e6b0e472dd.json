@@ -91,7 +91,7 @@
                     "label": "Answer",
                     "name": "answer",
                     "aria-label": "",
-                    "type": "wysiwyg",
+                    "type": "rte",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,

@@ -1,11 +1,11 @@
 const mix = require("laravel-mix")
 require("mix-tailwindcss")
 
-mix.webpackConfig({
-  stats: {
-    children: true,
-  },
-})
+// mix.webpackConfig({
+//   stats: {
+//     children: true,
+//   },
+// })
 
 // Set mix options
 mix.options({

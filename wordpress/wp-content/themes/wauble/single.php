@@ -65,7 +65,7 @@
         <?php endif; ?>
       </header>
 
-      <div class="entry-content prose max-w-full">
+      <div class="entry-content rte">
         <?php
             /* translators: %s: Name of current post */
             the_content(

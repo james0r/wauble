@@ -1,4 +1,40 @@
 <?php get_template_part('template-parts/header'); ?>
+  <?php 
+    if (is_home()) {
+      $page_for_posts = get_option('page_for_posts');
+    }
+
+    $paginate = get_field('paginate', $page_for_posts) ?? null;
+    $use_global_posts_per_page = get_field('use_global_posts_per_page', $page_for_posts) ?? null;
+    if ($use_global_posts_per_page) {
+      $posts_per_page = get_option('posts_per_page');
+    } else {
+      $posts_per_page = get_field('posts_per_page', $page_for_posts) ?? null;
+    }
+    $post_types = array('post');
+    $categories = array();
+    $tags = array();
+    $show_categories_on_posts = get_field('show_categories_on_posts', $page_for_posts) ?? null;
+    $show_date_on_posts = get_field('show_date_on_posts', $page_for_posts) ?? null;
+    $show_tags_on_posts = get_field('show_tags_on_posts', $page_for_posts) ?? null;
+    $ajax = get_field('use_ajax', $page_for_posts) ?? null;
+
+    if (get_query_var('paged')) {
+      $paged = get_query_var('paged');
+    } elseif (get_query_var('page')) {
+      $paged = get_query_var('page');
+    } else {
+      $paged = 1;
+    }
+  ?>
+  <?php if ($ajax) : ?>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script>
+    document.body.addEventListener('htmx:afterSwap', function(evt) {
+      history.pushState(null, null, evt.detail.xhr.responseURL)
+    })
+    </script>
+  <?php endif; ?>
 
 <div id="blog-posts" class="px-6 md:px-8">
   <div class="container my-8">
@@ -6,26 +42,7 @@
       <?php get_template_part('template-parts/searchform'); ?>
     </div>
 
-    <!-- Begin Loop -->
-    <?php if (have_posts()) : ?>
     <?php
-      $paginate = true;
-      $posts_per_page = get_option('posts_per_page');
-      $post_types = array('post');
-      $categories = array();
-      $tags = array();
-      $ajax = false;
-      $show_categories_on_posts = true;
-      $show_date_on_posts = true;
-
-      if (get_query_var('paged')) {
-        $paged = get_query_var('paged');
-      } elseif (get_query_var('page')) {
-        $paged = get_query_var('page');
-      } else {
-        $paged = 1;
-      }
-
       // WP_Query arguments
       $args = array(
         'ignore_sticky_posts' => true,
@@ -35,10 +52,14 @@
         'orderby' => 'date'
       );
 
-      if ($paginate && $posts_per_page === -1) {
-        $args['posts_per_page'] = 6;
+      if ($paginate) {
+        if ($posts_per_page === -1) {
+          $args['posts_per_page'] = 6;
+        } else {
+          $args['posts_per_page'] = $posts_per_page;
+        }
       } else {
-        $args['posts_per_page'] = $posts_per_page;
+        $args['posts_per_page'] = -1;
       }
 
       if (!empty($categories)) {
@@ -56,15 +77,6 @@
       $query = new WP_Query($args);
       ?>
 
-    <?php if ($paginate && $query->max_num_pages > 1 && $ajax) : ?>
-    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
-    <script>
-    document.body.addEventListener('htmx:afterSwap', function(evt) {
-      history.pushState(null, null, evt.detail.xhr.responseURL)
-    })
-    </script>
-    <?php endif; ?>
-
     <?php if ($query->have_posts()) : ?>
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
@@ -73,7 +85,8 @@
 
       <?php echo get_template_part('template-parts/blog-card', null, [
               'show_categories_on_posts' => $show_categories_on_posts,
-              'show_date_on_posts' => $show_date_on_posts
+              'show_date_on_posts' => $show_date_on_posts,
+              'show_tags_on_posts' => $show_tags_on_posts
             ]); ?>
 
       <?php endwhile; ?>
@@ -145,10 +158,6 @@
     wp_reset_postdata(); 
     
     ?>
-    <?php else : ?>
-    <p><?php esc_html_e('Sorry, no posts matched your criteria.', 'wauble'); ?></p>
-    <?php endif; ?>
-    <!-- End Loop -->
 
   </div>
 </div>

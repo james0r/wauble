@@ -37,11 +37,11 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "Copyright © 2022 Acme Co Inc. All rights reserved.",
+            "default_value": "Copyright © 2022 Acme Co Inc. All rights reserved.",
+            "maxlength": "",
+            "placeholder": "",
             "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "append": ""
         }
     ],
     "location": [
@@ -62,12 +62,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1672615786
+    "modified": 1688110251
 }

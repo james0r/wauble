@@ -6,18 +6,18 @@ Description: A Wordpress starter theme powered by Laravel Mix. Includes Alpine.j
 Version: 2023
 */
 
-.prose .aligncenter {
+.rte .aligncenter {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.prose .alignleft {
+.rte .alignleft {
   float: left;
   margin-right: 2rem;
 }
 
-.prose .alignright {
+.rte .alignright {
   float: right;
   margin-left: 2rem;
 }

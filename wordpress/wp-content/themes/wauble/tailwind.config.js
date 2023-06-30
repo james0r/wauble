@@ -33,8 +33,23 @@ module.exports = {
       fontFamily: {
         'open-sans': ['"Open Sans"', 'sans-serif'],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: 'var(--color-neutral-400)',
+            a: {
+              color: 'var(--color-secondary-500)',
+              '&:hover': {
+                color: 'var(--color-secondary-200)',
+              },
+            },
+          },
+        },
+      },
       colors: {
         primary: {
+          'DEFAULT': 'var(--color-primary-500)',
           50: 'var(--color-primary-50)',
           100: 'var(--color-primary-100)',
           200: 'var(--color-primary-200)',
@@ -47,6 +62,7 @@ module.exports = {
           900: 'var(--color-primary-900)',
         },
         secondary: {
+          'DEFAULT': 'var(--color-secondary-500)',
           50: 'var(--color-secondary-50)',
           100: 'var(--color-secondary-100)',
           200: 'var(--color-secondary-200)',
@@ -59,6 +75,7 @@ module.exports = {
           900: 'var(--color-secondary-900)',
         },
         accent: {
+          'DEFAULT': 'var(--color-accent-500)',
           50: 'var(--color-accent-50)',
           100: 'var(--color-accent-100)',
           200: 'var(--color-accent-200)',
@@ -71,6 +88,7 @@ module.exports = {
           900: 'var(--color-accent-900)',
         },
         neutral: {
+          'DEFAULT': 'var(--color-neutral-500)',
           50: 'var(--color-neutral-50)',
           100: 'var(--color-neutral-100)',
           200: 'var(--color-neutral-200)',
@@ -83,6 +101,7 @@ module.exports = {
           900: 'var(--color-neutral-900)',
         },
         base: {
+          'DEFAULT': 'var(--color-base-500)',
           50: 'var(--color-base-50)',
           100: 'var(--color-base-100)',
           200: 'var(--color-base-200)',
@@ -98,7 +117,9 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
+    require('@tailwindcss/typography')({
+      className: 'rte'
+    }),
     plugin(function ({ addVariant }) {
       addVariant('scrolled', '.scrolled &'), addVariant('mobile-menu-is-visible', '.mobile-menu-is-visible &')
     }),
