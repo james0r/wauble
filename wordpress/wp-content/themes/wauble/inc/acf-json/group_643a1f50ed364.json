@@ -1194,11 +1194,11 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "layout": "table",
+                            "layout": "row",
                             "min": 0,
                             "max": 0,
                             "collapsed": "",
-                            "button_label": "Add Row",
+                            "button_label": "Add Image",
                             "rows_per_page": 20,
                             "sub_fields": [
                                 {
@@ -1262,5 +1262,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1688130346
+    "modified": 1688131228
 }
