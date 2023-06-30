@@ -1,7 +1,7 @@
 <?php
-$show_categories_on_posts = $args['show_categories_on_posts'] ? true : false;
-$show_date_on_posts = $args['show_date_on_posts'] ? true : false;
-$show_tags_on_posts = true;
+$show_categories_on_posts = $args['show_categories_on_posts'] ?? null;
+$show_date_on_posts = $args['show_date_on_posts'] ?? null;
+$show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
 ?>
 
 <li>

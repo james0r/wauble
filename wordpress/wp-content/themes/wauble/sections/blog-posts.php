@@ -1,12 +1,13 @@
 <?php
-$paginate = $section['paginate'] ? true : false;
-$posts_per_page = $section['max_posts_per_page'];
-$post_types = $section['post_type'];
-$categories = $section['categories'];
-$tags = $section['tags'];
-$ajax = $section['use_ajax_pagination'] ? true : false;
-$show_categories_on_posts = $section['show_categories_on_posts'] ? true : false;
-$show_date_on_posts = $section['show_date_on_posts'] ? true : false;
+$paginate = $section['paginate'] ?? null;
+$posts_per_page = $section['max_posts_per_page'] ?? null;
+$post_types = $section['post_type'] ?? null;
+$categories = $section['categories'] ?? null;
+$tags = $section['tags'] ?? null;
+$ajax = $section['use_ajax_pagination'] ?? null;
+$show_categories_on_posts = $section['show_categories_on_posts'] ?? null;
+$show_date_on_posts = $section['show_date_on_posts'] ?? null;
+$show_tags_on_posts = $section['show_tags_on_posts'] ?? null;
 
 if (get_query_var('paged')) {
   $paged = get_query_var('paged');
@@ -66,7 +67,8 @@ document.body.addEventListener('htmx:afterSwap', function(evt) {
 
       <?php echo get_template_part('template-parts/blog-card', null, [
             'show_categories_on_posts' => $show_categories_on_posts,
-            'show_date_on_posts' => $show_date_on_posts
+            'show_date_on_posts' => $show_date_on_posts,
+            'show_tags_on_posts' => $show_tags_on_posts,
           ]); ?>
 
       <?php endwhile; ?>
