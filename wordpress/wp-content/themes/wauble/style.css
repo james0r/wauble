@@ -5,3 +5,19 @@ Author URI: https://www.jamesauble.com
 Description: A Wordpress starter theme powered by Laravel Mix. Includes Alpine.js, ES6/ESM & Tailwind compilation, BrowserSync, and some other helpful additions. 
 Version: 2023
 */
+
+.prose .aligncenter {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose .alignleft {
+  float: left;
+  margin-right: 2rem;
+}
+
+.prose .alignright {
+  float: right;
+  margin-left: 2rem;
+}

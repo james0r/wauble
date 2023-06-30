@@ -1,0 +1,15 @@
+.prose .aligncenter {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose .alignleft {
+  float: left;
+  margin-right: 2rem;
+}
+
+.prose .alignright {
+  float: right;
+  margin-left: 2rem;
+}

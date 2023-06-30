@@ -12,16 +12,16 @@
 
       <header class="entry-header mb-4 text-center">
         <div class="aspect-video">
-          <?php 
-            echo wp_get_attachment_image ( 
-              get_post_thumbnail_id(), 
-              'full', 
-              false, 
-              [
-                'class' => 'object-cover object-center w-full h-full'
-              ] 
-            );
-          ?>
+          <?php
+              echo wp_get_attachment_image(
+                get_post_thumbnail_id(),
+                'full',
+                false,
+                [
+                  'class' => 'object-cover object-center w-full h-full'
+                ]
+              );
+              ?>
         </div>
 
         <h2 class="entry-title text-2xl md:text-3xl font-extrabold leading-tight my-4">
@@ -29,16 +29,43 @@
             <?php echo get_the_title(); ?>
           </a>
         </h2>
-        <time
-          datetime="<?php echo get_the_date('c'); ?>"
-          itemprop="datePublished"
-          class="text-sm text-gray-700"
-        >
-          <?php echo get_the_date(); ?>
-        </time>
+        <div class="flex text-primary-500 mt-4 items-center mx-auto max-w-max">
+          <?php $categories = get_the_category(get_the_ID()); ?>
+          <a
+            href="<?php echo get_category_link($categories[0]); ?>"
+            class="hover:text-primary-500 relative z-[2]"
+          >
+            <?php echo $categories[0]->cat_name; ?>
+          </a>
+          <?php if ($categories[0]->cat_name) : ?>
+          <div>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+          <time
+            datetime="<?php echo get_the_date('c'); ?>"
+            itemprop="datePublished"
+            class="text-sm text-gray-700"
+          >
+            <?php echo str_replace('-', '/', get_the_date('n-d-Y')); ?>
+          </time>
+          <?php endif; ?>
+        </div>
+        <?php if (!empty(get_the_tags())) : ?>
+        <div class="text-sm my-1">
+          Tags: <?php
+                      $posttags = get_the_tags();
+                      if ($posttags) {
+                        foreach ($posttags as $index => $tag) {
+                          echo '<a href="/tag/' . $tag->slug . '" class="hover:text-primary-500">' . $tag->name . '</a>';
+                          if ($index < count($posttags) - 1) {
+                            echo ', ';
+                          }
+                        }
+                      }
+                      ?>
+        </div>
+        <?php endif; ?>
       </header>
 
-      <div class="entry-content">
+      <div class="entry-content prose max-w-full">
         <?php
             /* translators: %s: Name of current post */
             the_content(
