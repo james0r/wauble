@@ -11,5 +11,12 @@ export default {
   },
   truncateLongTitle(input) {
     return input.length > 5 ? `${input.substring(0, 18)}...` : input
+  },
+  async fetchHTML(endpoint) {
+    return await fetch(endpoint)
+      .then((response) => response.text())
+      .then((responseText) => {
+        return new DOMParser().parseFromString(responseText, 'text/html')
+      })
   }
 }

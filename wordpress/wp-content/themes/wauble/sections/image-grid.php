@@ -6,6 +6,14 @@ $enable_masonry_layout = $section['enable_masonry_layout'] ?? null;
 $flow_direction = $section['flow_direction'] ?? 'Horizontal';
 $vertical_gutter_size = $section['vertical_gutter_size'] ?? '10';
 $horizontal_gutter_size = $section['horizontal_gutter_size'] ?? '10';
+$infinite_load = true;
+$infinite_images_to_load = 9;
+$page = ($_GET['load_more_page'] ?? null) ? intval($_GET['load_more_page']) : 1;
+
+if ($infinite_load) {
+  $offset = ($page - 1) * $infinite_images_to_load;
+  $images = array_slice($images, $offset, $infinite_images_to_load);
+}
 
 $image_wrapper_classes = array(
   'relative',
@@ -40,10 +48,12 @@ if ($flow_direction === 'Horizontal') {
 
 <?php if (!empty($images)) : ?>
 
+<?php if ($enable_lightbox) : ?>
 <link
   rel="stylesheet"
   href="<?php echo Wauble()->getStaticAssetUrl('photoswipe.css'); ?>"
 >
+<?php endif; ?>
 
 <div class="px-6 md:px-8 py-8">
   <div class="container">
@@ -56,7 +66,7 @@ if ($flow_direction === 'Horizontal') {
     <?php if (!$enable_masonry_layout) : ?>
     <!-- Grid Layout -->
     <ul
-      id="photoswipe-gallery-<?php echo $section_count; ?>"
+      id="image-grid-<?php echo $section_count; ?>"
       class="<?php echo implode(" ", $grid_classes); ?>"
     >
       <?php foreach ($images as $index => $item) : ?>
@@ -91,7 +101,7 @@ if ($flow_direction === 'Horizontal') {
     <!-- Masonry Layout -->
     <script src="<?php echo Wauble()->getStaticAssetUrl('masonry.pkgd.min.js'); ?>"></script>
     <ul
-      id="photoswipe-gallery-<?php echo $section_count; ?>"
+      id="image-grid-<?php echo $section_count; ?>"
       class="masonry-with-columns -mx-2"
     >
       <?php foreach ($images as $index => $item) : ?>
@@ -120,13 +130,46 @@ if ($flow_direction === 'Horizontal') {
       </li>
       <?php endforeach; ?>
     </ul>
+    <?php endif; ?>
 
+    <?php if ($infinite_load) : ?>
+      <script>
+        function imageGridLoadMore() {
+          return {
+            page: <?php echo $page; ?>,
+            get endpoint() {
+              return `?load_more_page=${this.page + 1}`
+            },
+            swapId: '<?php echo '#image-grid-' . $section_count; ?>',
+            loadMore() {
+              wauble.helpers.fetchHTML(this.endpoint)
+              .then((responseHTML) => {
+                srcImageGrid = responseHTML.querySelector(this.swapId)
+                destinationImageGrid = document.querySelector(this.swapId)
+                itemsToAppend = srcImageGrid.querySelectorAll('li')
+                itemsToAppend.forEach((item) => {
+                  destinationImageGrid.appendChild(item)
+                  msnry.appended(item)
+                })
+
+                this.page++
+              })
+            }
+          }
+        }
+      </script>
+      <button
+        x-data="imageGridLoadMore()"
+        x-intersect="loadMore"
+      >
+        Load More
+      </button>
     <?php endif; ?>
 
     <?php if ($enable_masonry_layout) : ?>
     <script>
-    var elem = document.querySelector('.masonry-with-columns');
-    var msnry = new Masonry(elem, {
+    const elem = document.querySelector('.masonry-with-columns');
+    const msnry = new Masonry(elem, {
       itemSelector: 'li',
       columnWidth: 'li',
       percentPosition: true,
@@ -140,7 +183,7 @@ if ($flow_direction === 'Horizontal') {
     import PhotoSwipeLightbox from '<?php echo Wauble()->getStaticAssetUrl('photoswipe-lightbox.esm.min.js'); ?>';
 
     const lightbox = new PhotoSwipeLightbox({
-      gallery: '#photoswipe-gallery-<?php echo $section_count; ?>',
+      gallery: '#image-grid-<?php echo $section_count; ?>',
       children: 'a',
       doubleTapAction: false,
       pswpModule: () => import('<?php echo Wauble()->getStaticAssetUrl('photoswipe.esm.min.js'); ?>'),
