@@ -6,8 +6,8 @@ $enable_masonry_layout = $section['enable_masonry_layout'] ?? null;
 $flow_direction = $section['flow_direction'] ?? 'Horizontal';
 $vertical_gutter_size = $section['vertical_gutter_size'] ?? '10';
 $horizontal_gutter_size = $section['horizontal_gutter_size'] ?? '10';
-$infinite_load = true;
-$infinite_images_to_load = 9;
+$infinite_load = $section['enable_infinite_load_more'] ?? null;
+$infinite_images_to_load = $section['infinite_images_in_group'] ?? 9;
 $page = ($_GET['load_more_page'] ?? null) ? intval($_GET['load_more_page']) : 1;
 
 if ($infinite_load) {
@@ -145,11 +145,21 @@ if ($flow_direction === 'Horizontal') {
               wauble.helpers.fetchHTML(this.endpoint)
               .then((responseHTML) => {
                 srcImageGrid = responseHTML.querySelector(this.swapId)
+
+                if (srcImageGrid === null) {
+                  return
+                }
+
                 destinationImageGrid = document.querySelector(this.swapId)
                 itemsToAppend = srcImageGrid.querySelectorAll('li')
+                if (itemsToAppend.length === 0) {
+                  return
+                }
                 itemsToAppend.forEach((item) => {
                   destinationImageGrid.appendChild(item)
-                  msnry.appended(item)
+                  if (typeof msnry !== 'undefined') {
+                    msnry.appended(item)
+                  }
                 })
 
                 this.page++
@@ -158,12 +168,12 @@ if ($flow_direction === 'Horizontal') {
           }
         }
       </script>
-      <button
+      <div
         x-data="imageGridLoadMore()"
         x-intersect="loadMore"
+        class="invisible"
       >
-        Load More
-      </button>
+      </div>
     <?php endif; ?>
 
     <?php if ($enable_masonry_layout) : ?>
