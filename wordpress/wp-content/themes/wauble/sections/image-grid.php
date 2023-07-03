@@ -1,5 +1,5 @@
 <?php
-$images = $section['images'] ?? null;
+$images = $section['images'] ?? array();
 $heading = $section['heading'] ?? null;
 $enable_lightbox = $section['enable_lightbox'] ?? null;
 $enable_masonry_layout = $section['enable_masonry_layout'] ?? null;
@@ -70,6 +70,9 @@ if ($flow_direction === 'Horizontal') {
       class="<?php echo implode(" ", $grid_classes); ?>"
     >
       <?php foreach ($images as $index => $item) : ?>
+      <?php if (empty($item['image'])) {
+              return;
+            } ?>
       <li class="">
         <?php
               $image_id = $item['image'];
@@ -77,7 +80,6 @@ if ($flow_direction === 'Horizontal') {
               $width = $image_src[1];
               $height = $image_src[2];
               ?>
-
         <a
           href="<?php echo wp_get_attachment_image_url($image_id, 'full', false); ?>"
           class="<?php echo implode(" ", $image_wrapper_classes) ?>"
@@ -106,6 +108,10 @@ if ($flow_direction === 'Horizontal') {
     >
       <?php foreach ($images as $index => $item) : ?>
       <li class="w-full md:w-1/2 lg:w-[33.3333333%] p-2">
+        <?php if (empty($item['image'])) {
+                return;
+              } ?>
+
         <?php
               $image_id = $item['image'];
               $image_src = wp_get_attachment_image_src($image_id, 'full', false);
@@ -133,47 +139,53 @@ if ($flow_direction === 'Horizontal') {
     <?php endif; ?>
 
     <?php if ($infinite_load) : ?>
-      <script>
-        function imageGridLoadMore() {
-          return {
-            page: <?php echo $page; ?>,
-            get endpoint() {
-              return `?load_more_page=${this.page + 1}`
-            },
-            swapId: '<?php echo '#image-grid-' . $section_count; ?>',
-            loadMore() {
-              wauble.helpers.fetchHTML(this.endpoint)
-              .then((responseHTML) => {
-                srcImageGrid = responseHTML.querySelector(this.swapId)
+    <script>
+    function imageGridLoadMore() {
+      return {
+        page: <?php echo $page; ?>,
+        get endpoint() {
+          return `?load_more_page=${this.page + 1}`
+        },
+        swapId: '<?php echo '#image-grid-' . $section_count; ?>',
+        loadMore() {
+          wauble.helpers.fetchHTML(this.endpoint)
+            .then((responseHTML) => {
+              srcImageGrid = responseHTML.querySelector(this.swapId)
 
-                if (srcImageGrid === null) {
-                  return
+              if (srcImageGrid === null) {
+                return
+              }
+
+              destinationImageGrid = document.querySelector(this.swapId)
+              itemsToAppend = srcImageGrid.querySelectorAll('li')
+              if (itemsToAppend.length === 0) {
+                return
+              }
+              itemsToAppend.forEach((item) => {
+                destinationImageGrid.appendChild(item)
+                if (typeof msnry !== 'undefined') {
+                  msnry.appended(item)
                 }
-
-                destinationImageGrid = document.querySelector(this.swapId)
-                itemsToAppend = srcImageGrid.querySelectorAll('li')
-                if (itemsToAppend.length === 0) {
-                  return
-                }
-                itemsToAppend.forEach((item) => {
-                  destinationImageGrid.appendChild(item)
-                  if (typeof msnry !== 'undefined') {
-                    msnry.appended(item)
-                  }
-                })
-
-                this.page++
               })
-            }
-          }
+
+              this.page++
+
+              if (wauble.helpers.isInViewport(document.querySelector(
+                  '#section-<?php echo $section_count ?> [x-intersect="loadMore"]'))) {
+                // If the load more element is in the viewport, load more
+                this.loadMore()
+              }
+            })
         }
-      </script>
-      <div
-        x-data="imageGridLoadMore()"
-        x-intersect="loadMore"
-        class="invisible"
-      >
-      </div>
+      }
+    }
+    </script>
+    <div
+      x-data="imageGridLoadMore()"
+      x-intersect="loadMore"
+      class="invisible"
+    >
+    </div>
     <?php endif; ?>
 
     <?php if ($enable_masonry_layout) : ?>
