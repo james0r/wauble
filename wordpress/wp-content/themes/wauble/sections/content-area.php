@@ -10,8 +10,8 @@ $content = $section['content'] ?? null;
   </div>
 </div>
 <?php else : ?>
-<div class="px-6 md:px-8 py-8 md:py-12">
-  <div class="container"> 
+<div class="px-6 md:px-8 py-8Í md:py-12">
+  <div class="container">
     <div class="rte">
       <?php if ($title) : ?>
       <h2>
