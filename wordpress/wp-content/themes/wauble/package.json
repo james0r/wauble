@@ -18,6 +18,7 @@
     "embla-carousel": "^8.0.0-rc07",
     "fast-glob": "^3.2.11",
     "focus-trap": "^7.4.0",
+    "htmx.org": "^1.9.2",
     "laravel-mix": "^6.0.49",
     "mix-tailwindcss": "^1.3.0",
     "postcss-import": "^15.0.0",

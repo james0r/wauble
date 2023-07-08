@@ -32,8 +32,10 @@ proxy:
     - pma.wauble.lndo.site
 tooling:
   npm:
+    dir: /app/wordpress/wp-content/themes/wauble
     service: node
   node:
+    dir: /app/wordpress/wp-content/themes/wauble
     service: node
   envoy:
     service: appserver
