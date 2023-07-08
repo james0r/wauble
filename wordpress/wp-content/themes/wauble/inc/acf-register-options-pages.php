@@ -61,6 +61,21 @@ acf_add_options_page(array(
 ));
 
 acf_add_options_page(array(
+  'page_title' => 'Search',
+  'menu_slug' => 'search-options',
+  'menu_title' => 'Search',
+  'capability' => 'edit_posts',
+  'position' => '35',
+  'parent_slug' => 'wauble-options',
+  'icon_url' => '',
+  'redirect' => true,
+  'post_id' => 'options',
+  'autoload' => false,
+  'update_button' => 'Update',
+  'updated_message' => 'Options Updated',
+));
+
+acf_add_options_page(array(
   'page_title' => 'Forms',
   'menu_slug' => 'forms-options',
   'menu_title' => 'Forms',

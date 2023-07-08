@@ -136,3 +136,15 @@ if (!function_exists('wauble_css_encode')) {
     return $css;
   }
 }
+
+if (!function_exists('wauble_attributes_encode')) {
+  function wauble_attributes_encode($attrs) {
+    $html = '';
+
+    foreach ($attrs as $key => $value) {
+      $html .= sprintf('%s="%s" ', $key, $value);
+    }
+
+    return $html;
+  }
+}

@@ -5,7 +5,11 @@ import alpineExtended from "./alpine"
 import helpers from "./helpers.js"
 import "./a11y.js"
 
+
 window.Alpine = Alpine
+window.htmx = require('htmx.org');
+
+
 
 // Declare our namespace on the window
 const namespace = "wauble"
@@ -27,9 +31,16 @@ if (process.env.NODE_ENV === "development") {
   }
   console.table(tableData)
 
-  // HTMX hack to prevent hx-* headers from being sent
+  // Clear HTMX headers that cause CORS issues in dev
   document.addEventListener('htmx:configRequest', (evt) => {
     evt.detail.headers = [];
+  });
+
+  // Replace live site URL with local URL for XHR requests
+  document.body.addEventListener('htmx:afterSettle', function(evt) {
+    if (!evt.detail.xhr.responseURL.includes('/bs.')) return
+
+    document.body.innerHTML = document.body.innerHTML.replace(/\/wauble.lndo.site/g, '\/bs.wauble.lndo.site')
   });
 }
 

@@ -1,0 +1,45 @@
+{
+    "key": "group_64a8e5ae7d96e",
+    "title": "Search",
+    "fields": [
+        {
+            "key": "field_64a8e5ae8f2e0",
+            "label": "Use Global Posts Per Page",
+            "name": "use_global_posts_per_page_on_search",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "If enabled, the \"Blog pages show at most\" setting under Settings > Reading will be used.",
+            "default_value": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "search-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1688790558
+}
