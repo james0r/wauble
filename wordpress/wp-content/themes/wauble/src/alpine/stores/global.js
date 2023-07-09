@@ -10,6 +10,8 @@ export default {
       mobileFocusTrap: null,
       init() {
         window.addEventListener('scroll', this.onWindowScrollHandler)
+        window.addEventListener('DOMContentLoaded', this.initCalcHeaderHeight)
+        window.addEventListener('resize', this.initCalcHeaderHeight)
 
         this.mobileNavEl = document.getElementById('mobile-header-nav-list')
         this.mobileFocusTrap = focusTrap.createFocusTrap(this.mobileNavEl, {
@@ -24,6 +26,11 @@ export default {
         }
 
         return classes || ''
+      },
+      initCalcHeaderHeight() {
+        let header = document.getElementById('site-header')
+        let headerHeight = header.offsetHeight
+        document.documentElement.style.setProperty('--header-height', headerHeight + 'px')
       },
       onWindowScrollHandler() {
         var scrollTop =

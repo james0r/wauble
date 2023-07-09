@@ -24,7 +24,7 @@ if ($ajax) {
   $attrs['hx-target'] = '#section-' . $section_count;
   $attrs['hx-select'] = '#section-' . $section_count;
   $attrs['hx-swap'] = 'outerHTML';
-  $attrs['hx-on'] = 'htmx:beforeRequest: (evt) => { evt.detail.target.scrollIntoView({block: \'nearest\'}) }';
+  $attrs['hx-on'] = 'htmx:beforeRequest: (evt) => { evt.detail.target.scrollIntoView(); }';
 }
 
 if (get_query_var('paged')) {
@@ -64,6 +64,18 @@ if ($post_types) {
 
 $query = new WP_Query($args);
 ?>
+
+<?php 
+  $container_css = array(
+    '#section-' . $section_count => array(
+      'scroll-margin' => 'var(--header-height)'
+    )
+  );
+?>
+
+<style>
+  <?php echo wauble_css_encode($container_css); ?>
+</style>
 
 <div
   class="px-6 md:px-8 my-8"
