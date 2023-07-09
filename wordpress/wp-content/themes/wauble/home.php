@@ -27,14 +27,6 @@
       $paged = 1;
     }
   ?>
-  <?php if ($ajax) : ?>
-    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
-    <script>
-    document.body.addEventListener('htmx:afterSwap', function(evt) {
-      history.pushState(null, null, evt.detail.xhr.responseURL)
-    })
-    </script>
-  <?php endif; ?>
 
 <div id="blog-posts" class="px-6 md:px-8">
   <div class="container my-8">

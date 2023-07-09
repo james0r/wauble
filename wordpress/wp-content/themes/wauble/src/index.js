@@ -29,15 +29,13 @@ if (process.env.NODE_ENV === "development") {
   console.table(tableData)
 
   // Clear HTMX headers that cause CORS issues in dev
-  document.addEventListener('htmx:configRequest', (evt) => {
-    evt.detail.headers = [];
-  });
+  // document.addEventListener('htmx:configRequest', (evt) => {
+  //   evt.detail.headers = [];
+  // });
 
   // Replace live site URL with local URL for XHR requests
-  document.body.addEventListener('htmx:afterSettle', function(evt) {
-    if (!evt.detail.xhr.responseURL.includes('/bs.')) return
-
-    document.body.innerHTML = document.body.innerHTML.replace(/\/wauble.lndo.site/g, '\/bs.wauble.lndo.site')
+  document.body.addEventListener('htmx:beforeSwap', function (evt) {
+    evt.detail.serverResponse = evt.detail.serverResponse.replace(/\/wauble.lndo.site/g, '\/bs.wauble.lndo.site')
   });
 }
 

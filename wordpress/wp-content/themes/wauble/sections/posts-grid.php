@@ -1,13 +1,31 @@
 <?php
 $paginate = $section['paginate'] ?? null;
-$posts_per_page = $section['max_posts_per_page'] ?? null;
+$use_global_posts_per_page = $section['use_global_posts_per_page'] ?? null;
+if ($paginate) {
+  if ($use_global_posts_per_page) {
+    $posts_per_page = get_option('posts_per_page');
+  } else {
+    $posts_per_page = $section['max_posts_per_page'] ?? null;
+  }
+} else {
+  $posts_per_page = -1;
+}
 $post_types = $section['post_type'] ?? null;
 $categories = $section['categories'] ?? null;
 $tags = $section['tags'] ?? null;
-$ajax = $section['use_ajax_pagination'] ?? null;
+$ajax = $section['use_ajax'] ?? null;
 $show_categories_on_posts = $section['show_categories_on_posts'] ?? null;
 $show_date_on_posts = $section['show_date_on_posts'] ?? null;
 $show_tags_on_posts = $section['show_tags_on_posts'] ?? null;
+$attrs = array();
+
+if ($ajax) {
+  $attrs['hx-boost'] = 'true';
+  $attrs['hx-target'] = '#section-' . $section_count;
+  $attrs['hx-select'] = '#section-' . $section_count;
+  $attrs['hx-swap'] = 'outerHTML';
+  $attrs['hx-on'] = 'htmx:beforeRequest: (evt) => { evt.detail.target.scrollIntoView({block: \'nearest\'}) }';
+}
 
 if (get_query_var('paged')) {
   $paged = get_query_var('paged');
@@ -47,16 +65,10 @@ if ($post_types) {
 $query = new WP_Query($args);
 ?>
 
-<?php if ($paginate && $query->max_num_pages > 1 && $ajax) : ?>
-<script src="https://unpkg.com/htmx.org@1.8.4"></script>
-<script>
-document.body.addEventListener('htmx:afterSwap', function(evt) {
-  history.pushState(null, null, evt.detail.xhr.responseURL)
-})
-</script>
-<?php endif; ?>
-
-<div class="px-6 md:px-8 my-8">
+<div
+  class="px-6 md:px-8 my-8"
+  <?php echo wauble_attributes_encode($attrs); ?>
+>
   <div class="container">
     <?php if ($query->have_posts()) : ?>
     <ul
@@ -77,42 +89,14 @@ document.body.addEventListener('htmx:afterSwap', function(evt) {
     <nav class="flex space-x-4 mx-auto max-w-max my-8">
       <?php $big = 999999999; ?>
       <?php if ($paged > 1) : ?>
-      <?php if ($ajax) : ?>
-      <button
-        hx-get="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>"
-        hx-target="#section-<?php echo $section_count; ?> .container"
-        hx-select="#section-<?php echo $section_count; ?> .container"
-        hx-swap="outerHTML"
-        type="button"
-        hx-trigger="click"
-        class="font-bold"
-      >
-        &laquo; Previous
-      </button>
-      <?php else : ?>
       <a href="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>">
         &laquo; Previous
       </a>
       <?php endif; ?>
-      <?php endif; ?>
       <?php if ($paged < $query->max_num_pages) : ?>
-      <?php if ($ajax) : ?>
-      <button
-        hx-get="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>"
-        hx-target="#section-<?php echo $section_count; ?> .container"
-        hx-select="#section-<?php echo $section_count; ?> .container"
-        hx-swap="outerHTML"
-        type="button"
-        hx-trigger="click"
-        class="font-bold"
-      >
-        Next &raquo;
-      </button>
-      <?php else : ?>
       <a href="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>">
         Next &raquo;
       </a>
-      <?php endif; ?>
       <?php endif; ?>
       <?php
           // Full pagination

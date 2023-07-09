@@ -1,19 +1,29 @@
 <?php get_template_part('template-parts/header'); ?>
 
 <?php
-$paginate = true;
-$use_global_posts_per_page = get_option('use_global_posts_per_page_on_search', 'option') ?? null;
-if ($use_global_posts_per_page) {
-  $posts_per_page = get_option('posts_per_page');
+$paginate = get_field('paginate_search_results', 'option') ?? null;
+$use_global_posts_per_page = get_field('use_global_posts_per_page_on_search', 'option') ?? null;
+if ($paginate) {
+  if ($use_global_posts_per_page) {
+    $posts_per_page = get_option('posts_per_page');
+  } else {
+    $posts_per_page = get_field('search_results_posts_per_page', 'option') ?? null;
+  }
 } else {
-  $posts_per_page = get_option('posts_per_page_on_search', 'option') ?? null;
+  $posts_per_page = -1;
 }
+
 $post_types = array('post');
 $categories = array();
 $tags = array();
-$ajax = true;
+$ajax = get_field('search_results_use_ajax', 'option') ?? null;
 $show_categories_on_posts = true;
 $show_date_on_posts = true;
+$attrs = array();
+
+if ($ajax) {
+  $attrs['hx-boost'] = 'true';
+}
 
 if (get_query_var('paged')) {
   $paged = get_query_var('paged');
@@ -52,15 +62,6 @@ if ($post_types) {
 }
 
 $query = new WP_Query($args);
-?>
-
-<?php 
-$attrs = array();
-
-if ($ajax) {
-  $attrs['hx-boost'] = 'true';
-}
-
 ?>
 
 <div
