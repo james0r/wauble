@@ -1,17 +1,19 @@
 <?php get_template_part('template-parts/header'); ?>
 
 <div class="px-6 md:px-8 py-8">
-  <div class="container">
+  <div class="container rte">
     <h1 class="entry-title">
       <?php echo get_the_archive_title(); ?>
     </h1>
     
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-    
-        <?php
-        get_template_part('template-parts/content', get_post_type());
-        ?>
-        <hr>
+
+    <div>
+      <a href="<?php echo get_the_permalink(); ?>">
+        <?php echo get_the_title(); ?>
+      </a>
+    </div>
+
     <?php endwhile;
     endif; ?>
     

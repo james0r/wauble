@@ -65,16 +65,17 @@ if ($post_types) {
 $query = new WP_Query($args);
 ?>
 
-<?php 
-  $container_css = array(
-    '#section-' . $section_count => array(
-      'scroll-margin' => 'var(--header-height)'
-    )
-  );
+<?php
+$container_css = array(
+  '#section-' . $section_count => array(
+    'scroll-margin' => 'var(--header-height)'
+  )
+);
 ?>
 
 <style>
-  <?php echo wauble_css_encode($container_css); ?>
+<?php echo wauble_css_encode($container_css);
+?>
 </style>
 
 <div
