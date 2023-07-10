@@ -38,6 +38,11 @@ module.exports = {
           css: {
             maxWidth: 'none',
             color: 'var(--color-neutral-400)',
+            iframe: {
+              width: '100%',
+              height: '100%',
+              aspectRatio: '16/9'
+            },
             a: {
               color: 'var(--color-secondary-500)',
               '&:hover': {

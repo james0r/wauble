@@ -80,7 +80,6 @@ $container_css = array(
 
 <div
   class="px-6 md:px-8 my-8"
-  <?php echo wauble_attributes_encode($attrs); ?>
 >
   <div class="container">
     <?php if ($query->have_posts()) : ?>
@@ -99,7 +98,10 @@ $container_css = array(
       <?php endwhile; ?>
     </ul>
     <?php if ($paginate) : ?>
-    <nav class="flex space-x-4 mx-auto max-w-max my-8">
+    <nav 
+      class="flex space-x-4 mx-auto max-w-max my-8"
+      <?php echo wauble_attributes_encode($attrs); ?>
+      >
       <?php $big = 999999999; ?>
       <?php if ($paged > 1) : ?>
       <a href="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>">

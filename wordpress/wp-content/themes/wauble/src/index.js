@@ -35,6 +35,13 @@ if (process.env.NODE_ENV === "development") {
 
   // Replace live site URL with local URL for XHR requests
   document.body.addEventListener('htmx:beforeSwap', function (evt) {
+    if (
+      !evt.detail.xhr.responseURL.includes('https://bs') &&
+      !evt.detail.xhr.responseURL.includes('http://bs')
+    ) {
+      return
+    }
+
     evt.detail.serverResponse = evt.detail.serverResponse.replace(/\/wauble.lndo.site/g, '\/bs.wauble.lndo.site')
   });
 }

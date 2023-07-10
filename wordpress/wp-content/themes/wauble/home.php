@@ -18,6 +18,14 @@
     $show_date_on_posts = get_field('show_date_on_posts', $page_for_posts) ?? null;
     $show_tags_on_posts = get_field('show_tags_on_posts', $page_for_posts) ?? null;
     $ajax = get_field('use_ajax', $page_for_posts) ?? null;
+    $attrs = array();
+    if ($ajax) {
+      $attrs['hx-boost'] = 'true';
+      $attrs['hx-target'] = '#blog-posts';
+      $attrs['hx-select'] = '#blog-posts';
+      $attrs['hx-swap'] = 'outerHTML';
+      $attrs['hx-on'] = 'htmx:beforeRequest: (evt) => { evt.detail.target.scrollIntoView(); }';
+    }
 
     if (get_query_var('paged')) {
       $paged = get_query_var('paged');
@@ -69,6 +77,19 @@
       $query = new WP_Query($args);
       ?>
 
+      <?php
+      $container_css = array(
+        '#blog-posts' => array(
+          'scroll-margin' => 'var(--header-height)'
+        )
+      );
+      ?>
+
+      <style>
+      <?php echo wauble_css_encode($container_css);
+      ?>
+      </style>
+
     <?php if ($query->have_posts()) : ?>
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
@@ -84,47 +105,22 @@
       <?php endwhile; ?>
     </ul>
     <?php if ($paginate) : ?>
-    <nav class="flex space-x-4 mx-auto max-w-max my-8">
+    <nav 
+      class="flex space-x-4 mx-auto max-w-max my-8"
+      <?php echo wauble_attributes_encode($attrs); ?>
+      >
       <?php 
         $big = 999999999;
       ?>
       <?php if ($paged > 1) : ?>
-      <?php if ($ajax) : ?>
-      <button
-        hx-get="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>"
-        hx-target="#blog-posts"
-        hx-select="#blog-posts"
-        hx-swap="outerHTML"
-        type="button"
-        hx-trigger="click"
-        class="font-bold"
-      >
-        &laquo; Previous
-      </button>
-      <?php else : ?>
       <a href="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>">
         &laquo; Previous
       </a>
       <?php endif; ?>
-      <?php endif; ?>
       <?php if ($paged < $query->max_num_pages) : ?>
-      <?php if ($ajax) : ?>
-      <button
-        hx-get="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>"
-        hx-target="#blog-posts"
-        hx-select="#blog-posts"
-        hx-swap="outerHTML"
-        type="button"
-        hx-trigger="click"
-        class="font-bold"
-      >
-        Next &raquo;
-      </button>
-      <?php else : ?>
       <a href="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>">
         Next &raquo;
       </a>
-      <?php endif; ?>
       <?php endif; ?>
       <?php
             // Full pagination
@@ -146,9 +142,7 @@
     <?php endif; ?>
 
     <?php 
-    
     wp_reset_postdata(); 
-    
     ?>
 
   </div>
