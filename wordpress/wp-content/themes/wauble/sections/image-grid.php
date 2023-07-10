@@ -152,7 +152,8 @@ if ($flow_direction === 'Horizontal') {
             .then((responseHTML) => {
               srcImageGrid = responseHTML.querySelector(this.swapId)
 
-              if (srcImageGrid === null) {
+              if (!srcImageGrid) {
+                document.querySelector('#section-<?php echo $section_count ?> [x-intersect="loadMore"]').remove()
                 return
               }
 
@@ -183,8 +184,9 @@ if ($flow_direction === 'Horizontal') {
     <div
       x-data="imageGridLoadMore()"
       x-intersect="loadMore"
-      class="invisible"
+      class="flex justify-center py-8"
     >
+      <?php echo get_template_part('template-parts/loading-spinner'); ?>
     </div>
     <?php endif; ?>
 

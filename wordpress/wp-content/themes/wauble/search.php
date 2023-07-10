@@ -66,7 +66,6 @@ $query = new WP_Query($args);
 
 <div
   class="px-6 md:px-8"
-  <?php echo wauble_attributes_encode($attrs); ?>
 >
   <div class="container py-8">
     <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">
@@ -89,7 +88,10 @@ $query = new WP_Query($args);
       <?php endwhile; ?>
     </ul>
     <?php if ($paginate) : ?>
-    <nav class="flex space-x-4 mx-auto max-w-max my-8">
+    <nav 
+      class="flex space-x-4 mx-auto max-w-max my-8"
+      <?php echo wauble_attributes_encode($attrs); ?>
+      >
       <?php if ($paged > 1) : ?>
       <?php $previous_query_params = array(
               's' => get_search_query(),
