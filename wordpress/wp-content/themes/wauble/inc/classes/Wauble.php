@@ -24,6 +24,8 @@ class Wauble {
   public static $version = WAUBLE_VERSION;
 
   public $init;
+
+  public $posts;
   
   public $editors;
 
@@ -66,6 +68,7 @@ class Wauble {
       self::$instance = new Wauble();
 
       self::$instance->init = new Wauble_Init;
+      self::$instance->posts = new Wauble_Posts;
       self::$instance->editors = new Wauble_Editors;
       self::$instance->tweaks = new Wauble_Tweaks;
       self::$instance->scripts = new Wauble_Scripts;
