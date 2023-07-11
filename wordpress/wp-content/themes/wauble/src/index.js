@@ -8,23 +8,23 @@ import "./a11y.js"
 window.Alpine = Alpine
 window.htmx = require('htmx.org');
 
-// Declare our namespace on the window
-const namespace = "wauble"
+// Declare our NAMESPACE on the window
+const NAMESPACE = "wauble"
 
-// Define our namespace and helpers property
-window[namespace] = window[namespace] || {}
-window[namespace].helpers = {}
+// Define our NAMESPACE and helpers property
+window[NAMESPACE] = window[NAMESPACE] || {}
+window[NAMESPACE].helpers = {}
 
-// Map helper functions to window[namespace].helpers
+// Map helper functions to window[NAMESPACE].helpers
 for (const [key, value] of Object.entries(helpers)) {
-  window[namespace].helpers[key] = value
+  window[NAMESPACE].helpers[key] = value
 }
 
 if (process.env.NODE_ENV === "development") {
   const tableData = {
-    "Theme Namespace": namespace,
-    "WP Template": window[namespace].wordpress.currentTemplate,
-    "WP Version": window[namespace].wordpress.wpVersion,
+    "Theme NAMESPACE": NAMESPACE,
+    "WP Template": window[NAMESPACE].wordpress.currentTemplate,
+    "WP Version": window[NAMESPACE].wordpress.wpVersion,
   }
   console.table(tableData)
 
