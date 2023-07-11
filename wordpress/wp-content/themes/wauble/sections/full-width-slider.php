@@ -3,6 +3,7 @@ $slides = $section['slides'] ?? null;
 $show_navigation = $section['show_navigation'] ?? null;
 $show_pagination = $section['show_pagination'] ?? null;
 $loop_slides = $section['loop_slides'] ?? null;
+$lazy_load_images = $section['lazy_load_images'] ?? null;
 ?>
 
 <div class="relative">
@@ -22,11 +23,17 @@ $loop_slides = $section['loop_slides'] ?? null;
       <div class="embla__slide flex-[0_0_100%] min-w-0">
         <div class="relative min-h-[420px] md:min-h-[500px] flex items-center justify-center">
           <?php
+              $attrs['class'] = 'absolute object-cover inset-0 h-full w-full';
+              if ($lazy_load_images) {
+                $attrs['loading'] = 'lazy';
+              } else {
+                $attrs['loading'] = 'eager';
+              }
               echo wp_get_attachment_image(
                 $image,
                 'full',
                 false,
-                ['class' => 'absolute object-cover inset-0 h-full w-full']
+                $attrs
               );
               ?>
           <?php if ($tint_image) : ?>
