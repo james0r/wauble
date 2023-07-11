@@ -46,8 +46,7 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
-Alpine.plugin(intersect)
-Alpine.plugin(collapse)
+Alpine.plugin([intersect, collapse])
 alpineExtended.register(Alpine)
 Alpine.start()
 
