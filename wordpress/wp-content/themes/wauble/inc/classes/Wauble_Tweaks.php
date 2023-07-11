@@ -18,6 +18,8 @@ class Wauble_Tweaks {
     add_filter('wp_resource_hints', [$this, 'disable_emojis_remove_dns_prefetch'], 10, 2);
     add_action('admin_menu', [$this, 'remove_unused_admin_menu_items']);
     add_action('wp_dashboard_setup', [$this, 'remove_unused_dashboard_widgets'], 999);
+
+    add_filter('wpcf7_autop_or_not', '__return_false');
   }
 
   public function disable_emojis_tinymce($plugins) {

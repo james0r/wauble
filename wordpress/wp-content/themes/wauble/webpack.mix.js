@@ -22,7 +22,7 @@ mix.js("src/index.js", "dist/js/frontend-bundle.js")
 mix.sass('src/scss/main.scss', 'dist/css/sass-compiled.css');
 
 // Compile PostCSS
-mix.postCss("src/css/site.css", "dist/css/tailwind.css", [
+mix.postCss("src/css/site.pcss", "dist/css/tailwind.css", [
   require('tailwindcss/nesting'),
   require('tailwindcss')
 ])
@@ -43,5 +43,11 @@ mix.browserSync({
   },
   open: false,
   notify: false,
-  files: [`./**/*.php`, `./src/**/*.js`, `./src/**/*.scss`, `./src/**/*.css`]
+  files: [
+    `./**/*.php`,
+    `./src/**/*.js`,
+    `./src/**/*.scss`,
+    `./src/**/*.css`,
+    `./src/**/*.pcss`
+  ]
 })
