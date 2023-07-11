@@ -163,8 +163,11 @@
                                 "wp_template_part": "wp_template_part",
                                 "wp_global_styles": "wp_global_styles",
                                 "wp_navigation": "wp_navigation",
+                                "acf-post-type": "acf-post-type",
+                                "acf-taxonomy": "acf-taxonomy",
                                 "acf-field-group": "acf-field-group",
-                                "acf-field": "acf-field"
+                                "acf-field": "acf-field",
+                                "wpcf7_contact_form": "wpcf7_contact_form"
                             },
                             "default_value": [],
                             "return_format": "value",
@@ -347,6 +350,76 @@
                             "ui_on_text": "",
                             "ui_off_text": "",
                             "ui": 1
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_64acc8b767e8d": {
+                    "key": "layout_64acc8b767e8d",
+                    "name": "contact_form",
+                    "label": "Contact Form",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_64acc8ec67e8f",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Leave blank to hide.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "Contact Form Section",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_64acc945c8289",
+                            "label": "Description",
+                            "name": "description",
+                            "aria-label": "",
+                            "type": "wysiwyg",
+                            "instructions": "Leave blank to hide",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 0
+                        },
+                        {
+                            "key": "field_64acc980624ed",
+                            "label": "Contact Form 7 Shortcode",
+                            "name": "contact_form_7_shortcode",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "If left blank, the entire section will be hidden.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "[contact-form-7 id=\"372\" title=\"Contact form 1\"]",
+                            "prepend": "",
+                            "append": ""
                         }
                     ],
                     "min": "",
@@ -1505,5 +1578,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1688884590
+    "modified": 1689045428
 }

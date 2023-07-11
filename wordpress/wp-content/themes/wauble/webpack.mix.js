@@ -1,5 +1,4 @@
 const mix = require("laravel-mix")
-require("mix-tailwindcss")
 
 // mix.webpackConfig({
 //   stats: {
@@ -11,6 +10,9 @@ require("mix-tailwindcss")
 mix.options({
   processCssUrls: false,
   manifest: false,
+  terser: {
+    extractComments: false,
+  }
 })
 
 // Compile Javascript
@@ -20,8 +22,10 @@ mix.js("src/index.js", "dist/js/frontend-bundle.js")
 mix.sass('src/scss/main.scss', 'dist/css/sass-compiled.css');
 
 // Compile PostCSS
-mix.postCss("src/css/site.css", "dist/css/tailwind.css")
-  .tailwind()
+mix.postCss("src/css/site.css", "dist/css/tailwind.css", [
+  require('tailwindcss/nesting'),
+  require('tailwindcss')
+])
 
 // Sync Directories
 mix
@@ -36,7 +40,7 @@ mix.browserSync({
   socket: {
     domain: "http://bs.wauble.lndo.site",
     port: 80
-  },  
+  },
   open: false,
   notify: false,
   files: [`./**/*.php`, `./src/**/*.js`, `./src/**/*.scss`, `./src/**/*.css`]

@@ -1,5 +1,16 @@
+@tailwind components;
 @layer components {
   .btn {
     @apply py-3 px-12 bg-primary-500 hover:bg-primary-600 text-white rounded-full transition;
+  }
+
+  .contact-form-wrapper {
+    @apply max-w-4xl mx-auto px-4 py-12 bg-white rounded-lg shadow-lg;
+  }
+
+  .contact-form-wrapper {
+    form {
+      background: pink;
+    }
   }
 }

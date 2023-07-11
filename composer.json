@@ -39,6 +39,7 @@
     "wpackagist-plugin/wordpress-seo": "^20.5",
     "wpackagist-plugin/classic-editor": "^1.6",
     "satispress/advanced-custom-fields-pro": "^6.0",
+    "wpackagist-plugin/contact-form-7": "^5.7",
     "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {

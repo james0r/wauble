@@ -28,3 +28,9 @@
 .acf-field.indent-1 {
   margin-left: 1.5rem !important;
 }
+
+/* Dim ACF Field Placeholder Text */
+
+.acf-input input::placeholder {
+  color: lightgray;
+}
