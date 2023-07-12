@@ -1,8 +1,8 @@
 <div
   class="px-6 md:px-8 py-8 overflow-hidden"
   x-data="{ intersected: false }"
-  x-intersect:enter.full="intersected = true"
-  x-intersect:leave.full="intersected = false"
+  x-intersect:enter.half="intersected = true"
+  x-intersect:leave.half="intersected = false"
 >
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 h-auto md:h-[500px]">

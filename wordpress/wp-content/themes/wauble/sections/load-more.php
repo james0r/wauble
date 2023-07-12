@@ -78,10 +78,10 @@ document.addEventListener('alpine:init', () => {
           (response) => {
             const newImages = response.querySelectorAll(`${this.sectionId} .image-grid li`)
             this.imageGridEl.append(...newImages)
-            this.$el.scrollIntoView({
-              block: "center",
-              behavior: "smooth"
-            });
+            // this.$el.scrollIntoView({
+            //   block: "center",
+            //   behavior: "smooth"
+            // });
             if (newImages.length < this.itemsPerGroup) {
               this.triggerEl.remove()
             }
