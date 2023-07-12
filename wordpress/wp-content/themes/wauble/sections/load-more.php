@@ -59,6 +59,7 @@ $images = array_slice($total_images, 0, $items_to_load);
 </div>
 <?php endif; ?>
 
+<?php if ($section_is_first_instance) : ?>
 <script>
 document.addEventListener('alpine:init', () => {
   Alpine.data('loadMore', function() {
@@ -113,3 +114,4 @@ document.addEventListener('alpine:init', () => {
   }
 }
 </style>
+<?php endif; ?>

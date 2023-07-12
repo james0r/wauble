@@ -12,6 +12,9 @@ class Wauble_Sections {
     add_action('wp', [$this, 'init_sections']);
     add_action('init', [$this, 'register_shortcode']);
     add_filter('acf/load_value/name=sections', [$this, 'add_content_area_default_section'], 10, 3);
+
+    global $sections_included;
+    $sections_included = array();
   }
   
   public function init_sections() {
@@ -20,7 +23,7 @@ class Wauble_Sections {
     if (!$post) return;
 
     if ($section_fields = get_field('sections', $post->ID)) {
-      $sections = array_map([$this, 'get_sections_filenames'], $section_fields);
+      $sections = array_map([$this, 'get_section_filename'], $section_fields);
       $this->sections = $sections;
     }
   }
@@ -43,7 +46,7 @@ class Wauble_Sections {
     return $value;
   }
 
-  public function get_sections_filenames($section) {
+  public function get_section_filename($section) {
     $section['template'] = str_replace('_', '-', $section['acf_fc_layout']);
     return $section;
   }
@@ -55,6 +58,14 @@ class Wauble_Sections {
 
       <section id="section-<?php echo $index ?>" class="section-<?php echo $section['template'] ?>">
         <?php
+          global $sections_included;
+
+          if (in_array($section['template'], $sections_included)) {
+            set_query_var('section_is_first_instance', false);
+          } else {
+            set_query_var('section_is_first_instance', true);
+            array_push($sections_included, $section['template']);
+          }
 
           // Globally set the ACF data and section count for use in the template
           set_query_var('section', $section);
@@ -63,10 +74,14 @@ class Wauble_Sections {
           echo get_template_part('sections/' . $section['template']);
 
           // Reset the ACF data and section count to prevent scope pollution
-          set_query_var('section', false);
-          set_query_var('section_count', false);
+          set_query_var('section_is_first_instance', null);
+          set_query_var('section', null);
+          set_query_var('section_count', null);
           ?>
       </section>
+
+      <?php 
+      ?>
       
       <?php endforeach;
     echo '<!-- End Sections -->';
