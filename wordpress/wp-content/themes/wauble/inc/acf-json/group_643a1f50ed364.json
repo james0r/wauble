@@ -387,7 +387,7 @@
                             "name": "description",
                             "aria-label": "",
                             "type": "wysiwyg",
-                            "instructions": "Leave blank to hide",
+                            "instructions": "Leave blank to hide. NOTE: If this field does not load properly, it may be necessary to first Save\/Update your page before the WYSIWYG editor will load properly.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1301,7 +1301,7 @@
                             "name": "body_text",
                             "aria-label": "",
                             "type": "wysiwyg",
-                            "instructions": "Leave blank to hide.",
+                            "instructions": "Leave blank to hide. NOTE: If this field does not load properly, it may be necessary to first Save\/Update your page before the WYSIWYG editor will load properly.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1309,11 +1309,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "acfe_save_meta": 0,
                             "default_value": "",
-                            "acfe_settings": "",
-                            "acfe_validate": "",
-                            "acfe_permissions": "",
                             "tabs": "all",
                             "toolbar": "basic",
                             "media_upload": 0,
@@ -1598,5 +1594,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1689070999
+    "modified": 1689071525
 }

@@ -6,7 +6,6 @@ import helpers from "./helpers.js"
 import "./a11y.js"
 
 window.Alpine = Alpine
-window.htmx = require('htmx.org');
 
 // Declare our NAMESPACE on the window
 const NAMESPACE = "wauble"
