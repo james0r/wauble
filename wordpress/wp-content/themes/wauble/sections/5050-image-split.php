@@ -61,6 +61,7 @@
       $classes[] = 'flex';
       $classes[] = 'flex-col';
       $classes[] = 'p-4';
+      $classes[] = 'rte';
 
       if ($section['content_vertical_align'] === 'Bottom') {
         $classes[] = 'justify-end';
