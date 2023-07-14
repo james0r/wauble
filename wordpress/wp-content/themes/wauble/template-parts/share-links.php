@@ -122,7 +122,7 @@ $description = urlencode($description);
   >
     <div
       aria-hidden="true"
-      class="h-[54px] w-[54px] bg-black transition hover:bg-white fill-white hover:fill-black flex justify-center items-center"
+      class="h-[54px] w-[54px] bg-black hover:bg-black/75 transition fill-white flex justify-center items-center"
     >
       <svg
         aria-label="Threads"
