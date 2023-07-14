@@ -41,7 +41,7 @@
         >
         <a
           href="<?php echo home_url(); ?>"
-          class="font-bold font-[monospace] text-[16px] md:text-[20px] leading-[16px] md:leading-[20px] text-left font-['Foldit,sans-serif']"
+          class="font-bold text-[16px] md:text-[20px] leading-[16px] md:leading-[20px] text-left font-['Foldit,sans-serif']"
         >
           WAUBLE STARTER THEME
         </a>
