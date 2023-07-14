@@ -12,7 +12,7 @@ $navigation = wauble()->menus->get_navi_menu('header_menu');
 
 <?php if ($navigation->isNotEmpty()) : ?>
   <nav id="header-nav" aria-label="Header Menu">
-    <ul id="header-nav-list" class="flex">
+    <ul id="header-nav-list" class="flex uppercase">
       <?php foreach ($navigation->toArray() as $item) : ?>
         <?php
         $item->classes .= ' px-3 py-2.5 first:pl-0 group relative';

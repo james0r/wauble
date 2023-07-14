@@ -26,9 +26,24 @@
   >
     <div class="px-6 md:px-8">
       <div class="container flex items-center justify-between h-full">
-        <a href="<?php echo home_url(); ?>" class="font-bold font-[monospace] text-[16px] md:text-[20px] leading-[16px] md:leading-[20px] text-left">
-          <div class="block md:inline-block">WAUBLE</div>
-          <div class="block md:inline-block">STARTER THEME</div>
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+        >
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin
+        >
+        <link
+          href="https://fonts.googleapis.com/css2?family=Foldit:wght@700&display=swap"
+          rel="stylesheet"
+        >
+        <a
+          href="<?php echo home_url(); ?>"
+          class="font-bold font-[monospace] text-[16px] md:text-[20px] leading-[16px] md:leading-[20px] text-left font-['Foldit,sans-serif']"
+        >
+          WAUBLE STARTER THEME
         </a>
         <div class="hidden md:block">
           <?php echo get_template_part('template-parts/header-menu'); ?>
