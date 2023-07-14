@@ -55,9 +55,9 @@ $lazy_load_images = $section['lazy_load_images'] ?? null;
   </div>
   <?php if ($show_navigation) : ?>
   <div
-    class="[&_svg]:h-6 [&_svg]:w-6 absolute top-1/2 -translate-y-1/2 flex justify-between w-full pointer-events-none">
+    class="[&_svg]:h-6 [&_svg]:w-6 absolute top-1/2 -translate-y-1/2 flex justify-between w-full pointer-events-none text-white/75">
     <button
-      class="embla__button embla__button--prev p-2 pointer-events-auto"
+      class="embla__button embla__button--prev !p-2 pointer-events-auto"
       aria-label="Previous slide" 
       disabled
     >
@@ -72,7 +72,7 @@ $lazy_load_images = $section['lazy_load_images'] ?? null;
       </svg>
     </button>
     <button
-      class="embla__button embla__button--next p-2 pointer-events-auto"
+      class="embla__button embla__button--next !p-2 pointer-events-auto"
       aria-label="Next slide" 
       disabled
     >

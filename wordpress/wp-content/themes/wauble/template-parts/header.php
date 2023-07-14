@@ -28,14 +28,14 @@
       <div class="container flex items-center justify-between h-full">
         <a
           href="<?php echo home_url(); ?>"
-          class="font-bold text-[16px] md:text-[20px] leading-[16px] md:leading-[20px] text-left"
+          class="font-bold text-[16px] md:text-[20px] leading-[16px] lg:leading-[20px] text-left"
         >
           WAUBLE STARTER THEME
         </a>
-        <div class="hidden md:block">
+        <div class="hidden lg:block">
           <?php echo get_template_part('template-parts/header-menu'); ?>
         </div>
-        <div class="md:hidden flex justify-end items-center h-full">
+        <div class="lg:hidden flex justify-end items-center h-full">
           <?php echo get_template_part('template-parts/mobile-header-menu'); ?>
         </div>
       </div>

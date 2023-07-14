@@ -16,7 +16,7 @@ $navigation = wauble()->menus->get_navi_menu('header_menu');
   class="flex items-center h-full"
 >
   <button
-    class="md:hidden ml-auto p-2"
+    class="lg:hidden ml-auto p-2"
     x-data
     @click="$store.global.toggleMobileMenu()"
   >
