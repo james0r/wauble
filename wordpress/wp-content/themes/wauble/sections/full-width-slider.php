@@ -58,6 +58,7 @@ $lazy_load_images = $section['lazy_load_images'] ?? null;
     class="[&_svg]:h-6 [&_svg]:w-6 absolute top-1/2 -translate-y-1/2 flex justify-between w-full pointer-events-none">
     <button
       class="embla__button embla__button--prev p-2 pointer-events-auto"
+      aria-label="Previous slide" 
       disabled
     >
       <svg
@@ -72,6 +73,7 @@ $lazy_load_images = $section['lazy_load_images'] ?? null;
     </button>
     <button
       class="embla__button embla__button--next p-2 pointer-events-auto"
+      aria-label="Next slide" 
       disabled
     >
       <svg

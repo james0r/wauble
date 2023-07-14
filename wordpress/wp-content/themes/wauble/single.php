@@ -74,18 +74,17 @@
                 the_title('<span class="sr-only">"', '"</span>', false)
               )
             );
-
-            wp_link_pages(
-              array(
-                'before'      => '<div class="page-links"><span class="page-links-title">' . __('Pages:', 'wauble') . '</span>',
-                'after'       => '</div>',
-                'link_before' => '<span>',
-                'link_after'  => '</span>',
-                'pagelink'    => '<span class="sr-only">' . __('Page', 'wauble') . ' </span>%',
-                'separator'   => '<span class="sr-only">, </span>',
-              )
-            );
             ?>
+      </div>
+      <div>
+        <?php 
+          $share_data = array(
+            'url' => get_permalink(),
+            'title' => get_the_title(),
+            'description' => get_the_excerpt(),
+            'image' => get_the_post_thumbnail_url()
+          );
+          get_template_part('template-parts/share-links', null, $share_data); ?>
       </div>
 
     </article>
