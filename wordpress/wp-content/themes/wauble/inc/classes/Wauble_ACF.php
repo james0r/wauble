@@ -6,8 +6,13 @@
 
 class Wauble_ACF {
   public function __construct() {
-    add_action('acf/settings/load_json', [$this, 'acf_json_load_point']);
-    add_action('acf/settings/save_json', [$this, 'acf_json_save_point']);
+    // add_action('acf/settings/load_json', [$this, 'acf_json_load_point']);
+    // add_action('acf/settings/save_json', [$this, 'acf_json_save_point']);
+    add_action('acf/settings/php_save', [$this, 'acf_php_save_point']);
+    add_action('acf/settings/php_load', [$this, 'acf_php_load_point']);
+    add_action('acf/settings/l10n_textdomain', function () {
+      return Wauble::$text_domain;
+    });
     add_action('acf/init', [$this, 'acf_register_options_pages']);
     add_filter('acf/load_field/name=post_type', [$this, 'acf_load_post_type_field_choices']);
 
@@ -27,6 +32,20 @@ class Wauble_ACF {
 
   public function acf_json_save_point($path) {
     $path = Wauble::$stylesheet_dir_path . '/inc/acf-json';
+
+    return $path;
+  }
+
+  public function acf_php_load_point($paths) {
+    unset($paths[0]);
+
+    $paths[] = Wauble::$stylesheet_dir_path . '/inc/acf-php';
+
+    return $paths;
+  }
+
+  public function acf_php_save_point($path) {
+    $path = Wauble::$stylesheet_dir_path . '/inc/acf-php';
 
     return $path;
   }
@@ -57,13 +76,11 @@ class Wauble_ACF {
     // reset choices
     $field['choices'] = array();
 
-
     // get the textarea value from options page without any formatting
     $choices = get_post_types();
 
     // remove any unwanted white space
     $choices = array_map('trim', $choices);
-
 
     // loop through array and add to field 'choices'
     if (is_array($choices)) {
@@ -73,7 +90,6 @@ class Wauble_ACF {
         $field['choices'][$choice] = $choice;
       }
     }
-
 
     // return the field
     return $field;

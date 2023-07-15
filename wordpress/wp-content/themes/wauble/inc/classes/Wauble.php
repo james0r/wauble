@@ -7,6 +7,8 @@
 class Wauble {
   private static $theme_prefix;
 
+  public static $text_domain;
+
   public static $instance = null;
 
   public static $template_dir_path = '';
@@ -53,6 +55,7 @@ class Wauble {
 
   private function __construct() {
     self::$theme_prefix = 'wauble_';
+    self::$text_domain = 'wauble';
     self::$template_dir_path = wp_normalize_path(get_template_directory());
     self::$template_dir_url = get_template_directory_uri();
     self::$stylesheet_dir_path = wp_normalize_path(get_stylesheet_directory());

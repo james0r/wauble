@@ -15,7 +15,7 @@ class Wauble_Init {
   }
 
   public function init_i18n() {
-    load_theme_textdomain('wauble', get_template_directory() . '/languages');
+    load_theme_textdomain(Wauble::$text_domain, get_template_directory() . '/languages');
   }
 
   public function add_image_sizes() {

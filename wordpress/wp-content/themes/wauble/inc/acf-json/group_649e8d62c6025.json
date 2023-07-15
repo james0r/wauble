@@ -241,5 +241,13 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1688114041
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "php",
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1689406307
 }
