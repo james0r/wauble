@@ -50,6 +50,11 @@
   {{ logSuccess('Uploads pushed to environment -> '. $staging_env); }}
 @endtask
 
+@task('push-uploads-to-dreamhost', ['on' => 'localhost'])
+  rsync -avr --exclude ".DS_STORE" {{$local_wp_path}}/wp-content/uploads/ {{$dreamhost_ssh}}:{{$dreamhost_wp_path}}/wp-content/uploads
+  {{ logSuccess('Uploads pushed to environment -> '. $dreamhost_wp_path); }}
+@endtask
+
 @task('push-theme-files-to-wpengine-development', ['on' => 'localhost'])
   lando build:theme
   rsync -avr --delete --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/themes/{{$theme_name}}/ {{$dev_ssh}}:/sites/{{$dev_env}}/wp-content/themes/{{$theme_name}}
