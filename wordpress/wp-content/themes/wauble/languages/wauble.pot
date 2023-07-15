@@ -1,0 +1,130 @@
+# Copyright (C) 2023 James Auble
+# This file is distributed under the .
+msgid ""
+msgstr ""
+"Project-Id-Version: wauble 2023\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wauble\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-07-15T04:03:35+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: wauble\n"
+
+#. Theme Name of the theme
+msgid "wauble"
+msgstr ""
+
+#. Description of the theme
+msgid "A Wordpress starter theme powered by Laravel Mix. Includes Alpine.js, ES6/ESM & Tailwind compilation, BrowserSync, and some other helpful additions."
+msgstr ""
+
+#. Author of the theme
+msgid "James Auble"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://www.jamesauble.com"
+msgstr ""
+
+#: 404.php:6
+msgid "404: Page Not Found"
+msgstr ""
+
+#: home.php:157
+#: search.php:117
+#: sections/posts-grid.php:131
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#: inc/classes/Wauble_Menus.php:14
+msgid "Header Menu"
+msgstr ""
+
+#: inc/classes/Wauble_Menus.php:15
+msgid "Footer Menu"
+msgstr ""
+
+#: inc/classes/Wauble_Menus.php:16
+msgid "Sitemap Pages"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:19
+msgid "Extra small"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:20
+msgctxt "Font size"
+msgid "XS"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:25
+msgid "Small"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:26
+msgctxt "Font size"
+msgid "S"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:31
+msgid "Normal"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:32
+msgctxt "Font size"
+msgid "M"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:37
+msgid "Large"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:38
+msgctxt "Font size"
+msgid "L"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:43
+msgid "Extra large"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:44
+msgctxt "Font size"
+msgid "XL"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:49
+msgid "Huge"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:50
+msgctxt "Font size"
+msgid "XXL"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:55
+msgid "Gigantic"
+msgstr ""
+
+#: inc/classes/Wauble_Theme_Support.php:56
+msgctxt "Font size"
+msgid "XXXL"
+msgstr ""
+
+#. translators: %s: post author.
+#: inc/helpers.php:10
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Coming Soon template"
+msgstr ""
+
+#: single.php:73
+msgid "Continue reading %s"
+msgstr ""

@@ -11,7 +11,7 @@ class Wauble_Menus {
 
   public function __construct() {
     $this->menus = [
-      'header_menu' => esc_html__('Header Menu', 'wauble'),
+      'header_menu' => __('Header Menu', 'wauble'),
       'footer_menu' => __('Footer Menu', 'wauble'),
       'site_map_pages' => __('Sitemap Pages', 'wauble')
     ];

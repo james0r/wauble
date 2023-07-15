@@ -36,6 +36,10 @@
   import-db-on-wpengine-staging
 @endstory
 
+@task('make-theme-pot', ['on' => 'localhost'])
+  lando wp i18n make-pot wordpress/wp-content/themes/wauble wordpress/wp-content/themes/wauble/languages/wauble.pot
+@endtask
+
 @task('export-local-db', ['on' => 'localhost'])
   lando wp db export database-tmp.sql --add-drop-table --path=wordpress --exclude_tables=wp_users,wp_usermeta
 @endtask

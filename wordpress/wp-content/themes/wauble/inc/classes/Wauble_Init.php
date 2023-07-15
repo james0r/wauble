@@ -7,10 +7,15 @@
 class Wauble_Init {
   public function __construct() {
     add_action('after_setup_theme', [$this, 'add_image_sizes']);
+    add_action('after_setup_theme', [$this, 'init_i18n']);
     add_action('wp_footer', [$this, 'debugging_console_table']);
 
     Wauble()->requireOnce('/inc/helpers.php');
     Wauble()->requireOnce('/vendor/autoload.php');
+  }
+
+  public function init_i18n() {
+    load_theme_textdomain('wauble', get_template_directory() . '/languages');
   }
 
   public function add_image_sizes() {
