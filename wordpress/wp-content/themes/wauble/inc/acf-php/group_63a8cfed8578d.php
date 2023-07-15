@@ -48,12 +48,11 @@ acf_add_local_field_group(array(
 	'acfe_display_title' => 'Primary Form',
 	'acfe_autosync' => array(
 		0 => 'php',
-		1 => 'json',
 	),
 	'acfe_form' => 0,
 	'acfe_meta' => '',
 	'acfe_note' => '',
-	'modified' => 1689406291,
+	'modified' => 1689412064,
 ));
 
 endif;

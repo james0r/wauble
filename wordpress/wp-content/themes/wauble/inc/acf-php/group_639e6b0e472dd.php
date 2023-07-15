@@ -135,12 +135,11 @@ acf_add_local_field_group(array(
 	'acfe_display_title' => '',
 	'acfe_autosync' => array(
 		0 => 'php',
-		1 => 'json',
 	),
 	'acfe_form' => 0,
 	'acfe_meta' => '',
 	'acfe_note' => '',
-	'modified' => 1689406299,
+	'modified' => 1689412072,
 ));
 
 endif;
