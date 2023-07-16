@@ -32,11 +32,14 @@
         >
           WAUBLE STARTER THEME
         </a>
-        <div class="hidden lg:block">
-          <?php echo get_template_part('template-parts/header-menu'); ?>
-        </div>
-        <div class="lg:hidden flex justify-end items-center h-full">
-          <?php echo get_template_part('template-parts/mobile-header-menu'); ?>
+        <div class="flex items-center">
+          <div class="hidden lg:block">
+            <?php echo get_template_part('template-parts/header-menu'); ?>
+          </div>
+          <div class="lg:hidden flex justify-end items-center h-full">
+            <?php echo get_template_part('template-parts/mobile-header-menu'); ?>
+          </div>
+          <?php echo get_template_part('template-parts/tp-language-switcher'); ?>
         </div>
       </div>
     </div>
