@@ -22,7 +22,7 @@ $show_date_on_posts = true;
 $attrs = array();
 
 if ($ajax) {
-  $attrs['hx-boost'] = 'true';
+  $attrs['x-data'] = 'search';
 }
 
 if (get_query_var('paged')) {
@@ -66,6 +66,7 @@ $query = new WP_Query($args);
 
 <div
   class="px-6 md:px-8"
+  id="search-results"
 >
   <div class="container py-8">
     <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">
@@ -97,7 +98,12 @@ $query = new WP_Query($args);
               's' => get_search_query(),
               'page' => $paged - 1
             ); ?>
-      <a href="?<?php echo http_build_query($previous_query_params); ?>">
+      <a 
+        href="?<?php echo http_build_query($previous_query_params); ?>"
+        <?php if ($ajax) : ?>
+        @click.prevent="swap('?<?php echo http_build_query($previous_query_params); ?>')"
+        <?php endif; ?>
+        >
         &laquo; Previous
       </a>
       <?php endif; ?>
@@ -106,7 +112,12 @@ $query = new WP_Query($args);
               's' => get_search_query(),
               'page' => $paged + 1
             ); ?>
-      <a href="?<?php echo http_build_query($next_query_params); ?>">
+      <a 
+        href="?<?php echo http_build_query($next_query_params); ?>"
+        <?php if ($ajax) : ?>
+        @click.prevent="swap('?<?php echo http_build_query($next_query_params); ?>')"
+        <?php endif; ?>
+        >
         Next &raquo;
       </a>
       <?php endif; ?>
@@ -122,5 +133,30 @@ $query = new WP_Query($args);
   </div>
 </div>
 
+<?php if ($ajax) : ?>
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.data('search', function() {
+    return {
+      swap(endpoint) {
+        wauble.helpers.fetchHTML(endpoint).then(
+          (response) => {
+            const source = response.querySelector('#search-results')
+            const target = document.querySelector('#search-results')
+
+            target.innerHTML = source.innerHTML
+
+            document.querySelector('#search-results').scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            })
+          }
+        )
+      }
+    }
+  })
+})
+</script>
+<?php endif; ?>
 
 <?php get_template_part('template-parts/footer');

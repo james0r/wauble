@@ -10,6 +10,7 @@ if ($paginate) {
 } else {
   $posts_per_page = -1;
 }
+$route = home_url($wp->request);
 $post_types = $section['post_type'] ?? null;
 $categories = $section['categories'] ?? null;
 $tags = $section['tags'] ?? null;
@@ -20,11 +21,7 @@ $show_tags_on_posts = $section['show_tags_on_posts'] ?? null;
 $attrs = array();
 
 if ($ajax) {
-  $attrs['hx-boost'] = 'true';
-  $attrs['hx-target'] = '#section-' . $section_count;
-  $attrs['hx-select'] = '#section-' . $section_count;
-  $attrs['hx-swap'] = 'outerHTML';
-  $attrs['hx-on'] = 'htmx:beforeRequest: (evt) => { evt.detail.target.scrollIntoView(); }';
+  $attrs['x-data'] = 'postsGrid';
 }
 
 if (get_query_var('paged')) {
@@ -79,7 +76,10 @@ $container_css = array(
 </style>
 
 <div
-  class="px-6 md:px-8 my-8"
+  class="px-6 md:px-8 my-8 posts-grid"
+  data-section-id="section-<?php echo $section_count; ?>"
+  data-route="<?php echo $route; ?>"
+  <?php echo wauble_attributes_encode($attrs); ?>
 >
   <div class="container">
     <?php if ($query->have_posts()) : ?>
@@ -98,18 +98,25 @@ $container_css = array(
       <?php endwhile; ?>
     </ul>
     <?php if ($paginate) : ?>
-    <nav 
-      class="flex space-x-4 mx-auto max-w-max my-8"
-      <?php echo wauble_attributes_encode($attrs); ?>
-      >
+    <nav class="flex space-x-4 mx-auto max-w-max my-8">
       <?php $big = 999999999; ?>
       <?php if ($paged > 1) : ?>
-      <a href="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>">
+      <a
+        href="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>"
+        <?php if ($ajax) : ?>
+        @click.prevent="swap('<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>')"
+        <?php endif; ?>
+      >
         &laquo; Previous
       </a>
       <?php endif; ?>
       <?php if ($paged < $query->max_num_pages) : ?>
-      <a href="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>">
+      <a
+        href="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>"
+        <?php if ($ajax) : ?>
+        @click.prevent="swap('<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>')"
+        <?php endif; ?>
+      >
         Next &raquo;
       </a>
       <?php endif; ?>
@@ -135,3 +142,35 @@ $container_css = array(
 </div>
 
 <?php wp_reset_postdata(); ?>
+
+<?php if ($section_is_first_instance) : ?>
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.data('postsGrid', function() {
+    return {
+      sectionId: this.$el.dataset.sectionId,
+      route: this.$el.dataset.route,
+      swap(endpoint) {
+        wauble.helpers.fetchHTML(endpoint).then(
+          (response) => {
+            const source = response.querySelector(`#${this.sectionId} .posts-grid`)
+            const target = document.querySelector(`#${this.sectionId} .posts-grid`)
+
+            target.innerHTML = source.innerHTML
+
+            document.querySelector(`#${this.sectionId}`).scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            })
+          }
+        )
+      }
+    }
+  })
+})
+</script>
+
+<style>
+
+</style>
+<?php endif; ?>
