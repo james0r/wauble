@@ -75,10 +75,7 @@ $query = new WP_Query($args);
 
 
     <?php if ($query->have_posts()) : ?>
-    <ul
-      id="search-results"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
-    >
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
       <?php while ($query->have_posts()) : $query->the_post(); ?>
 
       <?php echo get_template_part('template-parts/blog-card', null, [
@@ -88,36 +85,28 @@ $query = new WP_Query($args);
 
       <?php endwhile; ?>
     </ul>
-    <?php if ($paginate) : ?>
-    <nav 
+    <?php if ($paginate) : $big = 999999999; ?>
+    <nav
       class="flex space-x-4 mx-auto max-w-max my-8"
       <?php echo wauble_attributes_encode($attrs); ?>
-      >
+    >
       <?php if ($paged > 1) : ?>
-      <?php $previous_query_params = array(
-              's' => get_search_query(),
-              'page' => $paged - 1
-            ); ?>
-      <a 
-        href="?<?php echo http_build_query($previous_query_params); ?>"
+      <a
+        href="<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>"
         <?php if ($ajax) : ?>
-        @click.prevent="swap('?<?php echo http_build_query($previous_query_params); ?>')"
+        @click.prevent="swap('<?php echo str_replace($big, ($paged - 1), get_pagenum_link($big, true)) ?>')"
         <?php endif; ?>
-        >
+      >
         &laquo; Previous
       </a>
       <?php endif; ?>
       <?php if ($paged < $query->max_num_pages) : ?>
-      <?php $next_query_params = array(
-              's' => get_search_query(),
-              'page' => $paged + 1
-            ); ?>
-      <a 
-        href="?<?php echo http_build_query($next_query_params); ?>"
+      <a
+        href="<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>"
         <?php if ($ajax) : ?>
-        @click.prevent="swap('?<?php echo http_build_query($next_query_params); ?>')"
+        @click.prevent="swap('<?php echo str_replace($big, ($paged + 1), get_pagenum_link($big, true)) ?>')"
         <?php endif; ?>
-        >
+      >
         Next &raquo;
       </a>
       <?php endif; ?>
@@ -145,6 +134,8 @@ document.addEventListener('alpine:init', () => {
             const target = document.querySelector('#search-results')
 
             target.innerHTML = source.innerHTML
+
+            history.pushState({}, '', endpoint)
 
             document.querySelector('#search-results').scrollIntoView({
               behavior: 'smooth',
