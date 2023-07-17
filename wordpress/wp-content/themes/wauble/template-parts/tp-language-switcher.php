@@ -1,5 +1,7 @@
 <?php
-$langs = trp_custom_language_switcher();
+if (function_exists('trp_custom_language_switcher')) {
+  $langs = trp_custom_language_switcher();
+}
 
 $current_locale = get_locale();
 ?>
@@ -7,7 +9,6 @@ $current_locale = get_locale();
 <?php if (!empty($langs)) : ?>
 <div
   x-data="langDropdown"
-  data-no-translation
   class="relative"
   x-id="['dropdown-panel']"
   x-on:focusin.window="! $refs.tpLangPanel.contains($event.target) && close()"
@@ -34,10 +35,10 @@ $current_locale = get_locale();
     x-cloak
     class="absolute right-0 top-0 bg-white rounded shadow-md w-max"
   >
-    <ul class="flex flex-col items-center">
+    <ul class="flex flex-col items-center" data-no-translation>
       <?php foreach ($langs as $index => $lang) : ?>
       <?php if ($lang['language_code'] === $current_locale) : ?>
-      <li class="w-full first:-mt-1">
+      <li class="w-full first:-mt-1" data-no-translation>
         <a
           href="<?php echo $lang['current_page_url']; ?>"
           class="block py-2"
@@ -58,7 +59,7 @@ $current_locale = get_locale();
       <?php endif; ?>
       <?php endforeach; ?>
       <?php foreach ($langs as $index => $lang) : ?>
-      <li class="w-full first:-mt-1">
+      <li class="w-full first:-mt-1" data-no-translation>
         <a
           href="<?php echo $lang['current_page_url']; ?>"
           class="block py-2"

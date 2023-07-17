@@ -6,20 +6,21 @@
 
 class Wauble_ACF {
   public function __construct() {
-    // add_action('acf/settings/load_json', [$this, 'acf_json_load_point']);
-    // add_action('acf/settings/save_json', [$this, 'acf_json_save_point']);
-    add_action('acf/settings/php_save', [$this, 'acf_php_save_point']);
-    add_action('acf/settings/php_load', [$this, 'acf_php_load_point']);
+    add_action('acf/settings/load_json', [$this, 'acf_json_load_point']);
+    add_action('acf/settings/save_json', [$this, 'acf_json_save_point']);
+    
     add_action('acf/settings/l10n_textdomain', function () {
       return Wauble::$text_domain;
     });
     add_action('acf/init', [$this, 'acf_register_options_pages']);
     add_filter('acf/load_field/name=post_type', [$this, 'acf_load_post_type_field_choices']);
-
+    
     // Uncomment the following lines and create a /blocks dir in the project root to enable ACR blocks.
     // See: https://github.com/james0r/wauble/tree/e498d51c6c97f6c58b88b63b6d6ee700df9767f3/blocks
     // add_filter('block_categories_all', [$this, 'register_block_categories']);
     // add_action('acf/init', [$this, 'acf_register_block_types']);
+    // add_filter('acf/settings/php_save', [$this, 'acf_php_save_point']);
+    // add_filter('acf/settings/php_load', [$this, 'acf_php_load_point']);
   }
 
   public function acf_json_load_point($paths) {

@@ -1,0 +1,73 @@
+{
+    "key": "group_629a2f42f31d8",
+    "title": "Footer",
+    "fields": [
+        {
+            "key": "field_6398f6f32a982",
+            "label": "Custom Footer Scripts",
+            "name": "custom_footer_scripts",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "WARNING: ADDING MALFORMED SCRIPTS TO THE FOOTER CAN HAVE DEVASTATING CONSEQUENCES TO THE SUCCESS OF YOUR WEBSITE. VALUES HERE SHOULD BE APPROVED OR ENTERED BY A WEB DEVELOPER.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "",
+            "acfe_textarea_code": 0
+        },
+        {
+            "key": "field_630a928746999",
+            "label": "Copyright Line",
+            "name": "copyright_line",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Leave blank to hide.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Copyright © 2022 Acme Co Inc. All rights reserved.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "footer-options"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "php"
+    ],
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1689565699
+}
