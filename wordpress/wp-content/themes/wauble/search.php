@@ -17,8 +17,9 @@ $post_types = array('post');
 $categories = array();
 $tags = array();
 $ajax = get_field('search_results_use_ajax', 'option') ?? null;
-$show_categories_on_posts = true;
-$show_date_on_posts = true;
+$show_categories_on_posts = get_field('search_results_show_categories_on_posts', 'option') ?? null;
+$show_date_on_posts = get_field('search_results_show_published_date_on_posts', 'option') ?? null;
+$show_tags_on_posts = get_field('search_results_show_tags_on_posts', 'option') ?? null;
 $attrs = array();
 
 if ($ajax) {
@@ -80,7 +81,8 @@ $query = new WP_Query($args);
 
       <?php echo get_template_part('template-parts/blog-card', null, [
             'show_categories_on_posts' => $show_categories_on_posts,
-            'show_date_on_posts' => $show_date_on_posts
+            'show_date_on_posts' => $show_date_on_posts,
+            'show_tags_on_posts' => $show_tags_on_posts
           ]); ?>
 
       <?php endwhile; ?>
