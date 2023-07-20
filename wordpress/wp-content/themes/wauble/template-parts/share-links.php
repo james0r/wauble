@@ -91,7 +91,7 @@ $description = urlencode($description);
   <!-- LinkedIn -->
   <a
     class=""
-    href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo $url; ?>&amp;title=<?php echo $title; ?>&amp;summary=<?php echo $description; ?>&amp;source=<?php echo $url; ?>"
+    href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo $url; ?>&amp;title=<?php echo $title; ?>"
     target="_blank"
     rel="noopener"
     aria-label="Share on LinkedIn"
