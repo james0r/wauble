@@ -5,11 +5,11 @@
  */
 
 class Wauble_Styles {
-  public array $styles_to_enqueue;
+  private array $styles_to_enqueue;
 
-  public array $styles_to_dequeue;
+  private array $styles_to_dequeue;
 
-  public array $admin_styles_to_enqueue;
+  private array $admin_styles_to_enqueue;
 
   public function __construct() {
     $this->styles_to_enqueue = [

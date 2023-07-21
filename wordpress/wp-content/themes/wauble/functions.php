@@ -17,7 +17,7 @@ if (!defined('WAUBLE_DEV_MODE')) {
 }
 
 if (!defined('WAUBLE_DISABLE_BLOCK_EDITOR')) {
-  define('WAUBLE_DISABLE_BLOCK_EDITOR', TRUE);
+  define('WAUBLE_DISABLE_BLOCK_EDITOR', true);
 }
 
 require_once wp_normalize_path(get_template_directory() . '/inc/helpers.php');
