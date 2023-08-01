@@ -14,7 +14,7 @@
     <span class="htmx-indicator ml-4">
       <img
         class="w-[32px] h-[32px]"
-        src="<?php echo Wauble()->getImageAssetUrl('bars.svg') ?>"
+        src="<?php echo Wauble()->url('/dist/images/bars.svg') ?>"
       />
     </span>
   </div>

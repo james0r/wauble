@@ -51,7 +51,7 @@ if ($flow_direction === 'Horizontal') {
 <?php if ($enable_lightbox) : ?>
 <link
   rel="stylesheet"
-  href="<?php echo Wauble()->getStaticAssetUrl('photoswipe.css'); ?>"
+  href="<?php echo Wauble()->url('/dist/static/photoswipe.css'); ?>"
 >
 <?php endif; ?>
 
@@ -101,7 +101,7 @@ if ($flow_direction === 'Horizontal') {
 
     <?php else : ?>
     <!-- Masonry Layout -->
-    <script src="<?php echo Wauble()->getStaticAssetUrl('masonry.pkgd.min.js'); ?>"></script>
+    <script src="<?php echo Wauble()->url('/dist/static/masonry.pkgd.min.js'); ?>"></script>
     <ul
       id="image-grid-<?php echo $section_count; ?>"
       class="masonry-with-columns -mx-2"
@@ -204,13 +204,13 @@ if ($flow_direction === 'Horizontal') {
 
     <?php if ($enable_lightbox) : ?>
     <script type="module">
-    import PhotoSwipeLightbox from '<?php echo Wauble()->getStaticAssetUrl('photoswipe-lightbox.esm.min.js'); ?>';
+    import PhotoSwipeLightbox from '<?php echo Wauble()->url('/dist/static/photoswipe-lightbox.esm.min.js'); ?>';
 
     const lightbox = new PhotoSwipeLightbox({
       gallery: '#image-grid-<?php echo $section_count; ?>',
       children: 'a',
       doubleTapAction: false,
-      pswpModule: () => import('<?php echo Wauble()->getStaticAssetUrl('photoswipe.esm.min.js'); ?>'),
+      pswpModule: () => import('<?php echo Wauble()->url('/dist/static/photoswipe.esm.min.js'); ?>'),
     });
 
     lightbox.init();
