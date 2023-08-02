@@ -4,9 +4,15 @@ $show_navigation = $section['show_navigation'] ?? null;
 $show_pagination = $section['show_pagination'] ?? null;
 $loop_slides = $section['loop_slides'] ?? null;
 $lazy_load_images = $section['lazy_load_images'] ?? null;
+$autoplay = $section['autoplay'] ?? null;
+$autoplay_delay = $section['autoplay_delay'] ?? null;
 ?>
 
-<div class="relative">
+<div
+  class="relative"
+  x-data="fullWidthSlider"
+  data-section-id="section-<?php echo $section_count; ?>"
+>
   <div class="embla overflow-hidden">
     <div class="embla__container flex">
       <?php if (!empty($slides)) : ?>
@@ -55,10 +61,11 @@ $lazy_load_images = $section['lazy_load_images'] ?? null;
   </div>
   <?php if ($show_navigation) : ?>
   <div
-    class="[&_svg]:h-6 [&_svg]:w-6 absolute top-1/2 -translate-y-1/2 flex justify-between w-full pointer-events-none text-white/75">
+    class="[&_svg]:h-6 [&_svg]:w-6 absolute top-1/2 -translate-y-1/2 flex justify-between w-full pointer-events-none text-white/75"
+  >
     <button
       class="embla__button embla__button--prev !p-2 pointer-events-auto"
-      aria-label="Previous slide" 
+      aria-label="Previous slide"
       disabled
     >
       <svg
@@ -73,7 +80,7 @@ $lazy_load_images = $section['lazy_load_images'] ?? null;
     </button>
     <button
       class="embla__button embla__button--next !p-2 pointer-events-auto"
-      aria-label="Next slide" 
+      aria-label="Next slide"
       disabled
     >
       <svg
@@ -92,34 +99,172 @@ $lazy_load_images = $section['lazy_load_images'] ?? null;
   <?php if ($show_pagination) : ?>
   <div class="embla__dots"></div>
   <?php endif; ?>
+
+  <?php
+  $options = array();
+  
+  if ($loop_slides) {
+    $options['loop'] = true;
+  } else {
+    $options['loop'] = false;
+  }
+  
+  if ($show_navigation) {
+    $options['showNavigation'] = true;
+  } else {
+    $options['showNavigation'] = false;
+  }
+  
+  if ($show_pagination) {
+    $options['showPagination'] = true;
+  } else {
+    $options['showPagination'] = false;
+  }
+  
+  if ($autoplay) {
+    $options['autoplay'] = true;
+  } else {
+    $options['autoplay'] = false;
+  }
+
+  if ($autoplay_delay) {
+    $options['autoplayDelay'] = $autoplay_delay;
+  } else {
+    $options['autoplayDelay'] = 4000;
+  }
+
+  ?>
+  
+  <script
+    type="application/json"
+    embla-options
+  >
+  <?php echo json_encode($options); ?>
+  </script>
 </div>
 
-<?php
-$embla_options = array();
+<?php if ($section_is_first_instance) : ?>
+<script src="<?php echo Wauble()->url('/dist/static/embla-carousel.umd.js') ?>"></script>
 
-if ($loop_slides) {
-  $embla_options['loop'] = true;
-} else {
-  $embla_options['loop'] = false;
-}
+<?php if ($autoplay) : ?>
+<script src="<?php echo Wauble()->url('/dist/static/embla-carousel-autoplay.umd.js') ?>"></script>
+<?php endif; ?>
 
-if ($show_navigation) {
-  $embla_options['showNavigation'] = true;
-} else {
-  $embla_options['showNavigation'] = false;
-}
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.data('fullWidthSlider', function() {
+    return {
+      init() {
+        const options = JSON.parse(this.$el.querySelector('[embla-options]').textContent)
+        const slider = this.$el.querySelector('.embla')
+        const prevButtonNode = this.$el.querySelector('.embla__button--prev')
+        const nextButtonNode = this.$el.querySelector('.embla__button--next')
+        const dotsNode = this.$el.querySelector('.embla__dots')
+        const plugins = []
 
-if ($show_pagination) {
-  $embla_options['showPagination'] = true;
-} else {
-  $embla_options['showPagination'] = false;
-}
+        if (options.autoplay) {
+          const autoplayOptions = {
+            rootNode: (emblaRoot) => emblaRoot.parentElement
+          }
 
-?>
+          if (options.autoplayDelay) {
+            autoplayOptions.delay = options.autoplayDelay
+          }
 
-<script
-  type="application/json"
-  embla-options
->
-<?php echo json_encode($embla_options); ?>
+          plugins.push(EmblaCarouselAutoplay(autoplayOptions))
+        }
+
+        const embla = EmblaCarousel(slider, options, plugins)
+
+        if (options.showNavigation) {
+          this.initPrevNextBtns(embla, prevButtonNode, nextButtonNode)
+        }
+
+        if (options.showPagination) {
+          this.addDotBtnsAndClickHandlers(embla, dotsNode)
+        }
+      },
+      addPrevNextBtnsClickHandlers(emblaApi, prevBtn, nextBtn) {
+        const scrollPrev = () => emblaApi.scrollPrev()
+        const scrollNext = () => emblaApi.scrollNext()
+        prevBtn.addEventListener('click', scrollPrev, false)
+        nextBtn.addEventListener('click', scrollNext, false)
+
+        return () => {
+          prevBtn.removeEventListener('click', scrollPrev, false)
+          nextBtn.removeEventListener('click', scrollNext, false)
+        }
+      },
+      addTogglePrevNextBtnsActive(emblaApi, prevBtn, nextBtn) {
+        const togglePrevNextBtnsState = () => {
+          if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
+          else prevBtn.setAttribute('disabled', 'disabled')
+
+          if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
+          else nextBtn.setAttribute('disabled', 'disabled')
+        }
+
+        emblaApi
+          .on('select', togglePrevNextBtnsState)
+          .on('init', togglePrevNextBtnsState)
+          .on('reInit', togglePrevNextBtnsState)
+
+        return () => {
+          prevBtn.removeAttribute('disabled')
+          nextBtn.setAttribute('disabled', 'disabled')
+        }
+      },
+      addDotBtnsAndClickHandlers(emblaApi, dotsNode) {
+        let dotNodes = []
+
+        const addDotBtnsWithClickHandlers = () => {
+          dotsNode.innerHTML = emblaApi
+            .scrollSnapList()
+            .map(() => '<button class="embla__dot" type="button"></button>')
+            .join('')
+
+          dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'))
+          dotNodes.forEach((dotNode, index) => {
+            dotNode.addEventListener('click', () => emblaApi.scrollTo(index), false)
+          })
+        }
+
+        const toggleDotBtnsActive = () => {
+          const previous = emblaApi.previousScrollSnap()
+          const selected = emblaApi.selectedScrollSnap()
+          dotNodes[previous].classList.remove('embla__dot--selected')
+          dotNodes[selected].classList.add('embla__dot--selected')
+        }
+
+        emblaApi
+          .on('init', addDotBtnsWithClickHandlers)
+          .on('reInit', addDotBtnsWithClickHandlers)
+          .on('init', toggleDotBtnsActive)
+          .on('reInit', toggleDotBtnsActive)
+          .on('select', toggleDotBtnsActive)
+
+        return () => {
+          dotsNode.innerHTML = ''
+        }
+      },
+      initPrevNextBtns(emblaApi, prevBtn, nextBtn) {
+        const removePrevNextBtnsClickHandlers = this.addPrevNextBtnsClickHandlers(
+          emblaApi,
+          prevBtn,
+          nextBtn,
+        )
+        const removeTogglePrevNextBtnsActive = this.addTogglePrevNextBtnsActive(
+          emblaApi,
+          prevBtn,
+          nextBtn,
+        )
+
+        emblaApi
+          .on('destroy', removePrevNextBtnsClickHandlers)
+          .on('destroy', removeTogglePrevNextBtnsActive)
+      }
+    }
+  })
+})
 </script>
+<?php endif; ?>

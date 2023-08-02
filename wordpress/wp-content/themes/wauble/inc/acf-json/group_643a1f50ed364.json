@@ -921,6 +921,56 @@
                             "ui_on_text": "",
                             "ui_off_text": "",
                             "ui": 1
+                        },
+                        {
+                            "key": "field_64c9fd1f9d3a0",
+                            "label": "Autoplay",
+                            "name": "autoplay",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_64ca05bac6ca1",
+                            "label": "Autoplay Delay",
+                            "name": "autoplay_delay",
+                            "aria-label": "",
+                            "type": "number",
+                            "instructions": "Delay between slide changes in milliseconds. This field accepts multiples of 500ms. (1000 equals 1 second)",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_64c9fd1f9d3a0",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "indent-1",
+                                "id": ""
+                            },
+                            "default_value": 4000,
+                            "min": 500,
+                            "max": 200000,
+                            "placeholder": "",
+                            "step": 500,
+                            "prepend": "",
+                            "append": ""
                         }
                     ],
                     "min": "",
@@ -1595,5 +1645,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1689565698
+    "modified": 1690961634
 }
