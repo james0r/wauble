@@ -48,7 +48,7 @@ $container_css = array(
 ?>
 
 <style>
-<?php echo wauble_css_encode($container_css);
+<?php echo Wauble()->utils->cssEncode($container_css);
 ?>
 </style>
 
@@ -57,7 +57,7 @@ $container_css = array(
   class="px-6 md:px-8"
   data-route="<?php echo $route; ?>"
   data-page="<?php echo $paged; ?>"
-  <?php echo wauble_attributes_encode($attrs); ?>
+  <?php echo Wauble()->utils->attrsEncode($attrs); ?>
 >
   <div class="container my-8">
     <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">

@@ -27,6 +27,8 @@ class Wauble {
 
   public $init;
 
+  public $utils;
+
   public $posts;
   
   public $editors;
@@ -71,6 +73,7 @@ class Wauble {
       self::$instance = new Wauble();
 
       self::$instance->init = new Wauble_Init;
+      self::$instance->utils = new Wauble_Utils;
       self::$instance->posts = new Wauble_Posts;
       self::$instance->editors = new Wauble_Editors;
       self::$instance->tweaks = new Wauble_Tweaks;
@@ -92,7 +95,7 @@ class Wauble {
     return self::$theme_prefix;
   }
 
-  public function url($path = '', $base = '') {
+  public static function url($path = '', $base = '') {
     if ($base === '') {
       $base = self::$stylesheet_dir_url;
     }
@@ -104,7 +107,7 @@ class Wauble {
     return $base . $path;
   }
 
-  public function path($path = '', $base = '') {
+  public static function path($path = '', $base = '') {
     if ($base === '') {
       $base = self::$stylesheet_dir_path;
     }
@@ -125,7 +128,7 @@ class Wauble {
       $path = '/' . $path;
     }
 
-    if ($this->ifFileExists($base . $path)) {
+    if (self::ifFileExists($base . $path)) {
       require_once $base . $path;
     } else {
       throw new Exception($path . 'File Not Found');
@@ -133,7 +136,7 @@ class Wauble {
     return $this; // Return class instance for method chaining
   }
 
-  private function ifFileExists($full_path) {
+  public static function ifFileExists($full_path) {
     if (file_exists($full_path)) {
       return true;
     }

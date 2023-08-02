@@ -90,7 +90,7 @@ $query = new WP_Query($args);
     <?php if ($paginate) : $big = 999999999; ?>
     <nav
       class="flex space-x-4 mx-auto max-w-max my-8"
-      <?php echo wauble_attributes_encode($attrs); ?>
+      <?php echo Wauble()->utils->attrsEncode($attrs); ?>
     >
       <?php if ($paged > 1) : ?>
       <a

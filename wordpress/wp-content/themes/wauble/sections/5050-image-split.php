@@ -115,7 +115,7 @@ if ($section['tint_image']) :
   ];
 
   echo '<style>';
-  echo wauble_css_encode($overlayStyles);
+  echo Wauble()->utils->cssEncode($overlayStyles);
   echo '</style>';
 else :
   echo '<style>';
@@ -124,7 +124,7 @@ else :
       'display' => 'none !important'
     ]
   ];
-  echo wauble_css_encode($overlayStyles);
+  echo Wauble()->utils->cssEncode($overlayStyles);
   echo '</style>';
 endif; ?>
 

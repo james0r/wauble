@@ -64,14 +64,14 @@ $query = new WP_Query($args);
 
 <?php
 $container_css = array(
-  '#section-' . $section_count => array(
+  '.section-' . $section['template'] => array(
     'scroll-margin' => 'var(--header-height)'
   )
 );
 ?>
 
 <style>
-<?php echo wauble_css_encode($container_css);
+<?php echo Wauble()->utils->cssEncode($container_css);
 ?>
 </style>
 
@@ -79,7 +79,7 @@ $container_css = array(
   class="px-6 md:px-8 my-8 posts-grid"
   data-section-id="section-<?php echo $section_count; ?>"
   data-route="<?php echo $route; ?>"
-  <?php echo wauble_attributes_encode($attrs); ?>
+  <?php echo Wauble()->utils->attrsEncode($attrs); ?>
 >
   <div class="container">
     <?php if ($query->have_posts()) : ?>
@@ -169,8 +169,4 @@ document.addEventListener('alpine:init', () => {
   })
 })
 </script>
-
-<style>
-
-</style>
 <?php endif; ?>

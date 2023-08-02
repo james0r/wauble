@@ -36,7 +36,6 @@ if (!function_exists('dd')) {
   }
 }
 
-
 if (!function_exists('get_id_from_path')) {
   /**
    * Retrieves a page id given its path.
@@ -66,12 +65,6 @@ if (!function_exists('wauble_escape_json_string')) {
   }
 }
 
-function wauble_console_log($data) {
-  echo '<script>';
-  echo 'console.log(' . json_encode($data) . ')';
-  echo '</script>';
-}
-
 if (!function_exists('wauble_get_directions')) {
   function wauble_get_directions($address) {
     // Redirects to Apple Maps if Apple device and falls back to Google maps if not.
@@ -98,53 +91,5 @@ if (!function_exists('wauble_attachment_id_from_url')) {
    */
   function wauble_attachment_id_from_url($url) {
     return attachment_url_to_postid($url);
-  }
-}
-
-if (!function_exists('wauble_css_encode')) {
-
-  /**
-   * Recursive function that generates from a a multidimensional array of CSS rules, a valid CSS string.
-   *
-   * @param array $rules
-   *   An array of CSS rules in the form of:
-   *   array('selector'=>array('property' => 'value')). Also supports selector
-   *   nesting, e.g.,
-   *   array('selector' => array('selector'=>array('property' => 'value'))).
-   *
-   * @return string A CSS string of rules. This is not wrapped in <style> tags.
-   * @source http://matthewgrasmick.com/article/convert-nested-php-array-css-string
-   */
-  function wauble_css_encode($rules, $indent = 0) {
-    $css = '';
-    $prefix = str_repeat('  ', $indent);
-
-    foreach ($rules as $key => $value) {
-      if (is_array($value)) {
-        $selector = $key;
-        $properties = $value;
-
-        $css .= $prefix . "$selector {\n";
-        $css .= $prefix . wauble_css_encode($properties, $indent + 1);
-        $css .= $prefix . "}\n";
-      } else {
-        $property = $key;
-        $css .= $prefix . "$property: $value;\n";
-      }
-    }
-
-    return $css;
-  }
-}
-
-if (!function_exists('wauble_attributes_encode')) {
-  function wauble_attributes_encode($attrs) {
-    $html = '';
-
-    foreach ($attrs as $key => $value) {
-      $html .= sprintf('%s="%s" ', $key, $value);
-    }
-
-    return $html;
   }
 }
