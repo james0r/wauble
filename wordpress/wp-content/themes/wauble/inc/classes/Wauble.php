@@ -29,6 +29,8 @@ class Wauble {
 
   public $utils;
 
+  public $search;
+
   public $posts;
   
   public $editors;
@@ -74,6 +76,7 @@ class Wauble {
 
       self::$instance->init = new Wauble_Init;
       self::$instance->utils = new Wauble_Utils;
+      self::$instance->search = new Wauble_Search;
       self::$instance->posts = new Wauble_Posts;
       self::$instance->editors = new Wauble_Editors;
       self::$instance->tweaks = new Wauble_Tweaks;
