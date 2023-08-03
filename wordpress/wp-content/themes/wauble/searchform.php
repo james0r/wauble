@@ -3,7 +3,7 @@
   method="get"
   id="searchform"
   class="searchform"
-  action="<?php echo get_home_url(); ?>"
+  action="<?php echo home_url( '/' ); ?>"
 >
   <div class="flex gap-x-2">
     <label

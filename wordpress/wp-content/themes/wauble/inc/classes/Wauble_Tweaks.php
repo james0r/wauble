@@ -20,6 +20,8 @@ class Wauble_Tweaks {
     add_action('wp_dashboard_setup', [$this, 'remove_unused_dashboard_widgets'], 999);
 
     add_filter('wpcf7_autop_or_not', '__return_false');
+    add_action('template_redirect', [$this, 'nice_search_redirect']);
+    add_action('search_rewrite_rules', [$this, 'search_empty_query_template_redirect']);;
   }
 
   public function disable_emojis_tinymce($plugins) {
@@ -57,5 +59,26 @@ class Wauble_Tweaks {
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
     remove_meta_box('dashboard_secondary', 'dashboard', 'side');
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
+  }
+
+  public function nice_search_redirect() {
+    global $wp_rewrite;
+    if (!isset($wp_rewrite) || !is_object($wp_rewrite) || !$wp_rewrite->using_permalinks())
+      return;
+
+    $search_base = $wp_rewrite->search_base;
+    if (is_search() && !is_admin() && strpos($_SERVER['REQUEST_URI'], "/{$search_base}/") === false) {
+      wp_redirect(home_url("/{$search_base}/" . urlencode(get_query_var('s'))));
+      exit();
+    }
+  }
+
+  public function search_empty_query_template_redirect($rewrite) {
+    global $wp_rewrite;
+    $rules = array(
+      $wp_rewrite->search_base . '/?$' => 'index.php?s=',
+    );
+    $rewrite = $rewrite + $rules;
+    return $rewrite;
   }
 }

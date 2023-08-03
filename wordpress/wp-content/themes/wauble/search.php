@@ -71,7 +71,7 @@ $query = new WP_Query($args);
 >
   <div class="container py-8">
     <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">
-      <?php get_template_part('template-parts/searchform'); ?>
+      <?php get_search_form(); ?>
     </div>
 
 
