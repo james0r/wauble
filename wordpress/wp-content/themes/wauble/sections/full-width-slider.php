@@ -247,7 +247,13 @@ document.addEventListener('alpine:init', () => {
 
           dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'))
           dotNodes.forEach((dotNode, index) => {
-            dotNode.addEventListener('click', () => emblaApi.scrollTo(index), false)
+            dotNode.addEventListener('click', () => {
+              if (emblaApi.plugins().autoplay?.options?.stopOnInteraction) {
+                emblaApi.plugins().autoplay.stop()
+              }
+              
+              emblaApi.scrollTo(index), false
+            })
           })
         }
 
