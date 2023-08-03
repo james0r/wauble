@@ -6,6 +6,7 @@ $loop_slides = $section['loop_slides'] ?? null;
 $lazy_load_images = $section['lazy_load_images'] ?? null;
 $autoplay = $section['autoplay'] ?? null;
 $autoplay_delay = $section['autoplay_delay'] ?? null;
+$stop_on_interaction = $section['stop_on_interaction'] ?? null;
 ?>
 
 <div
@@ -133,6 +134,12 @@ $autoplay_delay = $section['autoplay_delay'] ?? null;
     $options['autoplayDelay'] = 4000;
   }
 
+  if ($stop_on_interaction) {
+    $options['autoplayStopOnInteraction'] = true;
+  } else {
+    $options['autoplayStopOnInteraction'] = false;
+  }
+
   ?>
   
   <script
@@ -143,13 +150,12 @@ $autoplay_delay = $section['autoplay_delay'] ?? null;
   </script>
 </div>
 
-<?php if ($section_is_first_instance) : ?>
 <script src="<?php echo Wauble()->url('/dist/static/embla-carousel.umd.js') ?>"></script>
-
 <?php if ($autoplay) : ?>
 <script src="<?php echo Wauble()->url('/dist/static/embla-carousel-autoplay.umd.js') ?>"></script>
 <?php endif; ?>
 
+<?php if ($section_is_first_instance) : ?>
 <script>
 document.addEventListener('alpine:init', () => {
   Alpine.data('fullWidthSlider', function() {
@@ -171,6 +177,12 @@ document.addEventListener('alpine:init', () => {
             autoplayOptions.delay = options.autoplayDelay
           }
 
+          if (options.autoplayStopOnInteraction) {
+            autoplayOptions.stopOnInteraction = true
+          } else {
+            autoplayOptions.stopOnInteraction = false
+          }
+
           plugins.push(EmblaCarouselAutoplay(autoplayOptions))
         }
 
@@ -185,8 +197,18 @@ document.addEventListener('alpine:init', () => {
         }
       },
       addPrevNextBtnsClickHandlers(emblaApi, prevBtn, nextBtn) {
-        const scrollPrev = () => emblaApi.scrollPrev()
-        const scrollNext = () => emblaApi.scrollNext()
+        const scrollPrev = () => {
+          if (emblaApi.plugins().autoplay?.options?.stopOnInteraction) {
+            emblaApi.plugins().autoplay.stop()
+          }
+          emblaApi.scrollPrev()
+        }
+        const scrollNext = () => {
+          if (emblaApi.plugins().autoplay?.options?.stopOnInteraction) {
+            emblaApi.plugins().autoplay.stop()
+          }
+          emblaApi.scrollNext()
+        }
         prevBtn.addEventListener('click', scrollPrev, false)
         nextBtn.addEventListener('click', scrollNext, false)
 

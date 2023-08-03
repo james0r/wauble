@@ -971,6 +971,34 @@
                             "step": 500,
                             "prepend": "",
                             "append": ""
+                        },
+                        {
+                            "key": "field_64cb20edbec73",
+                            "label": "Stop on Interaction",
+                            "name": "stop_on_interaction",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_64c9fd1f9d3a0",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "indent-1",
+                                "id": ""
+                            },
+                            "message": "If enabled, when the user interacts by dragging slides or clicking either navigation button autoplay will be stop indefinitely.",
+                            "default_value": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
                         }
                     ],
                     "min": "",
@@ -1645,5 +1673,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1690961634
+    "modified": 1691034368
 }
