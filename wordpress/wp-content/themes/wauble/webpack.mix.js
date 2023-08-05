@@ -1,4 +1,5 @@
 const mix = require("laravel-mix")
+require('laravel-mix-clean')
 
 // mix.webpackConfig({
 //   stats: {
@@ -16,7 +17,9 @@ mix.options({
 })
 
 // Compile Javascript
-mix.js("src/index.js", "dist/js/frontend-bundle.js")
+mix.js("src/index.js", "dist/js/frontend-bundle.js").sourceMaps(false, 'source-map').clean({
+  cleanOnceBeforeBuildPatterns: ['./dist/js/*', './dist/css/*'],
+})
 
 // Compile SCSS
 mix.sass('src/scss/main.scss', 'dist/css/sass-compiled.css');
