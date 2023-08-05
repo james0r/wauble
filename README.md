@@ -20,7 +20,7 @@ lando start
 lando setup:wordpress
 ```
 
-### Install Wauble Starter Theme & Composer Managed Plugins
+### Cleanup themes directory, install themes dependencies, and run wp-cli commands to optimize WordPress for Wauble theme.
 
 ```bash
 lando setup:theme

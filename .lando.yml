@@ -54,7 +54,6 @@ tooling:
       - appserver: composer install
       - appserver: rm -rf wordpress/wp-content/themes/twentytwentyone
       - appserver: rm -rf wordpress/wp-content/themes/twentytwentytwo
-      - appserver: mkdir -p wordpress/wp-content/themes/wauble
       - appserver: cd wordpress/wp-content/themes/wauble && composer install
       - node: cd wordpress/wp-content/themes/wauble && npm install
       - node: cd wordpress/wp-content/themes/wauble && npm run build
