@@ -14,15 +14,15 @@ class Wauble_Tweaks {
     remove_filter('the_content_feed', 'wp_staticize_emoji');
     remove_filter('comment_text_rss', 'wp_staticize_emoji');
     remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-    add_filter('tiny_mce_plugins', [$this, 'disable_emojis_tinymce']);
-    add_filter('wp_resource_hints', [$this, 'disable_emojis_remove_dns_prefetch'], 10, 2);
-    add_action('admin_menu', [$this, 'remove_unused_admin_menu_items']);
-    add_action('wp_dashboard_setup', [$this, 'remove_unused_dashboard_widgets'], 999);
+    add_filter('tiny_mce_plugins', [$this, 'disableEmojisTinymce']);
+    add_filter('wp_resource_hints', [$this, 'disableEmojisRemoveDnsPrefetch'], 10, 2);
+    add_action('admin_menu', [$this, 'removeUnusedAdminMenuItems']);
+    add_action('wp_dashboard_setup', [$this, 'removeUnusedDashboardWidgets'], 999);
 
     add_filter('wpcf7_autop_or_not', '__return_false');
   }
 
-  public function disable_emojis_tinymce($plugins) {
+  public function disableEmojisTinymce($plugins) {
     if (is_array($plugins)) {
       return array_diff($plugins, ['wpemoji']);
     } else {
@@ -30,7 +30,7 @@ class Wauble_Tweaks {
     }
   }
 
-  public function disable_emojis_remove_dns_prefetch($urls, $relation_type) {
+  public function disableEmojisRemoveDnsPrefetch($urls, $relation_type) {
     if ('dns-prefetch' == $relation_type) {
       /** This filter is documented in wp-includes/formatting.php */
       $emoji_svg_url = apply_filters('emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/');
@@ -41,7 +41,7 @@ class Wauble_Tweaks {
     return $urls;
   }
 
-  public function remove_unused_admin_menu_items() {
+  public function removeUnusedAdminMenuItems() {
     global $menu;
     $restricted = [__('Links'), __('Comments')];
     end($menu);
@@ -53,7 +53,7 @@ class Wauble_Tweaks {
     }
   }
 
-  public function remove_unused_dashboard_widgets() {
+  public function removeUnusedDashboardWidgets() {
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
     remove_meta_box('dashboard_secondary', 'dashboard', 'side');
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');

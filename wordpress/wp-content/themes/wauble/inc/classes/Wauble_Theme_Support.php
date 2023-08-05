@@ -70,17 +70,17 @@ class Wauble_Theme_Support {
       ['core-block-patterns']
     ];
 
-    add_action('after_setup_theme', [$this, 'add_theme_support']);
-    add_action('after_setup_theme', [$this, 'remove_theme_support']);
+    add_action('after_setup_theme', [$this, 'addThemeSupport']);
+    add_action('after_setup_theme', [$this, 'removeThemeSupport']);
   }
 
-  public function add_theme_support() {
+  public function addThemeSupport() {
     array_map(function ($feature) {
       call_user_func_array('add_theme_support', $feature);
     }, $this->features_to_add);
   }
 
-  public function remove_theme_support() {
+  public function removeThemeSupport() {
     array_map(function ($feature) {
       call_user_func_array('remove_theme_support', $feature);
     }, $this->features_to_remove);

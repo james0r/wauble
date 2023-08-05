@@ -10,10 +10,10 @@ use LukaPeharda\TailwindCssColorPaletteGenerator\PaletteGenerator;
  */
 
 class Wauble_Colors {
-  protected array $themeColors;
+  protected array $theme_colors;
 
   public function __construct() {
-    $this->themeColors = array(
+    $this->theme_colors = array(
       'primary' => '#062F4F',
       'secondary' => '#813772',
       'accent' => '#B82601',
@@ -26,38 +26,38 @@ class Wauble_Colors {
   }
 
   public function getThemeColorPalette() {
-    return $this->themeColors;
+    return $this->theme_colors;
   }
 
   public function getShadedPalettes() {
-    $shadedPalettes = [];
+    $shaded_palettes = [];
 
-    foreach ($this->themeColors as $key => $hex) {
-      $colorObj = Color::fromHex($hex);
-      $paletteGenerator = new PaletteGenerator;
+    foreach ($this->theme_colors as $key => $hex) {
+      $color_obj = Color::fromHex($hex);
+      $palette_generator = new PaletteGenerator;
 
       if ($key === 'base') {
-        $paletteGenerator->setBaseValue(100);
+        $palette_generator->setBaseValue(100);
       }
 
-      $paletteGenerator->setBaseColor($colorObj);
-      $palette = $paletteGenerator->getPalette();
-      $shadedPalettes[$key] = $palette;
+      $palette_generator->setBaseColor($color_obj);
+      $palette = $palette_generator->getPalette();
+      $shaded_palettes[$key] = $palette;
     }
 
-    return $shadedPalettes;
+    return $shaded_palettes;
   }
 
   public function renderShadedPalettesAsCssVars() {
-    $shadedPalettes = $this->getShadedPalettes();
-    $cssVars = '';
+    $shaded_palettes = $this->getShadedPalettes();
+    $css_vars = '';
 
-    foreach ($shadedPalettes as $colorKey => $palette) {
+    foreach ($shaded_palettes as $color_key => $palette) {
       foreach ($palette as $key => $color) {
-        $cssVars .= "--color-{$colorKey}-{$key}: #{$color->getHex()};\r\n";
+        $css_vars .= "--color-{$color_key}-{$key}: #{$color->getHex()};\r\n";
       }
     }
     
-    echo "<style id=\"tailwind-color-palette-css-vars\">:root{{$cssVars}}</style>";
+    echo "<style id=\"tailwind-color-palette-css-vars\">:root{{$css_vars}}</style>";
   }
 }

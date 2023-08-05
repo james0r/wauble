@@ -6,30 +6,30 @@
 
 class Wauble_Static_Templates {
   public function __construct() {
-    add_action('init', [$this, 'static_template_rewrite']);
-    add_filter('query_vars', [$this, 'whitelist_query_vars']);
-    add_action('template_include', [$this, 'include_static_template']);
+    add_action('init', [$this, 'staticTemplateRewrite']);
+    add_filter('query_vars', [$this, 'whitelistQueryVars']);
+    add_action('template_include', [$this, 'includeStaticTemplate']);
   }
 
-  public function static_template_rewrite() {
+  public function staticTemplateRewrite() {
     add_rewrite_rule('/?$', 'index.php', 'top');
 
     // Not required. Just here for easier local development.
     flush_rewrite_rules();
   }
 
-  public function whitelist_query_vars($queryVars) {
-    $queryVars[] = 'static_template';
+  public function whitelistQueryVars($query_vars) {
+    $query_vars[] = 'static_template';
 
-    return $queryVars;
+    return $query_vars;
   }
 
-  public function include_static_template($template) {
+  public function includeStaticTemplate($template) {
 
-    $staticQueryVarValue = get_query_var('static_template');
+    $static_query_var_value = get_query_var('static_template');
 
-    if (!empty($staticQueryVarValue)) {
-      return get_stylesheet_directory() . "/static-templates/{$staticQueryVarValue}.php";
+    if (!empty($static_query_var_value)) {
+      return get_stylesheet_directory() . "/static-templates/{$static_query_var_value}.php";
     }
 
     return $template;

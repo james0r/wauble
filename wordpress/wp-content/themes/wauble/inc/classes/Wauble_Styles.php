@@ -44,25 +44,25 @@ class Wauble_Styles {
       ]
     ];
 
-    add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
-    add_action('wp_enqueue_scripts', [$this, 'dequeue_styles']);
-    add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_styles']);
+    add_action('wp_enqueue_scripts', [$this, 'enqueueStyles']);
+    add_action('wp_enqueue_scripts', [$this, 'dequeueStyles']);
+    add_action('admin_enqueue_scripts', [$this, 'enqueueAdminStyles']);
     // add_action('wp_enqueue_styles', [$this, 'wauble_register_styles']);
   }
 
-  public function enqueue_styles() {
+  public function enqueueStyles() {
     array_map(function ($style) {
       call_user_func_array('wp_enqueue_style', $style);
     }, $this->styles_to_enqueue);
   }
 
-  public function dequeue_styles() {
+  public function dequeueStyles() {
     array_map(function ($style) {
       call_user_func_array('wp_dequeue_style', $style);
     }, $this->styles_to_dequeue);
   }
 
-  public function enqueue_admin_styles() {
+  public function enqueueAdminStyles() {
     array_map(function ($style) {
       call_user_func_array('wp_enqueue_style', $style);
     }, $this->admin_styles_to_enqueue);

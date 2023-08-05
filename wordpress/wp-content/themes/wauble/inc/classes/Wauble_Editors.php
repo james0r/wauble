@@ -8,12 +8,12 @@ class Wauble_Editors {
   public function __construct() {
     
     if (WAUBLE_DISABLE_BLOCK_EDITOR) {
-      add_action('admin_init', [$this, 'hide_classic_editor_on_pages']);
+      add_action('admin_init', [$this, 'hideClassicEditorOnPages']);
       add_filter('use_block_editor_for_post', '__return_false');
     } 
   }
 
-  public function hide_classic_editor_on_pages() {
+  public function hideClassicEditorOnPages() {
     if (isset($_GET['post'])) {
       $post_id = $_GET['post'];
     }

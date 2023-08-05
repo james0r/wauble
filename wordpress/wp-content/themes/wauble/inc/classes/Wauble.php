@@ -145,7 +145,7 @@ class Wauble {
     }
   }
 
-  public static function get_normalized_theme_version() {
+  public static function getNormalizedThemeVersion() {
     $theme_version = self::$version;
     $theme_version_array = explode('.', $theme_version);
 
