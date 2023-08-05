@@ -81,7 +81,7 @@ tooling:
     user: root
     cmd:
       - echo -n "Building theme..."
-      - cd wordpress/wp-content/themes/wauble && npm run build
+      - cd /app/wordpress/wp-content/themes/wauble && npm run build
       - echo "Theme build successfully ✅"
   install:theme-dependencies:
     - echo -n "Installing theme dependencies..."

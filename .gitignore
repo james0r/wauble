@@ -42,6 +42,8 @@ node_modules
 /wordpress/wp-content/themes/wauble/.env
 /wordpress/wp-content/themes/wauble/vendor
 /wordpress/wp-content/themes/wauble/vendor/**
+/wordpress/wp-content/themes/wauble/node_modules
+/wordpress/wp-content/themes/wauble/node_modules/**
 
 # Lock Files
 package-lock.json
