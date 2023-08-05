@@ -25,13 +25,13 @@ class Wauble_ACF {
   public function acf_json_load_point($paths) {
     unset($paths[0]);
 
-    $paths[] = Wauble::$stylesheet_dir_path . '/inc/acf-json';
+    $paths[] = Wauble()->path('/inc/acf-json');
 
     return $paths;
   }
 
   public function acf_json_save_point($path) {
-    $path = Wauble::$stylesheet_dir_path . '/inc/acf-json';
+    $path = Wauble()->path('/inc/acf-json');
 
     return $path;
   }
@@ -39,13 +39,13 @@ class Wauble_ACF {
   public function acf_php_load_point($paths) {
     unset($paths[0]);
 
-    $paths[] = Wauble::$stylesheet_dir_path . '/inc/acf-php';
+    $paths[] = Wauble()->path('/inc/acf-php');
 
     return $paths;
   }
 
   public function acf_php_save_point($path) {
-    $path = Wauble::$stylesheet_dir_path . '/inc/acf-php';
+    $path = Wauble()->path('/inc/acf-php');
 
     return $path;
   }

@@ -16,30 +16,30 @@ class Wauble_Menus {
       'site_map_pages' => __('Sitemap Pages', 'wauble')
     ];
 
-    add_action('after_setup_theme', [$this, 'register_nav_menus']);
-    add_filter('nav_menu_css_class', [$this, 'add_class_to_menu_li'], 1, 3);
-    add_filter('nav_menu_link_attributes', [$this, 'add_menu_link_class'], 1, 3);
+    add_action('after_setup_theme', [$this, 'registerNavMenus']);
+    add_filter('nav_menu_css_class', [$this, 'addClassToMenuLi'], 1, 3);
+    add_filter('nav_menu_link_attributes', [$this, 'addMenuLinkClass'], 1, 3);
   }
 
-  public function register_nav_menus() {
+  public function registerNavMenus() {
     register_nav_menus($this->menus);
   }
 
-  public function add_class_to_menu_li($classes, $item, $args) {
+  public function addClassToMenuLi($classes, $item, $args) {
     if (isset($args->item_class)) {
       $classes[] = $args->item_class;
     }
     return $classes;
   }
 
-  public function add_menu_link_class($atts, $item, $args) {
+  public function addMenuLinkClass($atts, $item, $args) {
     if (property_exists($args, 'link_class')) {
       $atts['class'] = $args->link_class;
     }
     return $atts;
   }
 
-  public function get_navi_menu($menu_id) {
+  public function getNaviMenu($menu_id) {
     return (new Navi())->build($menu_id);
   }
 }

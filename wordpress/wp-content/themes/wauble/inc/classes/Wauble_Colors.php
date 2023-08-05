@@ -10,10 +10,10 @@ use LukaPeharda\TailwindCssColorPaletteGenerator\PaletteGenerator;
  */
 
 class Wauble_Colors {
-  protected array $theme_colors;
+  protected array $themeColors;
 
   public function __construct() {
-    $this->theme_colors = array(
+    $this->themeColors = array(
       'primary' => '#062F4F',
       'secondary' => '#813772',
       'accent' => '#B82601',
@@ -21,18 +21,18 @@ class Wauble_Colors {
       'base' => '#FFFFFF'
     );
 
-    add_action('wp_head', [$this, 'append_shaded_palettes_as_css_vars']);
-    add_action('login_enqueue_scripts', [$this, 'append_shaded_palettes_as_css_vars']);
+    add_action('wp_head', [$this, 'renderShadedPalettesAsCssVars']);
+    add_action('login_enqueue_scripts', [$this, 'renderShadedPalettesAsCssVars']);
   }
 
-  public function get_theme_color_palette() {
-    return $this->theme_colors;
+  public function getThemeColorPalette() {
+    return $this->themeColors;
   }
 
-  public function get_shaded_palettes() {
-    $shaded_palettes = [];
+  public function getShadedPalettes() {
+    $shadedPalettes = [];
 
-    foreach ($this->theme_colors as $key => $hex) {
+    foreach ($this->themeColors as $key => $hex) {
       $colorObj = Color::fromHex($hex);
       $paletteGenerator = new PaletteGenerator;
 
@@ -42,27 +42,22 @@ class Wauble_Colors {
 
       $paletteGenerator->setBaseColor($colorObj);
       $palette = $paletteGenerator->getPalette();
-      $shaded_palettes[$key] = $palette;
+      $shadedPalettes[$key] = $palette;
     }
 
-    return $shaded_palettes;
+    return $shadedPalettes;
   }
 
-  public function append_shaded_palettes_as_css_vars() {
-?>
-<!-- Wauble CSS Variables Start -->
-<style>
-:root {
-  <?php foreach ($this->get_shaded_palettes() as $colorKey=> $palette) {
-    foreach ($palette as $key=> $color) {
-      echo '--color-'. $colorKey . '-'. $key . ': #'. $color->getHex() . ';'. "\r\n";
+  public function renderShadedPalettesAsCssVars() {
+    $shadedPalettes = $this->getShadedPalettes();
+    $cssVars = '';
+
+    foreach ($shadedPalettes as $colorKey => $palette) {
+      foreach ($palette as $key => $color) {
+        $cssVars .= "--color-{$colorKey}-{$key}: #{$color->getHex()};\r\n";
+      }
     }
-  }
-
-  ?>
-}
-</style>
-<!-- Wauble CSS Variables End -->
-<?php
+    
+    echo "<style id=\"tailwind-color-palette-css-vars\">:root{{$cssVars}}</style>";
   }
 }

@@ -6,25 +6,25 @@
 
 class Wauble_Init {
   public function __construct() {
-    add_action('after_setup_theme', [$this, 'add_image_sizes']);
-    add_action('after_setup_theme', [$this, 'init_i18n']);
-    add_action('wp_footer', [$this, 'debugging_console_table']);
+    add_action('after_setup_theme', [$this, 'addImageSizes']);
+    add_action('after_setup_theme', [$this, 'initI18n']);
+    add_action('wp_footer', [$this, 'debuggingConsoleTable']);
 
     Wauble()->requireOnce('/inc/helpers.php');
     Wauble()->requireOnce('/vendor/autoload.php');
   }
 
-  public function init_i18n() {
+  public function initI18n() {
     load_theme_textdomain(Wauble::$text_domain, get_template_directory() . '/languages');
   }
 
-  public function add_image_sizes() {
+  public function addImageSizes() {
     add_image_size('pageBanner', 1500, 350, true);
-    add_image_size('test-thumbnail', 200, 300, true);
-    add_image_size('test-thumbnail-2X', 400, 600, true);
+    add_image_size('testThumbnail', 200, 300, true);
+    add_image_size('testThumbnail2X', 400, 600, true);
   }
 
-  public function debugging_console_table() {
+  public function debuggingConsoleTable() {
     global $template;
 
     $markup = '<script>
