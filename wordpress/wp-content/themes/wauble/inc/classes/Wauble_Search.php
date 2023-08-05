@@ -7,13 +7,13 @@
 class Wauble_Search {
 
   public function __construct() {
-    add_action('template_redirect', [$this, 'nice_search_redirect']);
-    add_action('search_rewrite_rules', [$this, 'search_empty_query_template_redirect']);;
-    add_filter('wpseo_title', [$this, 'on_filter_title'], 15);
-    add_filter('pre_get_document_title', [$this, 'on_filter_title'], 10);
+    add_action('template_redirect', [$this, 'rewriteQueryParamsToUrlSegments']);
+    add_action('search_rewrite_rules', [$this, 'rewriteBaseSearchRouteNoParams']);;
+    add_filter('wpseo_title', [$this, 'filterTitleTag'], 15);
+    add_filter('pre_get_document_title', [$this, 'filterTitleTag'], 10);
   }
 
-  public function on_filter_title($title) {
+  public function filterTitleTag($title) {
     if (is_search() && get_search_query() === '') {
       return str_replace('You searched for', 'Search', $title);
     }
@@ -21,7 +21,7 @@ class Wauble_Search {
     return $title;
   }
 
-  public function nice_search_redirect() {
+  public function rewriteQueryParamsToUrlSegments() {
     global $wp_rewrite;
     if (!isset($wp_rewrite) || !is_object($wp_rewrite) || !$wp_rewrite->using_permalinks())
       return;
@@ -33,7 +33,7 @@ class Wauble_Search {
     }
   }
 
-  public function search_empty_query_template_redirect($rewrite) {
+  public function rewriteBaseSearchRouteNoParams($rewrite) {
     global $wp_rewrite;
     $rules = array(
       $wp_rewrite->search_base . '/?$' => 'index.php?s=',

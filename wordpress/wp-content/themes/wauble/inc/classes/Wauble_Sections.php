@@ -36,7 +36,7 @@ class Wauble_Sections {
       // $value will only be NULL on a new post
       return $value;
     }
-    // add default layouts
+    
     $value = array(
       array(
         'acf_fc_layout' => 'content_area'
@@ -53,34 +53,25 @@ class Wauble_Sections {
   public function render() {
     ob_start();
     echo '<!-- Begin Sections -->';
-    foreach ($this->sections as $index => $section) : ?>
+    foreach ($this->sections as $index => $section) {
+      $template = $section['template'];
+      $section_id = "section-$index";
+      $section_class = "section-$template";
+      $is_first_instance = !in_array($template, $this->included_sections);
+      $this->included_sections[] = $template;
 
-<section
-  id="section-<?php echo $index ?>"
-  class="section-<?php echo $section['template'] ?>"
->
-  <?php
-        if (in_array($section['template'], $this->included_sections)) {
-          set_query_var('section_is_first_instance', false);
-        } else {
-          set_query_var('section_is_first_instance', true);
-          array_push($this->included_sections, $section['template']);
-        }
+      set_query_var('section', $section);
+      set_query_var('section_count', $index);
+      set_query_var('section_is_first_instance', $is_first_instance);
 
-        // Globally set the ACF data and section count for use in template-part
-        set_query_var('section', $section);
-        set_query_var('section_count', $index);
+      echo "<section id=\"$section_id\" class=\"$section_class\">";
+      get_template_part("sections/$template");
+      echo '</section>';
 
-        echo get_template_part('sections/' . $section['template']);
-
-        // Reset the ACF data and section count to prevent scope pollution
-        set_query_var('section_is_first_instance', null);
-        set_query_var('section', null);
-        set_query_var('section_count', null);
-        ?>
-</section>
-
-<?php endforeach;
+      set_query_var('section', null);
+      set_query_var('section_count', null);
+      set_query_var('section_is_first_instance', null);
+    }
     echo '<!-- End Sections -->';
     return ob_get_clean();
   }
