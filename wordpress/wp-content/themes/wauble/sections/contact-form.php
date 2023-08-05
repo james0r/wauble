@@ -4,10 +4,6 @@ $description = $section['description'] ?? null;
 $shortcode = $section['contact_form_7_shortcode'] ?? null;
 ?>
 
-<?php 
-// dd($shortcode);
-?>
-
 <?php if (!empty($shortcode)) : ?>
 <div class="px-6 md:px-8 py-8">
   <div class="container">

@@ -22,7 +22,7 @@ class Wauble_Sections {
     if (!$post) return;
 
     if ($section_fields = get_field('sections', $post->ID)) {
-      $sections = array_map([$this, 'getSectionFilename'], $section_fields);
+      $sections = array_map([$this, 'setSectionPathKeyValue'], $section_fields);
       $this->sections = $sections;
     }
   }
@@ -45,7 +45,7 @@ class Wauble_Sections {
     return $value;
   }
 
-  public function getSectionFilename($section) {
+  public function setSectionPathKeyValue($section) {
     $section['template'] = str_replace('_', '-', $section['acf_fc_layout']);
     return $section;
   }

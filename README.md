@@ -23,7 +23,7 @@ lando setup:wordpress
 ### Install Wauble Starter Theme & Composer Managed Plugins
 
 ```bash
-lando setup:environment
+lando setup:theme
 ```
 
 ### Rebuild Local Environment
