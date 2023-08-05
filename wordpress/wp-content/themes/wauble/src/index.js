@@ -1,7 +1,7 @@
 import Alpine from "alpinejs"
 import collapse from "@alpinejs/collapse"
 import intersect from '@alpinejs/intersect'
-import alpineExtended from "./alpine"
+import alpineGlobals from "./alpine"
 import helpers from "./helpers.js"
 import "./a11y.js"
 
@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 Alpine.plugin([intersect, collapse])
-alpineExtended.register(Alpine)
+alpineGlobals.register(Alpine)
 Alpine.start()
 
 console.log('Wauble Frontend Script Loaded')
