@@ -15,6 +15,7 @@
 !.env.example
 !/config/
 !/config/nginx.conf
+!/config/php.ini
 !/.lando/
 !/.lando/on_node_service_start.sh
 

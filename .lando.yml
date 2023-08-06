@@ -89,6 +89,7 @@ tooling:
     - echo "Theme dependencies installed successfully ✅"
 excludes:
   - wordpress/wp-content/themes/wauble/node_modules
+  - /app/wordpress/wp-content/themes/wauble/node_modules
   # - vendor
   # - wordpress/wp-content/themes/wauble/vendor
   # - wordpress/wp-content/uploads
