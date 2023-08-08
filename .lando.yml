@@ -84,9 +84,13 @@ tooling:
       - cd /app/wordpress/wp-content/themes/wauble && npm run build
       - echo "Theme build successfully ✅"
   install:theme-dependencies:
-    - echo -n "Installing theme dependencies..."
-    - cd wordpress/wp-content/themes/wauble && npm install
-    - echo "Theme dependencies installed successfully ✅"
+    description: Install theme dependencies
+    service: node
+    user: root
+    cmd:
+      - echo -n "Installing theme dependencies..."
+      - cd /app/wordpress/wp-content/themes/wauble && npm install
+      - echo "Theme dependencies installed successfully ✅"
 excludes:
   - wordpress/wp-content/themes/wauble/node_modules
   - /app/wordpress/wp-content/themes/wauble/node_modules

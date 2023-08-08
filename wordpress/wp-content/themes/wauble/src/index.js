@@ -30,6 +30,6 @@ if (process.env.NODE_ENV === "development") {
 
 Alpine.plugin([intersect, collapse])
 alpineGlobals.register(Alpine)
-Alpine.start()
+Alpine.start() 
 
 console.log('Wauble Frontend Script Loaded')
