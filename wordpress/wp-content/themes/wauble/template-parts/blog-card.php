@@ -11,7 +11,13 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       class="relative pt-[86%] block"
     >
       <?php
-      echo get_the_post_thumbnail(get_the_ID(), 600, ['class' => 'absolute object-cover w-full h-full inset-0 rounded-lg']);
+      echo get_the_post_thumbnail(
+        get_the_ID(), 
+        'wauble-blog-card', 
+        [
+          'class' => 'absolute object-cover w-full h-full inset-0 rounded-lg'
+        ]
+      );
       ?>
     </a>
     <div class="flex text-primary-500 mt-4 items-center">

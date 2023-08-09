@@ -10,7 +10,6 @@ class Wauble_Init {
     add_action('after_setup_theme', [$this, 'initI18n']);
     add_action('wp_footer', [$this, 'debuggingConsoleTable']);
 
-    Wauble()->requireOnce('/inc/helpers.php');
     Wauble()->requireOnce('/vendor/autoload.php');
   }
 
@@ -19,9 +18,12 @@ class Wauble_Init {
   }
 
   public function addImageSizes() {
-    add_image_size('pageBanner', 1500, 350, true);
-    add_image_size('testThumbnail', 200, 300, true);
-    add_image_size('testThumbnail2X', 400, 600, true);
+    add_image_size('wauble-blog-card', 600, 600, true);
+    add_image_size('wauble-blog-card-1-5x', 900, 900, true);
+    add_image_size('wauble-blog-card-2x', 1200, 1200, true);
+
+    add_image_size('single_featured_image', 1280, 9999, false);
+    add_image_size('single_featured_image_2X', 2560, 9999, false);
   }
 
   public function debuggingConsoleTable() {

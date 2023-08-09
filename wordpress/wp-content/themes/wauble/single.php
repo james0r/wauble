@@ -15,7 +15,7 @@
           <?php
               echo wp_get_attachment_image(
                 get_post_thumbnail_id(),
-                'full',
+                [1280, 9999],
                 false,
                 [
                   'class' => 'object-cover object-center w-full h-full'
