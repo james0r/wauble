@@ -9,16 +9,18 @@ config:
     server: config/nginx.conf
 env_file:
   - .env
-events:
-  pre-start:
-    - node: "cd /app/wordpress/wp-content/themes/wauble && npm install"
-    - node: "cd /app/wordpress/wp-content/themes/wauble && npm run dev"
+# events:
+#   pre-start:
+#     - node: "cd /app/wordpress/wp-content/themes/wauble && npm install"
+#     - node: "cd /app/wordpress/wp-content/themes/wauble && (npm run watch&)"
 services:
   node:
     type: node:18
+    build: 
+      - cd /app/wordpress/wp-content/themes/wauble && npm install
     overrides:
       command: 
-        - /app/.lando/on_node_service_start.sh
+        - /app/.lando/on_node_service_run.sh
   pma:
     type: phpmyadmin
     hosts:
@@ -68,29 +70,13 @@ tooling:
       - appserver: wp menu create "Footer Menu" --path=wordpress
       - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
-  restart:theme-watch:
-    description: Restart the watch command
+  kill:theme-watch:
+    description: Kill the watch command
     service: node
     user: root
     cmd:
       - echo -n "Killing theme watcher..."
-      - kill -9 $(cat /tmp/npm.pid) && echo " ✅"
-  build:theme:
-    description: Build the theme
-    service: node
-    user: root
-    cmd:
-      - echo -n "Building theme..."
-      - cd /app/wordpress/wp-content/themes/wauble && npm run build
-      - echo "Theme build successfully ✅"
-  install:theme-dependencies:
-    description: Install theme dependencies
-    service: node
-    user: root
-    cmd:
-      - echo -n "Installing theme dependencies..."
-      - cd /app/wordpress/wp-content/themes/wauble && npm install
-      - echo "Theme dependencies installed successfully ✅"
+      - /app/.lando/kill_npm_run_watch.sh && echo " ✅"
 excludes:
   - wordpress/wp-content/themes/wauble/node_modules
   - /app/wordpress/wp-content/themes/wauble/node_modules

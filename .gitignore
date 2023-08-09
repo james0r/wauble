@@ -18,6 +18,9 @@
 !/config/php.ini
 !/.lando/
 !/.lando/on_node_service_start.sh
+!/.lando/on_node_service_run.sh
+!/.lando/helpers.sh
+!/.lando/kill_npm_run_watch.sh
 
 # Depenedencies
 vendor
