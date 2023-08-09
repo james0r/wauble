@@ -20,6 +20,8 @@ class Wauble_Tweaks {
     add_action('wp_dashboard_setup', [$this, 'removeUnusedDashboardWidgets'], 999);
 
     add_filter('wpcf7_autop_or_not', '__return_false');
+
+    add_filter( 'max_srcset_image_width', [$this, 'setSrcsetMaximumWidth'], 10, 2 );
   }
 
   public function disableEmojisTinymce($plugins) {
@@ -57,5 +59,9 @@ class Wauble_Tweaks {
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
     remove_meta_box('dashboard_secondary', 'dashboard', 'side');
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
+  }
+
+  function setSrcsetMaximumWidth( $max_srcset_image_width, $sizes_array ) {
+    return 3200;
   }
 }
