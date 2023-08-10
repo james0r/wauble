@@ -15,7 +15,7 @@
           <?php
               echo wp_get_attachment_image(
                 get_post_thumbnail_id(),
-                'single_featured_image_new',
+                'single_featured_image',
                 false,
                 [
                   'class' => 'object-cover object-center w-full h-full',
