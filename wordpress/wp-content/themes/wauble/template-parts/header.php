@@ -13,8 +13,8 @@
 >
   <?php wp_body_open(); ?>
   <a
-    href="#main"
-    class="skip-to-content-link sr-only"
+    href="#site-main"
+    class="skip-to-content-link"
     tabindex="0"
   >
     Skip to content

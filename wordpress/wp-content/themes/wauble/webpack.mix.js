@@ -16,41 +16,35 @@ mix.options({
   }
 })
 
-// Compile Javascript
-mix.js("src/index.js", "dist/js/frontend-bundle.js").sourceMaps(false, 'source-map').clean({
-  cleanOnceBeforeBuildPatterns: ['./dist/js/*', './dist/css/*'],
-})
-
-// Compile SCSS
-mix.sass('src/scss/main.scss', 'dist/css/sass-compiled.css');
-
-// Compile PostCSS
-mix.postCss("src/css/site.pcss", "dist/css/tailwind.css", [
-  require('tailwindcss/nesting'),
-  require('tailwindcss')
-])
-
-// Sync Directories
-mix
+mix.setPublicPath("dist")
   .copyDirectory("src/static", "dist/static")
   .copyDirectory("src/images", "dist/images")
   .copyDirectory("src/admin", "dist/admin")
   .copyDirectory("src/fonts", "dist/fonts")
-
-// Start BrowserSync
-mix.browserSync({
-  proxy: "http://wauble.lndo.site",
-  socket: {
-    domain: "http://bs.wauble.lndo.site",
-    port: 80
-  },
-  open: false,
-  notify: false,
-  files: [
-    `./**/*.php`,
-    `./src/**/*.js`,
-    `./src/**/*.scss`,
-    `./src/**/*.css`,
-    `./src/**/*.pcss`
-  ]
-})
+  .js("src/index.js", "js/frontend-bundle.js").sourceMaps(false, 'source-map').clean({
+    cleanOnceBeforeBuildPatterns: ['./dist/js/*', './dist/css/*'],
+  })
+  .sass('src/scss/main.scss', 'css/sass-compiled.css')
+  .postCss("src/css/site.pcss", "css/tailwind.css", [
+    require('tailwindcss/nesting'),
+    require('tailwindcss')
+  ])
+  .clean({
+    dry: false
+  })
+  .browserSync({
+    proxy: "http://wauble.lndo.site",
+    socket: {
+      domain: "http://bs.wauble.lndo.site",
+      port: 80
+    },
+    open: false,
+    notify: false,
+    files: [
+      `./**/*.php`,
+      `./src/**/*.js`,
+      `./src/**/*.scss`,
+      `./src/**/*.css`,
+      `./src/**/*.pcss`
+    ]
+  })
