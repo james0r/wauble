@@ -13,8 +13,6 @@ if ($paginate) {
   $posts_per_page = -1;
 }
 
-echo $paged;
-
 $post_types = array('post');
 $categories = array();
 $tags = array();
@@ -78,7 +76,7 @@ $query = new WP_Query($args);
       <h1>
         <?php if (!empty(get_search_query())) : ?>
           <?php _e('Search Results for: ', 'wauble'); ?>
-          <span class="tw-text-primary-500"><?php echo get_search_query(); ?></span>
+          <span class="tw-text-blue-500"><?php echo get_search_query(); ?></span>
         <?php else : ?>
           <?php _e('Search', 'wauble'); ?>
         <?php endif; ?>
@@ -151,8 +149,6 @@ document.addEventListener('alpine:init', () => {
             const target = document.querySelector('#search-results')
 
             target.innerHTML = source.innerHTML
-
-            console.log(endpoint)
 
             history.pushState({}, '', endpoint)
 

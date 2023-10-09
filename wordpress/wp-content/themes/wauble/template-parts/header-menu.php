@@ -38,7 +38,7 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
       <div class=" tw-flex tw-items-center tw-relative tw-max-w-max tw-mx-auto tw-pr-6">
         <a
           href="<?php echo $item->url; ?>"
-          class="hover:tw-text-primary-600"
+          class="hover:tw-text-blue-600"
         >
           <?php echo $item->label; ?>
         </a>
@@ -74,7 +74,7 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
     <li class="<?php echo trim($item->classes); ?> <?php echo $item->active ? 'current-item' : ''; ?>">
       <a
         href="<?php echo $item->url; ?>"
-        class="hover:tw-text-primary-600 tw-font-bold"
+        class="hover:tw-text-blue-600 tw-font-bold"
       >
         <?php echo $item->label; ?>
       </a>

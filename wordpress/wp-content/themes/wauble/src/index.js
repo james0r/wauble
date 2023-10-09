@@ -7,14 +7,11 @@ import "./a11y.js"
 
 window.Alpine = Alpine
 
-// Declare our NAMESPACE on the window
 const NAMESPACE = "wauble"
 
-// Define our NAMESPACE and helpers property
 window[NAMESPACE] = window[NAMESPACE] || {}
 window[NAMESPACE].helpers = {}
 
-// Map helper functions to window[NAMESPACE].helpers
 for (const [key, value] of Object.entries(helpers)) {
   window[NAMESPACE].helpers[key] = value
 }

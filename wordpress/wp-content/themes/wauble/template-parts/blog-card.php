@@ -9,6 +9,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
     <a
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
       class="tw-relative tw-pt-[86%] tw-block"
+      tabindex="-1"
     >
       <?php
       echo get_the_post_thumbnail(
@@ -20,12 +21,12 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       );
       ?>
     </a>
-    <div class="tw-flex tw-text-primary-500 tw-mt-4 tw-items-center">
+    <div class="tw-flex tw-text-blue-500 tw-mt-4 tw-items-center">
       <?php if ($show_categories_on_posts) :  ?>
       <?php $categories = get_the_category(get_the_ID()); ?>
       <a
         href="<?php echo get_category_link($categories[0]); ?>"
-        class="hover:text-primary-500 tw-relative z-[2]"
+        class="hover:text-blue-500 tw-relative z-[2]"
       >
         <?php echo $categories[0]->cat_name; ?>
       </a>
@@ -49,7 +50,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
                 $posttags = get_the_tags();
                 if ($posttags) {
                   foreach ($posttags as $index=>$tag) {
-                    echo '<a href="/tag/' . $tag->slug . '" class="hover:text-primary-500">' . $tag->name . '</a>';
+                    echo '<a href="/tag/' . $tag->slug . '" class="hover:text-blue-500">' . $tag->name . '</a>';
                     if ($index < count($posttags) - 1) {
                       echo ', ';
                     }

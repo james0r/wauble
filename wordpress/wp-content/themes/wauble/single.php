@@ -30,11 +30,11 @@
             <?php echo get_the_title(); ?>
           </a>
         </h2>
-        <div class="tw-flex tw-text-primary-500 tw-mt-4 tw-items-center tw-mx-auto tw-max-w-max">
+        <div class="tw-flex tw-text-blue-500 tw-mt-4 tw-items-center tw-mx-auto tw-max-w-max">
           <?php $categories = get_the_category(get_the_ID()); ?>
           <a
             href="<?php echo get_category_link($categories[0]); ?>"
-            class="hover:tw-text-primary-500 tw-relative tw-z-[2]"
+            class="hover:tw-text-blue-500 tw-relative tw-z-[2]"
           >
             <?php echo $categories[0]->cat_name; ?>
           </a>
@@ -55,7 +55,7 @@
                       $posttags = get_the_tags();
                       if ($posttags) {
                         foreach ($posttags as $index => $tag) {
-                          echo '<a href="/tag/' . $tag->slug . '" class="hover:tw-text-primary-500">' . $tag->name . '</a>';
+                          echo '<a href="/tag/' . $tag->slug . '" class="hover:tw-text-blue-500">' . $tag->name . '</a>';
                           if ($index < count($posttags) - 1) {
                             echo ', ';
                           }

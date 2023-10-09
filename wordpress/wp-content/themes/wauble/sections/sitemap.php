@@ -14,7 +14,7 @@
           'menu_id'         => 'site-map-nav-list',
           'menu_class'      => 'site-map-nav-list',
           'item_class'      => 'relative',
-          'link_class'      => 'text-primary-500 hover:underline'
+          'link_class'      => 'text-blue-500 hover:underline'
         ]);
         ?>
         <h2 class="mb-2 text-2xl font-semibold text-neutral-500 lg:text-3xl">Blogs</h2>
@@ -39,7 +39,7 @@
               $query->the_post();
             ?>
               <li class="mb-2">
-                <a href="<?php echo get_the_permalink(get_the_ID()); ?>" class="hover:text-primary-500">
+                <a href="<?php echo get_the_permalink(get_the_ID()); ?>" class="hover:text-blue-500">
                   <?php echo get_the_title(get_the_ID()); ?>
                 </a>
               </li>

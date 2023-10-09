@@ -175,6 +175,8 @@ document.addEventListener('alpine:init', () => {
 
             target.innerHTML = source.innerHTML
 
+            history.pushState({}, '', endpoint)
+
             document.querySelector('#blog-posts').scrollIntoView({
               behavior: 'smooth',
               block: 'start'
