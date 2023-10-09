@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   <?php language_attributes(); ?>
-  class="antialiased font-open-sans bg-gray-100"
+  class="tw-antialiased tw-font-open-sans tw-bg-gray-100"
 >
 
 <?php get_template_part('template-parts/head'); ?>
@@ -22,21 +22,21 @@
 
   <header
     id="site-header"
-    class="bg-white sticky top-0 shadow-lg z-20"
+    class="tw-bg-white tw-sticky tw-top-0 tw-shadow-lg tw-z-20"
   >
-    <div class="px-6 md:px-8">
-      <div class="container flex items-center justify-between h-full">
+    <div class="tw-px-6 md:tw-px-8">
+      <div class="container tw-flex tw-items-center tw-justify-between tw-h-full">
         <a
           href="<?php echo home_url(); ?>"
-          class="font-bold text-[16px] md:text-[20px] leading-[16px] lg:leading-[20px] text-left"
+          class="tw-font-bold text-[16px] md:text-[20px] leading-[16px] lg:leading-[20px] tw-text-left"
         >
           WAUBLE STARTER THEME
         </a>
-        <div class="flex items-center">
-          <div class="hidden lg:block">
+        <div class="tw-flex tw-items-center">
+          <div class="tw-hidden lg:tw-block">
             <?php echo get_template_part('template-parts/header-menu'); ?>
           </div>
-          <div class="lg:hidden flex justify-end items-center h-full">
+          <div class="lg:tw-hidden tw-flex tw-justify-end tw-items-center tw-h-full">
             <?php echo get_template_part('template-parts/mobile-header-menu'); ?>
           </div>
           <?php echo get_template_part('template-parts/tp-language-switcher'); ?>

@@ -11,6 +11,7 @@ class Wauble_Search {
     add_action('search_rewrite_rules', [$this, 'rewriteBaseSearchRouteNoParams']);;
     add_filter('wpseo_title', [$this, 'filterTitleTag'], 15);
     add_filter('pre_get_document_title', [$this, 'filterTitleTag'], 10);
+    add_filter('get_pagenum_link', [$this, 'filterPaginationLinks'], 10, 2);
   }
 
   public function filterTitleTag($title) {
@@ -40,5 +41,15 @@ class Wauble_Search {
     );
     $rewrite = $rewrite + $rules;
     return $rewrite;
+  }
+  
+  public function filterPaginationLinks($link, $i) {
+
+    if (is_search()) {
+      $link = str_replace('/page/', '/?paged=', $link);
+      $link = str_replace($i . '/', $i, $link);
+    }
+
+    return $link;
   }
 }

@@ -76,7 +76,7 @@ $container_css = array(
 </style>
 
 <div
-  class="px-6 md:px-8 my-8 posts-grid"
+  class="tw-px-6 md:tw-px-8 tw-my-8 posts-grid"
   data-section-id="section-<?php echo $section_count; ?>"
   data-route="<?php echo $route; ?>"
   <?php echo Wauble()->utils->attrsEncode($attrs); ?>
@@ -85,7 +85,7 @@ $container_css = array(
     <?php if ($query->have_posts()) : ?>
     <ul
       id="blog-posts-<?php echo $section_count; ?>"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+      class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-x-8 tw-gap-y-12"
     >
       <?php while ($query->have_posts()) : $query->the_post(); ?>
 
@@ -98,7 +98,7 @@ $container_css = array(
       <?php endwhile; ?>
     </ul>
     <?php if ($paginate) : ?>
-    <nav class="flex space-x-4 mx-auto max-w-max my-8">
+    <nav class="tw-flex tw-space-x-4 tw-mx-auto tw-max-w-max tw-my-8">
       <?php $big = 999999999; ?>
       <?php if ($paged > 1) : ?>
       <a

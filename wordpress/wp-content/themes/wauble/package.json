@@ -3,7 +3,8 @@
   "description": "A Wordpress starter theme including Laravel Mix, Tailwind, SCSS, and Alpine.JS.",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npx mix",
+    "start": "npx mix",
+    "dev": "npm run watch",
     "watch": "npx mix watch",
     "prod": "npx mix --production",
     "build": "npm run prod"

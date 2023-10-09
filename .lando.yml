@@ -16,11 +16,11 @@ env_file:
 services:
   node:
     type: node:18
-    build: 
-      - cd /app/wordpress/wp-content/themes/wauble && npm install
     overrides:
       command: 
-        - /app/.lando/on_node_service_run.sh
+        - /app/.lando/on_node_service_start.sh
+    build: 
+      - cd /app/wordpress/wp-content/themes/wauble && npm install
   pma:
     type: phpmyadmin
     hosts:
@@ -70,13 +70,28 @@ tooling:
       - appserver: wp menu create "Footer Menu" --path=wordpress
       - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
-  kill:theme-watch:
-    description: Kill the watch command
+  restart:theme-watch:
+    description: Kill the watch command (which causes a restart of the processes)
     service: node
     user: root
     cmd:
       - echo -n "Killing theme watcher..."
       - /app/.lando/kill_npm_run_watch.sh && echo " ✅"
+  start:theme-watch:
+    description: Start the watch command
+    service: node
+    user: root
+    cmd:
+      - echo -n "Starting theme watcher..."
+      - cd /app/wordpress/wp-content/themes/wauble/ && npm run watch
+  build:theme:
+    description: Build the theme
+    service: node
+    user: root
+    cmd:
+      - echo -n "Building theme..."
+      - cd /app/wordpress/wp-content/themes/wauble/ && npm run build
+      - echo "Theme build successfully ✅"
 excludes:
   - wordpress/wp-content/themes/wauble/node_modules
   - /app/wordpress/wp-content/themes/wauble/node_modules

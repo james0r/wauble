@@ -3,38 +3,38 @@
 <!-- Begin Loop -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-<div class="px-6 md:px-8 py-8">
+<div class="tw-px-6 md:tw-px-8 tw-py-8">
   <div class="container">
     <article
       id="post-<?php the_ID(); ?>"
       <?php post_class(''); ?>
     >
 
-      <header class="entry-header mb-4 text-center">
-        <div class="aspect-video">
+      <header class="entry-header tw-mb-4 tw-text-center">
+        <div class="tw-aspect-video">
           <?php
               echo wp_get_attachment_image(
                 get_post_thumbnail_id(),
                 'single_featured_image',
                 false,
                 [
-                  'class' => 'object-cover object-center w-full h-full',
+                  'class' => 'tw-object-cover tw-object-center tw-w-full tw-h-full',
                   'loading' => 'eager',
                 ]
               );
               ?>
         </div>
 
-        <h2 class="entry-title text-2xl md:text-3xl font-extrabold leading-tight my-4">
+        <h2 class="entry-title tw-text-2xl md:tw-text-3xl tw-font-extrabold tw-leading-tight tw-my-4">
           <a href="<?php echo get_permalink(); ?>">
             <?php echo get_the_title(); ?>
           </a>
         </h2>
-        <div class="flex text-primary-500 mt-4 items-center mx-auto max-w-max">
+        <div class="tw-flex tw-text-primary-500 tw-mt-4 tw-items-center tw-mx-auto tw-max-w-max">
           <?php $categories = get_the_category(get_the_ID()); ?>
           <a
             href="<?php echo get_category_link($categories[0]); ?>"
-            class="hover:text-primary-500 relative z-[2]"
+            class="hover:tw-text-primary-500 tw-relative tw-z-[2]"
           >
             <?php echo $categories[0]->cat_name; ?>
           </a>
@@ -43,19 +43,19 @@
           <time
             datetime="<?php echo get_the_date('c'); ?>"
             itemprop="datePublished"
-            class="text-sm text-gray-700"
+            class="tw-text-sm tw-text-gray-700"
           >
             <?php echo str_replace('-', '/', get_the_date('n-d-Y')); ?>
           </time>
           <?php endif; ?>
         </div>
         <?php if (!empty(get_the_tags())) : ?>
-        <div class="text-sm my-1">
+        <div class="tw-text-sm tw-my-1">
           Tags: <?php
                       $posttags = get_the_tags();
                       if ($posttags) {
                         foreach ($posttags as $index => $tag) {
-                          echo '<a href="/tag/' . $tag->slug . '" class="hover:text-primary-500">' . $tag->name . '</a>';
+                          echo '<a href="/tag/' . $tag->slug . '" class="hover:tw-text-primary-500">' . $tag->name . '</a>';
                           if ($index < count($posttags) - 1) {
                             echo ', ';
                           }
@@ -66,13 +66,13 @@
         <?php endif; ?>
       </header>
 
-      <div class="entry-content rte">
+      <div class="entry-content tw-rte">
         <?php
             /* translators: %s: Name of current post */
             the_content(
               sprintf(
                 __('Continue reading %s', 'wauble'),
-                the_title('<span class="sr-only">"', '"</span>', false)
+                the_title('<span class="tw-sr-only">"', '"</span>', false)
               )
             );
             ?>

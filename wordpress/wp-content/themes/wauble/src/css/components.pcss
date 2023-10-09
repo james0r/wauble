@@ -4,46 +4,46 @@
   .skip-to-content-link {
 
     &:focus {
-      @apply absolute top-0 left-0 z-50 p-4 bg-black text-white rounded-md transition;
+      @apply tw-absolute tw-top-0 tw-left-0 tw-z-50 tw-p-4 tw-bg-black tw-text-white tw-rounded-md tw-transition;
     } 
 
     &:not(:focus) {
-      @apply sr-only;
+      @apply tw-sr-only;
     } 
   }
 
   .btn {
-    @apply py-3 px-12 bg-primary-500 hover:bg-primary-600 text-white rounded-full transition;
+    @apply tw-py-3 tw-px-12 tw-bg-primary-500 hover:tw-bg-primary-600 tw-text-white tw-rounded-full tw-transition;
   }
 
   .contact-form-wrapper {
-    @apply w-full;
+    @apply tw-w-full;
 
     & label,
     & .wpcf7-form-control-wrap {
-      @apply block mt-2;
+      @apply tw-block tw-mt-2;
     }
     
     & input[type="text"],
     & input[type="email"],
     & textarea {
-      @apply border border-gray-300 rounded-md px-4 py-2 w-full;
+      @apply tw-border tw-border-gray-300 tw-rounded-md tw-px-4 tw-py-2 tw-w-full;
     }
 
     & .form-submit-control {
-      @apply flex flex-row-reverse justify-end items-center mt-4;
+      @apply tw-flex tw-flex-row-reverse tw-justify-end tw-items-center tw-mt-4;
     }
 
     & input[type="submit"] {
-      @apply block relative bg-primary-500 text-white px-4 py-2 rounded-md cursor-pointer;
+      @apply tw-block tw-relative tw-bg-primary-500 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-cursor-pointer;
     }
 
     & .wpcf7-spinner {
-      @apply block ml-auto;
+      @apply tw-block tw-ml-auto;
     }
 
     & .wpcf7-response-output {
-      @apply block !mt-4 !mb-0 !border-primary-500 !mx-0;
+      @apply tw-block !tw-mt-4 !tw-mb-0 !tw-border-primary-500 !tw-mx-0;
     }
   }
 }

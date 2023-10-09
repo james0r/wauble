@@ -3,27 +3,27 @@
 get_template_part('template-parts/header');
 
 if (is_home()) {
-  $page_for_posts = get_option('page_for_posts');
+  $page_for_posts_id = get_option('page_for_posts');
 }
 
-$paginate = get_field('paginate', $page_for_posts) ?? null;
+$paginate = get_field('paginate', $page_for_posts_id) ?? null;
 
 // The main query's max_num_pages is kept in sync
 // with the number of pages in the custom loop using pre_get_posts in the Wauble_Posts class.
-$use_global_posts_per_page = get_field('use_global_posts_per_page', $page_for_posts) ?? null;
+$use_global_posts_per_page = get_field('use_global_posts_per_page', $page_for_posts_id) ?? null;
 if ($use_global_posts_per_page) {
   $posts_per_page = get_option('posts_per_page');
 } else {
-  $posts_per_page = get_field('posts_per_page', $page_for_posts) ?? null;
+  $posts_per_page = get_field('posts_per_page', $page_for_posts_id) ?? null;
 }
 $route = home_url($wp->request);
 $post_types = array('post');
 $categories = array();
 $tags = array();
-$show_categories_on_posts = get_field('show_categories_on_posts', $page_for_posts) ?? null;
-$show_date_on_posts = get_field('show_date_on_posts', $page_for_posts) ?? null;
-$show_tags_on_posts = get_field('show_tags_on_posts', $page_for_posts) ?? null;
-$ajax = get_field('use_ajax', $page_for_posts) ?? null;
+$show_categories_on_posts = get_field('show_categories_on_posts', $page_for_posts_id) ?? null;
+$show_date_on_posts = get_field('show_date_on_posts', $page_for_posts_id) ?? null;
+$show_tags_on_posts = get_field('show_tags_on_posts', $page_for_posts_id) ?? null;
+$ajax = get_field('use_ajax', $page_for_posts_id) ?? null;
 $attrs = array();
 
 if ($ajax) {
@@ -52,16 +52,16 @@ $container_css = array(
 ?>
 </style>
 
-<div
+<section
   id="blog-posts"
-  class="px-6 md:px-8"
+  class="tw-px-6 md:tw-px-8"
   data-route="<?php echo $route; ?>"
   data-page="<?php echo $paged; ?>"
   <?php echo Wauble()->utils->attrsEncode($attrs); ?>
 >
-  <div class="container my-8">
-    <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">
-      <?php get_template_part('template-parts/searchform'); ?>
+  <div class="container tw-py-8">
+    <div class="tw-max-w-lg tw-w-full tw-mx-auto tw-pb-8 md:tw-pb-16 tw-pt-8 md:tw-pt-16">
+      <?php echo get_search_form(); ?>
     </div>
 
     <?php
@@ -103,7 +103,7 @@ $container_css = array(
     <?php if ($posts_query->have_posts()) : ?>
     <ul 
       id="posts-grid"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-x-8 tw-gap-y-12">
       <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
 
       <?php echo get_template_part('template-parts/blog-card', null, [
@@ -115,7 +115,7 @@ $container_css = array(
       <?php endwhile; ?>
     </ul>
     <?php if ($paginate) : ?>
-    <nav class="flex space-x-4 mx-auto max-w-max my-8">
+    <nav class="tw-flex tw-space-x-4 tw-mx-auto tw-max-w-max tw-my-8">
       <?php
           $big = 999999999;
           ?>
@@ -160,7 +160,7 @@ $container_css = array(
     wp_reset_postdata(); ?>
 
   </div>
-</div>
+</section>
 
 <?php if ($ajax) : ?>
 <script>

@@ -11,7 +11,7 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
 ?>
 
 <div
-  class="relative"
+  class="tw-relative"
   x-data="fullWidthSlider"
   data-section-id="section-<?php echo $section_count; ?>"
 >
@@ -28,10 +28,10 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
             $tint_perc_padded = sprintf("%02d", $tint_perc);
           }
           ?>
-      <div class="swiper-slide flex-[0_0_100%] min-w-0">
-        <div class="relative min-h-[420px] md:min-h-[500px] flex items-center justify-center">
+      <div class="swiper-slide tw-flex-[0_0_100%] tw-min-w-0">
+        <div class="tw-relative tw-min-h-[420px] md:tw-min-h-[500px] tw-flex tw-items-center tw-justify-center">
           <?php
-              $attrs['class'] = 'absolute object-cover inset-0 h-full w-full';
+              $attrs['class'] = 'tw-absolute tw-object-cover tw-inset-0 tw-h-full tw-w-full';
               if ($lazy_load_images) {
                 $attrs['loading'] = 'lazy';
               } else {
@@ -46,12 +46,12 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
               ?>
           <?php if ($tint_image) : ?>
           <div
-            class="absolute inset-0"
+            class="tw-absolute tw-inset-0"
             style="background: rgba(0,0,0, .<?php echo $tint_perc_padded; ?>)"
           ></div>
           <?php endif; ?>
           <?php if ($heading) : ?>
-          <h1 class="relative text-white text-center">
+          <h1 class="tw-relative tw-text-white tw-text-center">
             <?php echo $heading ?>
           </h1>
           <?php endif; ?>
@@ -81,7 +81,7 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
   $options = array();
   
   if ($loop_slides) {
-    $options['loop'] = true;
+    $options['loop'] = true;  
   } else {
     $options['loop'] = false;
   }

@@ -5,27 +5,27 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
 ?>
 
 <li>
-  <div class="block p-3 pb-11 shadow-md rounded-lg relative bg-white h-full">
+  <div class="tw-block tw-p-3 tw-pb-11 tw-shadow-md tw-rounded-lg tw-relative tw-bg-white tw-h-full">
     <a
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
-      class="relative pt-[86%] block"
+      class="tw-relative tw-pt-[86%] tw-block"
     >
       <?php
       echo get_the_post_thumbnail(
         get_the_ID(), 
         'wauble-blog-card', 
         [
-          'class' => 'absolute object-cover w-full h-full inset-0 rounded-lg'
+          'class' => 'tw-absolute tw-object-cover tw-w-full tw-h-full tw-inset-0 tw-rounded-lg'
         ]
       );
       ?>
     </a>
-    <div class="flex text-primary-500 mt-4 items-center">
+    <div class="tw-flex tw-text-primary-500 tw-mt-4 tw-items-center">
       <?php if ($show_categories_on_posts) :  ?>
       <?php $categories = get_the_category(get_the_ID()); ?>
       <a
         href="<?php echo get_category_link($categories[0]); ?>"
-        class="hover:text-primary-500 relative z-[2]"
+        class="hover:text-primary-500 tw-relative z-[2]"
       >
         <?php echo $categories[0]->cat_name; ?>
       </a>
@@ -37,14 +37,14 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       <time
         datetime="<?php echo get_the_date('c'); ?>"
         itemprop="datePublished"
-        class="text-sm text-gray-700"
+        class="tw-text-sm tw-text-gray-700"
       >
         <?php echo str_replace('-', '/', get_the_date('n-d-Y')); ?>
       </time>
       <?php endif; ?>
     </div>
     <?php if ($show_tags_on_posts && !empty(get_the_tags())) : ?>
-      <div class="text-sm my-1">
+      <div class="tw-text-sm tw-my-1">
         Tags: <?php
                 $posttags = get_the_tags();
                 if ($posttags) {
@@ -62,7 +62,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
       class=""
     >
-      <h3 class="mt-0">
+      <h3 class="tw-mt-0">
         <?php echo get_the_title(get_the_ID()); ?>
       </h3>
     </a>

@@ -3,6 +3,7 @@ let plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: require('fast-glob').sync(['./**/*.php']),
+  prefix: 'tw-',
   theme: {
     container: {
       center: true,

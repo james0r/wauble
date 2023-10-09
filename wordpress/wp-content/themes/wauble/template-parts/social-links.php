@@ -1,4 +1,17 @@
-<ul class="social-icons-list">
+<?php 
+  $list_classes = [
+    'tw-flex',
+    'tw-gap-2',
+    'tw-py-4',
+    'tw-text-blue-500',
+    '[&_svg]:tw-h-[30px]',
+    '[&_svg]:tw-w-auto',
+    'tw-max-w-max',
+    'tw-mx-auto',
+  ]
+?>
+
+<ul class="<?php echo implode(' ', $list_classes); ?>">
   <?php if (!empty(get_field('facebook_link', 'option'))) : ?>
   <li class="social-icons-item">
     <a

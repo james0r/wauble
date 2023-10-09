@@ -17,11 +17,11 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
 >
   <ul
     id="header-nav-list"
-    class="flex tracking-wider"
+    class="tw-flex tw-tracking-wider"
   >
     <?php foreach ($navigation->toArray() as $item) : ?>
     <?php
-        $item->classes .= ' px-[min(12px,_1vw)] py-2.5 first:pl-0 group relative';
+        $item->classes .= ' tw-px-[min(12px,_1vw)] tw-py-2.5 first:tw-pl-0 group tw-relative';
         ?>
     <?php if ($item->children) : ?>
     <li
@@ -35,27 +35,27 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
             }
            }"
     >
-      <div class=" flex items-center relative max-w-max mx-auto pr-6">
+      <div class=" tw-flex tw-items-center tw-relative tw-max-w-max tw-mx-auto tw-pr-6">
         <a
           href="<?php echo $item->url; ?>"
-          class="hover:text-primary-600"
+          class="hover:tw-text-primary-600"
         >
           <?php echo $item->label; ?>
         </a>
         <button
-          class="absolute right-0"
+          class="tw-absolute tw-right-0"
           @click="expanded = !expanded"
           :aria-expanded="expanded ? 'true' : 'false'"
           aria-haspopup="menu"
           aria-label="Submenu Toggle"
-          :class="expanded ? 'rotate-[180deg]' : 'rotate-0'"
+          :class="expanded ? 'rotate-[180deg]' : 'tw-rotate-0'"
         >
           <?php echo get_template_part('template-parts/icons/hi-chevron-down'); ?>
         </button>
       </div>
 
       <ul
-        class="hidden group-hover:block absolute top-full bg-white"
+        class="tw-hidden group-hover:tw-block tw-absolute tw-top-full tw-bg-white"
         :class="expanded && '!block'"
       >
         <?php foreach ($item->children as $child) : ?>
@@ -74,7 +74,7 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
     <li class="<?php echo trim($item->classes); ?> <?php echo $item->active ? 'current-item' : ''; ?>">
       <a
         href="<?php echo $item->url; ?>"
-        class="hover:text-primary-600"
+        class="hover:tw-text-primary-600 tw-font-bold"
       >
         <?php echo $item->label; ?>
       </a>

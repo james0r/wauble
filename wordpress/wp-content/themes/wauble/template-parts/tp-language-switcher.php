@@ -9,13 +9,13 @@ $current_locale = get_locale();
 <?php if (!empty($langs)) : ?>
 <div
   x-data="langDropdown"
-  class="relative"
+  class="tw-relative"
   x-id="['dropdown-panel']"
   x-on:focusin.window="! $refs.tpLangPanel.contains($event.target) && close()"
 >
   <button
     type="button"
-    class="py-2 px-2"
+    class="tw-py-2 tw-px-2"
     x-ref="tp-lang-btn"
     @click="toggle()"
     :aria-expanded="open"
@@ -33,24 +33,24 @@ $current_locale = get_locale();
     @click.outside="open = false"
     x-transition.origin.top.right
     x-cloak
-    class="absolute right-0 top-0 bg-white rounded shadow-md w-max"
+    class="tw-absolute tw-right-0 tw-top-0 tw-bg-white tw-rounded tw-shadow-md tw-w-max"
   >
-    <ul class="flex flex-col items-center" data-no-translation>
+    <ul class="tw-flex tw-flex-col tw-items-center" data-no-translation>
       <?php foreach ($langs as $index => $lang) : ?>
       <?php if ($lang['language_code'] === $current_locale) : ?>
-      <li class="w-full first:-mt-1" data-no-translation>
+      <li class="tw-w-full first:tw--mt-1" data-no-translation>
         <a
           href="<?php echo $lang['current_page_url']; ?>"
-          class="block py-2"
+          class="tw-block tw-py-2"
         >
-          <div class="flex gap-2 px-2 items-center w-full justify-between hover:bg-primary-50">
-            <span class="text-[14px]">
+          <div class="tw-flex tw-gap-2 tw-px-2 tw-items-center tw-w-full tw-justify-between hover:tw-bg-primary-50">
+            <span class="tw-text-[14px]">
               <?php echo $lang['language_name']; ?>
             </span>
             <img
               src="<?php echo $lang['flag_link']; ?>"
               alt="<?php echo $lang['language_name']; ?>"
-              class="ml-1"
+              class="tw-ml-1"
             />
           </div>
         </a>
@@ -59,19 +59,19 @@ $current_locale = get_locale();
       <?php endif; ?>
       <?php endforeach; ?>
       <?php foreach ($langs as $index => $lang) : ?>
-      <li class="w-full first:-mt-1" data-no-translation>
+      <li class="tw-w-full first:tw--mt-1" data-no-translation>
         <a
           href="<?php echo $lang['current_page_url']; ?>"
-          class="block py-2"
+          class="tw-block tw-py-2"
         >
-          <div class="flex gap-2 px-2 items-center w-full justify-between hover:bg-primary-50">
-            <span class="text-[14px]">
+          <div class="tw-flex tw-gap-2 tw-px-2 tw-items-center tw-w-full tw-justify-between hover:tw-bg-primary-50">
+            <span class="tw-text-[14px]">
               <?php echo $lang['language_name']; ?>
             </span>
             <img
               src="<?php echo $lang['flag_link']; ?>"
               alt="<?php echo $lang['language_name']; ?>"
-              class="ml-1"
+              class="tw-ml-1"
             />
           </div>
         </a>

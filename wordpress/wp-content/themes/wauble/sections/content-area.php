@@ -4,19 +4,19 @@ $content = $section['content'] ?? null;
 ?>
 
 <?php if (empty($title) && empty($content)) : ?>
-<div class="px-6 md:px-8 py-8 md:py-12">
-  <div class="container">
+<div class="tw-px-6 md:tw-px-8 tw-py-8 md:tw-py-12">
+  <div class="tw-container">
     No content has been entered for this section. Please add content to the section or remove it from the page.
   </div>
 </div>
 <?php else : ?>
 <div
-  class="px-6 md:px-8 py-8 md:py-12"
+  class="tw-px-6 md:tw-px-8 tw-py-8 md:tw-py-12"
   x-data="contentArea"
   data-section-instance="section-<?php echo $section_count; ?>"
 >
-  <div class="container">
-    <div class="rte">
+  <div class="tw-container">
+    <div class="tw-rte">
       <?php if ($title) : ?>
       <h2>
         <?php
@@ -41,7 +41,7 @@ $content = $section['content'] ?? null;
   // Global Style  
   $css = [
     '.section-content-area' => [
-      'background' => 'transparent'
+      'background' => 'transparent' 
     ]
   ]
   ?>
