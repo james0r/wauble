@@ -60,7 +60,7 @@ document.addEventListener('alpine:init', () => {
     return {
       sectionEl: document.querySelector(`#${this.$el.dataset.sectionInstance}`),
       init() {
-        console.log(this.sectionEl)
+        // console.log(this.sectionEl)
       }
     }
   })

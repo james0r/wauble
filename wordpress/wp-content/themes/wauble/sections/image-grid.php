@@ -16,32 +16,32 @@ if ($infinite_load) {
 }
 
 $image_wrapper_classes = array(
-  'relative',
-  'pt-[100%]',
-  'block',
-  'rounded-lg',
-  'overflow-hidden',
+  'tw-relative',
+  'tw-pt-[100%]',
+  'tw-block',
+  'tw-rounded-lg',
+  'tw-overflow-hidden',
 );
 
 if (!$enable_lightbox) {
-  $image_wrapper_classes[] = 'pointer-events-none';
+  $image_wrapper_classes[] = 'tw-pointer-events-none';
 }
 
 $grid_classes = array();
 
 if ($flow_direction === 'Horizontal') {
-  $grid_classes[] = 'grid';
-  $grid_classes[] = 'grid-cols-1';
-  $grid_classes[] = 'md:grid-cols-2';
-  $grid_classes[] = 'lg:grid-cols-3';
-  $grid_classes[] = 'gap-4';
+  $grid_classes[] = 'tw-grid';
+  $grid_classes[] = 'tw-grid-cols-1';
+  $grid_classes[] = 'md:tw-grid-cols-2';
+  $grid_classes[] = 'lg:tw-grid-cols-3';
+  $grid_classes[] = 'tw-gap-4';
 } else {
-  $grid_classes[] = 'columns-1';
-  $grid_classes[] = 'md:columns-2';
-  $grid_classes[] = 'lg:columns-3';
-  $grid_classes[] = '-mb-4';
-  $grid_classes[] = '[&>li]:mb-4';
-  $grid_classes[] = 'gap-4';
+  $grid_classes[] = 'tw-columns-1';
+  $grid_classes[] = 'md:tw-columns-2';
+  $grid_classes[] = 'lg:tw-columns-3';
+  $grid_classes[] = 'tw--mb-4';
+  $grid_classes[] = '[&>li]:tw-mb-4';
+  $grid_classes[] = 'tw-gap-4';
 }
 
 ?>
@@ -55,10 +55,10 @@ if ($flow_direction === 'Horizontal') {
 >
 <?php endif; ?>
 
-<div class="px-6 md:px-8 py-8">
-  <div class="container">
+<div class="tw-px-6 md:tw-px-8 tw-py-8">
+  <div class="tw-container">
     <?php if ($heading) : ?>
-    <h2 class="mx-auto max-w-max mb-8">
+    <h2 class="tw-mx-auto tw-max-w-max tw-mb-8">
       <?php echo $heading; ?>
     </h2>
     <?php endif; ?>
@@ -92,7 +92,7 @@ if ($flow_direction === 'Horizontal') {
           target="_blank"
         >
           <?php
-                echo wp_get_attachment_image($image_id, [400, 400], false, ['class' => 'absolute pin object-cover w-full h-full inset-0', 'loading' => 'lazy']);
+                echo wp_get_attachment_image($image_id, [400, 400], false, ['class' => 'tw-absolute pin tw-object-cover tw-w-full tw-h-full tw-inset-0', 'loading' => 'lazy']);
                 ?>
         </a>
       </li>
@@ -104,10 +104,10 @@ if ($flow_direction === 'Horizontal') {
     <script src="<?php echo Wauble()->url('/dist/static/masonry.pkgd.min.js'); ?>"></script>
     <ul
       id="image-grid-<?php echo $section_count; ?>"
-      class="masonry-with-columns -mx-2"
+      class="masonry-with-columns tw--mx-2"
     >
       <?php foreach ($images as $index => $item) : ?>
-      <li class="w-full md:w-1/2 lg:w-[33.3333333%] p-2">
+      <li class="tw-w-full md:tw-w-1/2 lg:tw-w-[33.3333333%] tw-p-2">
         <?php if (empty($item['image'])) {
                 return;
               } ?>
@@ -120,7 +120,7 @@ if ($flow_direction === 'Horizontal') {
               ?>
         <a
           href="<?php echo wp_get_attachment_image_url($image_id, 'full', false); ?>"
-          class="<?php echo $enable_lightbox ? '' : 'pointer-events-none'; ?>"
+          class="<?php echo $enable_lightbox ? '' : 'tw-pointer-events-none'; ?>"
           <?php if ($enable_lightbox) : ?>
           data-pswp-width="<?php echo $width; ?>"
           data-pswp-height="<?php echo $height; ?>"
@@ -130,7 +130,7 @@ if ($flow_direction === 'Horizontal') {
           target="_blank"
         >
           <?php
-                echo wp_get_attachment_image($image_id, [400, 400], false, ['class' => 'w-full h-auto', 'loading' => 'lazy']);
+                echo wp_get_attachment_image($image_id, 1000, false, ['class' => 'tw-w-full tw-h-auto', 'loading' => 'lazy']);
                 ?>
         </a>
       </li>
@@ -184,7 +184,7 @@ if ($flow_direction === 'Horizontal') {
     <div
       x-data="imageGridLoadMore()"
       x-intersect="loadMore"
-      class="flex justify-center py-8"
+      class="tw-flex tw-justify-center tw-py-8"
     >
       <?php echo get_template_part('template-parts/loading-spinner'); ?>
     </div>
