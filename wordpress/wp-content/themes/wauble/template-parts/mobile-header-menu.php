@@ -15,6 +15,7 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
   id="mobile-header-nav"
   class="tw-flex tw-items-center tw-h-full"
   x-id="['mobile-navigation']"
+  x-trap.inert.noscroll="$store.global.isMobileMenuVisible"
 >
   <button
     class="lg:tw-hidden tw-ml-auto tw-p-2"
