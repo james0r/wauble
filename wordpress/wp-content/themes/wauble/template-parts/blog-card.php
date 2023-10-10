@@ -13,8 +13,8 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
     >
       <?php
       echo get_the_post_thumbnail(
-        get_the_ID(), 
-        'wauble-blog-card', 
+        get_the_ID(),
+        'wauble-blog-card',
         [
           'class' => 'tw-absolute tw-object-cover tw-w-full tw-h-full tw-inset-0 tw-rounded-lg'
         ]
@@ -45,19 +45,19 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       <?php endif; ?>
     </div>
     <?php if ($show_tags_on_posts && !empty(get_the_tags())) : ?>
-      <div class="tw-text-sm tw-my-1">
-        Tags: <?php
-                $posttags = get_the_tags();
-                if ($posttags) {
-                  foreach ($posttags as $index=>$tag) {
-                    echo '<a href="/tag/' . $tag->slug . '" class="hover:text-blue-500">' . $tag->name . '</a>';
-                    if ($index < count($posttags) - 1) {
-                      echo ', ';
-                    }
+    <div class="tw-text-sm tw-my-1">
+      Tags: <?php
+              $posttags = get_the_tags();
+              if ($posttags) {
+                foreach ($posttags as $index => $tag) {
+                  echo '<a href="/tag/' . $tag->slug . '" class="hover:text-blue-500">' . $tag->name . '</a>';
+                  if ($index < count($posttags) - 1) {
+                    echo ', ';
                   }
                 }
-                ?>
-      </div>
+              }
+              ?>
+    </div>
     <?php endif; ?>
     <a
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
