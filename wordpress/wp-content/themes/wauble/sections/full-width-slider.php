@@ -148,8 +148,6 @@ document.addEventListener('alpine:init', () => {
         const swiperEl = this.$el.querySelector('.swiper')
         let options = JSON.parse(this.$el.querySelector('[swiper-options]').textContent)
 
-        console.log(options)
-
         const swiper = new Swiper(swiperEl, options);
       }
     }

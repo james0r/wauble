@@ -81,7 +81,7 @@ $container_css = array(
   data-route="<?php echo $route; ?>"
   <?php echo Wauble()->utils->attrsEncode($attrs); ?>
 >
-  <div class="container">
+  <div class="tw-container">
     <?php if ($query->have_posts()) : ?>
     <ul
       id="blog-posts-<?php echo $section_count; ?>"
@@ -97,7 +97,7 @@ $container_css = array(
 
       <?php endwhile; ?>
     </ul>
-    <?php if ($paginate) : ?>
+    <?php if ($paginate && $query->max_num_pages > 1) : ?>
     <nav class="tw-flex tw-space-x-4 tw-mx-auto tw-max-w-max tw-my-8">
       <?php $big = 999999999; ?>
       <?php if ($paged > 1) : ?>

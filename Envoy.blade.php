@@ -44,6 +44,16 @@
   lando wp db export database-tmp.sql --add-drop-table --path=wordpress --exclude_tables=wp_users,wp_usermeta
 @endtask
 
+@task('push-plugins-to-wpengine-development', ['on' => 'localhost'])
+  rsync -avr --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/plugins/ {{$dev_ssh}}:/sites/{{$dev_env}}/wp-content/plugins
+  {{ logSuccess('Plugins pushed to environment -> '. $dev_env); }}
+@endtask
+
+@task('push-plugins-to-wpengine-staging', ['on' => 'localhost'])
+  rsync -avr --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/plugins/ {{$staging_ssh}}:/sites/{{$staging_env}}/wp-content/plugins
+  {{ logSuccess('Plugins pushed to environment -> '. $staging_env); }}
+@endtask
+
 @task('push-uploads-to-wpengine-development', ['on' => 'localhost'])
   rsync -avr --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/uploads/ {{$dev_ssh}}:/sites/{{$dev_env}}/wp-content/uploads
   {{ logSuccess('Uploads pushed to environment -> '. $dev_env); }}

@@ -4,7 +4,7 @@ $show_date_on_posts = $args['show_date_on_posts'] ?? null;
 $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
 ?>
 
-<li>
+<li class="tw-@container">
   <div class="tw-block tw-p-3 tw-pb-11 tw-shadow-md tw-rounded-lg tw-relative tw-bg-white tw-h-full">
     <a
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
@@ -26,7 +26,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       <?php $categories = get_the_category(get_the_ID()); ?>
       <a
         href="<?php echo get_category_link($categories[0]); ?>"
-        class="hover:text-blue-500 tw-relative z-[2]"
+        class="hover:tw-text-blue-500 tw-relative tw-z-[2]"
       >
         <?php echo $categories[0]->cat_name; ?>
       </a>
@@ -63,7 +63,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
       class=""
     >
-      <h3 class="tw-mt-0">
+      <h3 class="tw-mt-0 tw-text-xl @sm:tw-text-2xl">
         <?php echo get_the_title(get_the_ID()); ?>
       </h3>
     </a>

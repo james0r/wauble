@@ -1,22 +1,14 @@
-import * as focusTrap from 'focus-trap'; // ESM
-
 export default {
   name: 'global',
   store() {
     return {
       themeName: 'wauble',
       isMobileMenuVisible: false,
-      mobileNavEl: null,
-      mobileFocusTrap: null,
+      isWindowScrolled: false,
       init() {
         window.addEventListener('scroll', this.onWindowScrollHandler)
         window.addEventListener('DOMContentLoaded', this.initCalcHeaderHeight)
         window.addEventListener('resize', this.initCalcHeaderHeight)
-
-        this.mobileNavEl = document.getElementById('mobile-header-nav-list')
-        this.mobileFocusTrap = focusTrap.createFocusTrap(this.mobileNavEl, {
-          allowOutsideClick: true
-        })
       },
       get bodyClasses() {
         let classes = []
@@ -33,28 +25,16 @@ export default {
         document.documentElement.style.setProperty('--header-height', headerHeight + 'px')
       },
       onWindowScrollHandler() {
-        var scrollTop =
-          window.pageYOffset !== undefined
-            ? window.pageYOffset
-            : (document.documentElement || document.body.parentNode || document.body).scrollTop
+        const scrollTop = window.scrollY
 
-        if (scrollTop > 0) {
-          document.body.classList.add('scrolled')
-          this.isWindowScrolled = true
-        } else {
-          document.body.classList.remove('scrolled')
-          this.isWindowScrolled = false
-        }
+        document.body.classList[scrollTop > 0 ? 'add' : 'remove']('tw-scrolled')
+        this.isWindowScrolled = scrollTop > 0
       },
       openMobileMenu() {
         this.isMobileMenuVisible = true
-        setTimeout(() => {
-          this.mobileFocusTrap.activate()
-        }, 1000)
       },
       closeMobileMenu() {
         this.isMobileMenuVisible = false
-        this.mobileFocusTrap.deactivate()
       },
       toggleMobileMenu() {
         if (this.isMobileMenuVisible) {

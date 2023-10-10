@@ -1,7 +1,10 @@
 import Alpine from "alpinejs"
 import collapse from "@alpinejs/collapse"
 import intersect from '@alpinejs/intersect'
+import focus from "@alpinejs/focus"
+import morph from "@alpinejs/morph"
 import alpineGlobals from "./alpine"
+
 import helpers from "./helpers.js"
 import "./a11y.js"
 
@@ -25,7 +28,7 @@ if (process.env.NODE_ENV === "development") {
   console.table(tableData)
 }
 
-Alpine.plugin([intersect, collapse])
+Alpine.plugin([intersect, collapse, focus, morph])
 alpineGlobals.register(Alpine)
 Alpine.start() 
 

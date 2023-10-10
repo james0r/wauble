@@ -1,12 +1,12 @@
 <div class="tw-px-6 md:tw-px-8 tw-my-8 md:tw-my-12">
   <div
-    class="container"
+    class="tw-container"
     x-data="{ expanded: true }"
   >
     <h1 style="display: tw-inline-block;">Front Page Demos</h1>
     <button
       @click="expanded = ! expanded"
-      class="btn"
+      class="btn tw-inline-block tw-mt-4"
     >
       Toggle Collapse Section
     </button>

@@ -43,7 +43,7 @@ $current_locale = get_locale();
           href="<?php echo $lang['current_page_url']; ?>"
           class="tw-block tw-py-2"
         >
-          <div class="tw-flex tw-gap-2 tw-px-2 tw-items-center tw-w-full tw-justify-between hover:tw-bg-primary-50">
+          <div class="tw-flex tw-gap-2 tw-px-2 tw-items-center tw-w-full tw-justify-between hover:tw-bg-blue-50">
             <span class="tw-text-[14px]">
               <?php echo $lang['language_name']; ?>
             </span>
@@ -64,7 +64,7 @@ $current_locale = get_locale();
           href="<?php echo $lang['current_page_url']; ?>"
           class="tw-block tw-py-2"
         >
-          <div class="tw-flex tw-gap-2 tw-px-2 tw-items-center tw-w-full tw-justify-between hover:tw-bg-primary-50">
+          <div class="tw-flex tw-gap-2 tw-px-2 tw-items-center tw-w-full tw-justify-between hover:tw-bg-blue-50">
             <span class="tw-text-[14px]">
               <?php echo $lang['language_name']; ?>
             </span>
