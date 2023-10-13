@@ -6,21 +6,25 @@ config:
   via: nginx
   database: mysql
   config:
-    server: config/nginx.conf
+    server: .lando/config/nginx.conf
 env_file:
   - .env
 # events:
 #   pre-start:
-#     - node: "cd /app/wordpress/wp-content/themes/wauble && npm install"
-#     - node: "cd /app/wordpress/wp-content/themes/wauble && (npm run watch&)"
+#     - appserver: "cd $LANDO_MOUNT && composer install"
+#     - appserver: "cd $LANDO_MOUNT/wordpress/wp-content/themes/wauble && composer install"
 services:
-  node:
-    type: node:18
+  appserver:
+    build_as_root:
+      - "composer install"
+      - "cd wordpress/wp-content/themes/wauble && composer install"
+  appserver_nginx:
     overrides:
-      command: 
-        - /app/.lando/on_node_service_start.sh
-    build: 
-      - cd /app/wordpress/wp-content/themes/wauble && npm install
+      image: james0r/nginx
+      ports:
+        - 5173:5173
+    build_as_root:
+      - "cd wordpress/wp-content/themes/wauble && npm install"
   pma:
     type: phpmyadmin
     hosts:
@@ -28,17 +32,23 @@ services:
 proxy:
   appserver_nginx:
     - wauble.lndo.site
-  node:
-    - bs.wauble.lndo.site:3000
   pma:
     - pma.wauble.lndo.site
 tooling:
-  npm:
-    dir: /app/wordpress/wp-content/themes/wauble
-    service: node
   node:
-    dir: /app/wordpress/wp-content/themes/wauble
-    service: node
+    service: appserver_nginx
+  npm:
+    service: appserver_nginx
+  dev:
+    service: appserver_nginx
+    description: Start vite dev server
+    user: root
+    cmd: cd wordpress/wp-content/themes/wauble && npm run dev
+  build:
+    service: appserver_nginx
+    description: Build theme with vite
+    user: root
+    cmd: cd wordpress/wp-content/themes/wauble && npm run build
   envoy:
     service: appserver
   composer:
@@ -70,31 +80,9 @@ tooling:
       - appserver: wp menu create "Footer Menu" --path=wordpress
       - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
-  restart:theme-watch:
-    description: Kill the watch command (which causes a restart of the processes)
-    service: node
-    user: root
-    cmd:
-      - echo -n "Killing theme watcher..."
-      - /app/.lando/kill_npm_run_watch.sh && echo " ✅"
-  start:theme-watch:
-    description: Start the watch command
-    service: node
-    user: root
-    cmd:
-      - echo -n "Starting theme watcher..."
-      - cd /app/wordpress/wp-content/themes/wauble/ && npm run watch
-  build:theme:
-    description: Build the theme
-    service: node
-    user: root
-    cmd:
-      - echo -n "Building theme..."
-      - cd /app/wordpress/wp-content/themes/wauble/ && npm run build
-      - echo "Theme build successfully ✅"
 excludes:
-  - wordpress/wp-content/themes/wauble/node_modules
-  - /app/wordpress/wp-content/themes/wauble/node_modules
+  # - wordpress/wp-content/themes/wauble/node_modules
+  # - /app/wordpress/wp-content/themes/wauble/node_modules
   # - vendor
   # - wordpress/wp-content/themes/wauble/vendor
   # - wordpress/wp-content/uploads

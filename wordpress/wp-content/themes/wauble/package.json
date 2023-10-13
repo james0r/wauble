@@ -3,11 +3,10 @@
   "description": "A Wordpress starter theme including Laravel Mix, Tailwind, SCSS, and Alpine.JS.",
   "version": "1.0.0",
   "scripts": {
-    "start": "npx mix",
-    "dev": "npm run watch",
-    "watch": "npx mix watch",
-    "prod": "npx mix --production",
-    "build": "npm run prod"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "devDependencies": {
     "@alpinejs/collapse": "^3.13.1",
@@ -25,8 +24,11 @@
     "postcss-import": "^15.0.0",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.7",
+    "rollup-plugin-delete": "^2.0.0",
     "sass": "^1.56.1",
     "sass-loader": "^12.6.0",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.11",
+    "vite-plugin-live-reload": "^3.0.2"
   }
 }

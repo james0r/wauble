@@ -46,10 +46,7 @@ mix
 // Start BrowserSync
 mix.browserSync({
   proxy: "http://wauble.lndo.site",
-  socket: {
-    domain: "http://bs.wauble.lndo.site",
-    port: 80
-  },
+  host: "0.0.0.0",
   open: false,
   notify: false,
   files: [

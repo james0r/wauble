@@ -33,3 +33,8 @@ function Wauble() {
 }
 
 Wauble();
+
+function child_theme_styles() {
+  wp_enqueue_script('vite-dev-client', site_url() . ":5173/@vite/client", array(), null, false);
+}
+add_action('wp_enqueue_scripts', 'child_theme_styles');
