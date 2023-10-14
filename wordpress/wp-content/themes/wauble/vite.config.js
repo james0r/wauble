@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
-import laravel from 'laravel-vite-plugin';
+import laravel from 'laravel-vite-plugin'
+import fs from 'fs'
 
 export default defineConfig({
   base: '',
@@ -10,7 +11,14 @@ export default defineConfig({
     assetsDir: 'assets'
   },
   server: {
-    host: "0.0.0.0"
+    host: "0.0.0.0",
+    https: {
+      key: fs.readFileSync('/certs/cert.key'),
+      cert: fs.readFileSync('/certs/cert.crt')
+    },
+    hmr: {
+      host: 'localhost',
+    },
   },
   plugins: [
     laravel({

@@ -19,10 +19,13 @@ services:
       - "composer install"
       - "cd wordpress/wp-content/themes/wauble && composer install"
   appserver_nginx:
+    ssl: true
     overrides:
       image: james0r/nginx
       ports:
       - 5173:5173
+      volumes:
+      - ./certs:/certs
     build_as_root:
       - mkdir -p /.npm
       - chown -R 501:33 "/.npm"
