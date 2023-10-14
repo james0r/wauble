@@ -3,16 +3,18 @@ let plugin = require('tailwindcss/plugin')
 import { resolve } from 'path'
 
 module.exports = {
-  content: require('fast-glob').sync([
-    resolve(__dirname, '../**/*.php')
-  ]),
-  prefix: 'tw-',
-  safeList: [
-    'debug-screens'
+  content: [
+    resolve(__dirname, '../**/*.php'),
   ],
+  prefix: 'tw-',
   theme: {
     debugScreens: {
-      prefix: 'screen: ',
+      style: {
+        backgroundColor: 'rgba(0,0,0, .1)',
+        color: 'black',
+        // ...
+      },
+      prefix: '',
     },
     container: {
       center: true,

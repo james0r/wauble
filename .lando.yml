@@ -30,7 +30,7 @@ services:
       - mkdir -p /.npm
       - chown -R 501:33 "/.npm"
     build:
-      - "cd wordpress/wp-content/themes/wauble && npm install"
+      - "cd wordpress/wp-content/themes/wauble && npm install && npm run build"
   pma:
     type: phpmyadmin
     hosts:
