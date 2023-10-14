@@ -7,7 +7,7 @@
 <?php get_template_part('template-parts/head'); ?>
 
 <body
-  <?php body_class(); ?>
+  <?php body_class('debug-screens'); ?>
   x-data
   :class="$store.global.bodyClasses"
 >

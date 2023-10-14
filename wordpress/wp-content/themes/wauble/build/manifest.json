@@ -7,11 +7,6 @@
     "file": "assets/OpenSans-Regular-10e0df1f.woff2",
     "src": "src/fonts/OpenSans-Regular.woff2"
   },
-  "src/scss/theme.scss": {
-    "file": "assets/theme-0f4f9166.css",
-    "isEntry": true,
-    "src": "src/scss/theme.scss"
-  },
   "src/theme.css": {
     "file": "assets/theme-f53a5d13.css",
     "isEntry": true,

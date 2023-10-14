@@ -1,10 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 let plugin = require('tailwindcss/plugin')
+import { resolve } from 'path'
 
 module.exports = {
-  content: require('fast-glob').sync(['./**/*.php']),
+  content: require('fast-glob').sync([
+    resolve(__dirname, '../**/*.php')
+  ]),
   prefix: 'tw-',
+  safeList: [
+    'debug-screens'
+  ],
   theme: {
+    debugScreens: {
+      prefix: 'screen: ',
+    },
     container: {
       center: true,
       // padding: {
@@ -81,6 +90,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('tailwindcss-debug-screens'),
     require('@tailwindcss/container-queries'),
     require('@tailwindcss/typography')({
       className: 'rte'

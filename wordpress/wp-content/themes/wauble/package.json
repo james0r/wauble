@@ -1,12 +1,12 @@
 {
   "name": "wauble-starter-theme",
-  "description": "A Wordpress starter theme including Laravel Mix, Tailwind, SCSS, and Alpine.JS.",
+  "description": "A Wordpress starter theme including Laravel Vite Plugin, Tailwind, SCSS, and AlpineJS.",
   "version": "1.0.0",
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "start": "vite --config ./config/vite.config.js",
+    "dev": "vite --config ./config/vite.config.js",
+    "build": "vite build --config ./config/vite.config.js",
+    "serve": "vite preview --config ./config/vite.config.js"
   },
   "devDependencies": {
     "@alpinejs/collapse": "^3.13.1",
@@ -25,6 +25,7 @@
     "prettier-plugin-tailwindcss": "^0.2.7",
     "sass": "^1.69.3",
     "tailwindcss": "^3.3.3",
+    "tailwindcss-debug-screens": "^2.2.1",
     "vite": "^4.4.11"
   }
 }

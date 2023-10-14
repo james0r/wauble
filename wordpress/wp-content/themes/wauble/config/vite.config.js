@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import fs from 'fs'
+import { resolve } from 'path'
 
 export default defineConfig({
   base: '',
@@ -19,6 +20,16 @@ export default defineConfig({
     hmr: {
       host: 'localhost',
     },
+  },
+  css: {
+    postcss: {
+      plugins: [
+        require('postcss-import'),
+        require('tailwindcss/nesting'),
+        require('tailwindcss')(resolve(__dirname, './tailwind.config.js')),
+        require('autoprefixer')
+      ]
+    }
   },
   plugins: [
     laravel({
