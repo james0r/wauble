@@ -1,3 +1,12 @@
 @import './css/base.pcss';
 @import './css/components.pcss';
 @import './css/utilities.pcss';
+
+@font-face {   
+  font-family: 'Open Sans';
+  src: url('./fonts/OpenSans-Regular.woff2') format('woff2'),
+    url('./fonts/OpenSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

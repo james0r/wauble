@@ -34,6 +34,10 @@ class Wauble_Scripts {
     // enqueue the Vite module
     Vite::enqueue_module();
 
+    // uncomment to register and enqueue theme scss styles and also uncomment input vite.config.js
+    // $filename = Vite::asset('src/scss/theme.scss');
+    // wp_enqueue_style('theme-style-scss', $filename, [], null, 'screen');
+
     // register theme-style-css
     $filename = Vite::asset('src/theme.css');
 

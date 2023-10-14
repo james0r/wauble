@@ -17,7 +17,8 @@ export default defineConfig({
       publicDirectory: 'build',
       input: [
         'src/theme.js',
-        'src/theme.css'
+        'src/theme.css',
+        // 'src/scss/theme.scss'
       ],
       refresh: [
         '**.php'

@@ -82,8 +82,8 @@ tooling:
       - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
 excludes:
-  - /app/wordpress/wp-content/themes/wauble/node_modules
   - wordpress/wp-content/themes/wauble/node_modules
+  # - /app/wordpress/wp-content/themes/wauble/node_modules
   # - vendor
   # - wordpress/wp-content/themes/wauble/vendor
   # - wordpress/wp-content/uploads
