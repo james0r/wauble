@@ -1,3 +1,6 @@
+# sudo docker build --no-cache --network host -t james0r/nginx .
+# sudo docker push james0r/nginx
+
 FROM bitnami/nginx:1.17.10-debian-10-r71
 
 # Install Node 18

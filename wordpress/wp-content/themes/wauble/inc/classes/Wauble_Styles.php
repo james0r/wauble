@@ -12,20 +12,7 @@ class Wauble_Styles {
   private array $admin_styles_to_enqueue;
 
   public function __construct() {
-    $this->styles_to_enqueue = [
-      [
-        'theme-styles',
-        Wauble::$stylesheet_dir_url . '/style.css'
-      ],
-      [
-        'tailwind',
-        Wauble::$stylesheet_dir_url . '/dist/css/tailwind.css'
-      ],
-      [
-        'sass-compiled',
-        Wauble::$stylesheet_dir_url . '/dist/css/sass-compiled.css'
-      ]
-    ];
+    $this->styles_to_enqueue = [];
 
     $this->styles_to_dequeue = [];
 

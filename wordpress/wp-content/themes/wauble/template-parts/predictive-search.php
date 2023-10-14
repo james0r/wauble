@@ -11,10 +11,10 @@
       hx-target="#search-results"
       hx-indicator=".htmx-indicator"
     >
-    <span class="htmx-indicator tw-ml-4">
+    <span class="htmx-indicator tw-ml-4"> 
       <img
         class="tw-w-[32px] tw-h-[32px]"
-        src="<?php echo Wauble()->url('/dist/images/bars.svg') ?>"
+        src="<?php echo Wauble()->url('/static/images/bars.svg') ?>"
       />
     </span>
   </div>

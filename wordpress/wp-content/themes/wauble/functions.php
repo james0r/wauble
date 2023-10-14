@@ -26,6 +26,8 @@ require_once wp_normalize_path(get_template_directory() . '/inc/classes/Wauble.p
 
 require_once wp_normalize_path(get_template_directory() . '/inc/classes/Wauble_Autoload.php');
 
+require_once wp_normalize_path(get_template_directory() . '/inc/Vite.lib.php');
+
 new Wauble_Autoload;
 
 function Wauble() {
@@ -33,8 +35,3 @@ function Wauble() {
 }
 
 Wauble();
-
-function child_theme_styles() {
-  wp_enqueue_script('vite-dev-client', site_url() . ":5173/@vite/client", array(), null, false);
-}
-add_action('wp_enqueue_scripts', 'child_theme_styles');

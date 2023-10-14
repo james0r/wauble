@@ -1,0 +1,12 @@
+{
+  "src/theme.css": {
+    "file": "assets/theme-58492a52.css",
+    "isEntry": true,
+    "src": "src/theme.css"
+  },
+  "src/theme.js": {
+    "file": "assets/theme-6ea94957.js",
+    "isEntry": true,
+    "src": "src/theme.js"
+  }
+}

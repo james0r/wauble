@@ -11,6 +11,15 @@
   [x-cloak] {
     display: none !important;
   }
+
+  @font-face {   
+    font-family: 'Open Sans';
+    src: url('<?php echo Wauble()->url('/static/fonts/OpenSans-Regular.woff2') ?>') format('woff2'),
+      url('<?php echo Wauble()->url('/static/fonts/OpenSans-Regular.woff') ?>') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
   </style>
   <?php wp_head(); ?>
 </head>

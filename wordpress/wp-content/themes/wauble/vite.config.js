@@ -1,46 +1,35 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import del from 'rollup-plugin-delete'
-import * as fs from "fs"
-import liveReload from 'vite-plugin-live-reload'
+import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
-  server: {
-    host: "0.0.0.0",
-    https: false,
-    port: 5173,
-    origin: 'wauble.lndo.site'
-  },
+  base: '',
   build: {
+    emptyOutDir: true,
     manifest: true,
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/index.js'),
-      },
-      output: {
-        entryFileNames: `[name].js`,
-        chunkFileNames: `[name].js`,
-        assetFileNames: (assetInfo) =>
-          assetInfo.name.split('/').pop().split('.').shift() == 'main'
-            ? 'bundle.css'
-            : '[name].[ext]',
-      },
-      plugins: [
-        del({
-          targets: [
-            resolve(__dirname, 'dist')
-          ]
-        })
-      ]
-    },
-    outDir: resolve(__dirname, 'dist'),
-    assetsDir: '.',
-    emptyOutDir: true
+    outDir: 'build',
+    assetsDir: 'assets'
   },
-  publicDir: false,
+  server: {
+    host: "0.0.0.0"
+  },
   plugins: [
-    liveReload([
-      resolve(__dirname + '/**/*.php'),
-    ])
+    laravel({
+      publicDirectory: 'build',
+      input: [
+        'src/theme.js',
+        'src/theme.css'
+      ],
+      refresh: [
+        '**.php'
+      ]
+    })
   ],
+  resolve: {
+    alias: [
+      {
+        find: /~(.+)/,
+        replacement: process.cwd() + '/node_modules/$1'
+      },
+    ]
+  }
 })

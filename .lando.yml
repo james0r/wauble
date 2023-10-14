@@ -22,8 +22,11 @@ services:
     overrides:
       image: james0r/nginx
       ports:
-        - 5173:5173
+      - 5173:5173
     build_as_root:
+      - mkdir -p /.npm
+      - chown -R 501:33 "/.npm"
+    build:
       - "cd wordpress/wp-content/themes/wauble && npm install"
   pma:
     type: phpmyadmin
@@ -42,12 +45,10 @@ tooling:
   dev:
     service: appserver_nginx
     description: Start vite dev server
-    user: root
     cmd: cd wordpress/wp-content/themes/wauble && npm run dev
   build:
     service: appserver_nginx
     description: Build theme with vite
-    user: root
     cmd: cd wordpress/wp-content/themes/wauble && npm run build
   envoy:
     service: appserver
@@ -81,8 +82,8 @@ tooling:
       - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
 excludes:
-  # - wordpress/wp-content/themes/wauble/node_modules
-  # - /app/wordpress/wp-content/themes/wauble/node_modules
+  - /app/wordpress/wp-content/themes/wauble/node_modules
+  - wordpress/wp-content/themes/wauble/node_modules
   # - vendor
   # - wordpress/wp-content/themes/wauble/vendor
   # - wordpress/wp-content/uploads

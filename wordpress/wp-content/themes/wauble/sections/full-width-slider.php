@@ -134,10 +134,10 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
 
 
 <?php if ($section_is_first_instance) : ?>
-<script src="<?php echo Wauble()->url('/dist/static/swiper-bundle.min.js'); ?>"></script>
+<script src="<?php echo Wauble()->url('/static/js/swiper-bundle.min.js'); ?>"></script>
 <link
   rel="stylesheet"
-  href="<?php echo Wauble()->url('/dist/static/swiper-bundle.min.css'); ?>"
+  href="<?php echo Wauble()->url('/static/css/swiper-bundle.min.css'); ?>"
 >
 
 <script>
