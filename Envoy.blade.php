@@ -70,23 +70,20 @@
 @endtask
 
 @task('push-theme-files-to-wpengine-development', ['on' => 'localhost'])
-  lando build:theme
+  lando build
   rsync -avr --delete --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/themes/{{$theme_name}}/ {{$dev_ssh}}:/sites/{{$dev_env}}/wp-content/themes/{{$theme_name}}
-  lando restart:theme-watch
   {{ logSuccess('Theme files pushed to environment -> '. $dev_env); }}
 @endtask
 
 @task('push-theme-files-to-wpengine-staging', ['on' => 'localhost'])
-  lando build:theme
+  lando build
   rsync -avr --delete --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/themes/{{$theme_name}}/ {{$staging_ssh}}:/sites/{{$staging_env}}/wp-content/themes/{{$theme_name}}
-  lando restart:theme-watch
   {{ logSuccess('Theme files pushed to environment -> '. $staging_env); }}
 @endtask
 
 @task('push-theme-files-to-dreamhost', ['on' => 'localhost'])
   lando build:theme
   rsync -avr --delete --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/themes/{{$theme_name}}/ {{$dreamhost_ssh}}:{{$dreamhost_wp_path}}/wp-content/themes/{{$theme_name}}
-  lando restart:theme-watch
   {{ logSuccess('Theme files pushed to environment -> '. $dreamhost_wp_path); }}
 @endtask
 
