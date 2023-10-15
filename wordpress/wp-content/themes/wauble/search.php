@@ -70,7 +70,7 @@ $query = new WP_Query($args);
   class="tw-px-6 md:tw-px-8"
   id="search-results"
 >
-  <div class="container tw-py-16">
+  <div class="tw-container tw-py-16">
 
     <div class="tw-text-center">
       <h1>

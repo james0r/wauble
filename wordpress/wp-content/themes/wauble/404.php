@@ -1,7 +1,7 @@
 <?php get_template_part('template-parts/header'); ?>
 
-<div class="px-6 md:px-8 py-8">
-  <div class="container">
+<div class="tw-px-6 md:tw-px-8 tw-py-8">
+  <div class="tw-container">
     <h1>
       <?php _e('404: Page Not Found', 'wauble'); ?>
     </h1>

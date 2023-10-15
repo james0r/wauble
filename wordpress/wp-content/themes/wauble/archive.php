@@ -1,8 +1,8 @@
 <?php get_template_part('template-parts/header'); ?>
 
-<div class="px-6 md:px-8 py-8">
-  <div class="container">
-    <div class="rte">
+<div class="tw-px-6 md:tw-px-8 tw-py-8">
+  <div class="tw-container">
+    <div class="tw-rte">
       <h1 class="entry-title">
         <?php echo get_the_archive_title(); ?>
       </h1>
