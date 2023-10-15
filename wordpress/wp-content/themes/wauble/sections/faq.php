@@ -70,19 +70,19 @@
 
   <style>
     .section-faq .accordion-icon {
-      tw-border: solid currentcolor;
+      border: solid currentcolor;
       border-width: 0 2px 2px 0;
       height: 0.5rem;
       pointer-events: none;
       position: tw-absolute;
       right: 2em;
       top: 50%;
-      tw-transform: translateY(-60%) rotate(45deg);
+      transform: translateY(-60%) rotate(45deg);
       width: 0.5rem;
     }
 
     .section-faq button[aria-expanded="true"] .accordion-icon {
-      tw-transform: translateY(-50%) rotate(-135deg);
+      transform: translateY(-50%) rotate(-135deg);
     }
   </style>
 

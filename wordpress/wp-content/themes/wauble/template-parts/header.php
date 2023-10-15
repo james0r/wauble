@@ -25,7 +25,7 @@
     class="tw-bg-white tw-sticky tw-top-0 tw-shadow-lg tw-z-20"
   >
     <div class="tw-px-6 md:tw-px-8">
-      <div class="container tw-flex tw-items-center tw-justify-between tw-h-full">
+      <div class="tw-container tw-flex tw-items-center tw-justify-between tw-h-full">
         <a
           href="<?php echo home_url(); ?>"
           class="tw-font-bold text-[16px] md:text-[20px] leading-[16px] lg:leading-[20px] tw-text-left"

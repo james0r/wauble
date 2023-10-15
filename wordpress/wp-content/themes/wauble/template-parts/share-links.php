@@ -37,7 +37,7 @@ $description = urlencode($description);
     </div>
   </a>
 
-  <!-- Twitter -->
+  <!-- X (Twitter) -->
   <a
     class=""
     href="https://x.com/intent/tweet/?text=<?php echo $title; ?>&amp;url=<?php echo $url; ?>"
