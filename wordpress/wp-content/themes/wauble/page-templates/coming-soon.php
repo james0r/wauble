@@ -22,7 +22,7 @@
 
 <body <?php body_class(); ?> x-data :class="$store.global.bodyClasses">
   <?php wp_body_open(); ?>
-  <a href="#main" class="skip-to-content-link sr-only" tabindex="0">
+  <a href="#main" class="tw-skip-to-content-link tw-sr-only" tabindex="0">
     Skip to content
   </a>
 

@@ -17,7 +17,7 @@ $shortcode = $section['contact_form_7_shortcode'] ?? null;
       <?php echo $description; ?>
     </div>
     <?php endif; ?>
-    <div class="contact-form-wrapper">
+    <div class="tw-contact-form-wrapper">
       <?php echo do_shortcode($shortcode); ?>
     </div>
   </div>

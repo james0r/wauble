@@ -14,7 +14,7 @@
   <?php wp_body_open(); ?>
   <a
     href="#site-main"
-    class="skip-to-content-link"
+    class="tw-skip-to-content-link"
     tabindex="0"
   >
     Skip to content

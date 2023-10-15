@@ -6,7 +6,7 @@
     <h1 style="display: tw-inline-block;">Front Page Demos</h1>
     <button
       @click="expanded = ! expanded"
-      class="btn tw-inline-block tw-mt-4"
+      class="tw-btn tw-inline-block tw-mt-4"
     >
       Toggle Collapse Section
     </button>

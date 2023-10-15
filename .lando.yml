@@ -29,6 +29,7 @@ services:
     build_as_root:
       - mkdir -p /.npm
       - chown -R 501:33 "/.npm"
+      - chmod -R 777 "/.npm"
     build:
       - "cd wordpress/wp-content/themes/wauble && npm install && npm run build"
   pma:
@@ -53,6 +54,9 @@ tooling:
     service: appserver_nginx
     description: Build theme with vite
     cmd: cd /app/wordpress/wp-content/themes/wauble && npm run build
+  ls:
+    service: appserver_nginx
+    cmd: cd /app/wordpress/wp-content/themes/wauble && ls
   envoy:
     service: appserver
   composer:

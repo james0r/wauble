@@ -4,8 +4,8 @@
 ?>
 
 <?php if (!empty($tabs)) : ?>
-  <div class="px-6 md:px-8 py-8">
-    <div class="container rounded-xl">
+  <div class="tw-px-6 md:tw-px-8 tw-py-8">
+    <div class="tw-container tw-rounded-xl">
       <div
         x-data="{ 
             tab: 1, 
@@ -22,7 +22,7 @@
       >
         <?php if ($heading) : ?>
         <h2
-          class="text-5xl mb-12"
+          class="tw-text-5xl tw-mb-12"
           :id="$id('tabs-title')"
         >
           <?php echo $heading; ?>
@@ -30,7 +30,7 @@
         <?php endif; ?>
         <ul
           role="tablist"
-          class="-mb-px flex items-stretch"
+          class="tw--mb-px tw-flex tw-items-stretch"
           :aria-labelledby="$id('tabs-title')"
         >
 
@@ -39,8 +39,8 @@
               <button
                 type="button"
                 @click="tab = <?php echo $tab_num; ?>"
-                :class="tab == <?php echo $tab_num; ?> ? 'border-gray-200 bg-white' : 'border-transparent'"
-                class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5"
+                :class="tab == <?php echo $tab_num; ?> ? 'tw-border-gray-200 tw-bg-white' : 'tw-border-transparent'"
+                class="tw-inline-flex tw-rounded-t-md tw-border-t tw-border-l tw-border-r tw-px-5 tw-py-2.5"
                 role="tab"
                 id="tab-<?php echo $tab_num; ?>"
                 :tabindex="tab != <?php echo $tab_num; ?> && '-1'"
@@ -57,19 +57,19 @@
         </ul>
         <div
           role="tabpanels"
-          class="rounded-b-md border border-gray-200 bg-white"
+          class="tw-rounded-b-md tw-border tw-border-gray-200 tw-bg-white"
         >
 
         <?php foreach($tabs as $index=>$tab) : $tab_num = ($index + 1) ?>
           <section
               x-show="tab == <?php echo $tab_num; ?>"
-              class="p-8"
+              class="tw-p-8"
               role="tabpanel"
               :aria-hidden="tab == <?php echo $tab_num; ?> ? 'false' : 'true'"
               aria-labelledby="tab-<?php echo $tab_num; ?>"
               :tabindex="tab == <?php echo $tab_num; ?> && '0'"
             >
-              <div class="rte">
+              <div class="tw-rte">
                 <?php echo $tab['panel_content'] ?? null; ?>
               </div>
             </section>

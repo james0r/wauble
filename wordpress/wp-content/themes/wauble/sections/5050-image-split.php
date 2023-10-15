@@ -1,19 +1,19 @@
 <div
-  class="px-6 md:px-8 py-8 overflow-hidden"
+  class="tw-px-6 md:tw-px-8 tw-py-8 tw-overflow-hidden"
   x-data="{ intersected: false }"
   x-intersect:enter.half="intersected = true"
   x-intersect:leave.half="intersected = false"
 >
-  <div class="container">
-    <div class="grid grid-cols-1 md:grid-cols-2 h-auto md:h-[500px]">
+  <div class="tw-container">
+    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-h-auto md:tw-h-[500px]">
       <?php
       $classes = array(
-        'relative',
-        'aspect-video',
-        'md:aspect-auto'
+        'tw-relative',
+        'tw-aspect-video',
+        'md:tw-aspect-auto'
       );
       if ($section['image_position'] === 'Right') {
-        $classes[] = 'md:order-2';
+        $classes[] = 'md:tw-order-2';
       }
       ?>
       <div
@@ -22,14 +22,14 @@
       >
         <?php
         $classes = array(
-          'object-cover',
-          'w-full',
-          'h-full',
-          'absolute',
+          'tw-object-cover',
+          'tw-w-full',
+          'tw-h-full',
+          'tw-absolute',
         );
         if ($section['portrait_image'] === 'Right') {
-          $classes[] = 'md:hidden';
-          $classes[] = 'lg:block';
+          $classes[] = 'md:tw-hidden';
+          $classes[] = 'lg:tw-block';
         }
         echo wp_get_attachment_image(
           $section['landscape_image'],
@@ -48,7 +48,7 @@
             1000,
             false,
             [
-              'class' => 'hidden md:block lg:hidden object-cover w-full h-full absolute',
+              'class' => 'tw-hidden md:tw-block lg:tw-hidden tw-object-cover tw-w-full tw-h-full tw-absolute',
               'sizes' => '(max-width: 768px) 100vw, 50vw'
             ]
           );
@@ -58,22 +58,22 @@
       </div>
       <?php
       $classes = array();
-      $classes[] = 'flex';
-      $classes[] = 'flex-col';
-      $classes[] = 'p-4';
+      $classes[] = 'tw-flex';
+      $classes[] = 'tw-flex-col';
+      $classes[] = 'tw-p-4';
       $classes[] = 'rte';
 
       if ($section['content_vertical_align'] === 'Bottom') {
-        $classes[] = 'justify-end';
+        $classes[] = 'tw-justify-end';
       } elseif ($section['content_vertical_align'] === 'Middle') {
-        $classes[] = 'justify-center';
+        $classes[] = 'tw-justify-center';
       } else {
-        $classes[] = 'justify-start';
+        $classes[] = 'tw-justify-start';
       }
 
 
       if ($section['image_position'] === 'Right') {
-        $classes[] = 'md:order-1';
+        $classes[] = 'md:tw-order-1';
       }
       ?>
       <div
@@ -108,7 +108,7 @@ if ($section['tint_image']) :
       'background-color' => 'rgba(0, 0, 0, 0.' . $tint_perc_padded . ')',
       'bottom' => '0',
       'left' => '0',
-      'position' => 'absolute',
+      'position' => 'tw-absolute',
       'right' => '0',
       'top' => '0',
     ]
@@ -130,65 +130,65 @@ endif; ?>
 
 <style>
 .slide-in-from-left {
-  animation: slide-in-from-left 0.5s ease-in-out both;
+  animation: slide-in-from-left 0.5s tw-ease-in-out both;
 }
 
 .slide-in-from-right {
-  animation: slide-in-from-right 0.5s ease-in-out both;
+  animation: slide-in-from-right 0.5s tw-ease-in-out both;
 }
 
 @keyframes slide-in-from-left {
   0% {
-    transform: translateX(-20%);
+    tw-transform: translateX(-20%);
     opacity: 0;
   }
 
   100% {
-    transform: translateX(0);
+    tw-transform: translateX(0);
     opacity: 1;
   }
 }
 
 @keyframes slide-in-from-right {
   0% {
-    transform: translateX(20%);
+    tw-transform: translateX(20%);
     opacity: 0;
   }
 
   100% {
-    transform: translateX(0);
+    tw-transform: translateX(0);
     opacity: 1;
   }
 }
 
 .slide-out-to-left {
-  animation: slide-out-to-left 0.5s ease-in-out both;
+  animation: slide-out-to-left 0.5s tw-ease-in-out both;
 }
 
 .slide-out-to-right {
-  animation: slide-out-to-right 0.5s ease-in-out both;
+  animation: slide-out-to-right 0.5s tw-ease-in-out both;
 }
 
 @keyframes slide-out-to-left {
   0% {
-    transform: translateX(0);
+    tw-transform: translateX(0);
     opacity: 1;
   }
 
   100% {
-    transform: translateX(-20%);
+    tw-transform: translateX(-20%);
     opacity: 0;
   }
 }
 
 @keyframes slide-out-to-right {
   0% {
-    transform: translateX(0);
+    tw-transform: translateX(0);
     opacity: 1;
   }
 
   100% {
-    transform: translateX(20%);
+    tw-transform: translateX(20%);
     opacity: 0;
   }
 }

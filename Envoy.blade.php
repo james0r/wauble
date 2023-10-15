@@ -82,7 +82,7 @@
 @endtask
 
 @task('push-theme-files-to-dreamhost', ['on' => 'localhost'])
-  lando build:theme
+  lando build
   rsync -avr --delete --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/themes/{{$theme_name}}/ {{$dreamhost_ssh}}:{{$dreamhost_wp_path}}/wp-content/themes/{{$theme_name}}
   {{ logSuccess('Theme files pushed to environment -> '. $dreamhost_wp_path); }}
 @endtask
