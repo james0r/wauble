@@ -38,8 +38,8 @@ node_modules
 
 !/wordpress/wp-content/themes/wauble/
 !/wordpress/wp-content/themes/wauble/**
-/wordpress/wp-content/themes/wauble/dist
-/wordpress/wp-content/themes/wauble/dist/**
+/wordpress/wp-content/themes/wauble/build
+/wordpress/wp-content/themes/wauble/build/**
 /wordpress/wp-content/themes/wauble/.env
 /wordpress/wp-content/themes/wauble/vendor
 /wordpress/wp-content/themes/wauble/vendor/**
