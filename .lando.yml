@@ -48,11 +48,11 @@ tooling:
   dev:
     service: appserver_nginx
     description: Start vite dev server
-    cmd: cd wordpress/wp-content/themes/wauble && npm run dev
+    cmd: cd /app/wordpress/wp-content/themes/wauble && npm run dev
   build:
     service: appserver_nginx
     description: Build theme with vite
-    cmd: cd wordpress/wp-content/themes/wauble && npm run build
+    cmd: cd /app/wordpress/wp-content/themes/wauble && npm run build
   envoy:
     service: appserver
   composer:

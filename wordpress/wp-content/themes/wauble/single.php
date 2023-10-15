@@ -66,7 +66,7 @@
         <?php endif; ?>
       </header>
 
-      <div class="entry-content tw-rte">
+      <div class="entry-content tw-rte sm:tw-rte-lg">
         <?php
             /* translators: %s: Name of current post */
             the_content(

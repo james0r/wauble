@@ -163,8 +163,9 @@
                                 "wp_template_part": "wp_template_part",
                                 "wp_global_styles": "wp_global_styles",
                                 "wp_navigation": "wp_navigation",
-                                "acf-post-type": "acf-post-type",
                                 "acf-taxonomy": "acf-taxonomy",
+                                "acf-post-type": "acf-post-type",
+                                "acf-ui-options-page": "acf-ui-options-page",
                                 "acf-field-group": "acf-field-group",
                                 "acf-field": "acf-field",
                                 "wpcf7_contact_form": "wpcf7_contact_form",
@@ -207,7 +208,8 @@
                             "return_format": "id",
                             "field_type": "multi_select",
                             "allow_null": 0,
-                            "multiple": 0
+                            "multiple": 0,
+                            "bidirectional_target": []
                         },
                         {
                             "key": "field_64915265fbe46",
@@ -238,7 +240,8 @@
                             "return_format": "id",
                             "field_type": "multi_select",
                             "allow_null": 0,
-                            "multiple": 0
+                            "multiple": 0,
+                            "bidirectional_target": []
                         },
                         {
                             "key": "field_649178ea67190",
@@ -1672,6 +1675,11 @@
                 "param": "page_type",
                 "operator": "!=",
                 "value": "posts_page"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "page-templates\/generic.php"
             }
         ]
     ],
@@ -1684,5 +1692,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1696650866
+    "modified": 1697336340
 }

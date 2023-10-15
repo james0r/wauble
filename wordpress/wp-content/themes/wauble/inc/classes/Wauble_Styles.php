@@ -12,7 +12,12 @@ class Wauble_Styles {
   private array $admin_styles_to_enqueue;
 
   public function __construct() {
-    $this->styles_to_enqueue = [];
+    $this->styles_to_enqueue = [
+      [
+        'style',
+        Wauble::$stylesheet_dir_url . '/style.css'
+      ]
+    ];
 
     $this->styles_to_dequeue = [];
 
@@ -27,7 +32,7 @@ class Wauble_Styles {
     $this->admin_styles_to_enqueue = [
       [
         'admin-styles',
-        Wauble::$stylesheet_dir_url . '/dist/admin/admin.css'
+        Wauble::$stylesheet_dir_url . '/static/css/admin.css'
       ]
     ];
 

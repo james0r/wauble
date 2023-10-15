@@ -21,7 +21,7 @@ class Wauble_Scripts {
     $this->admin_scripts_to_enqueue = [
       [
         'admin-scripts',
-        Wauble::$stylesheet_dir_url . '/dist/admin/admin.js'
+        Wauble::$stylesheet_dir_url . '/static/js/admin.js'
       ]
     ];
 
