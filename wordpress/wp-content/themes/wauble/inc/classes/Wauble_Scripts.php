@@ -1,7 +1,5 @@
 <?php
 
-use Idleberg\WordPress\ViteAssets\Assets;
-
 /**
  * This class handles the registering, enqueueing, and dequeueing of scripts.
  */

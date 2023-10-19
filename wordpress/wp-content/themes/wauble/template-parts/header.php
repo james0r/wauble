@@ -7,7 +7,7 @@
 <?php get_template_part('template-parts/head'); ?>
 
 <body
-  <?php body_class(WP_ENV === 'development' ? 'tw-debug-screens' : ''); ?>
+  <?php body_class('tw-debug-screens'); ?>
   x-data
   :class="$store.global.bodyClasses"
 >
