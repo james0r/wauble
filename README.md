@@ -1,4 +1,4 @@
-# Wauble
+# Wauble Wordpress Starter Env + Theme
 
 ## Getting Started
 
