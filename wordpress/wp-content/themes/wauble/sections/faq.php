@@ -74,7 +74,7 @@
       border-width: 0 2px 2px 0;
       height: 0.5rem;
       pointer-events: none;
-      position: tw-absolute;
+      position: absolute;
       right: 2em;
       top: 50%;
       transform: translateY(-60%) rotate(45deg);
