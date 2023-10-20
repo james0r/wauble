@@ -13,10 +13,10 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    // https: {
-    //   key: fs.readFileSync('/certs/cert.key'),
-    //   cert: fs.readFileSync('/certs/cert.crt')
-    // },
+    https: {
+      key: fs.readFileSync('/certs/cert.key'),
+      cert: fs.readFileSync('/certs/cert.crt')
+    },
     hmr: {
       host: 'localhost',
     },

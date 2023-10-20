@@ -1,0 +1,1 @@
+UPDATE `wp_usermeta` SET `meta_value` = 'false' WHERE `wp_usermeta`.`umeta_id` = 10

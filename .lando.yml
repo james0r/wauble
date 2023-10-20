@@ -9,29 +9,22 @@ config:
     server: .lando/config/nginx.conf
 env_file:
   - .env
-# events:
-#   pre-start:
-#     - appserver: "cd $LANDO_MOUNT && composer install"
-#     - appserver: "cd $LANDO_MOUNT/wordpress/wp-content/themes/wauble && composer install"
 services:
   appserver:
     build_as_root:
       - "composer install"
       - "cd wordpress/wp-content/themes/wauble && composer install"
-  appserver_nginx:
-    ssl: true
-    overrides:
-      image: james0r/nginx
-      ports:
+  node: 
+    type: node:18
+    ports:
       - 5173:5173
-      volumes:
-      - ./certs:/certs
-    build_as_root:
-      - mkdir -p /.npm
-      - chown -R 501:33 "/.npm"
-      - chmod -R 777 "/.npm"
     build:
       - "cd wordpress/wp-content/themes/wauble && npm install && npm run build"
+    overrides:
+      volumes:
+      - ./certs:/certs
+  appserver_nginx:
+    ssl: true
   pma:
     type: phpmyadmin
     hosts:
@@ -43,20 +36,17 @@ proxy:
     - pma.wauble.lndo.site
 tooling:
   node:
-    service: appserver_nginx
+    service: node
   npm:
-    service: appserver_nginx
+    service: node
   dev:
-    service: appserver_nginx
+    service: node
     description: Start vite dev server
     cmd: cd /app/wordpress/wp-content/themes/wauble && npm run dev
   build:
-    service: appserver_nginx
+    service: node
     description: Build theme with vite
     cmd: cd /app/wordpress/wp-content/themes/wauble && npm run build
-  ls:
-    service: appserver_nginx
-    cmd: cd /app/wordpress/wp-content/themes/wauble && ls
   envoy:
     service: appserver
   composer:
