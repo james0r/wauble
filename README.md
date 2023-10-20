@@ -13,7 +13,7 @@ create_wauble_app.sh
 
 ### Set up WordPress
 
-In project root directory run
+In project root directory run (you may see an error or two when running lando start. That's okay.)
 
 ```bash
 lando start
