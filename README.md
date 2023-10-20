@@ -13,7 +13,7 @@ create_wauble_app.sh
 
 ### Set up WordPress
 
-In root directory run
+In project root directory run
 
 ```bash
 lando start
@@ -35,6 +35,7 @@ lando rebuild -y
 ```
 
 ## Create Wauble App
+This script clones the repo and renames most all instances of "wauble" with whatever name you provide.
 
 ```bash
 #!/bin/bash
