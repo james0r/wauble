@@ -12,17 +12,25 @@
 
       <header class="entry-header tw-mb-4 tw-text-center">
         <div class="tw-aspect-video">
+          <?php if (has_post_thumbnail()) : ?>
           <?php
-              echo wp_get_attachment_image(
-                get_post_thumbnail_id(),
-                'single_featured_image',
-                false,
-                [
-                  'class' => 'tw-object-cover tw-object-center tw-w-full tw-h-full',
-                  'loading' => 'eager',
-                ]
-              );
-              ?>
+                echo wp_get_attachment_image(
+                  get_post_thumbnail_id(),
+                  'single_featured_image',
+                  false,
+                  [
+                    'class' => 'tw-object-cover tw-object-center tw-w-full tw-h-full',
+                    'loading' => 'eager',
+                  ]
+                );
+                ?>
+          <?php else : ?>
+          <img
+            src="<?php echo Wauble()->url('/static/images/no-image.svg'); ?>"
+            alt="no image found"
+            class="tw-object-cover tw-object-center tw-w-full tw-h-full"
+          >
+          <?php endif; ?>
         </div>
 
         <h2 class="entry-title tw-text-2xl md:tw-text-3xl tw-font-extrabold tw-leading-tight tw-my-4">
@@ -78,14 +86,14 @@
             ?>
       </div>
       <div>
-        <?php 
-          $share_data = array(
-            'url' => get_permalink(),
-            'title' => get_the_title(),
-            'description' => get_the_excerpt(),
-            'image' => get_the_post_thumbnail_url()
-          );
-          get_template_part('template-parts/share-links', null, $share_data); ?>
+        <?php
+            $share_data = array(
+              'url' => get_permalink(),
+              'title' => get_the_title(),
+              'description' => get_the_excerpt(),
+              'image' => get_the_post_thumbnail_url()
+            );
+            get_template_part('template-parts/share-links', null, $share_data); ?>
       </div>
 
     </article>

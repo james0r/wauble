@@ -11,15 +11,23 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       class="tw-relative tw-pt-[86%] tw-block"
       tabindex="-1"
     >
+      <?php if (has_post_thumbnail(get_the_ID())) : ?>
       <?php
-      echo get_the_post_thumbnail(
-        get_the_ID(),
-        'wauble-blog-card',
-        [
-          'class' => 'tw-absolute tw-object-cover tw-w-full tw-h-full tw-inset-0 tw-rounded-lg'
-        ]
-      );
-      ?>
+        echo get_the_post_thumbnail(
+          get_the_ID(),
+          'wauble-blog-card',
+          [
+            'class' => 'tw-absolute tw-object-cover tw-w-full tw-h-full tw-inset-0 tw-rounded-lg'
+          ]
+        );
+        ?>
+      <?php else : ?>
+      <img
+        src="<?php echo Wauble()->url('/static/images/no-image.svg'); ?>"
+        alt="no image found"
+        class="tw-absolute tw-object-cover tw-w-full tw-h-full tw-inset-0 tw-rounded-lg"
+      >
+      <?php endif; ?>
     </a>
     <div class="tw-flex tw-text-blue-500 tw-mt-4 tw-items-center">
       <?php if ($show_categories_on_posts) :  ?>
