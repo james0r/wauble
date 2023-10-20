@@ -78,6 +78,7 @@ tooling:
       - appserver: wp menu create "Footer Menu" --path=wordpress
       - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
+      - appserver: wp --path=wordpress db query < .lando/wp-cli/setup-theme.sql
 excludes:
   - wordpress/wp-content/themes/wauble/node_modules
   # - /app/wordpress/wp-content/themes/wauble/node_modules

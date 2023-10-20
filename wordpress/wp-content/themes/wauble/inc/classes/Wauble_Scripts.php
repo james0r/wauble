@@ -7,6 +7,8 @@
 class Wauble_Scripts {
   public array $scripts_to_enqueue;
 
+  public array $scripts_to_deregister;
+
   public array $scripts_to_dequeue;
 
   public array $admin_scripts_to_enqueue;
@@ -15,6 +17,10 @@ class Wauble_Scripts {
     $this->scripts_to_enqueue = [];
 
     $this->scripts_to_dequeue = [];
+
+    $this->scripts_to_deregister = [
+      ['jquery']
+    ];
 
     $this->admin_scripts_to_enqueue = [
       [
@@ -25,6 +31,7 @@ class Wauble_Scripts {
 
     add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
     add_action('wp_enqueue_scripts', [$this, 'dequeueScripts']);
+    add_action('init', [$this, 'deregisterScripts']);
     add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
   }
 
@@ -54,6 +61,12 @@ class Wauble_Scripts {
     array_map(function ($script) {
       call_user_func_array('wp_enqueue_script', $script);
     }, $this->scripts_to_enqueue);
+  }
+
+  public function deregisterScripts() {
+    array_map(function ($script) {
+      call_user_func_array('wp_deregister_script', $script);
+    }, $this->scripts_to_deregister);
   }
 
   public function dequeueScripts() {
