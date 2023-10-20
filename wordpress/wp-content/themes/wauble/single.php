@@ -4,7 +4,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 <div class="tw-px-6 md:tw-px-8 tw-py-8">
-  <div class="container">
+  <div class="tw-container">
     <article
       id="post-<?php the_ID(); ?>"
       <?php post_class(''); ?>
