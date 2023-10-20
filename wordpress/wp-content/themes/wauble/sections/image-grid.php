@@ -70,16 +70,14 @@ if ($flow_direction === 'Horizontal') {
       class="<?php echo implode(" ", $grid_classes); ?>"
     >
       <?php foreach ($images as $index => $item) : ?>
-      <?php if (empty($item['image'])) {
-              return;
-            } ?>
+      <?php if (!empty($item['image'])) : ?>
       <li class="">
         <?php
-              $image_id = $item['image'];
-              $image_src = wp_get_attachment_image_src($image_id, 'full', false);
-              $width = $image_src[1];
-              $height = $image_src[2];
-              ?>
+                $image_id = $item['image'];
+                $image_src = wp_get_attachment_image_src($image_id, 'full', false);
+                $width = $image_src[1];
+                $height = $image_src[2];
+                ?>
         <a
           href="<?php echo wp_get_attachment_image_url($image_id, 'full', false); ?>"
           class="<?php echo implode(" ", $image_wrapper_classes) ?>"
@@ -92,10 +90,11 @@ if ($flow_direction === 'Horizontal') {
           target="_blank"
         >
           <?php
-                echo wp_get_attachment_image($image_id, [400, 400], false, ['class' => 'tw-absolute pin tw-object-cover tw-w-full tw-h-full tw-inset-0', 'loading' => 'lazy']);
-                ?>
+                  echo wp_get_attachment_image($image_id, [400, 400], false, ['class' => 'tw-absolute pin tw-object-cover tw-w-full tw-h-full tw-inset-0', 'loading' => 'lazy']);
+                  ?>
         </a>
       </li>
+      <?php endif; ?>
       <?php endforeach; ?>
     </ul>
 
@@ -107,17 +106,14 @@ if ($flow_direction === 'Horizontal') {
       class="masonry-with-columns tw--mx-2"
     >
       <?php foreach ($images as $index => $item) : ?>
+      <?php if (!empty($item['image'])) : ?>
       <li class="tw-w-full md:tw-w-1/2 lg:tw-w-[33.3333333%] tw-p-2">
-        <?php if (empty($item['image'])) {
-                return;
-              } ?>
-
         <?php
-              $image_id = $item['image'];
-              $image_src = wp_get_attachment_image_src($image_id, 'full', false);
-              $width = $image_src[1];
-              $height = $image_src[2];
-              ?>
+                $image_id = $item['image'];
+                $image_src = wp_get_attachment_image_src($image_id, 'full', false);
+                $width = $image_src[1];
+                $height = $image_src[2];
+                ?>
         <a
           href="<?php echo wp_get_attachment_image_url($image_id, 'full', false); ?>"
           class="<?php echo $enable_lightbox ? '' : 'tw-pointer-events-none'; ?>"
@@ -130,12 +126,22 @@ if ($flow_direction === 'Horizontal') {
           target="_blank"
         >
           <?php
-                echo wp_get_attachment_image($image_id, 1000, false, ['class' => 'tw-w-full tw-h-auto', 'loading' => 'lazy']);
-                ?>
+                  echo wp_get_attachment_image($image_id, 1000, false, ['class' => 'tw-w-full tw-h-auto', 'loading' => 'lazy']);
+                  ?>
         </a>
       </li>
+      <?php endif; ?>
       <?php endforeach; ?>
     </ul>
+    <script>
+    const elem = document.querySelector('.masonry-with-columns');
+    const msnry = new Masonry(elem, {
+      itemSelector: 'li',
+      columnWidth: 'li',
+      percentPosition: true,
+      horizontalOrder: false,
+    });
+    </script>
     <?php endif; ?>
 
     <?php if ($infinite_load) : ?>
@@ -188,18 +194,6 @@ if ($flow_direction === 'Horizontal') {
     >
       <?php echo get_template_part('template-parts/loading-spinner'); ?>
     </div>
-    <?php endif; ?>
-
-    <?php if ($enable_masonry_layout) : ?>
-    <script>
-    const elem = document.querySelector('.masonry-with-columns');
-    const msnry = new Masonry(elem, {
-      itemSelector: 'li',
-      columnWidth: 'li',
-      percentPosition: true,
-      horizontalOrder: false,
-    });
-    </script>
     <?php endif; ?>
 
     <?php if ($enable_lightbox) : ?>
