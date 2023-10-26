@@ -9,9 +9,6 @@ config:
     server: .lando/config/nginx.conf
 env_file:
   - .env
-events:
-  post-start:
-    - "chmod -R 755 /certs"
 services:
   appserver:
     build_as_root:

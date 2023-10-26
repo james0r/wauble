@@ -13,10 +13,7 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    https: process.env.NODE_ENV === 'development' ? {
-      key: fs.readFileSync('/certs/cert.key'),
-      cert: fs.readFileSync('/certs/cert.crt')
-    } : false,
+    https: false,
     hmr: {
       host: 'localhost',
     },
