@@ -1,5 +1,7 @@
 # Wauble Wordpress Starter Env + Theme
 
+> This readme is for the Wauble Development Environment. For the Wauble WordPress theme see [here](./wordpress/wp-content/themes/wauble/README.md)
+
 ## Getting Started
 
 ### Download
