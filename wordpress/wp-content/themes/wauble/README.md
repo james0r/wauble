@@ -6,7 +6,7 @@ Wauble starter theme attempts to be helpful and minimal. Wauble uses Laravel Vit
 
 ## HTTPS
 
-Make sure Lando's certificates are trusted on your system.
+Make sure Lando's certificates are trusted on your system. Read Lando's Security Docs for [Trusting the CA](https://docs.lando.dev/core/v3/security.html#trusting-the-ca)
 
 Development:
 ```bash

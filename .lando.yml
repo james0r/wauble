@@ -9,6 +9,9 @@ config:
     server: .lando/config/nginx.conf
 env_file:
   - .env
+events:
+  post-start:
+    - "chmod -R 755 /certs"
 services:
   appserver:
     build_as_root:
@@ -20,9 +23,6 @@ services:
       - 5173:5173
     build:
       - "cd wordpress/wp-content/themes/wauble && npm install && npm run build"
-    overrides:
-      volumes:
-      - ./certs:/certs
   appserver_nginx:
     ssl: true
   pma:
