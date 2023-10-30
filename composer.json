@@ -36,10 +36,10 @@
   },
   "require": {
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
-    "wpackagist-plugin/wordpress-seo": "^21.3",
+    "wpackagist-plugin/wordpress-seo": "^21.4",
     "wpackagist-plugin/classic-editor": "^1.6",
     "satispress/advanced-custom-fields-pro": "^6.2",
-    "wpackagist-plugin/contact-form-7": "^5.7",
+    "wpackagist-plugin/contact-form-7": "^5.8",
     "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {
