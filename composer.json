@@ -40,7 +40,8 @@
     "wpackagist-plugin/classic-editor": "^1.6",
     "satispress/advanced-custom-fields-pro": "^6.2",
     "wpackagist-plugin/contact-form-7": "^5.8",
-    "vlucas/phpdotenv": "^5.5"
+    "vlucas/phpdotenv": "^5.5",
+    "wpackagist-plugin/contact-form-cfdb7": "1.2.6.7"
   },
   "require-dev": {
     "laravel/envoy": "^2.8"
