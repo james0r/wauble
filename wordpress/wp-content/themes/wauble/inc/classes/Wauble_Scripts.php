@@ -18,9 +18,7 @@ class Wauble_Scripts {
 
     $this->scripts_to_dequeue = [];
 
-    $this->scripts_to_deregister = [
-      ['jquery']
-    ];
+    $this->scripts_to_deregister = [];
 
     $this->admin_scripts_to_enqueue = [
       [
@@ -33,6 +31,10 @@ class Wauble_Scripts {
     add_action('wp_enqueue_scripts', [$this, 'dequeueScripts']);
     add_action('init', [$this, 'deregisterScripts']);
     add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
+
+    // disable contact form 7 scripts
+    add_filter('wpcf7_load_js', '__return_false');
+    add_filter('wpcf7_load_css', '__return_false');
   }
 
   public function enqueueScripts() {
@@ -79,5 +81,15 @@ class Wauble_Scripts {
     array_map(function ($script) {
       call_user_func_array('wp_enqueue_script', $script);
     }, $this->admin_scripts_to_enqueue);
+  }
+
+  public function enqueueWpcf7Scripts() {
+    if (function_exists('wpcf7_enqueue_scripts')) {
+      wpcf7_enqueue_scripts();
+    }
+    
+    if (function_exists('wpcf7_enqueue_styles')) {
+      wpcf7_enqueue_styles();
+    }
   }
 }

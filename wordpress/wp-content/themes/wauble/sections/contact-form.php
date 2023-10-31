@@ -2,6 +2,8 @@
 $heading = $section['heading'] ?? null;
 $description = $section['description'] ?? null;
 $shortcode = $section['contact_form_7_shortcode'] ?? null;
+
+Wauble()->scripts->enqueueWpcf7Scripts();
 ?>
 
 <?php if (!empty($shortcode)) : ?>
