@@ -28,7 +28,7 @@
       <div class="tw-container tw-flex tw-items-center tw-justify-between tw-h-full">
         <a
           href="<?php echo home_url(); ?>"
-          class="tw-font-bold text-[16px] md:text-[20px] leading-[16px] lg:leading-[20px] tw-text-left"
+          class="tw-font-bold text-[16px] md:text-[20px] tw-leading-[16px] lg:leading-[20px] tw-text-left"
         >
           WAUBLE STARTER THEME
         </a>

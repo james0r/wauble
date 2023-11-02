@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-let plugin = require('tailwindcss/plugin')
 import { resolve } from 'path'
+let plugin = require('tailwindcss/plugin')
+const developmentPlugins = []
+
+if (process.env.NODE_ENV !== 'production') {
+  developmentPlugins.push(require('tailwindcss-debug-screens'))
+}
 
 module.exports = {
   content: [
@@ -92,7 +97,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwindcss-debug-screens'),
+    ...developmentPlugins,
     require('@tailwindcss/container-queries'),
     require('@tailwindcss/typography')({
       className: 'rte'
