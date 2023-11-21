@@ -10,7 +10,7 @@ git clone git@github.com:james0r/wauble.git
 ```
 or
 ```bash
-create_wauble_app.sh
+create_wauble_app
 ```
 
 ### Set up WordPress
@@ -38,6 +38,8 @@ lando rebuild -y
 
 ## Create Wauble App
 This script clones the repo and renames most all instances of "wauble" with whatever name you provide.
+
+Create a file and name it `create_wauble_app` and include it somewhere in your PATH. Make it executable with `sudo chmod +x create_wauble_app`.
 
 ```bash
 #!/bin/bash
