@@ -20,6 +20,10 @@
 
   $dreamhost_ssh = $_ENV['DREAMHOST_SSH'];
   $dreamhost_wp_path = $_ENV['DREAMHOST_WORDPRESS_PATH'];
+
+  $instawp_hostname = $_ENV['INSTAWP_SSH_HOSTNAME'];
+  $instawp_username = $_ENV['INSTAWP_SSH_USERNAME'];
+  $instawp_ssh = $_ENV['INSTAWP_SSH'];
 @endsetup
 
 @servers(['development' => $dev_ssh, 'staging' => $staging_ssh, 'localhost' => ['127.0.0.1'], 'dreamhost' => $dreamhost_ssh])
@@ -85,6 +89,12 @@
   lando build
   rsync -avr --delete --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/themes/{{$theme_name}}/ {{$dreamhost_ssh}}:{{$dreamhost_wp_path}}/wp-content/themes/{{$theme_name}}
   {{ logSuccess('Theme files pushed to environment -> '. $dreamhost_wp_path); }}
+@endtask
+
+@task('push-theme-files-to-instawp', ['on' => 'localhost'])
+  lando build
+  rsync -avr --delete --exclude-from=.rsync/exclude {{$local_wp_path}}/wp-content/themes/{{$theme_name}}/ {{$instawp_ssh}}:/home/{{$instawp_username}}/web/{{$instawp_hostname}}/public_html/wp-content/themes/{{$theme_name}}
+  {{ logSuccess('Theme files pushed to environment -> '. $instawp_ssh); }}
 @endtask
 
 @task('upload-db-to-wpengine-development', ['on' => 'localhost'])
