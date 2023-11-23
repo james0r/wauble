@@ -11,6 +11,21 @@ class Wauble_Init {
     add_action('wp_footer', [$this, 'debuggingConsoleTable']);
 
     Wauble()->requireOnce('/vendor/autoload.php');
+
+    add_action('acf/init', function () {
+      if (get_field('under_construction_mode', 'option')) {
+        if (!is_admin()) {
+          add_action('template_redirect', [$this, 'redirectToFrontpage']);
+        }
+      }
+    });
+  }
+
+  public function redirectToFrontpage() {
+    $homepage_id = get_option('page_on_front');
+    if (!is_page($homepage_id)) {
+      wp_redirect(home_url('index.php?page_id=' . $homepage_id));
+    }
   }
 
   public function initI18n() {

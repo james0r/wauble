@@ -1,7 +1,27 @@
 {
     "key": "group_63b216b19627d",
-    "title": "Business Information",
+    "title": "General",
     "fields": [
+        {
+            "key": "field_655f890a2a51d",
+            "label": "Under Construction Mode",
+            "name": "under_construction_mode",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "If enabled, all routes will be redirected to the homepage.",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
         {
             "key": "field_63b216b19bc42",
             "label": "Contact Address",
@@ -83,12 +103,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfe_display_title": "Business Information",
-    "acfe_autosync": [
-        "php"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1689565699
+    "modified": 1700759892
 }
