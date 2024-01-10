@@ -98,15 +98,17 @@
 @endtask
 
 @task('upload-db-to-wpengine-development', ['on' => 'localhost'])
-  sed -i '' 's|http://{{$theme_name}}\.lndo\.site|https://{{$dev_env}}\.wpengine\.com|g' database-tmp.sql
-  sed -i '' 's|Database: wordpress|Database: wp_{{$dev_env}}|g' database-tmp.sql
+  perl -pi -e 's|http://{{$theme_name}}\.lndo\.site|https://{{$dev_env}}\.wpengine\.com|g' database-tmp.sql
+  perl -pi -e 's|https://{{$theme_name}}\.lndo\.site|https://{{$dev_env}}\.wpengine\.com|g' database-tmp.sql
+  perl -pi -e 's|Database: wordpress|Database: wp_{{$dev_env}}|g' database-tmp.sql
   rsync database-tmp.sql {{$dev_ssh}}:/sites/{{$dev_env}}/wp-content/themes/{{$theme_name}}/
   rm database-tmp.sql
 @endtask
 
 @task('upload-db-to-wpengine-staging', ['on' => 'localhost'])
-  sed -i '' 's|http://{{$theme_name}}\.lndo\.site|https://{{$staging_env}}\.wpengine\.com|g' database-tmp.sql
-  sed -i '' 's|Database: wordpress|Database: wp_{{$staging_env}}|g' database-tmp.sql
+  perl -pi -e 's|http://{{$theme_name}}\.lndo\.site|https://{{$staging_env}}\.wpengine\.com|g' database-tmp.sql
+  perl -pi -e 's|https://{{$theme_name}}\.lndo\.site|https://{{$staging_env}}\.wpengine\.com|g' database-tmp.sql
+  perl -pi -e 's|Database: wordpress|Database: wp_{{$staging_env}}|g' database-tmp.sql
   rsync database-tmp.sql {{$staging_ssh}}:/sites/{{$staging_env}}/wp-content/themes/{{$theme_name}}/
   rm database-tmp.sql
 @endtask
