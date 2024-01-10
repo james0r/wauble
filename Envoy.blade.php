@@ -18,12 +18,12 @@
   $staging_env = $_ENV['WP_ENGINE_STAGING_ENV_NAME'];
   $staging_ssh = $_ENV['WP_ENGINE_STAGING_SSH'];
 
-  $dreamhost_ssh = $_ENV['DREAMHOST_SSH'];
-  $dreamhost_wp_path = $_ENV['DREAMHOST_WORDPRESS_PATH'];
+  $dreamhost_ssh = $_ENV['DREAMHOST_SSH'] ?? null;
+  $dreamhost_wp_path = $_ENV['DREAMHOST_WORDPRESS_PATH'] ?? null;
 
-  $instawp_hostname = $_ENV['INSTAWP_SSH_HOSTNAME'];
-  $instawp_username = $_ENV['INSTAWP_SSH_USERNAME'];
-  $instawp_ssh = $_ENV['INSTAWP_SSH'];
+  $instawp_hostname = $_ENV['INSTAWP_SSH_HOSTNAME'] ?? null;
+  $instawp_username = $_ENV['INSTAWP_SSH_USERNAME'] ?? null;
+  $instawp_ssh = $_ENV['INSTAWP_SSH'] ?? null;
 @endsetup
 
 @servers(['development' => $dev_ssh, 'staging' => $staging_ssh, 'localhost' => ['127.0.0.1'], 'dreamhost' => $dreamhost_ssh])
