@@ -37,7 +37,7 @@ export default defineConfig({
         // 'src/scss/theme.scss'
       ],
       refresh: [
-        '**.php'
+        '*/**/**.php'
       ]
     })
   ],
