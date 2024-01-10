@@ -34,7 +34,7 @@
     <!-- Begin Loop -->
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-        <div class="container">
+        <div class="tw-container">
           This template is assumed to at least partially hard-coded.
         </div>
 

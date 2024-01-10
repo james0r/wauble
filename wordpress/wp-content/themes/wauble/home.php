@@ -59,7 +59,7 @@ $container_css = array(
   data-page="<?php echo $paged; ?>"
   <?php echo Wauble()->utils->attrsEncode($attrs); ?>
 >
-  <div class="container tw-py-8">
+  <div class="tw-container tw-py-8">
     <div class="tw-max-w-lg tw-w-full tw-mx-auto tw-pb-8 md:tw-pb-16 tw-pt-8 md:tw-pt-16">
       <?php echo get_search_form(); ?>
     </div>

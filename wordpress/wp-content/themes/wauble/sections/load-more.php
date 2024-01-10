@@ -18,7 +18,7 @@ $images = array_slice($total_images, 0, $items_to_load);
   data-section-id="#section-<?php echo $section_count; ?>"
   class="tw-px-6 md:tw-px-8 tw-py-8"
 >
-  <div class="container">
+  <div class="tw-container">
     <?php if ($heading) : ?>
     <h2 class="tw-mx-auto tw-max-w-max tw-mb-8">
       <?php echo $heading; ?>
