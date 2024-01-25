@@ -14,6 +14,10 @@ class Wauble_Scripts {
   public array $admin_scripts_to_enqueue;
 
   public function __construct() {
+    Wauble()->requireOnce('/inc/Vite.php');
+
+    error_log(class_exists('Vite'));
+
     $this->scripts_to_enqueue = [];
 
     $this->scripts_to_dequeue = [];
@@ -38,6 +42,15 @@ class Wauble_Scripts {
   }
 
   public function enqueueScripts() {
+    
+    self::initViteAssets();
+
+    array_map(function ($script) {
+      call_user_func_array('wp_enqueue_script', $script);
+    }, $this->scripts_to_enqueue);
+  }
+
+  private static function initViteAssets() {
     // enqueue the Vite module
     Vite::enqueue_module();
 
@@ -59,10 +72,6 @@ class Wauble_Scripts {
 
     // update html script type to module wp hack
     Vite::script_type_module('theme-script');
-
-    array_map(function ($script) {
-      call_user_func_array('wp_enqueue_script', $script);
-    }, $this->scripts_to_enqueue);
   }
 
   public function deregisterScripts() {

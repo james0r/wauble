@@ -26,8 +26,6 @@ require_once wp_normalize_path(get_template_directory() . '/inc/classes/Wauble.p
 
 require_once wp_normalize_path(get_template_directory() . '/inc/classes/Wauble_Autoload.php');
 
-require_once wp_normalize_path(get_template_directory() . '/inc/Vite.lib.php');
-
 new Wauble_Autoload;
 
 function Wauble() {
