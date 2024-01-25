@@ -6,16 +6,31 @@
  */
 
 class Wauble_Sections {
+  /**
+   * @var array $sections An array to store sections.
+   */
   public $sections = array();
 
-  public $included_sections = array();
+  /**
+   * The array that holds the rendered sections.
+   *
+   * @var array
+   */
+  public $rendered_sections = array();
 
   public function __construct() {
     add_action('wp', [$this, 'initSections']);
     add_action('init', [$this, 'registerShortcode']);
-    add_filter('acf/load_value/name=sections', [$this, 'addExampleSections'], 10, 3);
+    add_filter('acf/load_value/name=sections', [$this, 'saveDefaultSectionOnNewPost'], 10, 3);
   }
 
+  /**
+   * Initializes the sections for the Wauble theme.
+   * 
+   * This method retrieves the sections from the current post and sets them in the $sections property of the class.
+   * 
+   * @return void
+   */
   public function initSections() {
     global $post;
 
@@ -27,16 +42,28 @@ class Wauble_Sections {
     }
   }
 
+  /**
+   * Registers the shortcode 'sections' and associates it with the 'render' method of the current class instance.
+   */
   public function registerShortcode() {
     add_shortcode('sections', [$this, 'render']);
   }
 
-  public function addExampleSections($value, $post_id, $field) {
+
+  /**
+   * Saves the default section on a new post.
+   *
+   * @param mixed $value The value of the field.
+   * @param int $post_id The ID of the post.
+   * @param string $field The name of the field.
+   * @return mixed The updated value of the field.
+   */
+  public function saveDefaultSectionOnNewPost($value, $post_id, $field) {
     if ($value !== NULL) {
       // $value will only be NULL on a new post
       return $value;
     }
-    
+
     $value = array(
       array(
         'acf_fc_layout' => 'content_area'
@@ -45,11 +72,27 @@ class Wauble_Sections {
     return $value;
   }
 
+  /**
+   * Sets the template path key value for a section.
+   *
+   * @param array $section The section array.
+   * @return array The modified section array with the template path key value set.
+   */
   public function setSectionPathKeyValue($section) {
     $section['template'] = str_replace('_', '-', $section['acf_fc_layout']);
     return $section;
   }
 
+  /**
+   * Renders the sections of the Wauble theme.
+   *
+   * This method iterates over the sections array and renders each section using the specified template.
+   * It sets query variables for each section, such as section, section_count, and section_is_first_instance,
+   * before including the template file using the get_template_part() function.
+   * Finally, it returns the rendered sections as a string.
+   *
+   * @return string The rendered sections.
+   */
   public function render() {
     ob_start();
     echo '<!-- Begin Sections -->';
@@ -57,8 +100,8 @@ class Wauble_Sections {
       $template = $section['template'];
       $section_id = "section-$index";
       $section_class = "section-$template";
-      $is_first_instance = !in_array($template, $this->included_sections);
-      $this->included_sections[] = $template;
+      $is_first_instance = !in_array($template, $this->rendered_sections);
+      $this->rendered_sections[] = $template;
 
       set_query_var('section', $section);
       set_query_var('section_count', $index);

@@ -28,13 +28,13 @@
 
 @servers(['development' => $dev_ssh, 'staging' => $staging_ssh, 'localhost' => ['127.0.0.1'], 'dreamhost' => $dreamhost_ssh])
 
-@story('push-db-to-wp-engine-development')
+@story('push-db-to-wpengine-development')
   export-local-db
   upload-db-to-wpengine-development
   import-db-on-wpengine-development
 @endstory
 
-@story('push-db-to-wp-engine-staging')
+@story('push-db-to-wpengine-staging')
   export-local-db
   upload-db-to-wpengine-staging
   import-db-on-wpengine-staging
