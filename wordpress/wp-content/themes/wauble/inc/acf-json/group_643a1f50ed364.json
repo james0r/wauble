@@ -17,6 +17,212 @@
                 "id": ""
             },
             "layouts": {
+                "layout_65b30bd7bb319": {
+                    "key": "layout_65b30bd7bb319",
+                    "name": "testimonials",
+                    "label": "Testimonials",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65b3162c976c2",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Leave blank to hide.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_65b31797c8388",
+                            "label": "Paginate",
+                            "name": "paginate",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "If enabled, clickable buttons will be shown below testimonials equal to the number of slides.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_65b31804c8389",
+                            "label": "Navigation",
+                            "name": "navigation",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "If enabled, arrows will be displayed on either side of the slides to go the previous and next slide.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_65b311c7c77d8",
+                            "label": "Loop",
+                            "name": "loop",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "If enabled, slides will infinitely loop. In other words, the slides will infinitely advance or reverse.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_65b30c7ebb31f",
+                            "label": "Autoplay",
+                            "name": "autoplay",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "If enabled, the slider will automatically start playing on page load.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_65b30d63bb321",
+                            "label": "Autoplay Delay",
+                            "name": "autoplay_delay",
+                            "aria-label": "",
+                            "type": "number",
+                            "instructions": "Delay between transitions (in ms) when autoplay is enabled.",
+                            "required": 1,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_65b30c7ebb31f",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 5000,
+                            "min": 1000,
+                            "max": 10000,
+                            "placeholder": "",
+                            "step": 500,
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_65b30ca5bb320",
+                            "label": "Speed",
+                            "name": "speed",
+                            "aria-label": "",
+                            "type": "number",
+                            "instructions": "Duration of transition between slides (in ms)",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 1000,
+                            "min": 200,
+                            "max": 2000,
+                            "placeholder": "",
+                            "step": 100,
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_65b30c12bb31d",
+                            "label": "Testimonial",
+                            "name": "testimonial",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "row",
+                            "min": 1,
+                            "max": 99,
+                            "collapsed": "",
+                            "button_label": "Add Testimonial",
+                            "rows_per_page": 20,
+                            "sub_fields": [
+                                {
+                                    "key": "field_65b30c21bb31e",
+                                    "label": "Quote",
+                                    "name": "quote",
+                                    "aria-label": "",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "tabs": "all",
+                                    "toolbar": "basic",
+                                    "media_upload": 1,
+                                    "delay": 0,
+                                    "parent_repeater": "field_65b30c12bb31d"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_6491495edb3c8": {
                     "key": "layout_6491495edb3c8",
                     "name": "posts_grid",
@@ -1692,5 +1898,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1697336340
+    "modified": 1706236012
 }
