@@ -1,10 +1,10 @@
 @tailwind base;
 @layer base {
   h1 {
-    @apply tw-text-6xl tw-font-bold;
+    @apply tw-text-3xl md:tw-text-6xl tw-font-bold;
   }
   h2 {
-    @apply tw-text-4xl tw-font-bold;
+    @apply tw-text-2xl md:tw-text-4xl tw-font-bold;
   }
   h3 {
     @apply tw-text-2xl tw-font-bold;
@@ -18,5 +18,13 @@
   /* Remove tap highlight on mobile chrome */
   html {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    @apply 
+    tw-outline-none
+    focus-visible:tw-ring-2
+    tw-ring-blue-300
+    tw-ring-offset-2;
   }
 }
