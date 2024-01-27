@@ -61,7 +61,7 @@
         >
 
         <?php foreach($tabs as $index=>$tab) : $tab_num = ($index + 1) ?>
-          <section
+          <div
               x-show="tab == <?php echo $tab_num; ?>"
               class="tw-p-8"
               role="tabpanel"
@@ -72,7 +72,7 @@
               <div class="tw-rte">
                 <?php echo $tab['panel_content'] ?? null; ?>
               </div>
-            </section>
+            </div>
         <?php endforeach; ?>
 
         </div>
