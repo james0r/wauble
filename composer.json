@@ -36,12 +36,12 @@
   },
   "require": {
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
-    "wpackagist-plugin/wordpress-seo": "^21.4",
+    "wpackagist-plugin/wordpress-seo": "^22.2",
     "wpackagist-plugin/classic-editor": "^1.6",
-    "satispress/advanced-custom-fields-pro": "^6.2",
+    "satispress/advanced-custom-fields-pro": "^6.2.7",
     "wpackagist-plugin/contact-form-7": "^5.8",
     "vlucas/phpdotenv": "^5.5",
-    "wpackagist-plugin/contact-form-cfdb7": "1.2.6.7"
+    "wpackagist-plugin/flamingo": "^2.4"
   },
   "require-dev": {
     "laravel/envoy": "^2.8"
