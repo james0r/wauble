@@ -1,4 +1,4 @@
-<?php get_template_part('template-parts/header'); ?>
+<?php Wauble()->component('header'); ?>
 
 <?php
 $paginate = get_field('paginate_search_results', 'option') ?? null;
@@ -92,7 +92,7 @@ $query = new WP_Query($args);
     <ul class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-x-8 tw-gap-y-12">
       <?php while ($query->have_posts()) : $query->the_post(); ?>
 
-      <?php echo get_template_part('template-parts/blog-card', null, [
+      <?php Wauble()->component('blog-card', [
             'show_categories_on_posts' => $show_categories_on_posts,
             'show_date_on_posts' => $show_date_on_posts,
             'show_tags_on_posts' => $show_tags_on_posts
@@ -165,4 +165,4 @@ document.addEventListener('alpine:init', () => {
 </script>
 <?php endif; ?>
 
-<?php get_template_part('template-parts/footer');
+<?php Wauble()->component('footer');

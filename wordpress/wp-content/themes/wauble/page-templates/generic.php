@@ -6,7 +6,7 @@
  */
 ?>
 
-<?php get_template_part('template-parts/header'); ?>
+<?php Wauble()->component('header'); ?>
 
 <!-- Begin Loop -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -22,7 +22,7 @@
   
   <section class="tw-px-6 md:tw-px-8">
     <div class="tw-container">
-      <div class="tw-rte sm:tw-rte-lg">
+      <div class="tw-prose sm:tw-prose-lg">
         <?php the_content() ?>
       </div>
     </div>
@@ -33,4 +33,4 @@
 endif; ?>
 <!-- End Loop -->
 
-<?php get_template_part('template-parts/footer');
+<?php Wauble()->component('footer');

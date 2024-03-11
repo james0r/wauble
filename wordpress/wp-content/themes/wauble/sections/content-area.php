@@ -16,7 +16,7 @@ $content = $section['content'] ?? null;
   data-section-instance="section-<?php echo $section_count; ?>"
 >
   <div class="tw-container">
-    <div class="tw-rte">
+    <div class="tw-prose">
       <?php if ($title) : ?>
       <h2>
         <?php

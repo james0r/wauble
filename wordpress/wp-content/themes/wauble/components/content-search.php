@@ -3,7 +3,7 @@
   id="post-<?php the_ID(); ?>"
   <?php post_class(); ?>
 >
-  <div class="item post-<?php echo get_the_ID(); ?> tw-rte tw-mx-auto">
+  <div class="item post-<?php echo get_the_ID(); ?> tw-prose tw-mx-auto">
     Title: <?php echo get_the_title(); ?><br>
     Content:
     <div class="">

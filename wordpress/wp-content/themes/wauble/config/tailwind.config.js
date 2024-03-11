@@ -99,9 +99,7 @@ module.exports = {
   plugins: [
     ...developmentPlugins,
     require('@tailwindcss/container-queries'),
-    require('@tailwindcss/typography')({
-      className: 'rte'
-    }),
+    require('@tailwindcss/typography')({}),
     plugin(function ({ addVariant }) {
       addVariant('scrolled', '.scrolled &'), addVariant('mobile-menu-is-visible', '.mobile-menu-is-visible &')
     }),

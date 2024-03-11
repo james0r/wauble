@@ -4,9 +4,21 @@
  * This class handles the enqueueing and dequeueing of styles.
  */
 
+use TailwindMerge\TailwindMerge;
+
 class Wauble_Utils {
 
-  public function __construct() {}
+  public function __construct() {
+  }
+
+  public static function tw($classes) {
+    $instance = TailwindMerge::factory()
+    ->withConfiguration([
+        'prefix' => 'tw-',
+    ])->make();
+
+    return $instance->merge($classes);
+  }
 
   public static function cssEncodeSectionScoped($rules, $section_count = null, $indent = 0) {
     if ($section_count === null || !isset($section_count)) {

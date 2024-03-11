@@ -8,10 +8,10 @@ wp_verify_nonce( $_GET['_wpnonce'], 'search-results' ) ) {
   
   <!-- Begin Loop -->
   <?php if (!empty($s) && $allsearch->have_posts()) : while ($allsearch->have_posts()) : $allsearch->the_post(); ?>
-      <?php get_template_part('template-parts/content-search'); ?>
+      <?php get_template_part('components/content-search'); ?>
     <?php endwhile;
   else : ?>
-    <?php get_template_part('template-parts/content-none'); ?>
+    <?php get_template_part('components/content-none'); ?>
   <?php endif; wp_reset_postdata();
 
 } else {

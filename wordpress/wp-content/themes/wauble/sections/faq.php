@@ -58,7 +58,7 @@
               </button>
             </h3>
             <div role="region" :aria-labelledby="$id('faq-question')" class="" :id="$id('faq-answer')" x-show="<?php echo $active_expression; ?>" x-collapse>
-              <div class="tw-rte tw-py-4">
+              <div class="tw-prose tw-py-4">
                 <?php echo $item['answer']; ?>
               </div>
             </div>

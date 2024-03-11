@@ -192,7 +192,7 @@ if ($flow_direction === 'Horizontal') {
       x-intersect="loadMore"
       class="tw-flex tw-justify-center tw-py-8"
     >
-      <?php echo get_template_part('template-parts/loading-spinner'); ?>
+      <?php Wauble()->component('loading-spinner'); ?>
     </div>
     <?php endif; ?>
 

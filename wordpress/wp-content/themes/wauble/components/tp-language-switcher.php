@@ -1,9 +1,9 @@
 <?php
-if (function_exists('trp_custom_language_switcher')) {
-  $langs = trp_custom_language_switcher();
-}
+// if (function_exists('trp_custom_language_switcher')) {
+//   $langs = trp_custom_language_switcher();
+// }
 
-$current_locale = get_locale();
+// $current_locale = get_locale();
 ?>
 
 <?php if (!empty($langs)) : ?>

@@ -1,7 +1,8 @@
 {
     "require": {
         "lukapeharda/tailwindcss-color-palette-generator": "^0.3.0",
-        "log1x/navi": "^2.0"
+        "log1x/navi": "^2.0",
+        "gehrisandro/tailwind-merge-php": "^1.1"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.0"

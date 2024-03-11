@@ -16,7 +16,7 @@
       x-collapse.duration.300ms
     >
 
-      <?php echo get_template_part('template-parts/social-links'); ?>
+      <?php Wauble()->component('social-links'); ?>
 
       Featured Image: <br>
 
@@ -31,10 +31,6 @@
               x-data
               x-text="`Theme name: ${$store.global.themeName}`"
             ></span>
-          </li>
-          <li>
-            <h3>Components</h3>
-            <?php echo get_template_part('template-parts/alpine/dropdown'); ?>
           </li>
         </ul>
       </div>

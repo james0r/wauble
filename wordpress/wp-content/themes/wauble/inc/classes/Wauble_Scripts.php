@@ -16,8 +16,6 @@ class Wauble_Scripts {
   public function __construct() {
     Wauble()->requireOnce('/inc/Vite.php');
 
-    error_log(class_exists('Vite'));
-
     $this->scripts_to_enqueue = [];
 
     $this->scripts_to_dequeue = [];

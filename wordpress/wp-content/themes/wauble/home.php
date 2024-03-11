@@ -1,6 +1,6 @@
 <?php
 
-get_template_part('template-parts/header');
+Wauble()->component('header');
 
 if (is_home()) {
   $page_for_posts_id = get_option('page_for_posts');
@@ -106,7 +106,7 @@ $container_css = array(
       class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-x-8 tw-gap-y-12">
       <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
 
-      <?php echo get_template_part('template-parts/blog-card', null, [
+      <?php Wauble()->component('blog-card', [
             'show_categories_on_posts' => $show_categories_on_posts,
             'show_date_on_posts' => $show_date_on_posts,
             'show_tags_on_posts' => $show_tags_on_posts
@@ -190,4 +190,4 @@ document.addEventListener('alpine:init', () => {
 </script>
 <?php endif; ?>
 
-<?php get_template_part('template-parts/footer');
+<?php Wauble()->component('footer');

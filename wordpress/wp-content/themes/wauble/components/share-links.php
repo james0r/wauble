@@ -1,6 +1,6 @@
 <?php
 
-extract($args);
+extract($props);
 
 $url = urlencode($url);
 $title = urlencode($title);

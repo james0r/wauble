@@ -69,7 +69,7 @@
               aria-labelledby="tab-<?php echo $tab_num; ?>"
               :tabindex="tab == <?php echo $tab_num; ?> && '0'"
             >
-              <div class="tw-rte">
+              <div class="tw-prose">
                 <?php echo $tab['panel_content'] ?? null; ?>
               </div>
             </div>

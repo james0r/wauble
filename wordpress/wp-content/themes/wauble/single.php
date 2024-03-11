@@ -1,4 +1,4 @@
-<?php get_template_part('template-parts/header'); ?>
+<?php Wauble()->component('header'); ?>
 
 <!-- Begin Loop -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -74,7 +74,7 @@
         <?php endif; ?>
       </header>
 
-      <div class="entry-content tw-rte sm:tw-rte-lg">
+      <div class="entry-content tw-prose sm:tw-prose-lg">
         <?php
             /* translators: %s: Name of current post */
             the_content(
@@ -93,7 +93,7 @@
               'description' => get_the_excerpt(),
               'image' => get_the_post_thumbnail_url()
             );
-            get_template_part('template-parts/share-links', null, $share_data); ?>
+            Wauble()->component('share-links', $share_data); ?>
       </div>
 
     </article>
@@ -104,4 +104,4 @@
 endif; ?>
 <!-- End Loop -->
 
-<?php get_template_part('template-parts/footer');
+<?php Wauble()->component('footer');

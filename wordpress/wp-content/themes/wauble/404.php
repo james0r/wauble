@@ -1,4 +1,4 @@
-<?php get_template_part('template-parts/header'); ?>
+<?php Wauble()->component('header'); ?>
 
 <div class="tw-px-6 md:tw-px-8 tw-py-8">
   <div class="tw-container">
@@ -8,4 +8,4 @@
   </div>
 </div>
 
-<?php get_template_part('template-parts/footer');
+<?php Wauble()->component('footer');

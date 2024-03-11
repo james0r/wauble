@@ -32,7 +32,7 @@ class Wauble {
   public $search;
 
   public $posts;
-  
+
   public $editors;
 
   public $tweaks;
@@ -96,6 +96,16 @@ class Wauble {
 
   public function getPrefix() {
     return self::$theme_prefix;
+  }
+
+  public function component($slug, $args = array()) {
+    $base_path = "components/";
+
+    set_query_var('props', $args);
+
+    echo get_template_part($base_path . $slug);
+
+    set_query_var('props', null);
   }
 
   public static function url($path = '', $base = '') {

@@ -1,8 +1,8 @@
-<?php get_template_part('template-parts/header'); ?>
+<?php Wauble()->component('header'); ?>
 
 <div class="tw-px-6 md:tw-px-8 tw-py-8">
   <div class="tw-container">
-    <div class="tw-rte">
+    <div class="tw-prose">
       <h1 class="entry-title">
         <?php echo get_the_archive_title(); ?>
       </h1>
@@ -49,4 +49,4 @@
 </div>
 
 
-<?php get_template_part('template-parts/footer');
+<?php Wauble()->component('footer');
