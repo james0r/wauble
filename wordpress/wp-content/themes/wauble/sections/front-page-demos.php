@@ -16,7 +16,7 @@
       x-collapse.duration.300ms
     >
 
-      <?php Wauble()->component('social-links'); ?>
+      <?php Wauble()->render('social-links'); ?>
 
       Featured Image: <br>
 

@@ -4,7 +4,7 @@
   class="tw-antialiased tw-font-open-sans tw-bg-gray-100"
 >
 
-<?php Wauble()->component('head'); ?>
+<?php Wauble()->render('head'); ?>
 
 <body
   <?php body_class('tw-debug-screens'); ?>
@@ -34,12 +34,12 @@
         </a>
         <div class="tw-flex tw-items-center">
           <div class="tw-hidden lg:tw-block">
-            <?php Wauble()->component('header-menu'); ?>
+            <?php Wauble()->render('header-menu'); ?>
           </div>
           <div class="lg:tw-hidden tw-flex tw-justify-end tw-items-center tw-h-full">
-            <?php Wauble()->component('mobile-header-menu'); ?>
+            <?php Wauble()->render('mobile-header-menu'); ?>
           </div>
-          <?php Wauble()->component('tp-language-switcher'); ?>
+          <?php Wauble()->render('tp-language-switcher'); ?>
         </div>
       </div>
     </div>

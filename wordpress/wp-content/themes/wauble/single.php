@@ -1,4 +1,4 @@
-<?php Wauble()->component('header'); ?>
+<?php Wauble()->render('header'); ?>
 
 <!-- Begin Loop -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -93,7 +93,7 @@
               'description' => get_the_excerpt(),
               'image' => get_the_post_thumbnail_url()
             );
-            Wauble()->component('share-links', $share_data); ?>
+            Wauble()->render('share-links', $share_data); ?>
       </div>
 
     </article>
@@ -104,4 +104,4 @@
 endif; ?>
 <!-- End Loop -->
 
-<?php Wauble()->component('footer');
+<?php Wauble()->render('footer');

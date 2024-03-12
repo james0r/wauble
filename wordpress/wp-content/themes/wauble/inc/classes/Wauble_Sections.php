@@ -103,6 +103,10 @@ class Wauble_Sections {
       $is_first_instance = !in_array($template, $this->rendered_sections);
       $this->rendered_sections[] = $template;
 
+      $tmp_section = get_query_var('section');
+      $tmp_section_count = get_query_var('section_count');
+      $tmp_section_is_first_instance = get_query_var('section_is_first_instance');
+
       set_query_var('section', $section);
       set_query_var('section_count', $index);
       set_query_var('section_is_first_instance', $is_first_instance);
@@ -111,9 +115,9 @@ class Wauble_Sections {
       get_template_part("sections/$template");
       echo '</section>';
 
-      set_query_var('section', null);
-      set_query_var('section_count', null);
-      set_query_var('section_is_first_instance', null);
+      set_query_var('section', $tmp_section);
+      set_query_var('section_count', $tmp_section_count);
+      set_query_var('section_is_first_instance', $tmp_section_is_first_instance);
     }
     echo '<!-- End Sections -->';
     return ob_get_clean();

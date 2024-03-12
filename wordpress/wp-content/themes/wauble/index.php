@@ -1,4 +1,4 @@
-<?php Wauble()->component('header'); ?>
+<?php Wauble()->render('header'); ?>
 
 <!-- Begin Loop -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -14,4 +14,4 @@
 endif; ?>
 <!-- End Loop -->
 
-<?php Wauble()->component('footer');
+<?php Wauble()->render('footer');

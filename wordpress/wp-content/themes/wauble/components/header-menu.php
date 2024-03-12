@@ -50,7 +50,7 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
           aria-label="Submenu Toggle"
           :class="expanded ? 'rotate-[180deg]' : 'tw-rotate-0'"
         >
-          <?php Wauble()->component('icons/hi-chevron-down'); ?>
+          <?php Wauble()->render('icons/hi-chevron-down'); ?>
         </button>
       </div>
 

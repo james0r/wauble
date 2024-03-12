@@ -66,10 +66,6 @@ class Wauble {
     self::$stylesheet_dir_url = get_stylesheet_directory_uri();
   }
 
-  // The Wauble Monolith is the Wauble instance that contains member variables for all other class instances.
-  // Here, Wauble object is instantiated from within the class itself
-  // and stored as a static variable.
-
   public static function getInstance() {
     if (self::$instance == null) {
       self::$instance = new Wauble();
@@ -98,14 +94,22 @@ class Wauble {
     return self::$theme_prefix;
   }
 
-  public function component($slug, $args = array()) {
+  /**
+   * Renders a template component.
+   *
+   * @param string $slug The slug of the template component.
+   * @param array $args Optional arguments to pass to the template component.
+   * @return void
+   */
+  public function render($slug, $args = array()) {
     $base_path = "components/";
 
+    $tmp = get_query_var('props');
     set_query_var('props', $args);
 
     echo get_template_part($base_path . $slug);
 
-    set_query_var('props', null);
+    set_query_var('props', $tmp);
   }
 
   public static function url($path = '', $base = '') {

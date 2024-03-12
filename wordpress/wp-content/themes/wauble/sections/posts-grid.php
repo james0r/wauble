@@ -89,7 +89,7 @@ $container_css = array(
     >
       <?php while ($query->have_posts()) : $query->the_post(); ?>
 
-      <?php Wauble()->component('blog-card', [
+      <?php Wauble()->render('blog-card', [
             'show_categories_on_posts' => $show_categories_on_posts,
             'show_date_on_posts' => $show_date_on_posts,
             'show_tags_on_posts' => $show_tags_on_posts,
