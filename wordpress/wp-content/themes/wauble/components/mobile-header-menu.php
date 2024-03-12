@@ -7,7 +7,7 @@
  * @link https://github.com/log1x/navi
  */
 
-$navigation = wauble()->menus->getNaviMenu('header_menu');
+$navigation = wauble()->menus->getNaviMenu('header-menu');
 ?>
 
 <?php if ($navigation->isNotEmpty()) : ?>
