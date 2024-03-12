@@ -33,7 +33,7 @@
           <?php endif; ?>
         </div>
 
-        <h2 class="entry-title tw-text-2xl md:tw-text-3xl tw-font-extrabold tw-leading-tight tw-my-4">
+        <h2 class="entry-title tw-my-4 tw-text-step-3 tw-text-pretty">
           <a href="<?php echo get_permalink(); ?>">
             <?php echo get_the_title(); ?>
           </a>

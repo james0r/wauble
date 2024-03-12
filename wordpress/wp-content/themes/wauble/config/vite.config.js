@@ -2,6 +2,10 @@ import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import fs from 'fs'
 import { resolve } from 'path'
+import postcssImport from 'postcss-import';
+import tailwindcssNesting from 'tailwindcss/nesting';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
   base: '',
@@ -21,10 +25,10 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-        require('postcss-import'),
-        require('tailwindcss/nesting'),
-        require('tailwindcss')(resolve(__dirname, './tailwind.config.js')),
-        require('autoprefixer')
+        postcssImport,
+        tailwindcssNesting,
+        tailwindcss(resolve(__dirname, './tailwind.config.js')),
+        autoprefixer
       ]
     }
   },

@@ -43,12 +43,54 @@ module.exports = {
       // => @media (min-width: 1024px) { ... }
       xl: '1280px',
       // => @media (min-width: 1280px) { ... }
-      '2xl': '1480px',
+      '2xl': '1536px',
       // => @media (min-width: 1480px) { ... }
     },
     extend: {
       fontFamily: {
         'open-sans': ['"Open Sans"', 'sans-serif'],
+      },
+      fontSize: {
+        'step-5': ['var(--step-5)', {
+          lineHeight: '1.25',
+          letterSpacing: '0rem',
+          fontWeight: '600',
+        }],
+        'step-4': ['var(--step-4)', {
+          lineHeight: '1.25',
+          letterSpacing: '0rem',
+          fontWeight: '600',
+        }],
+        'step-3': ['var(--step-3)', {
+          lineHeight: '1.25',
+          letterSpacing: '0rem',
+          fontWeight: '500',
+        }],
+        'step-2': ['var(--step-2)', {
+          lineHeight: '1.5',
+          letterSpacing: '0rem',
+          fontWeight: '500',
+        }],
+        'step-1': ['var(--step-1)', {
+          lineHeight: '1.5',
+          letterSpacing: '0rem',
+          fontWeight: '400',
+        }],
+        'step-0': ['var(--step-0)', {
+          lineHeight: '1.5',
+          letterSpacing: '0rem',
+          fontWeight: '400',
+        }],
+        'step--1': ['var(--step--1)', {
+          lineHeight: '1.5',
+          letterSpacing: '0rem',
+          fontWeight: '400',
+        }],
+        'step--2': ['var(--step--2)', {
+          lineHeight: '1.5',
+          letterSpacing: '0rem',
+          fontWeight: '400',
+        }],
       },
       typography: {
         DEFAULT: {
