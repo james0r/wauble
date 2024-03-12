@@ -1,12 +1,6 @@
 <?php 
 $heading = $section['heading'] ?? null;
 $link = $section['link'] ?? null;
-
-if( $link ) {
-  $link_url = $link['url'];
-  $link_title = $link['title'];
-  $link_target = $link['target'] ? $link['target'] : '_self';
-}
 ?>
 
 <div class="tw-px-6 md:tw-px-8 tw-py-12 md:tw-py-20">
@@ -16,15 +10,16 @@ if( $link ) {
         <?php echo $heading; ?>
       </h2>
     <?php endif; ?>
-    <?php if (!empty($link)) : ?>
+    <?php if ($link) : ?>
       <div class="">
-        <a
-          href="<?php echo $link_url; ?>"
-          target="<?php echo $link_target; ?>"
-          class="tw-btn"
-        >
-          <?php echo $link_title; ?>
-        </a>
+        <?php Wauble()->render('acf-link', [
+          'link' => $link,
+          'classes' => [
+            'tw-btn',
+            'tw-btn-primary',
+            'tw-btn-lg',
+          ],
+        ]); ?>
       </div>
     <?php endif; ?>
   </div>
