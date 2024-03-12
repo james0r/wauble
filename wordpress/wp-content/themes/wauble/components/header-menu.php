@@ -21,11 +21,23 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
   >
     <?php foreach ($navigation->toArray() as $item) : ?>
     <?php
-        $item->classes .= ' tw-px-[min(12px,_1vw)] tw-py-2.5 first:tw-pl-0 group tw-relative';
+        $item_classes = [
+          'tw-px-[min(12px,_1vw)]',
+          'tw-py-2.5',
+          'first:tw-pl-0',
+          'tw-group',
+          'tw-relative',
+        ];
+
+        if ($item->active) {
+          $item_classes[] = 'current-item';
+        }
+
+        $item_classes = Wauble()->utils->tw($item_classes, $item->classes);
         ?>
     <?php if ($item->children) : ?>
     <li
-      class="<?php echo trim($item->classes); ?> <?php echo $item->active ? 'current-item' : ''; ?>"
+      class="<?php echo $item_classes; ?>"
       x-data="{ 
             expanded: false,
             closeSubmenuOnFocusOut(element, event) {
@@ -48,7 +60,7 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
           :aria-expanded="expanded ? 'true' : 'false'"
           aria-haspopup="menu"
           aria-label="Submenu Toggle"
-          :class="expanded ? 'rotate-[180deg]' : 'tw-rotate-0'"
+          :class="expanded ? 'tw-rotate-[180deg]' : 'tw-rotate-0'"
         >
           <?php Wauble()->render('icons/hi-chevron-down'); ?>
         </button>
@@ -56,10 +68,20 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
 
       <ul
         class="tw-hidden group-hover:tw-block tw-absolute tw-top-full tw-bg-white"
-        :class="expanded && '!block'"
+        :class="expanded && '!tw-block'"
       >
         <?php foreach ($item->children as $child) : ?>
-        <li class="<?php echo $child->classes; ?> <?php echo $child->active ? 'current-item' : ''; ?>">
+        <?php
+                $clild_classes = [];
+
+                if ($child->active) {
+                  $child_classes[] = 'current-item';
+                }
+
+                $child_classes = Wauble()->utils->tw($child_classes, $child->classes);
+                ?>
+
+        <li class="<?php echo $child_classes; ?>">
           <a
             href="<?php echo $child->url; ?>"
             @focusout="closeSubmenuOnFocusOut($el, $event)"
@@ -71,7 +93,10 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
       </ul>
     </li>
     <?php else : ?>
-    <li class="<?php echo trim($item->classes); ?> <?php echo $item->active ? 'current-item' : ''; ?>">
+    <?php
+
+          ?>
+    <li class="<?php echo Wauble()->utils->tw($item_classes, $item->classes); ?>">
       <a
         href="<?php echo $item->url; ?>"
         class="hover:tw-text-blue-600 tw-font-bold"

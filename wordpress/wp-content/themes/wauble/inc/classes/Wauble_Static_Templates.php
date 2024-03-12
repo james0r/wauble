@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This class registers static templates found in /static-templates.
+ * This class registers static templates found in /templates/static.
  */
 
 class Wauble_Static_Templates {
@@ -29,7 +29,7 @@ class Wauble_Static_Templates {
     $static_query_var_value = get_query_var('static_template');
 
     if (!empty($static_query_var_value)) {
-      return get_stylesheet_directory() . "/static-templates/{$static_query_var_value}.php";
+      return get_stylesheet_directory() . "/templates/static/{$static_query_var_value}.php";
     }
 
     return $template;
