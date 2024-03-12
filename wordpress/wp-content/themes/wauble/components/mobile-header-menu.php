@@ -62,11 +62,19 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
     >
       <?php foreach ($navigation->toArray() as $item) : ?>
       <?php
-          $item->classes .= ' tw-py-1';
+          $item_classes = [
+            'tw-py-1'
+          ];
+
+          if ($item->active) {
+            $item_classes[] = 'current-item';
+          }
+
+          $item_classes = Wauble()->utils->tw($item_classes, $item->classes);
           ?>
       <?php if ($item->children) : ?>
       <li
-        class="<?php echo trim($item->classes); ?><?php echo $item->active ? ' current-item' : ''; ?>"
+        class="<?php echo $item_classes; ?>"
         x-data="{ expanded: false }"
       >
         <div class="tw-relative tw-flex tw-items-center tw-mx-auto tw-max-w-max">
@@ -88,7 +96,6 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
           </button>
         </div>
 
-        <?php if ($item->children) : ?>
         <ul
           class="tw-flex tw-flex-col tw-items-center tw-my-2"
           x-show="expanded"
@@ -97,10 +104,18 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
         >
           <?php foreach ($item->children as $child) : ?>
           <?php
-                    $child->classes .= ' tw-py-1';
-                    ?>
+                  $child_classes = [
+                    'tw-py-1'
+                  ];
+
+                  if ($child->active) {
+                    $child_classes[] = 'current-item';
+                  }
+
+                  $child_classes = Wauble()->utils->tw($child_classes, $child->classes);
+                  ?>
           <li
-            class="<?php echo trim($child->classes); ?><?php echo $child->active ? ' current-item' : ''; ?>"
+            class="<?php echo $child_classes; ?>"
             :aria-hidden="expanded ? 'false' : 'true'"
           >
             <a href="<?php echo $child->url; ?>">
@@ -109,10 +124,9 @@ $navigation = wauble()->menus->getNaviMenu('header_menu');
           </li>
           <?php endforeach; ?>
         </ul>
-        <?php endif; ?>
       </li>
       <?php else : ?>
-      <li class="<?php echo trim($item->classes); ?><?php echo $item->active ? ' current-item' : ''; ?>">
+      <li class="<?php echo $item_classes; ?>">
         <a
           href="<?php echo $item->url; ?>"
           class="hover:tw-text-blue-600"
