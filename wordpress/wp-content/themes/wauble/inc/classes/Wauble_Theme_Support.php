@@ -13,7 +13,8 @@ class Wauble_Theme_Support {
       ['title-tag'],
       ['align-wide'],
       ['responsive-embeds'],
-      ['post-thumbnails']
+      ['post-thumbnails'],
+      ['revisions']
     ];
 
     $this->features_to_remove = [];

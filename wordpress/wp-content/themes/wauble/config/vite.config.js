@@ -11,7 +11,7 @@ export default defineConfig({
   base: '',
   build: {
     emptyOutDir: true,
-    manifest: true,
+    manifest: 'manifest.json',
     outDir: 'build',
     assetsDir: 'assets'
   },
@@ -34,7 +34,6 @@ export default defineConfig({
   },
   plugins: [
     laravel({
-      publicDirectory: 'build',
       input: [
         'src/theme.js',
         'src/theme.css',

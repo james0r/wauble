@@ -58,7 +58,7 @@ class Wauble_Tweaks {
   public function removeUnusedDashboardWidgets() {
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
     remove_meta_box('dashboard_secondary', 'dashboard', 'side');
-    remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
+    // remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
   }
 
   function setSrcsetMaximumWidth( $max_srcset_image_width, $sizes_array ) {
