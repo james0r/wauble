@@ -34,6 +34,7 @@ export default defineConfig({
   },
   plugins: [
     laravel({
+      publicDirectory: 'build',
       input: [
         'src/theme.js',
         'src/theme.css',

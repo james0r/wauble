@@ -10,6 +10,13 @@ $autoplay_delay = $section['autoplay_delay'] ?? null;
 $stop_on_interaction = $section['stop_on_interaction'] ?? null;
 ?>
 
+<?php if ($section_is_first_instance) : ?>
+<style>
+<?php include Wauble()->path('/static/css/swiper-bundle.min.css'); ?>
+?>
+</style>
+<?php endif; ?>
+
 <div
   class="tw-relative"
   x-data="fullWidthSlider"
@@ -79,13 +86,13 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
 
   <?php
   $options = array();
-  
+
   if ($loop_slides) {
-    $options['loop'] = true;  
+    $options['loop'] = true;
   } else {
     $options['loop'] = false;
   }
-  
+
   if ($show_navigation) {
     $options['navigation'] = [
       'nextEl' => '.swiper-button-next',
@@ -94,7 +101,7 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
   } else {
     $options['navigation'] = false;
   }
-  
+
   if ($show_pagination) {
     $options['pagination'] = [
       'el' => '.swiper-pagination',
@@ -112,7 +119,7 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
   } else {
     $options['scrollbar'] = false;
   }
-  
+
   if ($autoplay) {
     $options['autoplay'] = [
       'delay' => $autoplay_delay,
@@ -121,9 +128,9 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
   } else {
     $options['autoplay'] = false;
   }
-  
+
   ?>
-  
+
   <script
     type="application/json"
     swiper-options
@@ -135,10 +142,6 @@ $stop_on_interaction = $section['stop_on_interaction'] ?? null;
 
 <?php if ($section_is_first_instance) : ?>
 <script src="<?php echo Wauble()->url('/static/js/swiper-bundle.min.js'); ?>"></script>
-<link
-  rel="stylesheet"
-  href="<?php echo Wauble()->url('/static/css/swiper-bundle.min.css'); ?>"
->
 
 <script>
 document.addEventListener('alpine:init', () => {
