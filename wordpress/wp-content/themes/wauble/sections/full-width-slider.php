@@ -10,13 +10,6 @@ $autoplay_delay = $section['autoplay_delay'] ?? null;
 $stop_on_interaction = $section['stop_on_interaction'] ?? null;
 ?>
 
-<?php if ($section_is_first_instance) : ?>
-<style>
-<?php include Wauble()->path('/static/css/swiper-bundle.min.css'); ?>
-?>
-</style>
-<?php endif; ?>
-
 <div
   class="tw-relative"
   x-data="fullWidthSlider"

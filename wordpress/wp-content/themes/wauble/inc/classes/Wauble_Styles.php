@@ -16,6 +16,10 @@ class Wauble_Styles {
       [
         'style',
         Wauble::$stylesheet_dir_url . '/style.css'
+      ],
+      [
+        'swiper-bundle',
+        Wauble::$stylesheet_dir_url . '/static/css/swiper-bundle.min.css'
       ]
     ];
 
