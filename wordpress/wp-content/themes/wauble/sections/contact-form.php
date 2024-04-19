@@ -15,7 +15,7 @@ Wauble()->scripts->enqueueWpcf7Scripts();
     </h2>
     <?php endif; ?>
     <?php if (!empty($description)) : ?>
-    <div class="tw-prose tw-mb-8">
+    <div class="tw-mb-8">
       <?php echo $description; ?>
     </div>
     <?php endif; ?>
