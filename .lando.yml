@@ -70,10 +70,10 @@ tooling:
       - appserver: wp option update page_on_front 2 --path=wordpress
       - appserver: wp option update show_on_front page --path=wordpress
       - appserver: wp menu create "Header Menu" --path=wordpress
-      - appserver: wp menu location assign header-menu header_menu --path=wordpress
+      - appserver: wp menu location assign header-menu header-menu --path=wordpress
       - appserver: wp menu item add-post header-menu 2 --path=wordpress
       - appserver: wp menu create "Footer Menu" --path=wordpress
-      - appserver: wp menu location assign footer-menu footer_menu --path=wordpress
+      - appserver: wp menu location assign footer-menu footer-menu --path=wordpress
       - appserver: wp menu item add-post footer-menu 2 --path=wordpress
       - appserver: wp --path=wordpress db query < .lando/wp-cli/setup-theme.sql
 excludes:
