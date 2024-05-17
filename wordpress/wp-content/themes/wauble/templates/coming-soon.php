@@ -22,7 +22,7 @@
 
 <body <?php body_class(); ?> x-data :class="$store.global.bodyClasses">
   <?php wp_body_open(); ?>
-  <a href="#main" class="tw-skip-to-content-link tw-sr-only" tabindex="0">
+  <a href="#main" class="skip-to-content-link sr-only" tabindex="0">
     Skip to content
   </a>
 
@@ -34,7 +34,7 @@
     <!-- Begin Loop -->
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-        <div class="tw-container">
+        <div class="container">
           This template is assumed to at least partially hard-coded.
         </div>
 

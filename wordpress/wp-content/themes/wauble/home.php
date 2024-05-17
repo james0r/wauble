@@ -54,13 +54,13 @@ $container_css = array(
 
 <section
   id="blog-posts"
-  class="tw-px-6 md:tw-px-8"
+  class="px-6 md:px-8"
   data-route="<?php echo $route; ?>"
   data-page="<?php echo $paged; ?>"
   <?php echo Wauble()->utils->attrsEncode($attrs); ?>
 >
-  <div class="tw-container tw-py-8">
-    <div class="tw-max-w-lg tw-w-full tw-mx-auto tw-pb-8 md:tw-pb-16 tw-pt-8 md:tw-pt-16">
+  <div class="container py-8">
+    <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">
       <?php echo get_search_form(); ?>
     </div>
 
@@ -103,7 +103,7 @@ $container_css = array(
     <?php if ($posts_query->have_posts()) : ?>
     <ul 
       id="posts-grid"
-      class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-x-8 tw-gap-y-12">
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
       <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
 
       <?php Wauble()->render('blog-card', [
@@ -115,7 +115,7 @@ $container_css = array(
       <?php endwhile; ?>
     </ul>
     <?php if ($paginate) : ?>
-    <nav class="tw-flex tw-space-x-4 tw-mx-auto tw-max-w-max tw-my-8">
+    <nav class="flex space-x-4 mx-auto max-w-max my-8">
       <?php
           $big = 999999999;
           ?>

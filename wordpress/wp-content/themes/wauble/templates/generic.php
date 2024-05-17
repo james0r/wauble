@@ -11,18 +11,18 @@
 <!-- Begin Loop -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-<div class="tw-py-12 sm:tw-py-16">
-  <section class="tw-px-6 md:tw-px-8">
-    <div class="tw-container">
-      <h1 class="tw-text-3xl sm:tw-text-5xl tw-font-bold tw-mb-6 sm:tw-mb-8">
+<div class="py-12 sm:py-16">
+  <section class="px-6 md:px-8">
+    <div class="container">
+      <h1 class="text-3xl sm:text-5xl font-bold mb-6 sm:mb-8">
         <?php the_title() ?>
       </h1>
     </div>
   </section>
   
-  <section class="tw-px-6 md:tw-px-8">
-    <div class="tw-container">
-      <div class="tw-prose sm:tw-prose-lg">
+  <section class="px-6 md:px-8">
+    <div class="container">
+      <div class="prose sm:prose-lg">
         <?php the_content() ?>
       </div>
     </div>

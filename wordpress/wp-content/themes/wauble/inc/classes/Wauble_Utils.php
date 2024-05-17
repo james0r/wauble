@@ -14,7 +14,7 @@ class Wauble_Utils {
   public static function tw($classes) {
     $instance = TailwindMerge::factory()
     ->withConfiguration([
-        'prefix' => 'tw-',
+        'prefix' => '',
     ])->make();
 
     return $instance->merge($classes);

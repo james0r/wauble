@@ -17,16 +17,16 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
 >
   <ul
     id="header-nav-list"
-    class="tw-flex tw-tracking-wider"
+    class="flex tracking-wider"
   >
     <?php foreach ($navigation->toArray() as $item) : ?>
     <?php
         $item_classes = [
-          'tw-px-[min(12px,_1vw)]',
-          'tw-py-2.5',
-          'first:tw-pl-0',
-          'tw-group',
-          'tw-relative',
+          'px-[min(12px,_1vw)]',
+          'py-2.5',
+          'first:pl-0',
+          'group',
+          'relative',
         ];
 
         if ($item->active) {
@@ -47,28 +47,28 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
             }
            }"
     >
-      <div class=" tw-flex tw-items-center tw-relative tw-max-w-max tw-mx-auto tw-pr-6">
+      <div class=" flex items-center relative max-w-max mx-auto pr-6">
         <a
           href="<?php echo $item->url; ?>"
-          class="hover:tw-text-blue-600"
+          class="hover:text-blue-600"
         >
           <?php echo $item->label; ?>
         </a>
         <button
-          class="tw-absolute tw-right-0"
+          class="absolute right-0"
           @click="expanded = !expanded"
           :aria-expanded="expanded ? 'true' : 'false'"
           aria-haspopup="menu"
           aria-label="Submenu Toggle"
-          :class="expanded ? 'tw-rotate-[180deg]' : 'tw-rotate-0'"
+          :class="expanded ? 'rotate-[180deg]' : 'rotate-0'"
         >
           <?php Wauble()->render('icons/hi-chevron-down'); ?>
         </button>
       </div>
 
       <ul
-        class="tw-hidden group-hover:tw-block tw-absolute tw-top-full tw-bg-white"
-        :class="expanded && '!tw-block'"
+        class="hidden group-hover:block absolute top-full bg-white"
+        :class="expanded && '!block'"
       >
         <?php foreach ($item->children as $child) : ?>
         <?php
@@ -99,7 +99,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
     <li class="<?php echo Wauble()->utils->tw($item_classes, $item->classes); ?>">
       <a
         href="<?php echo $item->url; ?>"
-        class="hover:tw-text-blue-600 tw-font-bold"
+        class="hover:text-blue-600 font-bold"
       >
         <?php echo $item->label; ?>
       </a>

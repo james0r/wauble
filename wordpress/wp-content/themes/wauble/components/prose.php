@@ -3,8 +3,8 @@ extract($props);
 
 $classes = Wauble()->utils->tw([
   [
-    'tw-prose',
-    'prose-h1:tw-text-blue-500'
+    'prose',
+    'prose-h1:text-blue-500'
   ],
   $classes ?? ''
 ]);

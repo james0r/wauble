@@ -1,7 +1,7 @@
 <?php Wauble()->render('header'); ?>
 
-<div class="tw-px-6 md:tw-px-8 tw-py-8">
-  <div class="tw-container">
+<div class="px-6 md:px-8 py-8">
+  <div class="container">
     <h1>
       <?php _e('404: Page Not Found', 'wauble'); ?>
     </h1>

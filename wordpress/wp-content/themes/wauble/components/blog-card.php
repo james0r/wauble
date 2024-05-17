@@ -4,11 +4,11 @@ $show_date_on_posts = $args['show_date_on_posts'] ?? null;
 $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
 ?>
 
-<li class="tw-@container">
-  <div class="tw-block tw-p-3 tw-pb-11 tw-shadow-md tw-rounded-lg tw-relative tw-bg-white tw-h-full">
+<li class="@container">
+  <div class="block p-3 pb-11 shadow-md rounded-lg relative bg-white h-full">
     <a
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
-      class="tw-relative tw-pt-[86%] tw-block"
+      class="relative pt-[86%] block"
       tabindex="-1"
     >
       <?php if (has_post_thumbnail(get_the_ID())) : ?>
@@ -17,7 +17,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
           get_the_ID(),
           'wauble-blog-card',
           [
-            'class' => 'tw-absolute tw-object-cover tw-w-full tw-h-full tw-inset-0 tw-rounded-lg'
+            'class' => 'absolute object-cover w-full h-full inset-0 rounded-lg'
           ]
         );
         ?>
@@ -25,16 +25,16 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       <img
         src="<?php echo Wauble()->url('/static/images/no-image.svg'); ?>"
         alt="no image found"
-        class="tw-absolute tw-object-cover tw-w-full tw-h-full tw-inset-0 tw-rounded-lg"
+        class="absolute object-cover w-full h-full inset-0 rounded-lg"
       >
       <?php endif; ?>
     </a>
-    <div class="tw-flex tw-text-blue-500 tw-mt-4 tw-items-center">
+    <div class="flex text-blue-500 mt-4 items-center">
       <?php if ($show_categories_on_posts) :  ?>
       <?php $categories = get_the_category(get_the_ID()); ?>
       <a
         href="<?php echo get_category_link($categories[0]); ?>"
-        class="hover:tw-text-blue-500 tw-relative tw-z-[2]"
+        class="hover:text-blue-500 relative z-[2]"
       >
         <?php echo $categories[0]->cat_name; ?>
       </a>
@@ -46,14 +46,14 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       <time
         datetime="<?php echo get_the_date('c'); ?>"
         itemprop="datePublished"
-        class="tw-text-sm tw-text-gray-700"
+        class="text-sm text-gray-700"
       >
         <?php echo str_replace('-', '/', get_the_date('n-d-Y')); ?>
       </time>
       <?php endif; ?>
     </div>
     <?php if ($show_tags_on_posts && !empty(get_the_tags())) : ?>
-    <div class="tw-text-sm tw-my-1">
+    <div class="text-sm my-1">
       Tags: <?php
               $posttags = get_the_tags();
               if ($posttags) {
@@ -71,7 +71,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
       class=""
     >
-      <h3 class="tw-mt-0 tw-text-xl @sm:tw-text-2xl">
+      <h3 class="mt-0 text-xl @sm:text-2xl">
         <?php echo get_the_title(get_the_ID()); ?>
       </h3>
     </a>

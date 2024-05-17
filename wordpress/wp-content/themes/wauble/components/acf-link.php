@@ -3,7 +3,7 @@
   * Usage: Wauble()->render('acf-link', [
   *   'link' => $link,
   *   'classes' => [
-  *     'tw-btn'
+  *     'btn'
   *   ],
   * ]);
   */

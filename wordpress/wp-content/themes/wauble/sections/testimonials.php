@@ -18,22 +18,22 @@ $loop = $section['loop'] ?? null;
   data-speed="<?php echo $speed; ?>"
   data-loop="<?php echo $loop; ?>"
   data-section-id="<?php echo $section_count; ?>"
-  class="tw-px-6 md:tw-px-8 tw-py-20"
+  class="px-6 md:px-8 py-20"
 >
-  <div class="tw-container">
+  <div class="container">
     <?php if (!empty($heading)) : ?>
-    <div class="tw-mb-8 md:tw-mb-12 tw-text-center">
-      <h2 class="tw-text-3xl md:tw-text-4xl tw-font-bold tw-text-gray-900">
+    <div class="mb-8 md:mb-12 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
         <?php echo $heading; ?>
       </h2>
     </div>
     <?php endif; ?>
-    <div class="tw-max-w-2xl tw-mx-auto tw-relative">
+    <div class="max-w-2xl mx-auto relative">
       <?php if (!empty($testimonials)) : ?>
       <div class="swiper">
         <ul class="swiper-wrapper">
           <?php foreach ($testimonials as $index => $testimonial) : ?>
-          <li class="swiper-slide tw-text-center tw-self-center">
+          <li class="swiper-slide text-center self-center">
             <?php echo $testimonial['quote'] ?? null; ?>
           </li>
           <?php endforeach; ?>

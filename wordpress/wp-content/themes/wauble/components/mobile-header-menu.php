@@ -13,12 +13,12 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
 <?php if ($navigation->isNotEmpty()) : ?>
 <nav
   id="mobile-header-nav"
-  class="tw-flex tw-items-center tw-h-full"
+  class="flex items-center h-full"
   x-id="['mobile-navigation']"
   x-trap.inert.noscroll="$store.global.isMobileMenuVisible"
 >
   <button
-    class="lg:tw-hidden tw-ml-auto tw-p-2"
+    class="lg:hidden ml-auto p-2"
     x-data
     @click="$store.global.toggleMobileMenu()"
     :aria-expanded="$store.global.isMobileMenuVisible ? 'true' : 'false'"
@@ -26,11 +26,10 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
     aria-label="Mobile Menu Toggle"
     :aria-controls="$id('mobile-navigation')"
   >
-    <span class="tw-sr-only">
+    <span class="sr-only">
       Menu
     </span>
     <span
-      x-cloak
       x-show="!$store.global.isMobileMenuVisible"
       :aria-hidden="$store.global.isMobileMenuVisible ? 'true' : 'false'"
     >
@@ -46,7 +45,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
   </button>
   <div
     :id="$id('mobile-navigation')"
-    class="tw-absolute tw-top-full tw-inset-x-0"
+    class="absolute top-full inset-x-0"
     x-data
     x-cloak
     @keyup.escape="$store.global.closeMobileMenu()"
@@ -57,13 +56,13 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
   >
     <ul
       id="mobile-header-nav-list"
-      class="tw-w-full tw-text-center tw-bg-white tw-top-full tw-py-2"
+      class="w-full text-center bg-white top-full py-2"
       aria-label="Mobile Header Menu"
     >
       <?php foreach ($navigation->toArray() as $item) : ?>
       <?php
           $item_classes = [
-            'tw-py-1'
+            'py-1'
           ];
 
           if ($item->active) {
@@ -77,27 +76,27 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
         class="<?php echo $item_classes; ?>"
         x-data="{ expanded: false }"
       >
-        <div class="tw-relative tw-flex tw-items-center tw-mx-auto tw-max-w-max">
+        <div class="relative flex items-center mx-auto max-w-max">
           <a
             href="<?php echo $item->url; ?>"
-            class="hover:tw-text-blue-600"
+            class="hover:text-blue-600"
           >
             <?php echo $item->label; ?>
           </a>
           <button
-            class="tw-absolute tw-right-0 tw-translate-x-full"
+            class="absolute right-0 translate-x-full"
             @click="expanded = !expanded"
             :aria-expanded="expanded ? 'true' : 'false'"
             aria-haspopup="menu"
             aria-label="Submenu Toggle"
-            :class="expanded ? 'rotate-[180deg]' : 'tw-rotate-0'"
+            :class="expanded ? 'rotate-[180deg]' : 'rotate-0'"
           >
             <?php Wauble()->render('icons/hi-chevron-down'); ?>
           </button>
         </div>
 
         <ul
-          class="tw-flex tw-flex-col tw-items-center tw-my-2"
+          class="flex flex-col items-center my-2"
           x-show="expanded"
           x-collapse
           :aria-hidden="expanded ? 'false' : 'true'"
@@ -105,7 +104,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
           <?php foreach ($item->children as $child) : ?>
           <?php
                   $child_classes = [
-                    'tw-py-1'
+                    'py-1'
                   ];
 
                   if ($child->active) {
@@ -129,7 +128,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
       <li class="<?php echo $item_classes; ?>">
         <a
           href="<?php echo $item->url; ?>"
-          class="hover:tw-text-blue-600"
+          class="hover:text-blue-600"
         >
           <?php echo $item->label; ?>
         </a>

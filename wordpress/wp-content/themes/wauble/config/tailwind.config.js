@@ -11,7 +11,6 @@ module.exports = {
   content: [
     resolve(__dirname, '../**/*.php'),
   ],
-  prefix: 'tw-',
   theme: {
     debugScreens: {
       style: {

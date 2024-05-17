@@ -5,9 +5,9 @@
   class="searchform"
   action="<?php echo home_url( '/' ); ?>"
 >
-  <div class="tw-flex tw-gap-x-2">
+  <div class="flex gap-x-2">
     <label
-      class="tw-sr-only"
+      class="sr-only"
       for="s"
     >Search for:</label>
     <input
@@ -15,13 +15,13 @@
       value="<?php echo get_search_query(); ?>"
       name="s"
       id="s"
-      class="tw-border tw-border-gray-300 tw-rounded-md tw-px-4 tw-py-2 tw-w-full"
+      class="border border-gray-300 rounded-md px-4 py-2 w-full"
     >
     <input
       type="submit"
       id="searchsubmit"
       value="Search"
-      class="tw-bg-blue-500 hover:tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-cursor-pointer"
+      class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer"
     >
   </div>
 </form>

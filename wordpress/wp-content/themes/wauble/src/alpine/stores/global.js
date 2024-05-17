@@ -27,7 +27,7 @@ export default {
       onWindowScrollHandler() {
         const scrollTop = window.scrollY
 
-        document.body.classList[scrollTop > 0 ? 'add' : 'remove']('tw-scrolled')
+        document.body.classList[scrollTop > 0 ? 'add' : 'remove']('scrolled')
         this.isWindowScrolled = scrollTop > 0
       },
       openMobileMenu() {

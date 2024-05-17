@@ -16,26 +16,26 @@ $images = array_slice($total_images, 0, $items_to_load);
   data-route="<?php echo $route; ?>"
   data-items-per-group="<?php echo $items_per_group; ?>"
   data-section-id="#section-<?php echo $section_count; ?>"
-  class="tw-px-6 md:tw-px-8 tw-py-8"
+  class="px-6 md:px-8 py-8"
 >
-  <div class="tw-container">
+  <div class="container">
     <?php if ($heading) : ?>
-    <h2 class="tw-mx-auto tw-max-w-max tw-mb-8">
+    <h2 class="mx-auto max-w-max mb-8">
       <?php echo $heading; ?>
     </h2>
     <?php endif; ?>
 
-    <ul class="image-grid tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-4">
+    <ul class="image-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <?php foreach ($images as $index => $item) : ?>
       <?php if (($index + 1) > ($items_to_load - $items_per_group)) : ?>
-      <li class="tw-relative tw-aspect-square fade-in">
+      <li class="relative aspect-square fade-in">
         <?php
               echo wp_get_attachment_image(
                 $item['image'],
                 [600, 600],
                 false,
                 [
-                  'class' => 'tw-object-cover tw-w-full tw-h-full'
+                  'class' => 'object-cover w-full h-full'
                 ]
               );
               ?>
@@ -47,7 +47,7 @@ $images = array_slice($total_images, 0, $items_to_load);
     <?php if ($items_to_load < count($total_images)) : ?>
     <button
       type="button"
-      class="load-more-trigger tw-block tw-mx-auto tw-max-w-max tw-my-8 tw-text-black hover:tw-text-black/25 tw-font-bold"
+      class="load-more-trigger block mx-auto max-w-max my-8 text-black hover:text-black/25 font-bold"
       @click="loadMore"
       data-get-url="<?php echo $route; ?>"
     >

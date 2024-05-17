@@ -7,19 +7,19 @@ Wauble()->scripts->enqueueWpcf7Scripts();
 ?>
 
 <?php if (!empty($shortcode)) : ?>
-<div class="tw-px-6 md:tw-px-8 tw-py-8">
-  <div class="tw-container">
+<div class="px-6 md:px-8 py-8">
+  <div class="container">
     <?php if (!empty($heading)) : ?>
-    <h2 class="tw-mb-4">
+    <h2 class="mb-4">
       <?php echo $heading; ?>
     </h2>
     <?php endif; ?>
     <?php if (!empty($description)) : ?>
-    <div class="tw-mb-8">
+    <div class="mb-8">
       <?php echo $description; ?>
     </div>
     <?php endif; ?>
-    <div class="tw-contact-form-wrapper">
+    <div class="contact-form-wrapper">
       <?php echo do_shortcode($shortcode); ?>
     </div>
   </div>

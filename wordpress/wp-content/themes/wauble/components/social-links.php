@@ -1,12 +1,12 @@
 <?php 
   $list_classes = [
-    'tw-flex',
-    'tw-space-x-3',
-    'tw-py-4',
-    'tw-max-w-max',
-    'tw-text-blue-500',
-    '[&_svg]:tw-h-[30px]',
-    '[&_svg]:tw-w-auto'
+    'flex',
+    'space-x-3',
+    'py-4',
+    'max-w-max',
+    'text-blue-500',
+    '[&_svg]:h-[30px]',
+    '[&_svg]:w-auto'
   ]
 ?>
 
@@ -43,10 +43,10 @@
       target="_blank"
       rel=”noopener”
       aria-label="X.com icon"
-      class="tw-flex tw-flex-col tw-justify-center tw-h-full"
+      class="flex flex-col justify-center h-full"
     >
     <svg
-        class="!tw-h-[26px] tw-w-auto"
+        class="!h-[26px] w-auto"
         alt="X.com Icon"
         viewBox="0 0 357 322"
         fill="none"

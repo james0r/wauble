@@ -1,12 +1,12 @@
-<div class="tw-px-6 md:tw-px-8 tw-my-8 md:tw-my-12">
+<div class="px-6 md:px-8 my-8 md:my-12">
   <div
-    class="tw-container"
+    class="container"
     x-data="{ expanded: true }"
   >
-    <h1 style="display: tw-inline-block;">Front Page Demos</h1>
+    <h1 style="display: inline-block;">Front Page Demos</h1>
     <button
       @click="expanded = ! expanded"
-      class="tw-btn tw-inline-block tw-mt-4"
+      class="btn inline-block mt-4"
     >
       Toggle Collapse Section
     </button>
@@ -22,7 +22,7 @@
 
       <?php echo get_the_post_thumbnail(get_the_ID()); ?>
 
-      <div class="tw-pb-12">
+      <div class="pb-12">
         <h2>Alpine.js Demos 3</h2>
         <ul>
           <li>

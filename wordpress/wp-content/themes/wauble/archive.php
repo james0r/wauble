@@ -1,8 +1,8 @@
 <?php Wauble()->render('header'); ?>
 
-<div class="tw-px-6 md:tw-px-8 tw-py-8">
-  <div class="tw-container">
-    <div class="tw-prose">
+<div class="px-6 md:px-8 py-8">
+  <div class="container">
+    <div class="prose">
       <h1 class="entry-title">
         <?php echo get_the_archive_title(); ?>
       </h1>
