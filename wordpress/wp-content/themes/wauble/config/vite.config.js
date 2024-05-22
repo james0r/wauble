@@ -8,7 +8,6 @@ import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
-  base: '',
   build: {
     emptyOutDir: true,
     manifest: 'manifest.json',
@@ -45,6 +44,7 @@ export default defineConfig({
       ]
     })
   ],
+  clearScreen: false,
   resolve: {
     alias: [
       {
