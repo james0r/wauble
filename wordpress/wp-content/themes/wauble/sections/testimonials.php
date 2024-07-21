@@ -40,8 +40,8 @@ $loop = $section['loop'] ?? null;
         </ul>
       </div>
       <div class="swiper-pagination"></div>
-      <div x-cloak x-show="swiperNavigation" class="swiper-button-prev"></div>
-      <div x-cloak x-show="swiperNavigation" class="swiper-button-next"></div>
+      <div x-cloak x-show="navigation" class="swiper-button-prev"></div>
+      <div x-cloak x-show="navigation" class="swiper-button-next"></div>
       <?php endif; ?>
     </div>
   </div>
@@ -60,28 +60,30 @@ document.addEventListener('alpine:init', () => {
     return {
       componentEl: this.$el,
       sectionId: this.$el.dataset.sectionId,
-      swiperInstance: null,
-      swiperNavigation: this.$el.dataset.navigation,
-      swiperPagination: this.$el.dataset.paginate,
-      swiperAutoplay: this.$el.dataset.autoplay,
-      swiperSpeed: this.$el.dataset.speed,
-      swiperAutoplayDelay: this.$el.dataset.autoplayDelay,
-      swiperLoop: this.$el.dataset.loop,
+      instance: null,
+      navigation: this.$el.dataset.navigation,
+      pagination: this.$el.dataset.paginate,
+      autoplay: this.$el.dataset.autoplay,
+      speed: this.$el.dataset.speed,
+      autoplayDelay: this.$el.dataset.autoplayDelay,
+      loop: this.$el.dataset.loop,
       init() {
-        this.swiperInstance = new Swiper(`[data-section-id="${this.sectionId}"] .swiper`, {
-          speed: this.swiperSpeed,
+
+        console.log(this.navigation)
+        this.instance = new Swiper(`[data-section-id="${this.sectionId}"] .swiper`, {
+          speed: this.speed,
           slidesPerView: 1,
           spaceBetween: 30,
-          loop: this.swiperLoop,
-          autoplay: this.swiperAutoplay ? {
-            delay: this.swiperAutoplayDelay,
+          loop: this.loop,
+          autoplay: this.autoplay ? {
+            delay: this.autoplayDelay,
             disableOnInteraction: true,
           } : false,
-          pagination: this.swiperPagination ? {
+          pagination: this.pagination ? {
             el: `[data-section-id="${this.sectionId}"] .swiper-pagination`,
             clickable: true,
           } : false,
-          navigation: this.swiperNavigation ? {
+          navigation: this.navigation ? {
             nextEl: `[data-section-id="${this.sectionId}"] .swiper-button-next`,
             prevEl: `[data-section-id="${this.sectionId}"] .swiper-button-prev`,
             disabledClass: 'disabled_swiper_button'
