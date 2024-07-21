@@ -7,6 +7,20 @@ import tailwindcssNesting from 'tailwindcss/nesting';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 
+function rewriteFontFaceUrls() {
+  return {
+    name: 'rewrite-font-face-urls',
+    enforce: 'post',
+    transform(code, id) {
+
+      if (/\.css$/.test(id)) {
+        code = code.replace(/\/build\/assets\//g, './');
+      }
+      return code;
+    }
+  };
+}
+
 export default defineConfig({
   build: {
     emptyOutDir: true,
@@ -21,6 +35,8 @@ export default defineConfig({
       host: 'localhost',
     },
   },
+  // Prevent Vite from rewriting the URLs in the CSS
+  base: '',
   css: {
     postcss: {
       plugins: [
@@ -42,7 +58,8 @@ export default defineConfig({
       refresh: [
         '*/**/**.php'
       ]
-    })
+    }),
+    rewriteFontFaceUrls()
   ],
   clearScreen: false,
   resolve: {

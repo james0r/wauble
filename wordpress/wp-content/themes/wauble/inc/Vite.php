@@ -113,10 +113,13 @@ class Vite {
       return static::$server . '/' . ltrim($asset, '/');
     }
 
+    
     if (!array_key_exists($asset, static::$manifest)) {
       throw new Exception('Unknown Vite build asset: ' . $asset);
     }
-
+    
+    error_log($asset);
+    
     // If we're not hot, enqueue asset css dependencies
     if (!static::$isHot) {
       static::enqueueSubModules($asset);

@@ -57,11 +57,12 @@ class Wauble_Scripts {
     // wp_enqueue_style('theme-style-scss', $filename, [], null, 'screen');
 
     // register theme-style-css
+    
     $filename = Vite::asset('src/theme.css');
-
+    
     // enqueue theme-style-css into our head
     wp_enqueue_style('theme-style', $filename, [], null, 'screen');
-
+    
     // register theme-script-js
     $filename = Vite::asset('src/theme.js');
 
