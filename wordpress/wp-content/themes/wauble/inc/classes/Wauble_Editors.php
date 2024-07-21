@@ -19,7 +19,9 @@ class Wauble_Editors {
     }
     if (!isset($post_id)) return;
 
-    if (get_post_type($post_id) == 'page' && (get_page_template_slug($post_id) !== 'page-templates/generic.php')) {
+    if (get_post_type($post_id) == 'page' && (get_page_template_slug($post_id) !== 'templates/generic.php')) {
+      
+      error_log(get_page_template_slug($post_id));
       remove_post_type_support('page', 'editor');
     }
   }

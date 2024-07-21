@@ -223,6 +223,101 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_669d406753b9f": {
+                    "key": "layout_669d406753b9f",
+                    "name": "icon_list",
+                    "label": "Icon List",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_669d406f53ba1",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_669d407c53ba2",
+                            "label": "Item",
+                            "name": "item",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "row",
+                            "min": 0,
+                            "max": 0,
+                            "collapsed": "",
+                            "button_label": "Add Row",
+                            "rows_per_page": 20,
+                            "sub_fields": [
+                                {
+                                    "key": "field_669d408b53ba3",
+                                    "label": "Icon SVG Code",
+                                    "name": "icon_svg_code",
+                                    "aria-label": "",
+                                    "type": "textarea",
+                                    "instructions": "Must be valid SVG code.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "rows": "",
+                                    "placeholder": "",
+                                    "new_lines": "",
+                                    "parent_repeater": "field_669d407c53ba2"
+                                },
+                                {
+                                    "key": "field_669d411853ba4",
+                                    "label": "Body Text",
+                                    "name": "body_text",
+                                    "aria-label": "",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "rows": "",
+                                    "placeholder": "",
+                                    "new_lines": "",
+                                    "parent_repeater": "field_669d407c53ba2"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_65b44b9f03cd0": {
                     "key": "layout_65b44b9f03cd0",
                     "name": "heading_cta",
@@ -1931,7 +2026,7 @@
             {
                 "param": "page_template",
                 "operator": "!=",
-                "value": "page-templates\/generic.php"
+                "value": "templates\/generic.php"
             }
         ]
     ],
@@ -1944,5 +2039,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1706314741
+    "modified": 1721582123
 }
