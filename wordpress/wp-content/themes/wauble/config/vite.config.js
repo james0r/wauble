@@ -36,7 +36,7 @@ export default defineConfig({
     },
   },
   // Prevent Vite from rewriting the URLs in the CSS
-  base: '',
+  base: './',
   css: {
     postcss: {
       plugins: [
