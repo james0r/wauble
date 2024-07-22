@@ -68,8 +68,6 @@ document.addEventListener('alpine:init', () => {
       autoplayDelay: this.$el.dataset.autoplayDelay,
       loop: this.$el.dataset.loop,
       init() {
-
-        console.log(this.navigation)
         this.instance = new Swiper(`[data-section-id="${this.sectionId}"] .swiper`, {
           speed: this.speed,
           slidesPerView: 1,
