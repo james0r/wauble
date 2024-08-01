@@ -36,15 +36,15 @@ marqueeContainers.forEach((c) => {
       direction: 'top',
       speed: 2000
     },
-    on: {
-      beforeInit: () => {
-        console.log('Not Yet Initialized');
-      },
+    // on: {
+    //   beforeInit: () => {
+    //     console.log('Not Yet Initialized');
+    //   },
 
-      afterInit: () => {
-        console.log('Initialized');
-      }
-    }
+    //   afterInit: () => {
+    //     console.log('Initialized');
+    //   }
+    // }
   });
 });
 </script>
