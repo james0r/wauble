@@ -292,6 +292,51 @@
                             "step": "",
                             "prepend": "",
                             "append": ""
+                        },
+                        {
+                            "key": "field_66abfd90ad7f5",
+                            "label": "Smooth in\/out",
+                            "name": "smooth_inout",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_66abffbc83885",
+                            "label": "Direction",
+                            "name": "direction",
+                            "aria-label": "",
+                            "type": "radio",
+                            "instructions": "The direction TO where the text scrolls.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "left": "left",
+                                "right": "right"
+                            },
+                            "default_value": "left",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "layout": "horizontal",
+                            "save_other_choice": 0
                         }
                     ],
                     "min": "",
@@ -2113,5 +2158,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1721671028
+    "modified": 1722548226
 }

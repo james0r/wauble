@@ -2,6 +2,8 @@
 $text = $section['text'] ?? null;
 $speed = $section['speed'] ?? 500;
 $gap = $section['gap'] ?? 0;
+$smooth_inout = $section['smooth_inout'] ?? false;
+$direction = $section['direction'] ?? 'left';
 ?>
 
 <div class="px-6 md:px-8 py-12">
@@ -9,6 +11,8 @@ $gap = $section['gap'] ?? 0;
     <div
       data-speed="<?php echo $speed; ?>"
       data-gap="<?php echo $gap; ?>"
+      data-smooth-inout="<?php echo $smooth_inout; ?>"
+      data-direction="<?php echo $direction; ?>"
       class="marquee-container overflow-hidden"
     >
       <?php echo $text; ?>
@@ -27,13 +31,13 @@ marqueeContainers.forEach((c) => {
   new vanillaInfiniteMarquee({
     element: c,
     speed: c.dataset.speed,
-    gap: c.dataset.gap,
-    smoothEdges: true,
-    direction: 'left',
-    spaceBetween: '25px',
+    gap: 100,
+    smoothEdges: c.dataset.smoothInout,
+    direction: c.dataset.direction,
+    spaceBetween: `${c.dataset.gap}px`,
     duplicateCount: 5,
     mobileSettings: {
-      direction: 'top',
+      direction: c.dataset.direction,
       speed: 2000
     },
     // on: {
