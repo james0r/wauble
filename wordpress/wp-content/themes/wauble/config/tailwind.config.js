@@ -49,6 +49,10 @@ module.exports = {
       fontFamily: {
         'open-sans': ['"Open Sans"', 'sans-serif'],
       },
+      gridTemplateColumns: {
+        'auto-fill-100': 'repeat(auto-fill, 1fr)',
+        'auto-fit-100': 'repeat(auto-fit, minmax(200px, 1fr))',
+      },
       fontSize: {
         'step-5': ['var(--step-5)', {
           lineHeight: '1.25',
