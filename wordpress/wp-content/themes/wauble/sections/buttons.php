@@ -16,7 +16,7 @@ $buttons = $section['buttons'] ?? null;
               $button['image'], 
               [600, 600], 
               false, 
-              ['class' => "object-cover absolute inset-0 w-full h-full", 'loading' => 'lazy'] 
+              ['class' => "object-cover absolute inset-0 w-full h-full", 'loading' => 'eager'] 
             ); ?>
           </a>
           <div class="absolute w-full bg-gradient-to-t from-black/25 to-transparent h-full pointer-events-none"></div>
