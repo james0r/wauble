@@ -2,10 +2,6 @@
   "name": "jamesauble/wauble",
   "type": "project",
   "repositories": {
-    "satispress": {
-      "type": "composer",
-      "url": "https://packages.jamesauble.com/satispress/"
-    },
     "0": {
       "type": "composer",
       "url": "https://wpackagist.org",
@@ -38,7 +34,6 @@
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/wordpress-seo": "^22.2",
     "wpackagist-plugin/classic-editor": "^1.6",
-    "satispress/advanced-custom-fields-pro": "^6.2.7",
     "wpackagist-plugin/contact-form-7": "^5.8",
     "vlucas/phpdotenv": "^5.5",
     "wpackagist-plugin/flamingo": "^2.4"
