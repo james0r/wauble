@@ -66,6 +66,7 @@ tooling:
       - node: cd wordpress/wp-content/themes/wauble && npm run build
       - appserver: wp theme activate wauble --path=wordpress
       - appserver: wp plugin delete hello --path=wordpress
+      - appserver: wp plugin install --path=wordpress ./advanced-custom-fields-pro.zip
       - appserver: wp plugin activate --all --path=wordpress
       - appserver: wp option update page_on_front 2 --path=wordpress
       - appserver: wp option update show_on_front page --path=wordpress
