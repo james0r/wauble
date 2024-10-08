@@ -46,6 +46,15 @@ module.exports = {
       // => @media (min-width: 1480px) { ... }
     },
     extend: {
+      animation: {
+				fade: 'fadeIn .5s ease-in-out',
+			},
+			keyframes: {
+				fadeIn: {
+					from: { opacity: 0 },
+					to: { opacity: 1 },
+				},
+			},
       fontFamily: {
         'open-sans': ['"Open Sans"', 'sans-serif'],
       },

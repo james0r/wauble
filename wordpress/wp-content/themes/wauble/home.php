@@ -101,9 +101,10 @@ $container_css = array(
     ?>
 
     <?php if ($posts_query->have_posts()) : ?>
-    <ul 
+    <ul
       id="posts-grid"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+    >
       <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
 
       <?php Wauble()->render('blog-card', [

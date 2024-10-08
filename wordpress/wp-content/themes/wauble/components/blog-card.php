@@ -5,7 +5,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
 ?>
 
 <li class="@container">
-  <div class="block p-3 pb-11 shadow-md rounded-lg relative bg-white h-full">
+  <div class="block p-3 pb-11 shadow-md rounded-lg relative bg-white h-full animate-fade">
     <a
       href="<?php echo get_the_permalink(get_the_ID()); ?>"
       class="relative pt-[86%] block"
