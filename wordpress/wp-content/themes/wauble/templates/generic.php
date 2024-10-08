@@ -14,7 +14,7 @@
 <div class="py-12 sm:py-16">
   <section class="px-6 md:px-8">
     <div class="container">
-      <h1 class="text-3xl sm:text-5xl font-bold mb-6 sm:mb-8">
+      <h1 class="text-step-3 sm:text-step-4 font-bold mb-6 sm:mb-8">
         <?php the_title() ?>
       </h1>
     </div>
