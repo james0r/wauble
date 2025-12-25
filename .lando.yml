@@ -1,20 +1,29 @@
 name: wauble
 recipe: wordpress
 config:
-  php: '8.2'
+  php: "8.2"
   webroot: wordpress
   via: nginx
   database: mysql
-  config:
-    server: .lando/config/nginx.conf
+  # config:
+  #   server: .lando/config/nginx.conf
 env_file:
   - .env
 services:
   appserver:
     build_as_root:
+      - "git config --global --add safe.directory /app"
+      - "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\""
+      - "php -r \"if (hash_file('sha384', 'composer-setup.php') === 'c8b085408188070d5f52bcfe4ecfbee5f727afa458b2573b8eaaf77b3419b0bf2768dc67c86944da1544f06fa544fd47') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }\""
+      - "php composer-setup.php"
+      - "php -r \"unlink('composer-setup.php');\""
+      - "mv composer.phar /usr/local/bin/composer"
+      - "curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
+      - "chmod +x wp-cli.phar"
+      - "mv wp-cli.phar /usr/local/bin/wp"
       - "composer install"
       - "cd wordpress/wp-content/themes/wauble && composer install"
-  node: 
+  node:
     type: node:18
     ports:
       - 5173:5173
@@ -58,14 +67,15 @@ tooling:
     service: appserver
     description: Download starter theme and install dependencies
     cmd:
-      - appserver: composer install
-      - appserver: rm -rf wordpress/wp-content/themes/twentytwentyone
-      - appserver: rm -rf wordpress/wp-content/themes/twentytwentytwo
+      # - appserver: composer install
+      - appserver: rm -rf wordpress/wp-content/themes/twentytwentythree
+      - appserver: rm -rf wordpress/wp-content/themes/twentytwentyfour
       - appserver: cd wordpress/wp-content/themes/wauble && composer install
       - node: cd wordpress/wp-content/themes/wauble && npm install
       - node: cd wordpress/wp-content/themes/wauble && npm run build
       - appserver: wp theme activate wauble --path=wordpress
       - appserver: wp plugin delete hello --path=wordpress
+      - appserver: wp plugin install --path=wordpress ./advanced-custom-fields-pro.zip
       - appserver: wp plugin activate --all --path=wordpress
       - appserver: wp option update page_on_front 2 --path=wordpress
       - appserver: wp option update show_on_front page --path=wordpress
