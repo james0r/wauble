@@ -75,10 +75,10 @@ $query = new WP_Query($args);
     <div class="text-center">
       <h1>
         <?php if (!empty(get_search_query())) : ?>
-          <?php _e('Search Results for: ', 'wauble'); ?>
-          <span class="text-blue-500"><?php echo get_search_query(); ?></span>
+        <?php _e('Search Results for: ', 'wauble'); ?>
+        <span class="text-blue-500"><?php echo get_search_query(); ?></span>
         <?php else : ?>
-          <?php _e('Search', 'wauble'); ?>
+        <?php _e('Search', 'wauble'); ?>
         <?php endif; ?>
       </h1>
     </div>

@@ -46,8 +46,21 @@ module.exports = {
       // => @media (min-width: 1480px) { ... }
     },
     extend: {
+      animation: {
+				fade: 'fadeIn .5s ease-in-out',
+			},
+			keyframes: {
+				fadeIn: {
+					from: { opacity: 0 },
+					to: { opacity: 1 },
+				},
+			},
       fontFamily: {
         'open-sans': ['"Open Sans"', 'sans-serif'],
+      },
+      gridTemplateColumns: {
+        'auto-fill-100': 'repeat(auto-fill, 1fr)',
+        'auto-fit-100': 'repeat(auto-fit, minmax(200px, 1fr))',
       },
       fontSize: {
         'step-5': ['var(--step-5)', {
