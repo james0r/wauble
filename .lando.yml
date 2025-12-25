@@ -16,7 +16,6 @@ services:
       - "php composer-setup.php"
       - "php -r \"unlink('composer-setup.php');\""
       - "rm -rf /usr/local/bin/composer"
-      - "chmod 777 /usr/local/bin/composer"
       - "mv -f composer.phar /usr/local/bin/composer"
       - "curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
       - "chmod +x wp-cli.phar"
