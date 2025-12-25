@@ -5,8 +5,6 @@ config:
   webroot: wordpress
   via: nginx
   database: mysql
-  config:
-    server: .lando/config/nginx.conf
 env_file:
   - .env
 services:
