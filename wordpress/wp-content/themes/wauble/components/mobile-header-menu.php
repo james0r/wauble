@@ -89,7 +89,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
             :aria-expanded="expanded ? 'true' : 'false'"
             aria-haspopup="menu"
             aria-label="Submenu Toggle"
-            :class="expanded ? 'rotate-[180deg]' : 'rotate-0'"
+            :class="expanded ? 'rotate-180' : 'rotate-0'"
           >
             <?php Wauble()->render('icons/hi-chevron-down'); ?>
           </button>

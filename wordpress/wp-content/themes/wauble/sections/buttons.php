@@ -19,7 +19,7 @@ $buttons = $section['buttons'] ?? null;
               ['class' => "object-cover absolute inset-0 w-full h-full", 'loading' => 'eager']
             ); ?>
         </a>
-        <div class="absolute w-full bg-gradient-to-t from-black/25 to-transparent h-full pointer-events-none"></div>
+        <div class="absolute w-full bg-linear-to-t from-black/25 to-transparent h-full pointer-events-none"></div>
         <div
           class="absolute w-full bottom-8 left-1/2 -translate-x-1/2 text-white text-center text-lg sm:text-2xl pointer-events-none"
         >

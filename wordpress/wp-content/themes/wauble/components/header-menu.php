@@ -22,7 +22,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
     <?php foreach ($navigation->toArray() as $item) : ?>
     <?php
         $item_classes = [
-          'px-[min(12px,_1vw)]',
+          'px-[min(12px,1vw)]',
           'py-2.5',
           'first:pl-0',
           'group',
@@ -60,7 +60,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
           :aria-expanded="expanded ? 'true' : 'false'"
           aria-haspopup="menu"
           aria-label="Submenu Toggle"
-          :class="expanded ? 'rotate-[180deg]' : 'rotate-0'"
+          :class="expanded ? 'rotate-180' : 'rotate-0'"
         >
           <?php Wauble()->render('icons/hi-chevron-down'); ?>
         </button>
@@ -68,7 +68,7 @@ $navigation = wauble()->menus->getNaviMenu('header-menu');
 
       <ul
         class="hidden group-hover:block absolute top-full bg-white"
-        :class="expanded && '!block'"
+        :class="expanded && 'block!'"
       >
         <?php foreach ($item->children as $child) : ?>
         <?php

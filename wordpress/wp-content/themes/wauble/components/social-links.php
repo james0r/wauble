@@ -46,7 +46,7 @@
       class="flex flex-col justify-center h-full"
     >
     <svg
-        class="!h-[26px] w-auto"
+        class="h-[26px]! w-auto"
         alt="X.com Icon"
         viewBox="0 0 357 322"
         fill="none"

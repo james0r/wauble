@@ -2,10 +2,7 @@ import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import fs from 'fs'
 import { resolve } from 'path'
-import postcssImport from 'postcss-import';
-import tailwindcssNesting from 'tailwindcss/nesting';
-import tailwindcss from 'tailwindcss';
-import autoprefixer from 'autoprefixer';
+import tailwindcss from '@tailwindcss/vite'
 
 function rewriteFontFaceUrls() {
   return {
@@ -37,17 +34,8 @@ export default defineConfig({
   },
   // Prevent Vite from rewriting the URLs in the CSS
   base: './',
-  css: {
-    postcss: {
-      plugins: [
-        postcssImport,
-        tailwindcssNesting,
-        tailwindcss(resolve(__dirname, './tailwind.config.js')),
-        autoprefixer
-      ]
-    }
-  },
   plugins: [
+    tailwindcss(resolve(__dirname, './tailwind.config.js')),
     laravel({
       publicDirectory: 'build',
       input: [

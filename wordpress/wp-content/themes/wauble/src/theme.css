@@ -1,12 +1,33 @@
-@import './css/base.pcss';
-@import './css/components.pcss';
-@import './css/utilities.pcss';
+@import 'tailwindcss';
+@import './css/base.css';
+@import './css/components.css';
+@import './css/utilities.css';
+@config '../config/tailwind.config.js';
 
-@font-face {   
+@font-face {
   font-family: 'Open Sans';
   src: url('./fonts/OpenSans-Regular.woff2') format('woff2'),
     url('./fonts/OpenSans-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-} 
+}
+
+@theme {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --font-open-sans: 'Open Sans', sans-serif;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

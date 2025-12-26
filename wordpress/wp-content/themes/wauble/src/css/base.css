@@ -1,0 +1,43 @@
+@layer base {
+  h1 {
+    font-size: var(--text-3xl);
+    font-weight: bold;
+  }
+  @variant md {
+    h1 {
+      font-size: var(--text-6xl);
+    }
+  }
+  h2 {
+    font-size: var(--text-2xl);
+    font-weight: bold;
+  }
+  @variant md {
+    h2 {
+      font-size: var(--text-4xl);
+    }
+  }
+  h3 {
+    font-size: var(--text-2xl);
+    font-weight: bold;
+  }
+  h4 {
+    font-size: var(--text-xl);
+    font-weight: bold;
+  }
+  a {
+    font-weight: bold;
+  }
+  /* Remove tap highlight on mobile chrome */
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    @apply 
+    outline-none
+    focus-visible:ring-2
+    ring-blue-300
+    ring-offset-2;
+  }
+}

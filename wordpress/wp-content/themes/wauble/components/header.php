@@ -14,7 +14,7 @@
   <?php wp_body_open(); ?>
   <a
     href="#site-main"
-    class="skip-to-content-link"
+    class="absolute top-0 left-0 z-50 p-4 bg-black text-white rounded-md transition not-focus:sr-only"
     tabindex="0"
   >
     Skip to content
@@ -28,7 +28,7 @@
       <div class="container flex items-center justify-between h-full">
         <a
           href="<?php echo home_url(); ?>"
-          class="font-bold text-[16px] md:text-[20px] leading-[16px] lg:leading-[20px] text-left"
+          class="font-bold text-[16px] md:text-[20px] leading-4 lg:leading-5 text-left"
         >
           WAUBLE STARTER THEME
         </a>

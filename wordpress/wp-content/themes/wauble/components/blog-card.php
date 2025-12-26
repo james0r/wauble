@@ -34,7 +34,7 @@ $show_tags_on_posts = $args['show_tags_on_posts'] ?? null;
       <?php $categories = get_the_category(get_the_ID()); ?>
       <a
         href="<?php echo get_category_link($categories[0]); ?>"
-        class="hover:text-blue-500 relative z-[2]"
+        class="hover:text-blue-500 relative z-2"
       >
         <?php echo $categories[0]->cat_name; ?>
       </a>

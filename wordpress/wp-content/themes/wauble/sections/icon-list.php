@@ -12,7 +12,7 @@ $items = $section['item'] ?? null;
       </h2>
       <?php endif; ?>
       <?php if ($items) : ?>
-      <ul class="grid grid-cols-[repeat(auto-fit,_minmax(240px,1fr))] mx-auto gap-4">
+      <ul class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] mx-auto gap-4">
         <?php foreach ($items as $index => $item) : ?>
         <?php
             $svg_code = $item['icon_svg_code'] ?? null;

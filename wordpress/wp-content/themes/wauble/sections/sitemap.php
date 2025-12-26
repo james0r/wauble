@@ -1,8 +1,8 @@
 <section class="section section-<?php echo $section_count ?> section-content-area">
   <article class="bg-white px-6 pt-8 pb-12 lg:pb-24 md:pt-16 sm:px-8 xl:px-12">
-    <div class="max-w-screen-md mx-auto">
+    <div class="max-w-(--breakpoint-md) mx-auto">
 
-      <div class="max-w-screen-md mx-auto prose lg:prose-lg">
+      <div class="max-w-(--breakpoint-md) mx-auto prose lg:prose-lg">
         <h2 class="mb-2 text-2xl font-semibold text-neutral-500 lg:text-3xl">Pages</h2>
         <?php
         wp_nav_menu([

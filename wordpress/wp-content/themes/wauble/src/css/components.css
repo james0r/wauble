@@ -1,0 +1,75 @@
+@layer components {
+  .contact-form-wrapper {
+    width: 100%;
+
+
+    & label,
+    & .wpcf7-form-control-wrap {
+      display: block;
+      margin-top: --spacing(2)
+    }
+    
+    & input[type="text"],
+    & input[type="email"],
+    & textarea {
+      @apply border border-gray-300 rounded-md px-4 py-2 w-full;
+      width: 100%;
+      padding: --spacing(2) -spacing(4);
+      border-width: 1px;
+      border-color: var(--color-gray-300);
+      border-radius: var(--radius-md);
+    }
+
+    & .form-submit-control {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: --spacing(4);
+    }
+
+    & input[type="submit"] {
+      display: block;
+      position: relative;
+      background-color: var(--color-blue-500);
+      color: var(--color-white);
+      padding: --spacing(2) --spacing(4);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+    }
+
+    & .wpcf7-spinner {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    & .wpcf7-response-output {
+      @apply block mt-4! mb-0! border-blue-500! mx-0!;
+      display: block;
+      margin-top: --spacing(4) !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+
+  .prose {
+    .aligncenter {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .alignleft {
+      float: left;
+      margin-right: 2rem;
+      margin-top: 0 !important;
+    }
+    
+    .alignright {
+      float: right;
+      margin-left: 2rem;
+      margin-top: 0 !important;
+    }
+  }
+}
