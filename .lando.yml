@@ -18,7 +18,7 @@ services:
       - "mv -f composer.phar /usr/local/bin/composer"
       - "curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
       - "chmod +x wp-cli.phar"
-      - "mv -f wp-cli.phar /usr/local/bin/wp"
+      # - "mv -f wp-cli.phar /usr/local/bin/wp"
       - "composer update"
       - "composer install"
       - "cd wordpress/wp-content/themes/wauble && composer install"
