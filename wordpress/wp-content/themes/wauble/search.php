@@ -65,7 +65,6 @@ if ($post_types) {
 $query = new WP_Query($args);
 ?>
 
-
 <div
   class="px-6 md:px-8"
   id="search-results"
@@ -86,7 +85,6 @@ $query = new WP_Query($args);
     <div class="max-w-lg w-full mx-auto pb-8 md:pb-16 pt-8 md:pt-16">
       <?php get_search_form(); ?>
     </div>
-
 
     <?php if ($query->have_posts()) : ?>
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
