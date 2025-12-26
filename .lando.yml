@@ -19,10 +19,11 @@ services:
       - "curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
       - "chmod +x wp-cli.phar"
       - "mv -f wp-cli.phar /usr/local/bin/wp"
+      - "composer update"
       - "composer install"
       - "cd wordpress/wp-content/themes/wauble && composer install"
   node:
-    type: node:18
+    type: node:22
     ports:
       - 5173:5173
     build:
